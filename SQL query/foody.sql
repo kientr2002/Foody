@@ -6,7 +6,9 @@ create table User (
     Email varchar(255) not null,
     Height float not null,
 	Weight float not null,
-    TDEE float not null
+    TDEE float not null,
+	acin float, # 1.2 1.375 1.55 1.725 1.9
+    obeject int # -1 0 1
 );
 
 create table Account (
@@ -75,3 +77,20 @@ create table List (
 	ID int primary key auto_increment,
     type varchar(255)
 );
+
+create function insertacc (email varchar(255), pass varchar(255), name varchar(255), dob datetime, ques varchar(255), ans varchar(255), role bool)
+returns bool
+DETERMINISTIC
+begin
+	if year(current_date()) - year(dob) < 8 then
+		return false;
+    insert into User(Name,DOB,email)
+    values (name, dob, email);
+    
+    declare id = select Last_insert_ID();
+    
+    insert into account(username, Pass, Ques, Ans, Role, UserID)
+    values (email, pass, ques, ans, role, id);
+    return true
+end;
+
