@@ -9,7 +9,7 @@ import styles from './styles'
 export interface ButtonAttribute {
     content: string,
     type: string,
-    arrow: Boolean
+    arrow?: boolean
 }
 
 const buttonColor = {
