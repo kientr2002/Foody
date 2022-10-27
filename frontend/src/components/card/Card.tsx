@@ -1,12 +1,8 @@
 import * as React from 'react'
-import { View, Image, Text } from "react-native"
-import * as SplashScreen from 'expo-splash-screen';
-import { AntDesign } from '@expo/vector-icons'; 
-import { useFonts } from 'expo-font'
+import { View, Image, Text } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
 
-import styles from "./styles"
-
-SplashScreen.preventAutoHideAsync()
+import styles from './styles'
 
 export interface CardAttribute {
     cardStyle: number,
@@ -84,25 +80,9 @@ export default function Card({ cardStyle, name, body, rate, imgSrc} : CardAttrib
     }, [cardStyle])
 
 
-    // load font
-    const [fontLoaded] = useFonts({
-        'SF-Pro-Rounded_bold': require('../../../assets/font/SF-Pro-Rounded-Bold.otf'),
-        'SF-Pro-Rounded_regular': require('../../../assets/font/SF-Pro-Rounded-Regular.otf')
-    })
-
-    const onLayoutRootView = React.useCallback(async () => {
-        if (fontLoaded) {
-          await SplashScreen.hideAsync();
-        }
-    }, [fontLoaded]);
-
-    if (!fontLoaded)
-        return null
-
     return (
         <View
             style={[styles.background, backgroundSize]}
-            onLayout={onLayoutRootView}
         >
             <Image 
                 style={imgSize}
