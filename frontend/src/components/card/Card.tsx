@@ -37,8 +37,9 @@ function Stars({ rate, style }: StarsAttribute) {
 
     return (
         <View style={styles.starContainer}>
-            {starArr.map(element => (
+            {starArr.map((element, i) => (
                 <AntDesign 
+                    key={i}
                     name={element === 'star' ? "star" : "staro"} 
                     size={20} 
                     style={styles.star} 
@@ -95,7 +96,7 @@ export default function Card({ cardStyle, name, body, rate, imgSrc} : CardAttrib
                         {name}
                     </Text>
                     {cardStyle !== 4 ?
-                        <Text style={styles.text} numberOfLines={cardStyle === 3 || cardStyle === 4 ? 3 : 0}>
+                        <Text style={styles.text} numberOfLines={cardStyle === 3 || cardStyle === 4 ? 3 : 2}>
                             {body.description}
                         </Text> :
                         <View>

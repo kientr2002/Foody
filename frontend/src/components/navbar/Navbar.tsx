@@ -1,132 +1,101 @@
 import React from 'react'
-import { Pressable, View } from 'react-native'
+import { Pressable, TouchableOpacity, View, Text } from 'react-native'
 import { FontAwesome5, Entypo, FontAwesome, MaterialIcons } from '@expo/vector-icons'
 
 import styles from './styles'
 
-export interface NavAttribute {
-    type: string
-}
-export interface NavElementAttribute {
-    active: string,
-    setActive: (active: string) => void
-}
-
-function User({ active, setActive }: NavElementAttribute) {
-    return (
-        <>
-            <Pressable
-                style={styles.element}
-                onPress={() => setActive('home')}
-            >
-                <Entypo 
-                    name="home" 
-                    size={25} 
-                    style={active === 'home' ? styles.iconActive : styles.icon}
-                />
-            </Pressable>
-            <Pressable
-                style={styles.element}
-                onPress={() => setActive('plan')}
-            >
-                <FontAwesome5 
-                    name="calendar-day" 
-                    size={23} 
-                    style={active === 'plan' ? styles.iconActive : styles.icon} 
-                />
-            </Pressable>
-            <Pressable
-                style={styles.element}
-                onPress={() => setActive('search')}
-            >
-                <FontAwesome 
-                    name="search" 
-                    size={24} 
-                    style={active === 'search' ? styles.iconActive : styles.icon} 
-                />
-            </Pressable>
-            <Pressable
-                style={styles.element}
-                onPress={() => setActive('favorite')}
-            >
-                <MaterialIcons 
-                    name="favorite" 
-                    size={26} 
-                    style={active === 'favorite' ? styles.iconActive : styles.icon}  
-                />
-            </Pressable>
-            <Pressable
-                style={styles.element}
-                onPress={() => setActive('profile')}
-            >
-                <FontAwesome 
-                    name="user-circle-o" 
-                    size={24} 
-                    style={active === 'profile' ? styles.iconActive : styles.icon}  
-                />
-            </Pressable>
-        </>
-    )
-}
-
-function Admin({ active, setActive }:NavElementAttribute) {
-    return (
-        <>
-            <Pressable
-                style={styles.element}
-                onPress={() => setActive('accountManager')}
-            >
-                <FontAwesome 
-                    name="users" 
-                    size={21} 
-                    style={active === 'accountManager' ? styles.iconActive : styles.icon}
-                />
-            </Pressable>
-            <Pressable
-                style={styles.element}
-                onPress={() => setActive('foodManager')}
-            >
-                <FontAwesome5
-                    name="pen" 
-                    size={21} 
-                    style={active === 'foodManager' ? styles.iconActive : styles.icon}
-                />
-            </Pressable>
-            <Pressable
-                style={styles.element}
-                onPress={() => setActive('profile')}
-            >
-                <FontAwesome 
-                    name="user-circle-o" 
-                    size={24} 
-                    style={active === 'profile' ? styles.iconActive : styles.icon}  
-                />
-            </Pressable>
-        </>
-    )
-}
-
-
-/*
-    Component NavBar:
-        type (String): choose menu for user and admin, value: 'user', 'admin'
-*/
-
-export default function Navbar({ type }:NavAttribute) {
-    const [active, setActive] = React.useState<string>(type === 'user' ? 'home' : 'accountManager')
-
+export default function Navbar({state, descriptors, navigation} : any) {
     return (
         <View style={styles.background}>
-            {type === 'user' ? 
-                <User
-                    active={active}
-                    setActive={setActive}
-                /> : 
-                <Admin 
-                    active={active}
-                    setActive={setActive}
-                />
-            }
+            {state.routes.map((route:any, index:any) => {
+                const { options } = descriptors[route.key];
+                const label =
+                options.tabBarLabel !== undefined
+                    ? options.tabBarLabel
+                    : options.title !== undefined
+                    ? options.title
+                    : route.name;
+
+                const isFocused = state.index === index;
+
+                const onPress = () => {
+                    const event = navigation.emit({
+                        type: 'tabPress',
+                        target: route.key,
+                        canPreventDefault: true,
+                    });
+
+                    if (!isFocused && !event.defaultPrevented) {
+                        // The `merge: true` option makes sure that the params inside the tab screen are preserved
+                        navigation.navigate({ name: route.name, merge: true });
+                    }
+                };
+
+                const onLongPress = () => {
+                    navigation.emit({
+                        type: 'tabLongPress',
+                        target: route.key,
+                    });
+                };
+
+                return (
+                    <TouchableOpacity
+                        key={route.key}
+                        accessibilityRole="button"
+                        accessibilityState={isFocused ? { selected: true } : {}}
+                        accessibilityLabel={options.tabBarAccessibilityLabel}
+                        testID={options.tabBarTestID}
+                        onPress={onPress}
+                        onLongPress={onLongPress}
+                        style={styles.element}
+                    >
+                        {
+                            label === 'Home' 
+                            ?   <Entypo 
+                                    name="home" 
+                                    size={25} 
+                                    style={isFocused ? styles.iconActive : styles.icon}
+                                /> 
+                            : label === 'Plan'
+                            ?   <FontAwesome5 
+                                    name="calendar-day" 
+                                    size={23} 
+                                    style={isFocused ? styles.iconActive : styles.icon} 
+                                />
+                            : label === 'Search'
+                            ?   <FontAwesome
+                                    name="search" 
+                                    size={24} 
+                                    style={isFocused ? styles.iconActive : styles.icon} 
+                                />
+                            : label === 'Favorite'
+                            ?   <MaterialIcons 
+                                    name="favorite" 
+                                    size={26} 
+                                    style={isFocused ? styles.iconActive : styles.icon}  
+                                />
+                            : label === 'Profile'
+                            ?   <FontAwesome 
+                                    name="user-circle-o" 
+                                    size={24} 
+                                    style={isFocused ? styles.iconActive : styles.icon}  
+                                />
+                            : label === 'AccountManager'
+                            ?   <FontAwesome 
+                                    name="users" 
+                                    size={21} 
+                                    style={isFocused ? styles.iconActive : styles.icon}  
+                                />
+                            :   <FontAwesome5
+                                    name="pen" 
+                                    size={21} 
+                                    style={isFocused ? styles.iconActive : styles.icon}
+                                />
+                        }
+                        
+                    </TouchableOpacity>
+                );
+            })}
         </View>
     )
 }

@@ -8,6 +8,7 @@ import { useFonts } from 'expo-font'
 import Navbar from './src/components/navbar/Navbar'
 import Card from './src/components/card/Card'
 import Button from './src/components/button/Button'
+import Input from './src/components/input/Input'
 
 const Stack = createNativeStackNavigator()
 
@@ -63,8 +64,8 @@ export default function App() {
                 <Button
                     content='LOGIN'
                     type='confirm'
-                    arrow={false}
                 />
+                <Input type='name'/>
             </View>
             <Navbar type='admin'></Navbar>
         </>

@@ -3,24 +3,32 @@ import color from "../../styles/color"
 
 const styles = StyleSheet.create({
     button: {
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 40,
-        paddingRight: 40,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 30,
+        paddingRight: 30,
         borderRadius: 30,
 
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
     },
+    comment: {
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
     text: {
         color: color.background,
         fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 17,
     },
+    icon: {
+        color: color.background
+    },
     arrow: {
         paddingLeft: 10,
-        color: color.background
     }
 })
 
