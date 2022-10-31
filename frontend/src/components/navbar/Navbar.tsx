@@ -4,17 +4,17 @@ import { FontAwesome5, Entypo, FontAwesome, MaterialIcons } from '@expo/vector-i
 
 import styles from './styles'
 
-export default function Navbar({state, descriptors, navigation} : any) {
+export default function Navbar({ state, descriptors, navigation }: any) {
     return (
         <View style={styles.background}>
-            {state.routes.map((route:any, index:any) => {
+            {state.routes.map((route: any, index: any) => {
                 const { options } = descriptors[route.key];
                 const label =
-                options.tabBarLabel !== undefined
-                    ? options.tabBarLabel
-                    : options.title !== undefined
-                    ? options.title
-                    : route.name;
+                    options.tabBarLabel !== undefined
+                        ? options.tabBarLabel
+                        : options.title !== undefined
+                            ? options.title
+                            : route.name;
 
                 const isFocused = state.index === index;
 
@@ -50,49 +50,49 @@ export default function Navbar({state, descriptors, navigation} : any) {
                         style={styles.element}
                     >
                         {
-                            label === 'Home' 
-                            ?   <Entypo 
-                                    name="home" 
-                                    size={25} 
-                                    style={isFocused ? styles.iconActive : styles.icon}
-                                /> 
-                            : label === 'Plan'
-                            ?   <FontAwesome5 
-                                    name="calendar-day" 
-                                    size={23} 
-                                    style={isFocused ? styles.iconActive : styles.icon} 
-                                />
-                            : label === 'Search'
-                            ?   <FontAwesome
-                                    name="search" 
-                                    size={24} 
-                                    style={isFocused ? styles.iconActive : styles.icon} 
-                                />
-                            : label === 'Favorite'
-                            ?   <MaterialIcons 
-                                    name="favorite" 
-                                    size={26} 
-                                    style={isFocused ? styles.iconActive : styles.icon}  
-                                />
-                            : label === 'Profile'
-                            ?   <FontAwesome 
-                                    name="user-circle-o" 
-                                    size={24} 
-                                    style={isFocused ? styles.iconActive : styles.icon}  
-                                />
-                            : label === 'AccountManager'
-                            ?   <FontAwesome 
-                                    name="users" 
-                                    size={21} 
-                                    style={isFocused ? styles.iconActive : styles.icon}  
-                                />
-                            :   <FontAwesome5
-                                    name="pen" 
-                                    size={21} 
+                            label === 'Home'
+                                ? <Entypo
+                                    name="home"
+                                    size={25}
                                     style={isFocused ? styles.iconActive : styles.icon}
                                 />
+                                : label === 'Plan'
+                                    ? <FontAwesome5
+                                        name="calendar-day"
+                                        size={23}
+                                        style={isFocused ? styles.iconActive : styles.icon}
+                                    />
+                                    : label === 'Search'
+                                        ? <FontAwesome
+                                            name="search"
+                                            size={24}
+                                            style={isFocused ? styles.iconActive : styles.icon}
+                                        />
+                                        : label === 'Favorite'
+                                            ? <MaterialIcons
+                                                name="favorite"
+                                                size={26}
+                                                style={isFocused ? styles.iconActive : styles.icon}
+                                            />
+                                            : label === 'Profile'
+                                                ? <FontAwesome
+                                                    name="user-circle-o"
+                                                    size={24}
+                                                    style={isFocused ? styles.iconActive : styles.icon}
+                                                />
+                                                : label === 'Manage Account'
+                                                    ? <FontAwesome
+                                                        name="users"
+                                                        size={21}
+                                                        style={isFocused ? styles.iconActive : styles.icon}
+                                                    />
+                                                    : <FontAwesome5
+                                                        name="pen"
+                                                        size={21}
+                                                        style={isFocused ? styles.iconActive : styles.icon}
+                                                    />
                         }
-                        
+
                     </TouchableOpacity>
                 );
             })}
