@@ -75,22 +75,13 @@ create table Edit (
 
 create table List (
 	ID int primary key auto_increment,
-    type varchar(255)
+    type varchar(255),
+    Name varchar(255),
+    UserID int references User(ID)
 );
 
-create function insertacc (email varchar(255), pass varchar(255), name varchar(255), dob datetime, ques varchar(255), ans varchar(255), role bool)
-returns bool
-DETERMINISTIC
-begin
-	if year(current_date()) - year(dob) < 8 then
-		return false;
-    insert into User(Name,DOB,email)
-    values (name, dob, email);
-    
-    declare id = select Last_insert_ID();
-    
-    insert into account(username, Pass, Ques, Ans, Role, UserID)
-    values (email, pass, ques, ans, role, id);
-    return true
-end;
+
+
+
+
 
