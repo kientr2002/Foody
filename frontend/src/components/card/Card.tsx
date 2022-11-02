@@ -1,12 +1,8 @@
 import * as React from 'react'
-import { View, Image, Text } from "react-native"
-import * as SplashScreen from 'expo-splash-screen';
-import { AntDesign } from '@expo/vector-icons'; 
-import { useFonts } from 'expo-font'
+import { View, Image, Text } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
 
-import styles from "./styles"
-
-SplashScreen.preventAutoHideAsync()
+import styles from './styles'
 
 export interface CardAttribute {
     cardStyle: number,
@@ -41,8 +37,9 @@ function Stars({ rate, style }: StarsAttribute) {
 
     return (
         <View style={styles.starContainer}>
-            {starArr.map(element => (
+            {starArr.map((element, i) => (
                 <AntDesign 
+                    key={i}
                     name={element === 'star' ? "star" : "staro"} 
                     size={20} 
                     style={styles.star} 
@@ -84,25 +81,9 @@ export default function Card({ cardStyle, name, body, rate, imgSrc} : CardAttrib
     }, [cardStyle])
 
 
-    // load font
-    const [fontLoaded] = useFonts({
-        'SF-Pro-Rounded_bold': require('../../../assets/font/SF-Pro-Rounded-Bold.otf'),
-        'SF-Pro-Rounded_regular': require('../../../assets/font/SF-Pro-Rounded-Regular.otf')
-    })
-
-    const onLayoutRootView = React.useCallback(async () => {
-        if (fontLoaded) {
-          await SplashScreen.hideAsync();
-        }
-    }, [fontLoaded]);
-
-    if (!fontLoaded)
-        return null
-
     return (
         <View
             style={[styles.background, backgroundSize]}
-            onLayout={onLayoutRootView}
         >
             <Image 
                 style={imgSize}
@@ -115,7 +96,7 @@ export default function Card({ cardStyle, name, body, rate, imgSrc} : CardAttrib
                         {name}
                     </Text>
                     {cardStyle !== 4 ?
-                        <Text style={styles.text} numberOfLines={cardStyle === 3 || cardStyle === 4 ? 3 : 0}>
+                        <Text style={styles.text} numberOfLines={cardStyle === 3 || cardStyle === 4 ? 3 : 2}>
                             {body.description}
                         </Text> :
                         <View>
