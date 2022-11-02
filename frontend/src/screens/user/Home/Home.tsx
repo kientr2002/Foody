@@ -1,27 +1,37 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import Card from '../../../components/card/Card'
+import { createNativeStackNavigator } from '@react-navigation/native-stack' 
+import { HomeStackParamList, UserTabParamList } from '../../../util/types'
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 
-export default function Home() {
+import FoodList from '../FoodList/FoodList'
+import FoodDetail from '../Food detail/FoodDetail'
+import color from '../../../styles/color'
+
+const Stack = createNativeStackNavigator<HomeStackParamList>()
+type Props = BottomTabScreenProps<UserTabParamList, 'Home'>
+
+export default function Home({ route, navigation }:Props) {
     return (
-        <>
-            <View style={styles.container}>
-                <Card
-                    cardStyle={2}
-                    name='Food name'
-                    body={{
-                        description: 'This dish is created by ThoaiLe, an Asia chef. He want to create a dish that not only good for your health but also easy to do',
-                        calories: 1200,
-                        protein: 400,
-                        fat: 20,
-                        carb: 210
-                    }}
-                    imgSrc='../../../assets/food.jpg'
-                    rate={4}
-                />
-            </View>
-        </>
+        <Stack.Navigator
+            screenOptions={{
+                headerTintColor: color.primary,
+                headerTitleStyle: {
+                    fontFamily: 'SF-Pro-Rounded_bold',
+                    fontSize: 23
+                }
+            }}
+        >
+            <Stack.Screen
+                name='Food List' 
+                component={FoodList}
+            />
+            <Stack.Screen 
+                name='Food Detail' 
+                component={FoodDetail} 
+                options={({ route }) => ({ title: route.params.name })}
+            />
+        </Stack.Navigator>
     )
 }
 

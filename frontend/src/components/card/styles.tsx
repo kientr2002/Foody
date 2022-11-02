@@ -13,10 +13,12 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity:  0.15,
         shadowRadius: 5,
-        elevation: 30
+        elevation: 10
     },
     background_1: {
-        width: '65%'
+        width: 250,
+        height: 425,
+        marginRight: 20
     },
     background_2: {
         width: '80%'
