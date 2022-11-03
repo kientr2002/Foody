@@ -1,7 +1,15 @@
 import * as React from 'react'
+import { View } from 'react-native'
+import * as SplashScreen from 'expo-splash-screen'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useFonts } from 'expo-font'
 
-import UserView from './src/screens/user/UserView'
+import Button from './src/components/button/Button';
+import styles from './src/components/card/styles';
+import color from "./src/styles/color"
+
+import {Login} from './src/screens/authentication/login'
 
 
 export default function App() {
@@ -16,8 +24,8 @@ export default function App() {
     
     if (!fontLoaded)
         return null 
-
+        
     return (
-        <UserView/>
+        <Login/>
     )
 }
