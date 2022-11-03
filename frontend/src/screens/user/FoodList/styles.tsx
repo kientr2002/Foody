@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     },
     mealContainer: {
         backgroundColor: 'transparent',
-        paddingLeft: 20
+        paddingLeft: 20,
+        marginBottom: 20
     },
     mealTitle: {
         fontFamily: 'SF-Pro-Rounded_semibold',

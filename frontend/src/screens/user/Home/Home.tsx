@@ -34,7 +34,7 @@ export default function Home({ route, navigation }:Props) {
                 name='Food Detail' 
                 component={FoodDetail} 
                 options={({ route }) => ({ 
-                    // title: route.params.name,
+                    title: route.params.name,
                     headerRight: () => (<HeaderButton type={2} />)
                 })}
             />

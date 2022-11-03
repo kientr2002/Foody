@@ -12,6 +12,14 @@ export interface ReviewCardAttribute {
     body: string,
 }
 
+export interface ReviewInputAttribute {
+    rate: number
+    setRate: (rate:number) => void
+    comment: string
+    setComment: (comment:string) => void
+    handleSubmit: (rate:number, comment:string) => void
+}
+
 function Stars({ rate }:any) {
     let starArr:string[] = []
     for (let i=0; i < 5; i++) {
@@ -35,10 +43,7 @@ function Stars({ rate }:any) {
     )
 }
 
-export function ReviewInput(props:any) {
-    const [rate, setRate] = React.useState<number>(0)
-    const [comment, setComment] = React.useState<string>('')
-
+export function ReviewInput({rate, setRate, comment, setComment, handleSubmit}:ReviewInputAttribute) {
     return (
         <View style={styles.reviewInput}>
             <View style={styles.input}>
@@ -100,6 +105,7 @@ export function ReviewInput(props:any) {
             <Button 
                 type='confirm'
                 comment
+                onPress={() => handleSubmit(rate, comment)}
             />
         </View>
     )

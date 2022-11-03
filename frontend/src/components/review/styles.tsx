@@ -3,20 +3,20 @@ import color from '../../styles/color'
 
 const styles = StyleSheet.create({
     reviewInput: {
-        width: '90%',
+        width: '95%',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
 
-        paddingVertical: 10,
+        paddingVertical: 15,
         borderRadius: 20,
         backgroundColor: color.background,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity:  0.15,
         shadowRadius: 5,
-        elevation: 5
+        elevation: 1
     },
     input: {
         width: '75%',
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     },
 
     reviewCard: {
-        width: '90%',
+        width: '95%',
         paddingVertical: 10,
         paddingHorizontal: 10,
         borderRadius: 20,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity:  0.15,
         shadowRadius: 5,
-        elevation: 5
+        elevation: 1
     },
     reviewCardTitle: {
         display: 'flex',

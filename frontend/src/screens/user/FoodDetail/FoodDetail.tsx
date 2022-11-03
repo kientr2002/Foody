@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs'
-import { View, Text, Image, ScrollView, Pressable, TouchableOpacity, Animated } from 'react-native'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { View, Text, Image, ScrollView, } from 'react-native'
 import * as Progress from 'react-native-progress'
 import { HomeStackParamList } from '../../../util/types'
+import { ReviewInput, ReviewCard } from '../../../components/review/Review'
 
 import styles from './styles'
 import color from '../../../styles/color'
@@ -36,6 +37,14 @@ function Recipe({ recipe }:any) {
 }
 
 function About({ body }:any) {
+    const [reviews, setReview] = React.useState< Array<Object> >([])
+    const [rate, setRate] = React.useState<number>(0)
+    const [comment, setComment] = React.useState<string>('')
+
+    const handleSubmit = (rate:number, comment:string) => {
+        setReview([...reviews, {rate, body: comment, username: 'thoaile'}])
+    }
+
     return (
         <ScrollView style={styles.tabBody}>
             {/* Nutrient section */}
@@ -99,9 +108,32 @@ function About({ body }:any) {
 
             {/* Comment section */}
             <View>
-            <Text style={styles.sectionTitle}>Reviews</Text>
-                <View style={styles.sectionContainer}>
-                    <Text>Hlello</Text>
+                <Text style={styles.sectionTitle}>Reviews</Text>
+                <View
+                    style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <ReviewInput 
+                        rate={rate}
+                        setRate={setRate}
+                        comment={comment}
+                        setComment={setComment}
+                        handleSubmit={handleSubmit}
+                    />
+                </View>
+                <View style={styles.reviewCardContainer}>
+                    {reviews.length !== 0 && reviews.map((review:any, i:any) => (
+                        <ReviewCard
+                            key={i}
+                            username={review.username}
+                            body={review.body}
+                            rate={review.rate}
+                        />
+                    ))}
+                    {reviews.length === 0 && <Text>No comments</Text>}
                 </View>
             </View>
 

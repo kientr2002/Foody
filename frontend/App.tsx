@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useFonts } from 'expo-font'
 import { ReviewCard, ReviewInput } from './src/components/review/Review'
 import { View } from 'react-native'
+import UserView from './src/screens/user/UserView'
 
 
 export default function App() {
@@ -18,17 +19,6 @@ export default function App() {
         return null 
 
     return (
-        <View style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center'
-        }}>
-            <ReviewInput />
-            <ReviewCard 
-                username='thoaile'
-                rate={2}
-                body='Very good food'
-            />
-        </View>
+        <UserView />
     )
 }

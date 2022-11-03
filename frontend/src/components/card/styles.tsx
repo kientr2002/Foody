@@ -4,7 +4,8 @@ import color from "../../styles/color"
 const styles = StyleSheet.create({
     background: {
         borderRadius: 20,
-
+        marginBottom: 5,
+    
         display: 'flex',
         flexDirection: 'column',
 
@@ -13,9 +14,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity:  0.15,
         shadowRadius: 5,
-        elevation: 0,
+        elevation: 2,
 
-        borderWidth: 1,
     },
     background_1: {
         width: 250,

@@ -77,9 +77,7 @@ export default function FoodDetail({ route, navigation }: Props) {
             <View>
                 <Text style={styles.mealTitle}>Lunch</Text>
                 <ScrollView
-                    contentContainerStyle={{
-                        paddingLeft: 20,
-                    }}
+                    contentContainerStyle={styles.mealContainer}
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                 >
@@ -99,9 +97,7 @@ export default function FoodDetail({ route, navigation }: Props) {
             <View>
                 <Text style={styles.mealTitle}>Dinner</Text>
                 <ScrollView
-                    contentContainerStyle={{
-                        paddingLeft: 20,
-                    }}
+                    contentContainerStyle={styles.mealContainer}
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                 >

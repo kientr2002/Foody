@@ -57,7 +57,9 @@ const styles = StyleSheet.create({
         fontSize: 17
     },
     sectionContainer: {
-        
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     nutrientElement: {
@@ -71,6 +73,13 @@ const styles = StyleSheet.create({
     progressBar: {
         marginLeft: 20,
         borderRadius: 10
+    },
+
+    reviewCardContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 20
     }
 })
 
