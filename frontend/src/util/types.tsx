@@ -20,6 +20,12 @@ type HomeStackParamList = {
             fat: number,
             carb: number
         }
+        recipe: [
+            {
+                step: number,
+                body: string,
+            }
+        ],
         imgSrc: string
         rate: number
     },

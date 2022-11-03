@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { UserTabParamList } from '../../util/types'
 
 import Navbar from '../../components/navbar/Navbar'
+import Home from './Home/Home'
+
 
 import color from '../../styles/color'
 
@@ -28,10 +30,6 @@ export default function UserView() {
                 }}
             >
                 <Tab.Screen name='Home' component={Home} />
-                <Tab.Screen name='Plan' component={Plan} />
-                <Tab.Screen name='Search' component={Search} />
-                <Tab.Screen name='Favorite' component={Favorite}/>
-                <Tab.Screen name='Profile' component={Profile}/>
             </Tab.Navigator>
         </NavigationContainer>
     )

@@ -5,7 +5,8 @@ import { HomeStackParamList, UserTabParamList } from '../../../util/types'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 
 import FoodList from '../FoodList/FoodList'
-import FoodDetail from '../Food detail/FoodDetail'
+import FoodDetail from '../FoodDetail/FoodDetail'
+import HeaderButton from '../../../components/headerButton/HeaderButton'
 import color from '../../../styles/color'
 
 const Stack = createNativeStackNavigator<HomeStackParamList>()
@@ -25,11 +26,17 @@ export default function Home({ route, navigation }:Props) {
             <Stack.Screen
                 name='Food List' 
                 component={FoodList}
+                options={{
+                    headerRight: () => (<HeaderButton type={1} />)
+                }}
             />
             <Stack.Screen 
                 name='Food Detail' 
                 component={FoodDetail} 
-                options={({ route }) => ({ title: route.params.name })}
+                options={({ route }) => ({ 
+                    // title: route.params.name,
+                    headerRight: () => (<HeaderButton type={2} />)
+                })}
             />
         </Stack.Navigator>
     )

@@ -13,11 +13,13 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity:  0.15,
         shadowRadius: 5,
-        elevation: 10
+        elevation: 0,
+
+        borderWidth: 1,
     },
     background_1: {
         width: 250,
-        height: 425,
+        height: 410,
         marginRight: 20
     },
     background_2: {
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
 
     img_1: {
         width: '100%',
-        height: 280,
+        height: 260,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20
     },
