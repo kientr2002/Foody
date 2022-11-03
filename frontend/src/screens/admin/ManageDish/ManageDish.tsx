@@ -1,9 +1,11 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
+
 import { StyleSheet, View, Text, ScrollView } from 'react-native'
 import Card from '../../../components/card/Card'
+import FoodCardAdmin from '../../../components/FoodCardAdmin/FoodCardAdmin'
 import Button from '../../../components/button/Button'
-export default function ManageDish() {
+export default function ManageDish({ navigation }: { navigation: any }) {
     return (
         <>
             <View
@@ -11,20 +13,14 @@ export default function ManageDish() {
                     flex: 1,
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start',
-                    marginLeft: 30
+                    marginLeft: '8%'
                 }}
             >
-                {/* Header */}
-                <View
-                    style={{
-                        flex: 1
-                    }}>
-
-                </View>
                 {/* Add dish */}
                 <View
                     style={{
                         flex: 1,
+                        marginTop: 20,
                         marginBottom: 10
                     }}
                 >
@@ -32,6 +28,7 @@ export default function ManageDish() {
                         content='ADD DISH'
                         type='warning'
                         arrow={false}
+                        onPress={() => navigation.navigate('AddEditDish')}
                     />
                 </View>
                 {/* All dish */}
@@ -43,7 +40,7 @@ export default function ManageDish() {
                     <Text
                         style={{
                             fontFamily: 'SF-Pro-Rounded_bold',
-                            fontSize: 17,
+                            fontSize: 20,
                             fontStyle: 'italic',
                             fontWeight: 'bold'
                         }}
@@ -67,19 +64,12 @@ export default function ManageDish() {
                         <View
                             style={{
                                 marginBottom: 20
-                            }}>
-                            <Card
-                                cardStyle={3}
-                                name='Food name'
-                                body={{
-                                    description: 'This dish is created by ThoaiLe, an Asia chef. He want to create a dish that not only good for your health but also easy to do',
-                                    calories: 1200,
-                                    protein: 400,
-                                    fat: 20,
-                                    carb: 210
-                                }}
+                            }}
+                        >
+                            <FoodCardAdmin
+                                name='Thịt luộc'
                                 imgSrc='../../../assets/food.jpg'
-                                rate={4}
+                                onPress={() => navigation.navigate('AddEditDish')}
                             />
                         </View>
 
@@ -91,7 +81,7 @@ export default function ManageDish() {
                                 cardStyle={3}
                                 name='Food name'
                                 body={{
-                                    description: 'This dish is created by ThoaiLe, an Asia chef. He want to create a dish that not only good for your health but also easy to do',
+                                    description: 'This dish is created by ThoaiLe, an Asia chef. ',
                                     calories: 1200,
                                     protein: 400,
                                     fat: 20,

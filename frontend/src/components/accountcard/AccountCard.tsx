@@ -1,15 +1,22 @@
 import * as React from 'react'
-import { View, Image, Text } from 'react-native'
+import { View, Image, Text, Pressable } from 'react-native'
 
 import styles from './styles'
 
 export interface AccountCardAttribute {
     username: string,
     role: string,
-    status: string
+    status: string,
+    onPress?: () => void
 }
 
-export default function AccountCard({ username, role, status }: AccountCardAttribute) {
+export default function AccountCard({ username, role, status, onPress }: AccountCardAttribute) {
+    const [pressed, setPressed] = React.useState<boolean>(false)
+    const handlePressIn = () => {
+        setPressed(true)
+        if (onPress)
+            onPress()
+    }
     return (
         <View
             style={styles.view_layout}
@@ -26,11 +33,17 @@ export default function AccountCard({ username, role, status }: AccountCardAttri
                 }}
             >
                 <View>
-                    <Text
-                        style={styles.text_1}
+                    <Pressable
+                        onPressIn={handlePressIn}
+                        onPressOut={() => setPressed(false)}
                     >
-                        {username}
-                    </Text>
+                        <Text
+                            style={styles.text_1}
+                        >
+                            {username}
+                        </Text>
+                    </Pressable>
+
                 </View>
                 {/* Role */}
                 <View

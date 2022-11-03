@@ -15,8 +15,8 @@ const Tab = createBottomTabNavigator()
 export default function UserView() {
     return (
         <NavigationContainer>
-            <Tab.Navigator 
-                tabBar={props => <Navbar {...props}/>}
+            <Tab.Navigator
+                tabBar={props => <Navbar {...props} />}
                 screenOptions={{
                     headerStyle: {
                         backgroundColor: color.background

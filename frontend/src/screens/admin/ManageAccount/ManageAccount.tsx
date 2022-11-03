@@ -3,7 +3,7 @@ import * as React from 'react'
 import { StyleSheet, View, Text, ScrollView } from 'react-native'
 import Card from '../../../components/card/Card'
 import AccountCard from '../../../components/accountcard/AccountCard'
-export default function ManageAccount() {
+export default function ManageAccount({ navigation }: { navigation: any }) {
     return (
         <>
             <View
@@ -15,18 +15,21 @@ export default function ManageAccount() {
                         fontFamily: 'SF-Pro-Rounded_regular',
                         fontStyle: 'italic',
                         fontWeight: 'bold',
-                        fontSize: 17,
-                        paddingLeft: '5%',
-                        marginTop: 80,
+                        fontSize: 20,
+                        paddingLeft: '8%',
+                        marginTop: 15,
                         marginBottom: 20
                     }}>All account
                 </Text>
                 <View
                     style={{
                         flex: 10,
-                        paddingLeft: '5%'
+                        paddingLeft: '8%'
                     }}>
-                    <ScrollView>
+                    <ScrollView
+                        contentContainerStyle={{
+                            paddingHorizontal: 0
+                        }}>
                         <View
                             style={{
                                 paddingTop: 10,
@@ -34,7 +37,19 @@ export default function ManageAccount() {
                             }}>
                             <AccountCard
                                 username='levanbang'
-                                role='admin'
+                                role='Admin'
+                                status='active'
+                                onPress={() => navigation.navigate('AccountName')}
+                            />
+                        </View>
+                        <View
+                            style={{
+                                paddingTop: 10,
+                                paddingBottom: 10
+                            }}>
+                            <AccountCard
+                                username='levanbang'
+                                role='Admin'
                                 status='active'
                             />
                         </View>
@@ -45,7 +60,7 @@ export default function ManageAccount() {
                             }}>
                             <AccountCard
                                 username='levanbang'
-                                role='admin'
+                                role='Admin'
                                 status='active'
                             />
                         </View>
@@ -56,7 +71,7 @@ export default function ManageAccount() {
                             }}>
                             <AccountCard
                                 username='levanbang'
-                                role='admin'
+                                role='Admin'
                                 status='active'
                             />
                         </View>
@@ -67,7 +82,7 @@ export default function ManageAccount() {
                             }}>
                             <AccountCard
                                 username='levanbang'
-                                role='admin'
+                                role='Admin'
                                 status='active'
                             />
                         </View>
@@ -78,7 +93,7 @@ export default function ManageAccount() {
                             }}>
                             <AccountCard
                                 username='levanbang'
-                                role='admin'
+                                role='Admin'
                                 status='active'
                             />
                         </View>
@@ -89,18 +104,7 @@ export default function ManageAccount() {
                             }}>
                             <AccountCard
                                 username='levanbang'
-                                role='admin'
-                                status='active'
-                            />
-                        </View>
-                        <View
-                            style={{
-                                paddingTop: 10,
-                                paddingBottom: 10
-                            }}>
-                            <AccountCard
-                                username='levanbang'
-                                role='admin'
+                                role='Admin'
                                 status='active'
                             />
                         </View>

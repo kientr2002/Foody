@@ -12,10 +12,11 @@ import Input from './src/components/input/Input'
 import AccountCard from './src/components/accountcard/AccountCard'
 import UserView from './src/screens/user/UserView'
 import AdminView from './src/screens/admin/AdminView'
+import DishName from './src/screens/admin/DishName/DishName'
 const Stack = createNativeStackNavigator()
 
 export default function App() {
-    // load font
+    //load font
     const [fontLoaded] = useFonts({
         'SF-Pro-Rounded_heavy': require('./assets/font/SF-Pro-Rounded-Heavy.otf'),
         'SF-Pro-Rounded_bold': require('./assets/font/SF-Pro-Rounded-Bold.otf'),
@@ -24,35 +25,12 @@ export default function App() {
         'SF-Pro-Rounded_regular': require('./assets/font/SF-Pro-Rounded-Regular.otf'),
     })
 
-    React.useEffect(() => {
-        async function prepare() {
-            await SplashScreen.preventAutoHideAsync()
-        }
-        prepare()
-    }, [])
-
-    const onLayoutRootView = React.useCallback(async () => {
-        if (fontLoaded) {
-            await SplashScreen.hideAsync()
-        }
-    }, [fontLoaded])
-
     if (!fontLoaded)
         return null
 
     return (
-        <>
-            <View
-                onLayout={onLayoutRootView}
-            >
-
-            </View>
-            <AdminView />
-        </>
-        // <NavigationContainer>
-        //     <Stack.Navigator>
-
-        //     </Stack.Navigator>
-        // </NavigationContainer>
+        <AdminView />
     )
 }
+
+
