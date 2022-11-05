@@ -94,7 +94,10 @@ export default function Card({ cardStyle, name, body, rate, imgSrc, onPress} : C
             />
             <View style={textSize}>
                 <View>
-                    <Text style={cardStyle !== 3 ? styles.title : styles.title_2}>
+                    <Text 
+                        style={cardStyle !== 3 ? styles.title : styles.title_2}
+                        numberOfLines={1}    
+                    >
                         {name}
                     </Text>
                     {cardStyle !== 4 ?

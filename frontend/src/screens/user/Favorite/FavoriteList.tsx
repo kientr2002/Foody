@@ -1,5 +1,4 @@
 import React from "react"
-import axios from 'axios'
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { ScrollView, StyleSheet } from "react-native"
 import { FavoriteStackParamList, Food } from "../../../util/types"
@@ -10,11 +9,9 @@ type Props = NativeStackScreenProps<FavoriteStackParamList>
 export default function FavoriteList({ route, navigation }:Props) {
     const [foods, setFoods] = React.useState< Array<Food> >([])
     React.useEffect(() => {
-        axios.get('http://localhost:3000/favorite')
-            .then(response => {
-                if (response)
-                    setFoods(response.data)
-            })
+        const data = require('../../../../data/db.json')
+        if (data)
+            setFoods(data?.favorite)
     }, [])
 
     const handleOnPress = (obj:any) => {

@@ -1,21 +1,19 @@
 import * as React from 'react'
-import axios from 'axios'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import { Food, HomeStackParamList } from '../../../util/types'
 import Card from '../../../components/card/Card'
-import useFetchData from '../../../hooks/useFetchData'
 
 
 type Props = NativeStackScreenProps<HomeStackParamList>
 
 export default function FoodList({ route, navigation }: Props) {
     const [foods, setFoods] = React.useState< Array<Food> >([])
-    const { data }:any = useFetchData('http://localhost:3500/food')
-
     React.useEffect(() => {
-        console.log(data)
-    }, [data])
+        const data = require('../../../../data/db.json')
+        if (data)
+            setFoods(data?.food)
+    }, [])
 
     const handleOnPress = (obj:any) => {
         navigation.navigate(

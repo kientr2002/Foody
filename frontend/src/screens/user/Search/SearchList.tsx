@@ -1,5 +1,4 @@
 import * as React from 'react'
-import axios from 'axios'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import AnimatedLottieView from 'lottie-react-native'
 import Card from '../../../components/card/Card'
@@ -12,12 +11,10 @@ export default function SearchList({ navigation }:any) {
     const [result, setResult] = React.useState< Food[] >([])
 
     React.useEffect(() => {
-        axios.get('http://localhost:3000/food')
-            .then(response => {
-                if (response)
-                    setFoods(response.data)
-            })
-    }, [])
+        const data = require('../../../../data/db.json')
+        if (data)
+            setFoods(data?.food)
+    }, []) 
 
     React.useEffect(() => {
         if (searchKeyWord === '')
