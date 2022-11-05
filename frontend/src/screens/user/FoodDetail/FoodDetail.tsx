@@ -1,24 +1,13 @@
 import * as React from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { View, Text, Image, ScrollView, } from 'react-native'
 import * as Progress from 'react-native-progress'
-import { HomeStackParamList } from '../../../util/types'
 import { ReviewInput, ReviewCard } from '../../../components/review/Review'
 
 import styles from './styles'
 import color from '../../../styles/color'
 
-type Props = NativeStackScreenProps<HomeStackParamList>
 const Tab = createMaterialTopTabNavigator()
-
-interface FoodBody {
-    description: string,
-    calories: number,
-    protein: number
-    fat: number,
-    carb: number
-}
 
 function Recipe({ recipe }:any) {
     return (
@@ -141,14 +130,24 @@ function About({ body }:any) {
     )
 }
 
-export default function FoodDetail({ route, navigation }:Props) {
-    const { name, recipe, body, imgSrc }:any = route.params
+export default function FoodDetail({ route }:any) {
+    const { name, recipe, body, imgSrc }:any = route?.params
+
+
+
+    const handleAddToFavorite = () => {
+        
+    }
+
+    const handeRemoveFromFavorite = () => {
+
+    }
 
     return (
         <>
             <View style={styles.imgContainer}>
                 <Image 
-                    source={require('../../../../assets/food.jpg')}
+                    source={{ uri: imgSrc }}
                     style={styles.img}
                 />
             </View>

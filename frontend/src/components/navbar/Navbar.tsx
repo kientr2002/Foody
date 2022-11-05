@@ -50,7 +50,7 @@ export default function Navbar({state, descriptors, navigation} : any) {
                         style={styles.element}
                     >
                         {
-                            label === 'Home' 
+                            label === 'Home page' 
                             ?   <Entypo 
                                     name="home" 
                                     size={25} 
@@ -62,19 +62,19 @@ export default function Navbar({state, descriptors, navigation} : any) {
                                     size={23} 
                                     style={isFocused ? styles.iconActive : styles.icon} 
                                 />
-                            : label === 'Search'
+                            : label === 'Search page'
                             ?   <FontAwesome
                                     name="search" 
                                     size={24} 
                                     style={isFocused ? styles.iconActive : styles.icon} 
                                 />
-                            : label === 'Favorite'
+                            : label === 'Favorite page'
                             ?   <MaterialIcons 
                                     name="favorite" 
                                     size={26} 
                                     style={isFocused ? styles.iconActive : styles.icon}  
                                 />
-                            : label === 'Profile'
+                            : label === 'Profile page'
                             ?   <FontAwesome 
                                     name="user-circle-o" 
                                     size={24} 

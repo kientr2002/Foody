@@ -5,7 +5,7 @@ import { HomeStackParamList } from '../../../util/types'
 
 import Card from '../../../components/card/Card'
 
-export default function FoodDetail() {
+export default function CreatePlan() {
 
     return (
         <>

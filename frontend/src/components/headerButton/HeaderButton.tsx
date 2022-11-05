@@ -4,14 +4,24 @@ import { FontAwesome5, MaterialIcons  } from '@expo/vector-icons'
 
 import styles from './styles'
 import color from '../../styles/color'
+import { Food } from '../../util/types'
 
 interface HeaderButtonAttribute {
     type: number
+    navigation?: any
+    handleAddToFavorite: () => void
+    handleRemoveFromFavorite: () => void
 }
 
-export default function HeaderButton({type}:HeaderButtonAttribute) {
+export default function HeaderButton({type, navigation, handleAddToFavorite, handleRemoveFromFavorite }:HeaderButtonAttribute) {
     const [like, setLike] = React.useState<boolean>(false)
     const [inPlan, setInPlan] = React.useState<boolean>(false)
+
+    const handleGoToCreatePlan = () => {
+        navigation?.navigate(
+            'Create Plan'
+        )
+    }
 
     const handleAddToPlan = () => {
         setInPlan(true)
@@ -21,19 +31,14 @@ export default function HeaderButton({type}:HeaderButtonAttribute) {
         setInPlan(false)
     }
 
-    const handleAddToFavorite = () => {
-        setLike(true)
-    }
-
-    const handleRemoveFromFavorite = () => {
-        setLike(false)
-    }
-
     return (
         <>
             {type === 1 ? 
                 <View style={styles.container}>
-                    <Pressable style={styles.item}>
+                    <Pressable 
+                        style={styles.item}
+                        onPress={handleGoToCreatePlan}
+                    >
                         <FontAwesome5 name="shopping-basket" size={23} color={color.textBackground} />
                     </Pressable> 
                 </View> :
@@ -41,7 +46,11 @@ export default function HeaderButton({type}:HeaderButtonAttribute) {
                     <Pressable 
                         style={styles.item}
                         onPress={() => {
-                            !like ? handleAddToFavorite() : handleRemoveFromFavorite()
+                            if (!like)
+                                handleAddToFavorite()
+                            else
+                                handleRemoveFromFavorite()
+                            setLike(!like)
                         }}
                     >
 

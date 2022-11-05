@@ -23,11 +23,13 @@ const styles = StyleSheet.create({
         marginRight: 20
     },
     background_2: {
-        width: '80%'
+        width: '80%',
+        marginBottom: 20
     },
     background_3: {
         width: '90%',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginBottom: 10
     },
 
     img_1: {
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     },
     img_3: {
         width: 120,
-        height: '100%',
+        height: 100,
         borderTopLeftRadius: 20,
         borderBottomLeftRadius: 20
     },
@@ -70,7 +72,12 @@ const styles = StyleSheet.create({
         fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 25
     },
+    title_2: {
+        fontFamily: 'SF-Pro-Rounded_bold',
+        fontSize: 20
+    },
     text: {
+        height: 50,
         fontFamily: 'SF-Pro-Rounded_regular',
         fontSize: 17,
         color: color.textBackground

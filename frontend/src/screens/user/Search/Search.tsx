@@ -1,18 +1,20 @@
 import * as React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack' 
-import { HomeStackParamList, UserTabParamList } from '../../../util/types'
+import { SearchStackParamList, UserTabParamList } from '../../../util/types'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 
-import FoodList from './FoodList'
-import FoodDetail from '../FoodDetail/FoodDetail'
-import CreatePlan from '../CreatePlan/CreatePlan'
 import HeaderButton from '../../../components/headerButton/HeaderButton'
+import CreatePlan from '../CreatePlan/CreatePlan'
+import FoodDetail from '../FoodDetail/FoodDetail'
+import SearchList from './SearchList'
+
 import color from '../../../styles/color'
 
-const Stack = createNativeStackNavigator<HomeStackParamList>()
-type Props = BottomTabScreenProps<UserTabParamList, 'Home page'>
+const Stack = createNativeStackNavigator<SearchStackParamList>()
+type Props = BottomTabScreenProps<UserTabParamList, 'Search page'>
 
-export default function Home({ navigation }:Props) {
+export default function Search({ navigation }:Props) {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -23,11 +25,11 @@ export default function Home({ navigation }:Props) {
                 }
             }}
         >
-            <Stack.Screen
-                name='Food List' 
-                component={FoodList}
+            <Stack.Screen 
+                name='Search List' 
+                component={SearchList}
                 options={{
-                    title: 'Home',
+                    title: 'Search',
                     headerRight: () => (<HeaderButton type={1} navigation={navigation} />)
                 }}
             />

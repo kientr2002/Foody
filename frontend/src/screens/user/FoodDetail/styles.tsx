@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     },
     sectionText: {
         fontFamily: 'SF-Pro-Rounded_regular',
-        fontSize: 17
+        fontSize: 17,
     },
     sectionContainer: {
         flex: 1,

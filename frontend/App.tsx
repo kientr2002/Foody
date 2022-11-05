@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { useFonts } from 'expo-font'
-import { ReviewCard, ReviewInput } from './src/components/review/Review'
-import { View } from 'react-native'
 import UserView from './src/screens/user/UserView'
 
 

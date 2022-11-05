@@ -1,47 +1,63 @@
 import { NavigatorScreenParams } from "@react-navigation/native"
 
 type UserTabParamList = {
-    Home: NavigatorScreenParams<HomeStackParamList>,
+    'Home page': NavigatorScreenParams<HomeStackParamList>,
     Plan: undefined,
-    Search: undefined,
-    Favorite: undefined,
-    Profile: undefined
+    'Search page': NavigatorScreenParams<SearchStackParamList>,
+    'Favorite page': NavigatorScreenParams<FavoriteStackParamList>,
+    'Profile page': undefined
 }
 
 type HomeStackParamList = {
     'Food List': undefined,
-    'Food Detail': {
-        cardStyle: number,
-        name: string,
-        body: {
-            description: string,
-            calories: number,
-            protein: number
-            fat: number,
-            carb: number
-        }
-        recipe: [
-            {
-                step: number,
-                body: string,
-            }
-        ],
-        imgSrc: string
-        rate: number
-    },
+    'Food Detail': Food,
     'Create Plan': undefined
 }
 
-// type AdminRootStackParamList = {
-//     AccountManager: undefined,
-//     FoodManager: undefined,
-//     Profile: undefined
-// }
+type FavoriteStackParamList = {
+    'Favorite List': undefined,
+    'Food Detail': Food,
+    'Create Plan': undefined
+}
 
-// type AuthenticateRootStackParamList = {
-//     Login: undefined,
-//     SignUp: undefined,
-//     ForgotPassword: undefined
-// }
+type SearchStackParamList = {
+    'Search List': undefined,
+    'Food Detail': Food,
+    'Create Plan': undefined
+}
 
-export { UserTabParamList, HomeStackParamList}
+type ProfileStackParamList = {
+    'My profile': undefined,
+    'Update status': undefined,
+    'Change password': undefined
+}
+
+interface Food {
+    cardStyle: number,
+    name: string,
+    body: {
+        description: string,
+        calories: number,
+        protein: number
+        fat: number,
+        carb: number
+    }
+    recipe: [
+        {
+            step: number,
+            body: string,
+        }
+    ],
+    imgSrc: string
+    rate: number
+}
+
+
+export { 
+    Food, 
+    UserTabParamList, 
+    HomeStackParamList, 
+    FavoriteStackParamList,
+    SearchStackParamList,
+    ProfileStackParamList
+}

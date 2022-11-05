@@ -1,50 +1,22 @@
 import * as React from 'react'
+import axios from 'axios'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { View, ScrollView, FlatList, Text } from 'react-native'
-import { HomeStackParamList } from '../../../util/types'
+import { StyleSheet, View, ScrollView, Text } from 'react-native'
+import { Food, HomeStackParamList } from '../../../util/types'
 import Card from '../../../components/card/Card'
+import useFetchData from '../../../hooks/useFetchData'
 
-import styles from './styles'
 
 type Props = NativeStackScreenProps<HomeStackParamList>
 
-const demoObj = {
-    cardStyle: 1,
-    name: 'Food name',
-    body: {
-        description: 'This dish is created by ThoaiLe, an Asia chef. He want to create a dish that not only good for your health but also easy to do',
-        calories: 250,
-        protein: 120,
-        fat: 50,
-        carb: 90
-    },
-    recipe: [
-        {
-            step: 1,
-            body: 'Do step 1'
-        },
-        {
-            step: 2,
-            body: 'Do step 2'
-        },
-        {
-            step: 3,
-            body: 'Do step 3'
-        }
-    ],
-    imgSrc: '../../../assets/food.jpg',
-    rate: 4
-}
-const objArr = [
-    demoObj,
-    {...demoObj, name: 'Food name 2', rate: 3},
-    {...demoObj, name: 'Food name 3', rate: 4},
-    {...demoObj, name: 'Food name 4', rate: 5},
-    {...demoObj, name: 'Food name 5', rate: 0},
-    {...demoObj, name: 'Food name 6', rate: 1},
-]
+export default function FoodList({ route, navigation }: Props) {
+    const [foods, setFoods] = React.useState< Array<Food> >([])
+    const { data }:any = useFetchData('http://localhost:3500/food')
 
-export default function FoodDetail({ route, navigation }: Props) {
+    React.useEffect(() => {
+        console.log(data)
+    }, [data])
+
     const handleOnPress = (obj:any) => {
         navigation.navigate(
             'Food Detail', 
@@ -61,15 +33,15 @@ export default function FoodDetail({ route, navigation }: Props) {
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                 >
-                    {objArr.map((obj, i) => (
+                    {foods.map((food:Food, i:number) => (
                         <Card
                             key={i}
                             cardStyle={1}
-                            name={obj.name}
-                            body={obj.body}
-                            imgSrc={obj.imgSrc}
-                            rate={obj.rate}
-                            onPress={() => handleOnPress(obj)}
+                            name={food.name}
+                            body={food.body}
+                            imgSrc={food.imgSrc}
+                            rate={food.rate}
+                            onPress={() => handleOnPress(food)}
                         />
                     ))}
                 </ScrollView>
@@ -81,15 +53,15 @@ export default function FoodDetail({ route, navigation }: Props) {
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                 >
-                    {objArr.map((obj, i) => (
+                    {foods.map((food:Food, i:number) => (
                         <Card
                             key={i}
                             cardStyle={1}
-                            name={obj.name}
-                            body={obj.body}
-                            imgSrc={obj.imgSrc}
-                            rate={obj.rate}
-                            onPress={() => handleOnPress(obj)}
+                            name={food.name}
+                            body={food.body}
+                            imgSrc={food.imgSrc}
+                            rate={food.rate}
+                            onPress={() => handleOnPress(food)}
                         />
                     ))}
                 </ScrollView>
@@ -101,15 +73,15 @@ export default function FoodDetail({ route, navigation }: Props) {
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                 >
-                    {objArr.map((obj, i) => (
+                    {foods.map((food:Food, i:number) => (
                         <Card
                             key={i}
                             cardStyle={1}
-                            name={obj.name}
-                            body={obj.body}
-                            imgSrc={obj.imgSrc}
-                            rate={obj.rate}
-                            onPress={() => handleOnPress(obj)}
+                            name={food.name}
+                            body={food.body}
+                            imgSrc={food.imgSrc}
+                            rate={food.rate}
+                            onPress={() => handleOnPress(food)}
                         />
                     ))}
                 </ScrollView>
@@ -118,3 +90,21 @@ export default function FoodDetail({ route, navigation }: Props) {
         </ScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'transparent'
+    },
+    mealContainer: {
+        backgroundColor: 'transparent',
+        paddingLeft: 20,
+        marginBottom: 20
+    },
+    mealTitle: {
+        fontFamily: 'SF-Pro-Rounded_semibold',
+        fontSize: 23,
+        marginLeft: 20,
+        marginBottom: 5,
+        marginTop: 10
+    }
+})

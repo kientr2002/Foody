@@ -89,12 +89,12 @@ export default function Card({ cardStyle, name, body, rate, imgSrc, onPress} : C
         >
             <Image 
                 style={imgSize}
-                source={require('../../../assets/food.jpg')}
+                source={{ uri: imgSrc }}
                 fadeDuration={300}
             />
             <View style={textSize}>
                 <View>
-                    <Text style={styles.title}>
+                    <Text style={cardStyle !== 3 ? styles.title : styles.title_2}>
                         {name}
                     </Text>
                     {cardStyle !== 4 ?
