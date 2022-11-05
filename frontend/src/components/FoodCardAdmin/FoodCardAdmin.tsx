@@ -1,14 +1,11 @@
 import * as React from 'react'
-import { View, Image, Text, Pressable, PressableProps } from 'react-native'
+import { View, Image, Text, Pressable, PressableProps, StyleSheet } from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons'
-
 import styles from './styles'
-
 export interface CardAttribute {
     name: string,
     imgSrc: string,
     onPress?: () => void
-
 }
 
 export default function FoodCardAdmin({ name, imgSrc, onPress }: CardAttribute) {
@@ -24,8 +21,8 @@ export default function FoodCardAdmin({ name, imgSrc, onPress }: CardAttribute) 
 
     const handlePressIn = () => {
         setPressed(true)
-        if (onPress)
-            onPress()
+        // if (onPress)
+        //     onPress()
     }
 
     return (
@@ -48,17 +45,38 @@ export default function FoodCardAdmin({ name, imgSrc, onPress }: CardAttribute) 
                         </Text>
                     </Pressable>
                 </View>
-
-
                 <View style={styles.icon}>
-                    <FontAwesome5
-                        name="ellipsis-v"
-                        size={24}
-                        color="black"
-                    />
-                </View>
-            </View>
+                    <Pressable>
+                        <FontAwesome5
+                            name="ellipsis-v"
+                            size={24}
+                            color="black"
+                        />
+                    </Pressable>
 
-        </View>
+                    <View
+                        style={styles.menu}
+                    >
+                        <Text
+                            style={{
+                                fontFamily: 'SF-Pro-Rounded_bold',
+                                fontSize: 25
+                            }}>Edit</Text>
+                        <View
+                            style={{
+                                borderBottomColor: 'black',
+                                borderBottomWidth: StyleSheet.hairlineWidth,
+                                margin: 5
+                            }}></View>
+                        <Text
+                            style={{
+                                fontFamily: 'SF-Pro-Rounded_bold',
+                                fontSize: 25
+                            }}>Delete</Text>
+                    </View>
+                </View>
+            </View >
+        </View >
     )
+
 }

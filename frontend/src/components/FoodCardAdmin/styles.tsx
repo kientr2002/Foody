@@ -3,14 +3,18 @@ import color from "../../styles/color"
 
 const styles = StyleSheet.create({
     background: {
+        position: "relative",
         borderRadius: 20,
+        marginTop: 10,
+        marginBottom: 10,
         flexDirection: 'row',
         backgroundColor: color.background,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.15,
         shadowRadius: 5,
-        elevation: 30
+        elevation: 10,
+        zIndex: 0
     },
     title: {
         fontFamily: 'SF-Pro-Rounded_bold',
@@ -38,12 +42,27 @@ const styles = StyleSheet.create({
     },
     icon: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     iconActive: {
         color: color.second,
         shadowColor: "#000",
         elevation: 10
+    },
+    menu: {
+        position: 'absolute',
+        right: 0,
+        bottom: -60,
+        width: 120,
+        height: 120,
+        padding: 10,
+        backgroundColor: color.background,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 5,
+        elevation: 15,
+        zIndex: 1
     }
 })
 

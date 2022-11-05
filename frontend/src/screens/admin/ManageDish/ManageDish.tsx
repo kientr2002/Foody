@@ -2,9 +2,9 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
 
 import { StyleSheet, View, Text, ScrollView } from 'react-native'
-import Card from '../../../components/card/Card'
 import FoodCardAdmin from '../../../components/FoodCardAdmin/FoodCardAdmin'
 import Button from '../../../components/button/Button'
+import color from '../../../styles/color'
 export default function ManageDish({ navigation }: { navigation: any }) {
     return (
         <>
@@ -13,7 +13,8 @@ export default function ManageDish({ navigation }: { navigation: any }) {
                     flex: 1,
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start',
-                    marginLeft: '8%'
+                    paddingLeft: '8%',
+                    backgroundColor: color.background
                 }}
             >
                 {/* Add dish */}
@@ -48,12 +49,14 @@ export default function ManageDish({ navigation }: { navigation: any }) {
                         All dish
                     </Text>
                 </View>
+
                 {/* List */}
                 <View
                     style={{
                         flex: 10,
                         width: '100%',
                         justifyContent: 'center',
+                        paddingBottom: 70
                     }}
                 >
                     <ScrollView
@@ -61,6 +64,72 @@ export default function ManageDish({ navigation }: { navigation: any }) {
                             backgroundColor: '#FFFFFF'
                         }}
                     >
+                        <FoodCardAdmin
+                            name='Thịt luộc'
+                            imgSrc='../../../assets/food.jpg'
+                            onPress={() => navigation.navigate('AddEditDish')}
+                        />
+                        <FoodCardAdmin
+                            name='Thịt luộc'
+                            imgSrc='../../../assets/food.jpg'
+                            onPress={() => navigation.navigate('AddEditDish')}
+                        />
+                        <FoodCardAdmin
+                            name='Thịt luộc'
+                            imgSrc='../../../assets/food.jpg'
+                            onPress={() => navigation.navigate('AddEditDish')}
+                        />
+                        {/* <FoodCardAdmin
+                            name='Thịt luộc'
+                            imgSrc='../../../assets/food.jpg'
+                            onPress={() => navigation.navigate('AddEditDish')}
+                        />
+                        <FoodCardAdmin
+                            name='Thịt luộc'
+                            imgSrc='../../../assets/food.jpg'
+                            onPress={() => navigation.navigate('AddEditDish')}
+                        />
+                        <FoodCardAdmin
+                            name='Thịt luộc'
+                            imgSrc='../../../assets/food.jpg'
+                            onPress={() => navigation.navigate('AddEditDish')}
+                        /> */}
+                        {/* <View
+                            style={{
+                                marginBottom: 20
+                            }}
+                        >
+                            <FoodCardAdmin
+                                name='Thịt luộc'
+                                imgSrc='../../../assets/food.jpg'
+                                onPress={() => navigation.navigate('AddEditDish')}
+                            />
+                        </View>
+
+                        <View
+                            style={{
+                                marginBottom: 20
+                            }}
+                        >
+                            <FoodCardAdmin
+                                name='Thịt luộc'
+                                imgSrc='../../../assets/food.jpg'
+                                onPress={() => navigation.navigate('AddEditDish')}
+                            />
+                        </View>
+
+                        <View
+                            style={{
+                                marginBottom: 20
+                            }}
+                        >
+                            <FoodCardAdmin
+                                name='Thịt luộc'
+                                imgSrc='../../../assets/food.jpg'
+                                onPress={() => navigation.navigate('AddEditDish')}
+                            />
+                        </View>
+
                         <View
                             style={{
                                 marginBottom: 20
@@ -81,25 +150,6 @@ export default function ManageDish({ navigation }: { navigation: any }) {
                                 cardStyle={3}
                                 name='Food name'
                                 body={{
-                                    description: 'This dish is created by ThoaiLe, an Asia chef. ',
-                                    calories: 1200,
-                                    protein: 400,
-                                    fat: 20,
-                                    carb: 210
-                                }}
-                                imgSrc='../../../assets/food.jpg'
-                                rate={4}
-                            />
-                        </View>
-
-                        <View
-                            style={{
-                                marginBottom: 20
-                            }}>
-                            <Card
-                                cardStyle={3}
-                                name='Food name'
-                                body={{
                                     description: 'This dish is created by ThoaiLe, an Asia chef. He want to create a dish that not only good for your health but also easy to do',
                                     calories: 1200,
                                     protein: 400,
@@ -109,51 +159,8 @@ export default function ManageDish({ navigation }: { navigation: any }) {
                                 imgSrc='../../../assets/food.jpg'
                                 rate={4}
                             />
-                        </View>
-
-                        <View
-                            style={{
-                                marginBottom: 20
-                            }}>
-                            <Card
-                                cardStyle={3}
-                                name='Food name'
-                                body={{
-                                    description: 'This dish is created by ThoaiLe, an Asia chef. He want to create a dish that not only good for your health but also easy to do',
-                                    calories: 1200,
-                                    protein: 400,
-                                    fat: 20,
-                                    carb: 210
-                                }}
-                                imgSrc='../../../assets/food.jpg'
-                                rate={4}
-                            />
-                        </View>
-
-                        <View
-                            style={{
-                                marginBottom: 20
-                            }}>
-                            <Card
-                                cardStyle={3}
-                                name='Food name'
-                                body={{
-                                    description: 'This dish is created by ThoaiLe, an Asia chef. He want to create a dish that not only good for your health but also easy to do',
-                                    calories: 1200,
-                                    protein: 400,
-                                    fat: 20,
-                                    carb: 210
-                                }}
-                                imgSrc='../../../assets/food.jpg'
-                                rate={4}
-                            />
-                        </View>
+                        </View> */}
                     </ScrollView>
-                </View>
-                <View
-                    style={{
-                        flex: 1
-                    }}>
 
                 </View>
             </View>
