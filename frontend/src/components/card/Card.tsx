@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Image, Text } from 'react-native'
+import { View, Image, Text, Pressable } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 
 import styles from './styles'
@@ -15,7 +15,8 @@ export interface CardAttribute {
         carb: number
     },
     imgSrc: string,
-    rate: number
+    rate: number,
+    onPress?: () => void
 }
 
 interface StarsAttribute {
@@ -49,7 +50,7 @@ function Stars({ rate, style }: StarsAttribute) {
     )
 }
 
-export default function Card({ cardStyle, name, body, rate, imgSrc} : CardAttribute) {
+export default function Card({ cardStyle, name, body, rate, imgSrc, onPress} : CardAttribute) {
     const [backgroundSize, setBackgroundSize] = React.useState<any>(null)
     const [imgSize, setImgSize] = React.useState<any>(null)
     const [textSize, setTextSize] = React.useState<any>(null)
@@ -82,8 +83,9 @@ export default function Card({ cardStyle, name, body, rate, imgSrc} : CardAttrib
 
 
     return (
-        <View
+        <Pressable
             style={[styles.background, backgroundSize]}
+            onPress={onPress}
         >
             <Image 
                 style={imgSize}
@@ -109,6 +111,6 @@ export default function Card({ cardStyle, name, body, rate, imgSrc} : CardAttrib
                 </View>
                 <Stars rate={rate} style={cardStyle}></Stars>
             </View>
-        </View>
+        </Pressable>
     )
 }
