@@ -56,7 +56,7 @@ export default function Navbar({state, descriptors, navigation} : any) {
                                     size={25} 
                                     style={isFocused ? styles.iconActive : styles.icon}
                                 /> 
-                            : label === 'Plan'
+                            : label === 'MyPlan page'
                             ?   <FontAwesome5 
                                     name="calendar-day" 
                                     size={23} 

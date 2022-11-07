@@ -38,7 +38,7 @@ export default function Search({ navigation }:Props) {
                 component={FoodDetail} 
                 options={({ route }) => ({ 
                     title: route.params.name,
-                    headerRight: () => (<HeaderButton type={2} />)
+                    headerRight: () => (<HeaderButton type={2} route={route} />)
                 })}
             />
             <Stack.Screen 

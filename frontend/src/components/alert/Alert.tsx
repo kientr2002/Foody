@@ -25,6 +25,7 @@ function ButtonBox(props:any) {
             <Button
                 type='confirm'
                 content='ok'
+                onPress={() => props?.setVisible(false)}
             />
         </View>
     )

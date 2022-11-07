@@ -1,18 +1,17 @@
 import * as React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack' 
-import { HomeStackParamList, UserTabParamList } from '../../../util/types'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { MyPlanStackParamList, UserTabParamList } from '../../../util/types'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-
-import FoodList from './FoodList'
+import MyPlanList from './MyPlanList'
 import FoodDetail from '../FoodDetail/FoodDetail'
 import CreatePlan from '../CreatePlan/CreatePlan'
 import HeaderButton from '../../../components/headerButton/HeaderButton'
 import color from '../../../styles/color'
 
-const Stack = createNativeStackNavigator<HomeStackParamList>()
-type Props = BottomTabScreenProps<UserTabParamList, 'Home page'>
+const Stack = createNativeStackNavigator<MyPlanStackParamList>()
+type Props = BottomTabScreenProps<UserTabParamList, 'MyPlan page'>
 
-export default function Home({ navigation }:Props) {
+export default function MyPlan({ navigation }:Props) {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -21,22 +20,21 @@ export default function Home({ navigation }:Props) {
                     fontFamily: 'SF-Pro-Rounded_bold',
                     fontSize: 23
                 }
-            }}
+            }}  
         >
             <Stack.Screen
-                name='Food List' 
-                component={FoodList}
+                name='MyPlan List'
+                component={MyPlanList}
                 options={{
-                    title: 'Home',
+                    title: 'My Plan',
                     headerRight: () => (<HeaderButton type={1} navigation={navigation} />)
                 }}
             />
             <Stack.Screen 
                 name='Food Detail' 
-                component={FoodDetail} 
-                options={({ route }) => ({ 
-                    title: route.params.name,
-                    headerRight: () => (<HeaderButton type={2} route={route} />)
+                component={FoodDetail}
+                options={({ route }) => ({
+                    title: route.params.name
                 })}
             />
             <Stack.Screen 

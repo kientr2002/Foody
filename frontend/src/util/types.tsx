@@ -2,7 +2,7 @@ import { NavigatorScreenParams } from "@react-navigation/native"
 
 type UserTabParamList = {
     'Home page': NavigatorScreenParams<HomeStackParamList>,
-    Plan: undefined,
+    'MyPlan page': undefined,
     'Search page': NavigatorScreenParams<SearchStackParamList>,
     'Favorite page': NavigatorScreenParams<FavoriteStackParamList>,
     'Profile page': undefined
@@ -10,6 +10,12 @@ type UserTabParamList = {
 
 type HomeStackParamList = {
     'Food List': undefined,
+    'Food Detail': Food,
+    'Create Plan': undefined
+}
+
+type MyPlanStackParamList = {
+    'MyPlan List': undefined,
     'Food Detail': Food,
     'Create Plan': undefined
 }
@@ -33,7 +39,7 @@ type ProfileStackParamList = {
 }
 
 interface Food {
-    cardStyle: number,
+    id: number,
     name: string,
     body: {
         description: string,
@@ -56,7 +62,8 @@ interface Food {
 export { 
     Food, 
     UserTabParamList, 
-    HomeStackParamList, 
+    HomeStackParamList,
+    MyPlanStackParamList,
     FavoriteStackParamList,
     SearchStackParamList,
     ProfileStackParamList
