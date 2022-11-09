@@ -8,7 +8,7 @@ const color = {
     text: '#000000',
     textBackground: '#ADAAAA',
     background: '#ffffff',
-    yellow: '#E8DF07'
+    yellow: '#E8DF07',
 }
 
 export default color

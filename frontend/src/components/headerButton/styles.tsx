@@ -1,18 +1,18 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     item: {
-        paddingHorizontal: 5
+        paddingHorizontal: 5,
     },
     overlap_disappear: {
-        display: 'none'
-    }
+        display: 'none',
+    },
 })
 
 export default styles

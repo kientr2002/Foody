@@ -1,28 +1,28 @@
-import { NavigatorScreenParams } from "@react-navigation/native"
+import { NavigatorScreenParams } from '@react-navigation/native'
 
 type UserTabParamList = {
-    Home: NavigatorScreenParams<HomeStackParamList>,
-    Plan: undefined,
-    Search: undefined,
-    Favorite: undefined,
+    Home: NavigatorScreenParams<HomeStackParamList>
+    Plan: undefined
+    Search: undefined
+    Favorite: undefined
     Profile: undefined
 }
 
 type HomeStackParamList = {
-    'Food List': undefined,
+    'Food List': undefined
     'Food Detail': {
-        cardStyle: number,
-        name: string,
+        cardStyle: number
+        name: string
         body: {
-            description: string,
-            calories: number,
+            description: string
+            calories: number
             protein: number
-            fat: number,
+            fat: number
             carb: number
         }
         imgSrc: string
         rate: number
-    },
+    }
     'Create Plan': undefined
 }
 
@@ -38,4 +38,4 @@ type HomeStackParamList = {
 //     ForgotPassword: undefined
 // }
 
-export { UserTabParamList, HomeStackParamList}
+export { UserTabParamList, HomeStackParamList }
