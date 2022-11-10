@@ -10,7 +10,7 @@ import styles from './src/components/card/styles';
 import color from "./src/styles/color"
 
 import {Login} from './src/screens/authentication/login'
-import {Status} from './src/screens/authentication/updateStatus'
+import SignUp from './src/screens/authentication/signup/signup'
 
 
 export default function App() {
@@ -27,7 +27,6 @@ export default function App() {
         return null 
         
     return (
-        <Status/>
-        // <Login/>
+        <SignUp/>
     )
 }

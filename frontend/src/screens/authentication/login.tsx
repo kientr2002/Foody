@@ -5,7 +5,7 @@ import {View, Text, StyleSheet, Dimensions, Image, TouchableOpacity,StatusBar, S
 import Button from '../../../src/components/button/Button';
 import styles from '../../../src/components/card/styles';
 import color from "../../../src/styles/color"
-
+import InputAttribute from "../../components/input/Input";
 
 
 const windowWidth = Dimensions.get('window').width;
