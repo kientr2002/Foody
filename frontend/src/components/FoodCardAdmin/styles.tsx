@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.15,
         shadowRadius: 5,
         elevation: 10,
-        zIndex: 0
     },
     title: {
         fontFamily: 'SF-Pro-Rounded_bold',
@@ -37,32 +36,45 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     name: {
-        flex: 10,
-        justifyContent: 'center'
+        flex: 9,
+        justifyContent: 'center',
     },
     icon: {
-        flex: 1,
-        justifyContent: 'center'
+        flex: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     iconActive: {
         color: color.second,
         shadowColor: "#000",
         elevation: 10
     },
-    menu: {
+    menu1: {
         position: 'absolute',
+        display: "none",
         right: 0,
-        bottom: -60,
+        bottom: 0,
         width: 120,
-        height: 120,
         padding: 10,
         backgroundColor: color.background,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.15,
         shadowRadius: 5,
-        elevation: 15,
-        zIndex: 1
+        elevation: 15
+    },
+    menu2: {
+        position: 'absolute',
+        right: 25,
+        bottom: -10,
+        width: 100,
+        padding: 10,
+        backgroundColor: color.background,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 5,
+        elevation: 15
     }
 })
 

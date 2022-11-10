@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "react-native-material-design": "^0.3.7",
+    "react-native-popup-menu": "^0.16.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
+    "@types/react-native": "^0.70.6"
+  }
+}

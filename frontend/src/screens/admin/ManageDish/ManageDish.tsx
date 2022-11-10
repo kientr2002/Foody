@@ -60,24 +60,21 @@ export default function ManageDish({ navigation }: { navigation: any }) {
                     }}
                 >
                     <ScrollView
-                        style={{
-                            backgroundColor: '#FFFFFF'
-                        }}
                     >
                         <FoodCardAdmin
                             name='Thịt luộc'
                             imgSrc='../../../assets/food.jpg'
-                            onPress={() => navigation.navigate('AddEditDish')}
+                            onPress={(name) => navigation.navigate(name)}
                         />
                         <FoodCardAdmin
                             name='Thịt luộc'
                             imgSrc='../../../assets/food.jpg'
-                            onPress={() => navigation.navigate('AddEditDish')}
+                            onPress={(name) => navigation.navigate(name)}
                         />
                         <FoodCardAdmin
                             name='Thịt luộc'
                             imgSrc='../../../assets/food.jpg'
-                            onPress={() => navigation.navigate('AddEditDish')}
+                            onPress={(name) => navigation.navigate(name)}
                         />
                         {/* <FoodCardAdmin
                             name='Thịt luộc'
