@@ -1,16 +1,15 @@
 import * as React from 'react'
 import { Food } from '../util/types'
 
-
 export interface UserContextInterface {
-    username?: string,
-    createPlanList: Food[],
-    myPlan: Food[],
-    myFavorite: Food[],
-    handleAddToCreatePlan: (food : Food) => void
-    handleRemoveFromCreatePlan: (id: number | undefined) => void,
-    handleAddToFavorite: (food: Food) => void,
-    handleRemoveFromFavorite: (id: number) => void,
+    username?: string
+    createPlanList: Food[]
+    myPlan: Food[]
+    myFavorite: Food[]
+    handleAddToCreatePlan: (food: Food) => void
+    handleRemoveFromCreatePlan: (id: number | undefined) => void
+    handleAddToFavorite: (food: Food) => void
+    handleRemoveFromFavorite: (id: number) => void
     handleCreatePlan: (list: Food[]) => boolean
 }
 
@@ -22,11 +21,10 @@ const UserContext = React.createContext<UserContextInterface>({
     handleRemoveFromCreatePlan: () => {},
     handleAddToFavorite: () => {},
     handleRemoveFromFavorite: () => {},
-    handleCreatePlan: () => true
-
+    handleCreatePlan: () => true,
 })
 
-export function UserProvider({ children }:any) {
+export function UserProvider({ children }: any) {
     const [createPlanList, setCreatePlanList] = React.useState<Food[]>([])
     const [myFavorite, setMyFavorite] = React.useState<Food[]>([])
     const [myPlan, setMyPlan] = React.useState<Food[]>([])
@@ -34,32 +32,27 @@ export function UserProvider({ children }:any) {
     // get user favorite dishes
     React.useEffect(() => {
         const data = require('../../data/db.json')
-        if (data)
-            setMyFavorite(data?.favorite)
+        if (data) setMyFavorite(data?.favorite)
     }, [])
 
-    const handleAddToCreatePlan = (food:Food) => {
-        if (food)
-            setCreatePlanList([...createPlanList, food])
+    const handleAddToCreatePlan = (food: Food) => {
+        if (food) setCreatePlanList([...createPlanList, food])
     }
 
-    const handleRemoveFromCreatePlan = (id:number | undefined) => {
+    const handleRemoveFromCreatePlan = (id: number | undefined) => {
         if (id) {
-            const arr = createPlanList.filter(food => food.id !== id)
+            const arr = createPlanList.filter((food) => food.id !== id)
             setCreatePlanList(arr)
-        }
-        else
-            setCreatePlanList([])
+        } else setCreatePlanList([])
     }
 
-    const handleAddToFavorite = (food:Food) => {
-        if (food)
-            setMyFavorite([...myFavorite, food])
+    const handleAddToFavorite = (food: Food) => {
+        if (food) setMyFavorite([...myFavorite, food])
     }
 
     const handleRemoveFromFavorite = (id: number) => {
         if (id) {
-            const arr = myFavorite.filter(food => food.id !== id)
+            const arr = myFavorite.filter((food) => food.id !== id)
             setMyFavorite(arr)
         }
     }
@@ -82,10 +75,10 @@ export function UserProvider({ children }:any) {
                 handleRemoveFromCreatePlan,
                 handleAddToFavorite,
                 handleRemoveFromFavorite,
-                handleCreatePlan
+                handleCreatePlan,
             }}
         >
-            { children }
+            {children}
         </UserContext.Provider>
     )
 }

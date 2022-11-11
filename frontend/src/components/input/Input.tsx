@@ -5,11 +5,11 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import styles from './styles'
 
 export interface InputAttribute {
-    type?: string,
-    focus?: boolean,
-    editable?: boolean,
-    value: string,
-    setValue?: (value:string) => void
+    type?: string
+    focus?: boolean
+    editable?: boolean
+    value: string
+    setValue?: (value: string) => void
 }
 
 /*
@@ -24,7 +24,13 @@ export interface InputAttribute {
         editable
 */
 
-export default function Input({ type, focus, editable, value, setValue } : InputAttribute) {
+export default function Input({
+    type,
+    focus,
+    editable,
+    value,
+    setValue,
+}: InputAttribute) {
     const [name, setName] = React.useState<string>('')
     const [icon, setIcon] = React.useState<string>('')
 

@@ -97,14 +97,19 @@ export default function Card({
             />
             <View style={textSize}>
                 <View>
-                    <Text 
+                    <Text
                         style={cardStyle !== 3 ? styles.title : styles.title_2}
-                        numberOfLines={1}    
+                        numberOfLines={1}
                     >
                         {name}
                     </Text>
-                    {cardStyle !== 4 ?
-                        <Text style={styles.text} numberOfLines={cardStyle === 3 || cardStyle === 4 ? 3 : 2}>
+                    {cardStyle !== 4 ? (
+                        <Text
+                            style={styles.text}
+                            numberOfLines={
+                                cardStyle === 3 || cardStyle === 4 ? 3 : 2
+                            }
+                        >
                             {body.description}
                         </Text>
                     ) : (

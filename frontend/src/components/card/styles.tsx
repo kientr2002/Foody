@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     background: {
         borderRadius: 20,
         marginBottom: 5,
-    
+
         display: 'flex',
         flexDirection: 'column',
 
@@ -15,21 +15,20 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.15,
         shadowRadius: 5,
         elevation: 2,
-
     },
     background_1: {
         width: 250,
         height: 410,
-        marginRight: 20
+        marginRight: 20,
     },
     background_2: {
         width: '80%',
-        marginBottom: 20
+        marginBottom: 20,
     },
     background_3: {
         width: '90%',
         flexDirection: 'row',
-        marginBottom: 10
+        marginBottom: 10,
     },
 
     img_1: {
@@ -70,11 +69,11 @@ const styles = StyleSheet.create({
 
     title: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 25
+        fontSize: 25,
     },
     title_2: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 20
+        fontSize: 20,
     },
     text: {
         height: 50,

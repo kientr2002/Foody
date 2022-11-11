@@ -21,7 +21,7 @@ function ButtonBox(props: any) {
                     content='cancel'
                     onPress={() => props?.setVisible(false)}
                 />
-            }
+            )}
             <Button
                 type='confirm'
                 content='ok'

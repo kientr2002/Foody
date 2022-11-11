@@ -11,37 +11,36 @@ import CreatePlan from '../CreatePlan/CreatePlan'
 const Stack = createNativeStackNavigator<FavoriteStackParamList>()
 type Props = BottomTabScreenProps<UserTabParamList, 'Favorite page'>
 
-export default function Favorite({ navigation }:Props) {
+export default function Favorite({ navigation }: Props) {
     return (
         <Stack.Navigator
             screenOptions={{
                 headerTintColor: color.primary,
                 headerTitleStyle: {
                     fontFamily: 'SF-Pro-Rounded_bold',
-                    fontSize: 23
-                }
-            }}  
+                    fontSize: 23,
+                },
+            }}
         >
             <Stack.Screen
                 name='Favorite List'
                 component={FavoriteList}
                 options={{
                     title: 'Favorite',
-                    headerRight: () => (<HeaderButton type={1} navigation={navigation} />)
+                    headerRight: () => (
+                        <HeaderButton type={1} navigation={navigation} />
+                    ),
                 }}
             />
-            <Stack.Screen 
-                name='Food Detail' 
+            <Stack.Screen
+                name='Food Detail'
                 component={FoodDetail}
-                options={({ route }) => ({ 
+                options={({ route }) => ({
                     title: route.params.name,
-                    headerRight: () => (<HeaderButton type={4} route={route}/>)
+                    headerRight: () => <HeaderButton type={4} route={route} />,
                 })}
             />
-            <Stack.Screen 
-                name='Create Plan' 
-                component={CreatePlan}
-            />
+            <Stack.Screen name='Create Plan' component={CreatePlan} />
         </Stack.Navigator>
     )
 }

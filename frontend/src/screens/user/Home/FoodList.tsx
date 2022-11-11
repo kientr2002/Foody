@@ -4,22 +4,17 @@ import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import { Food, HomeStackParamList } from '../../../util/types'
 import Card from '../../../components/card/Card'
 
-
 type Props = NativeStackScreenProps<HomeStackParamList>
 
 export default function FoodList({ route, navigation }: Props) {
-    const [foods, setFoods] = React.useState< Array<Food> >([])
+    const [foods, setFoods] = React.useState<Array<Food>>([])
     React.useEffect(() => {
         const data = require('../../../../data/db.json')
-        if (data)
-            setFoods(data?.food)
+        if (data) setFoods(data?.food)
     }, [])
 
-    const handleOnPress = (obj:any) => {
-        navigation.navigate(
-            'Food Detail', 
-            obj
-        )
+    const handleOnPress = (obj: any) => {
+        navigation.navigate('Food Detail', obj)
     }
 
     return (
@@ -31,7 +26,7 @@ export default function FoodList({ route, navigation }: Props) {
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                 >
-                    {foods.map((food:Food, i:number) => (
+                    {foods.map((food: Food, i: number) => (
                         <Card
                             key={i}
                             cardStyle={1}
@@ -51,7 +46,7 @@ export default function FoodList({ route, navigation }: Props) {
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                 >
-                    {foods.map((food:Food, i:number) => (
+                    {foods.map((food: Food, i: number) => (
                         <Card
                             key={i}
                             cardStyle={1}
@@ -71,7 +66,7 @@ export default function FoodList({ route, navigation }: Props) {
                     showsHorizontalScrollIndicator={false}
                     horizontal={true}
                 >
-                    {foods.map((food:Food, i:number) => (
+                    {foods.map((food: Food, i: number) => (
                         <Card
                             key={i}
                             cardStyle={1}
@@ -84,25 +79,25 @@ export default function FoodList({ route, navigation }: Props) {
                     ))}
                 </ScrollView>
             </View>
-            <View style={{marginVertical: 10}}></View>
+            <View style={{ marginVertical: 10 }}></View>
         </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
     },
     mealContainer: {
         backgroundColor: 'transparent',
         paddingLeft: 20,
-        marginBottom: 20
+        marginBottom: 20,
     },
     mealTitle: {
         fontFamily: 'SF-Pro-Rounded_semibold',
         fontSize: 23,
         marginLeft: 20,
         marginBottom: 5,
-        marginTop: 10
-    }
+        marginTop: 10,
+    },
 })

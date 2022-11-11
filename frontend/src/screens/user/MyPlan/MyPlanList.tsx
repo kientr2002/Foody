@@ -1,40 +1,30 @@
 import React from 'react'
-import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { ScrollView, View, Text, StyleSheet } from "react-native"
-import { Food, MyPlanStackParamList } from "../../../util/types"
-import Card from "../../../components/card/Card"
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { ScrollView, View, Text, StyleSheet } from 'react-native'
+import { Food, MyPlanStackParamList } from '../../../util/types'
+import Card from '../../../components/card/Card'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 
 type Props = NativeStackScreenProps<MyPlanStackParamList>
 
-export default function MyPlanList({ route, navigation }:Props) {
-    const {myPlan} = React.useContext<UserContextInterface>(UserContext)
-    const [foods, setFoods] = React.useState< Array<Food> >([])
+export default function MyPlanList({ route, navigation }: Props) {
+    const { myPlan } = React.useContext<UserContextInterface>(UserContext)
+    const [foods, setFoods] = React.useState<Array<Food>>([])
 
     React.useEffect(() => {
         setFoods(myPlan)
     }, [myPlan])
 
-    const handleOnPress = (obj:any) => {
-        navigation.navigate(
-            'Food Detail',
-            obj
-        )
+    const handleOnPress = (obj: any) => {
+        navigation.navigate('Food Detail', obj)
     }
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            {foods.map((food:Food, i:number) => (
-                <View 
-                    key={i}
-                    style={styles.mealContainer}
-                >
+            {foods.map((food: Food, i: number) => (
+                <View key={i} style={styles.mealContainer}>
                     <Text style={styles.text}>
-                        {  
-                            i === 0 ? 'Breakfast'
-                            : i === 1 ? 'Lunch'
-                            : 'Dinner'
-                        }
+                        {i === 0 ? 'Breakfast' : i === 1 ? 'Lunch' : 'Dinner'}
                     </Text>
                     <Card
                         cardStyle={2}
@@ -46,7 +36,6 @@ export default function MyPlanList({ route, navigation }:Props) {
                     />
                 </View>
             ))}
-
         </ScrollView>
     )
 }
@@ -54,7 +43,7 @@ export default function MyPlanList({ route, navigation }:Props) {
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
-        paddingTop: 20
+        paddingTop: 20,
     },
 
     mealContainer: {
@@ -67,6 +56,6 @@ const styles = StyleSheet.create({
 
         fontFamily: 'SF-Pro-Rounded_medium',
         fontSize: 22,
-        alignSelf: 'flex-start'
-    }
+        alignSelf: 'flex-start',
+    },
 })

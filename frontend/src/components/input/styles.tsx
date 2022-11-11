@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         height: 35,
         fontFamily: 'SF-Pro-Rounded_medium',
         fontSize: 20,
-        paddingTop: 5
+        paddingTop: 5,
     },
     inputTextDefault: {
         height: 40,

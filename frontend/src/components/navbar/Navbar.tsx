@@ -54,50 +54,63 @@ export default function Navbar({ state, descriptors, navigation }: any) {
                         onLongPress={onLongPress}
                         style={styles.element}
                     >
-                        {
-                            label === 'Home page' 
-                            ?   <Entypo 
-                                    name="home" 
-                                    size={25} 
-                                    style={isFocused ? styles.iconActive : styles.icon}
-                                /> 
-                            : label === 'MyPlan page'
-                            ?   <FontAwesome5 
-                                    name="calendar-day" 
-                                    size={23} 
-                                    style={isFocused ? styles.iconActive : styles.icon} 
-                                />
-                            : label === 'Search page'
-                            ?   <FontAwesome
-                                    name="search" 
-                                    size={24} 
-                                    style={isFocused ? styles.iconActive : styles.icon} 
-                                />
-                            : label === 'Favorite page'
-                            ?   <MaterialIcons 
-                                    name="favorite" 
-                                    size={26} 
-                                    style={isFocused ? styles.iconActive : styles.icon}  
-                                />
-                            : label === 'Profile page'
-                            ?   <FontAwesome 
-                                    name="user-circle-o" 
-                                    size={24} 
-                                    style={isFocused ? styles.iconActive : styles.icon}  
-                                />
-                            : label === 'AccountManager'
-                            ?   <FontAwesome 
-                                    name="users" 
-                                    size={21} 
-                                    style={isFocused ? styles.iconActive : styles.icon}  
-                                />
-                            :   <FontAwesome5
-                                    name="pen" 
-                                    size={21} 
-                                    style={isFocused ? styles.iconActive : styles.icon}
-                                />
-                        }
-                        
+                        {label === 'Home page' ? (
+                            <Entypo
+                                name='home'
+                                size={25}
+                                style={
+                                    isFocused ? styles.iconActive : styles.icon
+                                }
+                            />
+                        ) : label === 'MyPlan page' ? (
+                            <FontAwesome5
+                                name='calendar-day'
+                                size={23}
+                                style={
+                                    isFocused ? styles.iconActive : styles.icon
+                                }
+                            />
+                        ) : label === 'Search page' ? (
+                            <FontAwesome
+                                name='search'
+                                size={24}
+                                style={
+                                    isFocused ? styles.iconActive : styles.icon
+                                }
+                            />
+                        ) : label === 'Favorite page' ? (
+                            <MaterialIcons
+                                name='favorite'
+                                size={26}
+                                style={
+                                    isFocused ? styles.iconActive : styles.icon
+                                }
+                            />
+                        ) : label === 'Profile page' ? (
+                            <FontAwesome
+                                name='user-circle-o'
+                                size={24}
+                                style={
+                                    isFocused ? styles.iconActive : styles.icon
+                                }
+                            />
+                        ) : label === 'AccountManager' ? (
+                            <FontAwesome
+                                name='users'
+                                size={21}
+                                style={
+                                    isFocused ? styles.iconActive : styles.icon
+                                }
+                            />
+                        ) : (
+                            <FontAwesome5
+                                name='pen'
+                                size={21}
+                                style={
+                                    isFocused ? styles.iconActive : styles.icon
+                                }
+                            />
+                        )}
                     </TouchableOpacity>
                 )
             })}
