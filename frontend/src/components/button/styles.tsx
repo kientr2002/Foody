@@ -5,8 +5,8 @@ const styles = StyleSheet.create({
     button: {
         paddingTop: 5,
         paddingBottom: 5,
-        paddingLeft: 30,
-        paddingRight: 30,
+        paddingLeft: 20,
+        paddingRight: 20,
         borderRadius: 30,
 
         display: 'flex',
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     text: {
         color: color.background,
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 17,
+        fontSize: 15,
     },
     icon: {
         color: color.background,

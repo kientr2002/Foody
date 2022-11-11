@@ -92,19 +92,19 @@ export default function Card({
         >
             <Image
                 style={imgSize}
-                source={require('../../../assets/food.jpg')}
+                source={{ uri: imgSrc }}
                 fadeDuration={300}
             />
             <View style={textSize}>
                 <View>
-                    <Text style={styles.title}>{name}</Text>
-                    {cardStyle !== 4 ? (
-                        <Text
-                            style={styles.text}
-                            numberOfLines={
-                                cardStyle === 3 || cardStyle === 4 ? 3 : 2
-                            }
-                        >
+                    <Text 
+                        style={cardStyle !== 3 ? styles.title : styles.title_2}
+                        numberOfLines={1}    
+                    >
+                        {name}
+                    </Text>
+                    {cardStyle !== 4 ?
+                        <Text style={styles.text} numberOfLines={cardStyle === 3 || cardStyle === 4 ? 3 : 2}>
                             {body.description}
                         </Text>
                     ) : (

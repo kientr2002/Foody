@@ -4,21 +4,21 @@ import color from '../../styles/color'
 const styles = StyleSheet.create({
     background: {
         width: '100%',
-        height: 65,
+        paddingVertical: 10,
 
         display: 'flex',
         flexDirection: 'row',
 
-        position: 'absolute',
-        bottom: 0,
-        zIndex: 10,
+        // position: 'absolute',
+        // bottom: 0,
+        // zIndex: 10,
 
         backgroundColor: color.background,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 6 },
         shadowOpacity: 0.2,
         shadowRadius: 5,
-        elevation: 20,
+        elevation: 10
     },
     element: {
         flexBasis: '20%',
