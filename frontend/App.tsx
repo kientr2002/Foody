@@ -12,7 +12,7 @@ import Input from './src/components/input/Input'
 import AccountCard from './src/components/accountcard/AccountCard'
 import UserView from './src/screens/user/UserView'
 import AdminView from './src/screens/admin/AdminView'
-import DishName from './src/screens/admin/DishName/DishName'
+import DishName from './src/screens/admin/DishDetail/DishDetail'
 const Stack = createNativeStackNavigator()
 
 export default function App() {

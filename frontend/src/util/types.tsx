@@ -1,21 +1,30 @@
-type UserTabParamList = {
-    Home: undefined,
-    Plan: undefined,
-    Search: undefined,
-    Favorite: undefined,
-    Profile: undefined
+import { NavigatorScreenParams  } from '@react-navigation/native'
+
+type AdminTabParamList = {
+    'Manage Dish': NavigatorScreenParams<ManageDishStackParamList>,
+    'Manage Account': NavigatorScreenParams<ManageAccountStackParamList>,
+    'Profile': NavigatorScreenParams<AdminProfileStackParamList>
 }
 
-// type AdminRootStackParamList = {
-//     AccountManager: undefined,
-//     FoodManager: undefined,
-//     Profile: undefined
-// }
+type ManageDishStackParamList = {
+    'Dish list': undefined,
+    'Dish detail': undefined,
+    'Edit dish': undefined,
+    'Add dish': undefined 
+}
 
-// type AuthenticateRootStackParamList = {
-//     Login: undefined,
-//     SignUp: undefined,
-//     ForgotPassword: undefined
-// }
+type ManageAccountStackParamList = {
+    'Account list': undefined,
+    'Account detail': undefined
+}
 
-export { UserTabParamList}
+type AdminProfileStackParamList = {
+    
+}
+
+export {
+    AdminTabParamList,
+    ManageAccountStackParamList,
+    ManageDishStackParamList,
+    AdminProfileStackParamList
+}
