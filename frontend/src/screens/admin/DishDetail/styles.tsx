@@ -20,37 +20,36 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     headerText: {
         width: '100%',
 
         fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 14,
-        textAlign: 'center'
+        textAlign: 'center',
     },
 
     tabBody: {
         display: 'flex',
         flexDirection: 'column',
         paddingHorizontal: 20,
-        marginTop: 10
-
+        marginTop: 10,
     },
     recipe: {
-        marginVertical: 10
+        marginVertical: 10,
     },
     recipeTitle: {
         fontFamily: 'SF-Pro-Rounded_semibold',
-        fontSize: 20
+        fontSize: 20,
     },
 
     section: {
-        marginVertical: 10
+        marginVertical: 10,
     },
     sectionTitle: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 20
+        fontSize: 20,
     },
     sectionText: {
         fontFamily: 'SF-Pro-Rounded_regular',
@@ -59,28 +58,28 @@ const styles = StyleSheet.create({
     sectionContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     nutrientElement: {
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     nutrientElementTitle: {
-        flexBasis: '20%'
+        flexBasis: '20%',
     },
     progressBar: {
         marginLeft: 20,
-        borderRadius: 10
+        borderRadius: 10,
     },
 
     reviewCardContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 20
-    }
+        marginVertical: 20,
+    },
 })
 
 export default styles

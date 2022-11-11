@@ -1,25 +1,25 @@
-import { NavigatorScreenParams  } from '@react-navigation/native'
+import { NavigatorScreenParams } from '@react-navigation/native'
 
 type AdminTabParamList = {
-    'Manage Dish': NavigatorScreenParams<ManageDishStackParamList>,
-    'Manage Account': NavigatorScreenParams<ManageAccountStackParamList>,
-    'Profile': NavigatorScreenParams<AdminProfileStackParamList>
+    'Manage Dish': NavigatorScreenParams<ManageDishStackParamList>
+    'Manage Account': NavigatorScreenParams<ManageAccountStackParamList>
+    'Profile page': NavigatorScreenParams<AdminProfileStackParamList>
 }
 
 type ManageDishStackParamList = {
-    'Dish list': undefined,
-    'Dish detail': undefined,
-    'Edit dish': undefined,
-    'Add dish': undefined 
+    'Food list': undefined
+    'Food detail': Food
+    'Edit Food': undefined
+    'Add Food': undefined
 }
 
 type ManageAccountStackParamList = {
-    'Account list': undefined,
+    'Account list': undefined
     'Account detail': undefined
 }
 
 type AdminProfileStackParamList = {
-    
+    'My profile': undefined
 }
 
 type UserTabParamList = {
@@ -91,5 +91,5 @@ export {
     AdminTabParamList,
     ManageAccountStackParamList,
     ManageDishStackParamList,
-    AdminProfileStackParamList
+    AdminProfileStackParamList,
 }

@@ -1,6 +1,9 @@
 import * as React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { ManageDishStackParamList, AdminTabParamList } from '../../../util/types'
+import {
+    ManageDishStackParamList,
+    AdminTabParamList,
+} from '../../../util/types'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 
 import DishList from './DishList'
@@ -23,16 +26,16 @@ export default function ManageDish({ navigation }: Props) {
             }}
         >
             <Stack.Screen
-                name='Dish list'
+                name='Food list'
                 component={DishList}
                 options={{
                     title: 'Dish List',
                 }}
             />
             <Stack.Screen
-                name='Dish detail'
+                name='Food detail'
                 component={DishDetail}
-                // options={({ route }) => ({ 
+                // options={({ route }) => ({
                 //     title: route.params.name,
                 // })}
             />

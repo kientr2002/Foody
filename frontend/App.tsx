@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useFonts } from 'expo-font'
 import UserView from './src/screens/user/UserView'
+import AdminView from './src/screens/admin/AdminView'
 
 
 export default function App() {
@@ -17,7 +18,7 @@ export default function App() {
         return null 
 
     return (
-        <UserView />
+        <AdminView />
     )
 }
 

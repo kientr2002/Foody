@@ -1,8 +1,8 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     title: {
         fontFamily: 'SF-Pro-Rounded_regular',
@@ -11,19 +11,19 @@ const styles = StyleSheet.create({
         fontSize: 20,
         paddingLeft: '8%',
         marginTop: 15,
-        marginBottom: 20
+        marginBottom: 20,
     },
     account_list: {
         flex: 10,
-        paddingLeft: '8%'
+        paddingLeft: '8%',
     },
     card: {
         paddingTop: 10,
-        paddingBottom: 10
+        paddingBottom: 10,
     },
     pads: {
-        flex: 1
-    }
+        flex: 1,
+    },
 })
 
 export default styles

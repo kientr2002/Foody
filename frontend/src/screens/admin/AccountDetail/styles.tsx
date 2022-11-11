@@ -1,22 +1,21 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     avatar_username_container: {
         flex: 3,
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     avatar_container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     avatar: {
         width: 150,
         height: 150,
         borderRadius: 75,
         backgroundColor: '#ADAAAA',
-
     },
     username_container: {
         flex: 1,
@@ -24,21 +23,21 @@ const styles = StyleSheet.create({
     },
     username: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 25
+        fontSize: 25,
     },
     email: {
         fontFamily: 'SF-Pro-Rounded_regular',
         fontSize: 17,
-        color: '#ADAAAA'
+        color: '#ADAAAA',
     },
     information_container: {
         flex: 5,
         paddingLeft: 30,
-        paddingRight: 30
+        paddingRight: 30,
     },
     line_container: {
         flexDirection: 'row',
-        paddingBottom: 10
+        paddingBottom: 10,
     },
     text_1: {
         fontFamily: 'SF-Pro-Rounded_bold',
@@ -61,9 +60,8 @@ const styles = StyleSheet.create({
     },
     button: {
         justifyContent: 'center',
-        alignItems: 'center'
-    }
-
+        alignItems: 'center',
+    },
 })
 
 export default styles

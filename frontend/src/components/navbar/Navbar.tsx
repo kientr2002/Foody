@@ -94,7 +94,7 @@ export default function Navbar({ state, descriptors, navigation }: any) {
                                     isFocused ? styles.iconActive : styles.icon
                                 }
                             />
-                        ) : label === 'AccountManager' ? (
+                        ) : label === 'Manage Account' ? (
                             <FontAwesome
                                 name='users'
                                 size={21}
