@@ -1,60 +1,61 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from 'react-native'
+import color from '../../../styles/color'
+
 const styles = StyleSheet.create({
-    avatar_username_container: {
-        flex: 3,
+    headerContainer: {
+        marginTop: 30,
+        marginBottom: 40,
+        paddingHorizontal: 10,
+
+        display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center'
-    },
-    avatar_container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        justifyContent: 'space-around',
+        alignItems: 'center',
     },
     avatar: {
         width: 150,
         height: 150,
-        borderRadius: 75,
-        backgroundColor: '#ADAAAA',
+        borderRadius: 100,
     },
-    username_container: {
-        flex: 1,
-        justifyContent: 'center',
-    },
-    username: {
+    text_bold: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 25
+        paddingRight: 10,
     },
-    email: {
-        fontFamily: 'SF-Pro-Rounded_regular',
-        fontSize: 17,
-        color: '#ADAAAA'
+    text_regular: {
+        fontFamily: 'SF-Pro-Rounded_medium',
     },
-    information_container: {
-        flex: 4,
-        paddingLeft: 30,
-        paddingRight: 30
+    textSize_23: {
+        fontSize: 23,
     },
-    line_container: {
-        flexDirection: 'row'
+    textSize_18: {
+        fontSize: 18,
     },
-    text_1: {
-        fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 17,
-        color: '#000000',
-        marginRight: 20,
+    color_1: {
+        color: color.textBackground,
     },
-    text_2: {
-        fontFamily: 'SF-Pro-Rounded_regular',
-        fontSize: 17,
-        color: '#000000',
-        marginRight: 20,
+    marginBottom: {
+        marginBottom: 10,
     },
-    button_container: {
-        flex: 2,
+
+    infoContainer: {
+        paddingHorizontal: 20,
+    },
+    textContainer: {
+        marginBottom: 10,
+        display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
-        paddingLeft: 30,
-        paddingRight: 30
-    }
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    buttonContainer: {
+        marginTop: 20,
+        paddingRight: 20,
+
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
 })
+
 export default styles

@@ -5,8 +5,11 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import styles from './styles'
 
 export interface InputAttribute {
-    type?: string,
+    type?: string
     focus?: boolean
+    editable?: boolean
+    value: string
+    setValue?: (value: string) => void
 }
 
 /*
@@ -18,14 +21,21 @@ export interface InputAttribute {
                 'email', 'password' , 'confirm_password', 'name', 'calendar',
                 'weight', 'height', 'question', 'answer', 'search', ''
         focus (boolean): set auto focus on that input
+        editable
 */
 
-export default function Input({ type, focus } : InputAttribute) {
+export default function Input({
+    type,
+    focus,
+    editable,
+    value,
+    setValue,
+}: InputAttribute) {
     const [name, setName] = React.useState<string>('')
     const [icon, setIcon] = React.useState<string>('')
 
     React.useEffect(() => {
-        switch(type) {
+        switch (type) {
             case 'email':
                 setName('EMAIL')
                 setIcon('envelope')
@@ -74,19 +84,26 @@ export default function Input({ type, focus } : InputAttribute) {
 
     return (
         <View style={styles.container}>
-            {name !== '' &&
+            {name !== '' && (
                 <View style={styles.icon}>
-                    <FontAwesome5 name={icon} size={22} color="black" />
+                    <FontAwesome5 name={icon} size={22} color='black' />
                 </View>
-            }
+            )}
             <View style={styles.inputContainer}>
-                {name !== ''  && name !== 'SEARCH' && 
+                {name !== '' && name !== 'SEARCH' && (
                     <Text style={styles.nameText}>{name}</Text>
-                }
-                <TextInput 
-                    style={name !== '' ? styles.inputText : [styles.inputText, styles.inputTextDefault]}
+                )}
+                <TextInput
+                    style={
+                        name !== ''
+                            ? styles.inputText
+                            : [styles.inputText, styles.inputTextDefault]
+                    }
                     textAlignVertical='center'
                     autoFocus={focus ? focus : false}
+                    editable={editable}
+                    value={value}
+                    onChangeText={setValue}
                 />
             </View>
         </View>

@@ -17,11 +17,11 @@ const styles = StyleSheet.create({
 
         borderRadius: 20,
         backgroundColor: color.background,
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: { width: 1, height: 1 },
-        shadowOpacity:  0.10,
+        shadowOpacity: 0.1,
         shadowRadius: 2,
-        elevation: 2
+        elevation: 2,
     },
     icon: {
         width: '15%',
@@ -33,26 +33,28 @@ const styles = StyleSheet.create({
         width: '85%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     nameText: {
-        marginBottom: 5,
+        marginBottom: 2,
 
         color: color.textBackground,
         fontFamily: 'SF-Pro-Rounded_semibold',
-        fontSize: 10
+        fontSize: 10,
     },
     inputText: {
+        height: 35,
         fontFamily: 'SF-Pro-Rounded_medium',
         fontSize: 20,
-        paddingBottom: 5
+        paddingTop: 5,
     },
     inputTextDefault: {
+        height: 40,
         paddingTop: 10,
         paddingBottom: 5,
         paddingLeft: 10,
         paddingRight: 10,
-    }
+    },
 })
 
 export default styles

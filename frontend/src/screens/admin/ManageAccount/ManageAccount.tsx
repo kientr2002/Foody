@@ -1,6 +1,9 @@
 import * as React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { ManageAccountStackParamList, AdminTabParamList } from '../../../util/types'
+import {
+    ManageAccountStackParamList,
+    AdminTabParamList,
+} from '../../../util/types'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 
 import AccountList from './AccountList'
@@ -29,10 +32,7 @@ export default function ManageAccount({ navigation }: Props) {
                     title: 'Manage Account',
                 }}
             />
-            <Stack.Screen
-                name='Account detail'
-                component={AccountDetail}
-            />
+            <Stack.Screen name='Account detail' component={AccountDetail} />
         </Stack.Navigator>
     )
 }
