@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Pressable, View, Animated } from 'react-native'
-import { FontAwesome5, MaterialIcons  } from '@expo/vector-icons'
+import { FontAwesome5, MaterialIcons } from '@expo/vector-icons'
 import UserContext, { UserContextInterface } from '../../context/UserContext'
-
 
 import styles from './styles'
 import color from '../../styles/color'
@@ -14,9 +13,13 @@ interface HeaderButtonAttribute {
     route?: any
 }
 
-export default function HeaderButton({type, navigation, route }:HeaderButtonAttribute) {
-    const { 
-        createPlanList, 
+export default function HeaderButton({
+    type,
+    navigation,
+    route,
+}: HeaderButtonAttribute) {
+    const {
+        createPlanList,
         myFavorite,
         handleAddToCreatePlan,
         handleRemoveFromCreatePlan,
@@ -28,84 +31,102 @@ export default function HeaderButton({type, navigation, route }:HeaderButtonAttr
 
     // check if the food is in favorite or in create plan list
     React.useEffect(() => {
-        if (createPlanList.find((food:Food) => food.id === route?.params?.id))
+        if (createPlanList.find((food: Food) => food.id === route?.params?.id))
             setInPlan(true)
     }, [createPlanList])
     React.useEffect(() => {
-        if (myFavorite.find((food:Food) => food.id === route?.params?.id))
+        if (myFavorite.find((food: Food) => food.id === route?.params?.id))
             setLike(true)
     }, [myFavorite])
 
     const handleGoToCreatePlan = () => {
-        navigation?.navigate(
-            'Create Plan'
-        )
+        navigation?.navigate('Create Plan')
     }
 
     return (
         <>
-            {type === 1 ? 
+            {type === 1 ? (
                 <View style={styles.container}>
-                    <Pressable 
+                    <Pressable
                         style={styles.item}
                         onPress={handleGoToCreatePlan}
                     >
-                        <FontAwesome5 name="shopping-basket" size={23} color={color.textBackground} />
-                    </Pressable> 
-                </View> :
+                        <FontAwesome5
+                            name='shopping-basket'
+                            size={23}
+                            color={color.textBackground}
+                        />
+                    </Pressable>
+                </View>
+            ) : (
                 <View style={styles.container}>
-                    <Pressable 
+                    <Pressable
                         style={styles.item}
                         onPress={() => {
                             if (!like) {
-                                const food:Food = {
+                                const food: Food = {
                                     id: route?.params?.id,
                                     name: route?.params?.name,
                                     body: route?.params?.body,
                                     recipe: route?.params?.recipe,
                                     imgSrc: route?.params?.imgSrc,
-                                    rate: route?.params?.rate
+                                    rate: route?.params?.rate,
                                 }
                                 handleAddToFavorite(food)
-                            }
-                            else
-                                handleRemoveFromFavorite(route?.params?.id)
+                            } else handleRemoveFromFavorite(route?.params?.id)
                             setLike(!like)
                         }}
                     >
-
-                        <MaterialIcons name="favorite" size={27} color={like ? 'tomato' : color.textBackground} />
+                        <MaterialIcons
+                            name='favorite'
+                            size={27}
+                            color={like ? 'tomato' : color.textBackground}
+                        />
                     </Pressable>
                     <View>
-                        <Pressable 
-                            style={[styles.item, inPlan ? styles.overlap_disappear : null ]}
+                        <Pressable
+                            style={[
+                                styles.item,
+                                inPlan ? styles.overlap_disappear : null,
+                            ]}
                             onPress={() => {
-                                const food:Food = {
+                                const food: Food = {
                                     id: route?.params?.id,
                                     name: route?.params?.name,
                                     body: route?.params?.body,
                                     recipe: route?.params?.recipe,
                                     imgSrc: route?.params?.imgSrc,
-                                    rate: route?.params?.rate
+                                    rate: route?.params?.rate,
                                 }
                                 setInPlan(true)
                                 handleAddToCreatePlan(food)
-                            }}    
+                            }}
                         >
-                            <MaterialIcons name="add-circle" size={27} color={color.textBackground} />
-                        </Pressable> 
-                        <Pressable 
-                            style={[styles.item, !inPlan ? styles.overlap_disappear : null]}
+                            <MaterialIcons
+                                name='add-circle'
+                                size={27}
+                                color={color.textBackground}
+                            />
+                        </Pressable>
+                        <Pressable
+                            style={[
+                                styles.item,
+                                !inPlan ? styles.overlap_disappear : null,
+                            ]}
                             onPress={() => {
                                 setInPlan(false)
                                 handleRemoveFromCreatePlan(route?.params?.id)
-                            }}    
+                            }}
                         >
-                            <MaterialIcons name="check-circle" size={27} color={color.primary} />
+                            <MaterialIcons
+                                name='check-circle'
+                                size={27}
+                                color={color.primary}
+                            />
                         </Pressable>
                     </View>
                 </View>
-            }
+            )}
         </>
     )
 }

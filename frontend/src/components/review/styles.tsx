@@ -12,15 +12,15 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         borderRadius: 20,
         backgroundColor: color.background,
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity:  0.15,
+        shadowOpacity: 0.15,
         shadowRadius: 5,
-        elevation: 1
+        elevation: 1,
     },
     input: {
         width: '75%',
-        marginRight: 10
+        marginRight: 10,
     },
     comment: {
         width: '100%',
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
 
         fontFamily: 'SF-Pro-Rounded_regular',
-        fontSize: 18
+        fontSize: 18,
     },
 
     reviewCard: {
@@ -40,44 +40,44 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius: 20,
         backgroundColor: color.background,
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity:  0.15,
+        shadowOpacity: 0.15,
         shadowRadius: 5,
-        elevation: 1
+        elevation: 1,
     },
     reviewCardTitle: {
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     reviewCardBody: {
         marginLeft: 65,
         fontFamily: 'SF-Pro-Rounded_regular',
-        fontSize: 18
+        fontSize: 18,
     },
     avatar: {
         width: 50,
         height: 50,
         borderRadius: 100,
-        marginRight: 5
+        marginRight: 5,
     },
     username: {
         fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 20,
-        marginHorizontal: 5
+        marginHorizontal: 5,
     },
     starContainer: {
         marginTop: 10,
         display: 'flex',
         flexDirection: 'row',
-        marginBottom: 10
+        marginBottom: 10,
     },
     star: {
         color: color.yellow,
         paddingLeft: 2,
-        paddingRight: 2
-    }
+        paddingRight: 2,
+    },
 })
 
 export default styles

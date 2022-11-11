@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native"
-import color from "../../styles/color"
+import { StyleSheet } from 'react-native'
+import color from '../../styles/color'
 
 const styles = StyleSheet.create({
     button: {
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     comment: {
         paddingTop: 10,
@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     icon: {
-        color: color.background
+        color: color.background,
     },
     arrow: {
         paddingLeft: 10,
-    }
+    },
 })
 
 export default styles

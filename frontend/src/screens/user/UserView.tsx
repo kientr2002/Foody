@@ -4,14 +4,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { UserTabParamList } from '../../util/types'
 import { UserProvider } from '../../context/UserContext'
 
-
 import Navbar from '../../components/navbar/Navbar'
 import Home from './Home/Home'
 import MyPlan from './MyPlan/MyPlan'
 import Favorite from './Favorite/Favorite'
 import Search from './Search/Search'
 import Profile from './Profile/Profile'
-
 
 import color from '../../styles/color'
 
@@ -20,20 +18,18 @@ const MyTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        background: color.background
-    }
+        background: color.background,
+    },
 }
 
 export default function UserView() {
     return (
         <UserProvider>
-            <NavigationContainer
-                theme={MyTheme}
-            >
-                <Tab.Navigator 
-                    tabBar={props => <Navbar {...props}/>}
+            <NavigationContainer theme={MyTheme}>
+                <Tab.Navigator
+                    tabBar={(props) => <Navbar {...props} />}
                     screenOptions={{
-                        headerShown: false
+                        headerShown: false,
                     }}
                 >
                     <Tab.Screen name='Home page' component={Home} />

@@ -5,11 +5,11 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import styles from './styles'
 
 export interface InputAttribute {
-    type?: string,
-    focus?: boolean,
-    editable?: boolean,
-    value: string,
-    setValue?: (value:string) => void
+    type?: string
+    focus?: boolean
+    editable?: boolean
+    value: string
+    setValue?: (value: string) => void
 }
 
 /*
@@ -24,12 +24,18 @@ export interface InputAttribute {
         editable
 */
 
-export default function Input({ type, focus, editable, value, setValue } : InputAttribute) {
+export default function Input({
+    type,
+    focus,
+    editable,
+    value,
+    setValue,
+}: InputAttribute) {
     const [name, setName] = React.useState<string>('')
     const [icon, setIcon] = React.useState<string>('')
 
     React.useEffect(() => {
-        switch(type) {
+        switch (type) {
             case 'email':
                 setName('EMAIL')
                 setIcon('envelope')
@@ -78,17 +84,21 @@ export default function Input({ type, focus, editable, value, setValue } : Input
 
     return (
         <View style={styles.container}>
-            {name !== '' &&
+            {name !== '' && (
                 <View style={styles.icon}>
-                    <FontAwesome5 name={icon} size={22} color="black" />
+                    <FontAwesome5 name={icon} size={22} color='black' />
                 </View>
-            }
+            )}
             <View style={styles.inputContainer}>
-                {name !== ''  && name !== 'SEARCH' && 
+                {name !== '' && name !== 'SEARCH' && (
                     <Text style={styles.nameText}>{name}</Text>
-                }
-                <TextInput 
-                    style={name !== '' ? styles.inputText : [styles.inputText, styles.inputTextDefault]}
+                )}
+                <TextInput
+                    style={
+                        name !== ''
+                            ? styles.inputText
+                            : [styles.inputText, styles.inputTextDefault]
+                    }
                     textAlignVertical='center'
                     autoFocus={focus ? focus : false}
                     editable={editable}

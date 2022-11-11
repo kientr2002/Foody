@@ -8,8 +8,9 @@ import Card from '../../../components/card/Card'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import { Food } from '../../../util/types'
 
-export default function CreatePlan({ navigation }:any) {
-    const { createPlanList, handleCreatePlan, handleRemoveFromCreatePlan } = React.useContext<UserContextInterface>(UserContext)
+export default function CreatePlan({ navigation }: any) {
+    const { createPlanList, handleCreatePlan, handleRemoveFromCreatePlan } =
+        React.useContext<UserContextInterface>(UserContext)
     const [totalCalories, setTotalCalories] = React.useState<number>(0)
     const [totalProtein, setTotalProtein] = React.useState<number>(0)
     const [totalFat, setTotalFat] = React.useState<number>(0)
@@ -17,8 +18,11 @@ export default function CreatePlan({ navigation }:any) {
     const [success, setSuccess] = React.useState<boolean>(false)
 
     React.useEffect(() => {
-        let c = 0, p = 0, f = 0, cb = 0
-        createPlanList.forEach((food:Food) => {
+        let c = 0,
+            p = 0,
+            f = 0,
+            cb = 0
+        createPlanList.forEach((food: Food) => {
             c += food.body.calories
             p += food.body.protein
             f += food.body.fat
@@ -30,21 +34,19 @@ export default function CreatePlan({ navigation }:any) {
         setTotalCarb(cb)
     }, [createPlanList])
 
-
-
     return (
         <>
-            <Alert 
+            <Alert
                 type='create_plan'
                 title='Success'
                 message='Today plan has been created'
                 visible={success}
                 setVisible={setSuccess}
             />
-            {createPlanList.length !== 0 ?
-                <ScrollView>   
+            {createPlanList.length !== 0 ? (
+                <ScrollView>
                     <View style={styles.foodContainer}>
-                        {createPlanList.map((food: Food, i:number) => (
+                        {createPlanList.map((food: Food, i: number) => (
                             <Card
                                 key={i}
                                 cardStyle={4}
@@ -57,29 +59,69 @@ export default function CreatePlan({ navigation }:any) {
                     </View>
                     <View style={styles.summary}>
                         <View style={styles.textContainer}>
-                            <Text style={[styles.text_semibold, styles.textSize]}>Number of food:</Text>
-                            <Text style={[styles.text_regular, styles.textSize]}>{createPlanList.length}</Text>
+                            <Text
+                                style={[styles.text_semibold, styles.textSize]}
+                            >
+                                Number of food:
+                            </Text>
+                            <Text
+                                style={[styles.text_regular, styles.textSize]}
+                            >
+                                {createPlanList.length}
+                            </Text>
                         </View>
                         <View style={styles.textContainer}>
-                            <Text style={[styles.text_semibold, styles.textSize]}>Total Calories</Text>
-                            <Text style={[styles.text_regular, styles.textSize]}>{totalCalories}</Text>
+                            <Text
+                                style={[styles.text_semibold, styles.textSize]}
+                            >
+                                Total Calories
+                            </Text>
+                            <Text
+                                style={[styles.text_regular, styles.textSize]}
+                            >
+                                {totalCalories}
+                            </Text>
                         </View>
                         <View style={styles.textContainer}>
-                            <Text style={[styles.text_semibold, styles.textSize]}>Total Protein</Text>
-                            <Text style={[styles.text_regular, styles.textSize]}>{totalProtein}</Text>
+                            <Text
+                                style={[styles.text_semibold, styles.textSize]}
+                            >
+                                Total Protein
+                            </Text>
+                            <Text
+                                style={[styles.text_regular, styles.textSize]}
+                            >
+                                {totalProtein}
+                            </Text>
                         </View>
                         <View style={styles.textContainer}>
-                            <Text style={[styles.text_semibold, styles.textSize]}>Total Carb</Text>
-                            <Text style={[styles.text_regular, styles.textSize]}>{totalCarb}</Text>
+                            <Text
+                                style={[styles.text_semibold, styles.textSize]}
+                            >
+                                Total Carb
+                            </Text>
+                            <Text
+                                style={[styles.text_regular, styles.textSize]}
+                            >
+                                {totalCarb}
+                            </Text>
                         </View>
                         <View style={styles.textContainer}>
-                            <Text style={[styles.text_semibold, styles.textSize]}>Total Fat</Text>
-                            <Text style={[styles.text_regular, styles.textSize]}>{totalFat}</Text>
+                            <Text
+                                style={[styles.text_semibold, styles.textSize]}
+                            >
+                                Total Fat
+                            </Text>
+                            <Text
+                                style={[styles.text_regular, styles.textSize]}
+                            >
+                                {totalFat}
+                            </Text>
                         </View>
-                    </View> 
+                    </View>
                     <View style={styles.buttonContainer}>
                         <View>
-                            <Button 
+                            <Button
                                 content='CANCEL'
                                 type='error'
                                 onPress={() => {
@@ -88,8 +130,8 @@ export default function CreatePlan({ navigation }:any) {
                                 }}
                             />
                         </View>
-                        <View style={{ marginLeft: 10}}>
-                            <Button 
+                        <View style={{ marginLeft: 10 }}>
+                            <Button
                                 content='CREATE'
                                 type='confirm'
                                 onPress={() => {
@@ -102,14 +144,14 @@ export default function CreatePlan({ navigation }:any) {
                         </View>
                     </View>
                 </ScrollView>
-                : 
+            ) : (
                 <AnimatedLottieView
                     style={styles.empty}
                     source={require('../../../../assets/animation/empty.json')}
                     autoPlay
                     loop
                 />
-            }
+            )}
         </>
     )
 }
@@ -118,37 +160,37 @@ const styles = StyleSheet.create({
     foodContainer: {
         marginTop: 20,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     summary: {
         paddingHorizontal: 20,
         marginVertical: 10,
         justifyContent: 'center',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
     },
     textContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     text_semibold: {
-      fontFamily: 'SF-Pro-Rounded_semibold'
+        fontFamily: 'SF-Pro-Rounded_semibold',
     },
     text_regular: {
         marginLeft: 10,
-        fontFamily: 'SF-Pro-Rounded_regular'
+        fontFamily: 'SF-Pro-Rounded_regular',
     },
     textSize: {
-        fontSize: 18
+        fontSize: 18,
     },
     buttonContainer: {
         marginVertical: 10,
         paddingRight: 20,
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
     },
 
     empty: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+    },
 })

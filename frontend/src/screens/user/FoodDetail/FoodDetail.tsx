@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { View, Text, Image, ScrollView, } from 'react-native'
+import { View, Text, Image, ScrollView } from 'react-native'
 import * as Progress from 'react-native-progress'
 import { ReviewInput, ReviewCard } from '../../../components/review/Review'
 
@@ -9,14 +9,11 @@ import color from '../../../styles/color'
 
 const Tab = createMaterialTopTabNavigator()
 
-function Recipe({ recipe }:any) {
+function Recipe({ recipe }: any) {
     return (
         <View style={styles.tabBody}>
-            {recipe?.map((item:any, i:any) => (
-                <View
-                    key={i}
-                    style={styles.recipe}
-                >
+            {recipe?.map((item: any, i: any) => (
+                <View key={i} style={styles.recipe}>
                     <Text style={styles.recipeTitle}>Step {item?.step}</Text>
                     <Text>{item?.body}</Text>
                 </View>
@@ -25,13 +22,13 @@ function Recipe({ recipe }:any) {
     )
 }
 
-function About({ body }:any) {
-    const [reviews, setReview] = React.useState< Array<Object> >([])
+function About({ body }: any) {
+    const [reviews, setReview] = React.useState<Array<Object>>([])
     const [rate, setRate] = React.useState<number>(0)
     const [comment, setComment] = React.useState<string>('')
 
-    const handleSubmit = (rate:number, comment:string) => {
-        setReview([...reviews, {rate, body: comment, username: 'thoaile'}])
+    const handleSubmit = (rate: number, comment: string) => {
+        setReview([...reviews, { rate, body: comment, username: 'thoaile' }])
     }
 
     return (
@@ -41,8 +38,15 @@ function About({ body }:any) {
                 <Text style={styles.sectionTitle}>Nutrient</Text>
                 <View style={styles.sectionContainer}>
                     <View style={styles.nutrientElement}>
-                        <Text style={[styles.sectionText, styles.nutrientElementTitle]}>Calories</Text>
-                        <Progress.Bar 
+                        <Text
+                            style={[
+                                styles.sectionText,
+                                styles.nutrientElementTitle,
+                            ]}
+                        >
+                            Calories
+                        </Text>
+                        <Progress.Bar
                             style={styles.progressBar}
                             progress={1}
                             width={250}
@@ -52,10 +56,17 @@ function About({ body }:any) {
                         />
                     </View>
                     <View style={styles.nutrientElement}>
-                        <Text style={[styles.sectionText, styles.nutrientElementTitle]}>Protein</Text>
-                        <Progress.Bar 
+                        <Text
+                            style={[
+                                styles.sectionText,
+                                styles.nutrientElementTitle,
+                            ]}
+                        >
+                            Protein
+                        </Text>
+                        <Progress.Bar
                             style={styles.progressBar}
-                            progress={body ? (body?.protein/body?.calories) : 0}
+                            progress={body ? body?.protein / body?.calories : 0}
                             width={250}
                             height={13}
                             color={'#DC4040'}
@@ -63,10 +74,17 @@ function About({ body }:any) {
                         />
                     </View>
                     <View style={styles.nutrientElement}>
-                        <Text style={[styles.sectionText, styles.nutrientElementTitle]}>Carb</Text>
-                        <Progress.Bar 
+                        <Text
+                            style={[
+                                styles.sectionText,
+                                styles.nutrientElementTitle,
+                            ]}
+                        >
+                            Carb
+                        </Text>
+                        <Progress.Bar
                             style={styles.progressBar}
-                            progress={body ? (body?.carb/body?.calories) : 0}
+                            progress={body ? body?.carb / body?.calories : 0}
                             width={250}
                             height={13}
                             color={'#3DC73A'}
@@ -74,10 +92,17 @@ function About({ body }:any) {
                         />
                     </View>
                     <View style={styles.nutrientElement}>
-                        <Text style={[styles.sectionText, styles.nutrientElementTitle]}>Fat</Text>
-                        <Progress.Bar 
+                        <Text
+                            style={[
+                                styles.sectionText,
+                                styles.nutrientElementTitle,
+                            ]}
+                        >
+                            Fat
+                        </Text>
+                        <Progress.Bar
                             style={styles.progressBar}
-                            progress={body ? (body?.fat/body?.calories) : 0}
+                            progress={body ? body?.fat / body?.calories : 0}
                             width={250}
                             height={13}
                             color={'#DD34AE'}
@@ -102,10 +127,10 @@ function About({ body }:any) {
                     style={{
                         flex: 1,
                         justifyContent: 'center',
-                        alignItems: 'center'
+                        alignItems: 'center',
                     }}
                 >
-                    <ReviewInput 
+                    <ReviewInput
                         rate={rate}
                         setRate={setRate}
                         comment={comment}
@@ -114,61 +139,52 @@ function About({ body }:any) {
                     />
                 </View>
                 <View style={styles.reviewCardContainer}>
-                    {reviews.length !== 0 && reviews.map((review:any, i:any) => (
-                        <ReviewCard
-                            key={i}
-                            username={review.username}
-                            body={review.body}
-                            rate={review.rate}
-                        />
-                    ))}
+                    {reviews.length !== 0 &&
+                        reviews.map((review: any, i: any) => (
+                            <ReviewCard
+                                key={i}
+                                username={review.username}
+                                body={review.body}
+                                rate={review.rate}
+                            />
+                        ))}
                     {reviews.length === 0 && <Text>No comments</Text>}
                 </View>
             </View>
-
         </ScrollView>
     )
 }
 
-export default function FoodDetail({ route }:any) {
-    const { name, recipe, body, imgSrc }:any = route?.params
+export default function FoodDetail({ route }: any) {
+    const { name, recipe, body, imgSrc }: any = route?.params
 
+    const handleAddToFavorite = () => {}
 
-
-    const handleAddToFavorite = () => {
-        
-    }
-
-    const handeRemoveFromFavorite = () => {
-
-    }
+    const handeRemoveFromFavorite = () => {}
 
     return (
         <>
             <View style={styles.imgContainer}>
-                <Image 
-                    source={{ uri: imgSrc }}
-                    style={styles.img}
-                />
+                <Image source={{ uri: imgSrc }} style={styles.img} />
             </View>
 
-            <Tab.Navigator 
+            <Tab.Navigator
                 style={styles.bodyContainer}
                 screenOptions={{
                     tabBarInactiveTintColor: color.textBackground,
                     tabBarActiveTintColor: color.text,
                     tabBarLabelStyle: styles.headerText,
-                    tabBarStyle: { 
+                    tabBarStyle: {
                         elevation: 0,
-                        backgroundColor: color.background               
+                        backgroundColor: color.background,
                     },
                     tabBarPressColor: '000000',
-                    tabBarItemStyle: { 
-                        paddingVertical: 5
+                    tabBarItemStyle: {
+                        paddingVertical: 5,
                     },
                     tabBarIndicatorStyle: {
-                        backgroundColor: color.primary
-                    }
+                        backgroundColor: color.primary,
+                    },
                 }}
             >
                 <Tab.Screen name='Recipe'>

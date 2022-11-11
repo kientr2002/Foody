@@ -6,91 +6,85 @@ import styles from './styles'
 import Button from '../button/Button'
 
 export interface ReviewCardAttribute {
-    avatarSrc?: string,
-    username: string,
-    rate: number,
-    body: string,
+    avatarSrc?: string
+    username: string
+    rate: number
+    body: string
 }
 
 export interface ReviewInputAttribute {
     rate: number
-    setRate: (rate:number) => void
+    setRate: (rate: number) => void
     comment: string
-    setComment: (comment:string) => void
-    handleSubmit: (rate:number, comment:string) => void
+    setComment: (comment: string) => void
+    handleSubmit: (rate: number, comment: string) => void
 }
 
-function Stars({ rate }:any) {
-    let starArr:string[] = []
-    for (let i=0; i < 5; i++) {
-        if (i < rate)
-            starArr.push('star')
-        else 
-            starArr.push('staro')
+function Stars({ rate }: any) {
+    let starArr: string[] = []
+    for (let i = 0; i < 5; i++) {
+        if (i < rate) starArr.push('star')
+        else starArr.push('staro')
     }
 
     return (
         <View style={styles.starContainer}>
             {starArr.map((element, i) => (
-                <AntDesign 
+                <AntDesign
                     key={i}
-                    name={element === 'star' ? "star" : "staro"} 
-                    size={20} 
-                    style={styles.star} 
+                    name={element === 'star' ? 'star' : 'staro'}
+                    size={20}
+                    style={styles.star}
                 />
             ))}
         </View>
     )
 }
 
-export function ReviewInput({rate, setRate, comment, setComment, handleSubmit}:ReviewInputAttribute) {
+export function ReviewInput({
+    rate,
+    setRate,
+    comment,
+    setComment,
+    handleSubmit,
+}: ReviewInputAttribute) {
     return (
         <View style={styles.reviewInput}>
             <View style={styles.input}>
                 <View style={styles.starContainer}>
-                    <Pressable
-                        onPress={() => setRate(1)}
-                    >
+                    <Pressable onPress={() => setRate(1)}>
                         <AntDesign
-                            name={rate >= 1 ? 'star' : 'staro'} 
-                            size={20} 
-                            style={styles.star} 
+                            name={rate >= 1 ? 'star' : 'staro'}
+                            size={20}
+                            style={styles.star}
                         />
                     </Pressable>
-                    <Pressable
-                        onPress={() => setRate(2)}
-                    >
+                    <Pressable onPress={() => setRate(2)}>
                         <AntDesign
-                            name={rate >= 2 ? 'star' : 'staro'}  
-                            size={20} 
-                            style={styles.star} 
+                            name={rate >= 2 ? 'star' : 'staro'}
+                            size={20}
+                            style={styles.star}
                         />
                     </Pressable>
-                    <Pressable
-                        onPress={() => setRate(3)}
-                    >
+                    <Pressable onPress={() => setRate(3)}>
                         <AntDesign
-                            name={rate >= 3 ? 'star' : 'staro'}  
-                            size={20} 
-                            style={styles.star} 
+                            name={rate >= 3 ? 'star' : 'staro'}
+                            size={20}
+                            style={styles.star}
                         />
                     </Pressable>
-                    <Pressable
-                        onPress={() => setRate(4)}
-                    >
+                    <Pressable onPress={() => setRate(4)}>
                         <AntDesign
-                            name={rate >= 4 ? 'star' : 'staro'}  
-                            size={20} 
-                            style={styles.star} 
+                            name={rate >= 4 ? 'star' : 'staro'}
+                            size={20}
+                            style={styles.star}
                         />
                     </Pressable>
-                    <Pressable
-                        onPress={() => setRate(5)}
-                    >
+                    <Pressable onPress={() => setRate(5)}>
                         <AntDesign
-                            name={rate >= 5 ? 'star' : 'staro'}  
-                            size={20} 
-                            style={styles.star}     
+                            name={rate >= 5 ? 'star' : 'staro'}
+                            size={20}
+                            style={styles.star}
                         />
                     </Pressable>
                 </View>
@@ -102,7 +96,7 @@ export function ReviewInput({rate, setRate, comment, setComment, handleSubmit}:R
                     multiline
                 />
             </View>
-            <Button 
+            <Button
                 type='confirm'
                 comment
                 onPress={() => handleSubmit(rate, comment)}
@@ -111,22 +105,23 @@ export function ReviewInput({rate, setRate, comment, setComment, handleSubmit}:R
     )
 }
 
-export function ReviewCard({ avatarSrc, username, rate, body}:ReviewCardAttribute) {
+export function ReviewCard({
+    avatarSrc,
+    username,
+    rate,
+    body,
+}: ReviewCardAttribute) {
     return (
         <View style={styles.reviewCard}>
             <View style={styles.reviewCardTitle}>
-                <Image 
+                <Image
                     source={require('../../../assets/icon.png')}
                     style={styles.avatar}
                 />
                 <Text style={styles.username}>{username}</Text>
-                <Stars rate={rate}/>
+                <Stars rate={rate} />
             </View>
-            <Text
-                style={styles.reviewCardBody}
-            >
-                {body}
-            </Text>
+            <Text style={styles.reviewCardBody}>{body}</Text>
         </View>
     )
 }

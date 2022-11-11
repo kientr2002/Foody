@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack' 
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ProfileStackParamList, UserTabParamList } from '../../../util/types'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 
@@ -10,23 +10,25 @@ import MyProfile from './MyProfile'
 const Stack = createNativeStackNavigator<ProfileStackParamList>()
 type Props = BottomTabScreenProps<UserTabParamList, 'Profile page'>
 
-export default function Profile({ navigation }:Props) {
+export default function Profile({ navigation }: Props) {
     return (
         <Stack.Navigator
             screenOptions={{
                 headerTintColor: color.primary,
                 headerTitleStyle: {
                     fontFamily: 'SF-Pro-Rounded_bold',
-                    fontSize: 23
-                }
+                    fontSize: 23,
+                },
             }}
         >
             <Stack.Screen
-                name='My profile' 
+                name='My profile'
                 component={MyProfile}
                 options={{
                     title: 'Profile',
-                    headerRight: () => (<HeaderButton type={1} navigation={navigation} />)
+                    headerRight: () => (
+                        <HeaderButton type={1} navigation={navigation} />
+                    ),
                 }}
             />
         </Stack.Navigator>
