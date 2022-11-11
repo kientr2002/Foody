@@ -7,6 +7,9 @@ import styles from './styles'
 export interface InputAttribute {
     type?: string
     focus?: boolean
+    editable?: boolean
+    value: string
+    setValue?: (value: string) => void
 }
 
 /*
@@ -18,9 +21,16 @@ export interface InputAttribute {
                 'email', 'password' , 'confirm_password', 'name', 'calendar',
                 'weight', 'height', 'question', 'answer', 'search', ''
         focus (boolean): set auto focus on that input
+        editable
 */
 
-export default function Input({ type, focus }: InputAttribute) {
+export default function Input({
+    type,
+    focus,
+    editable,
+    value,
+    setValue,
+}: InputAttribute) {
     const [name, setName] = React.useState<string>('')
     const [icon, setIcon] = React.useState<string>('')
 
@@ -91,6 +101,9 @@ export default function Input({ type, focus }: InputAttribute) {
                     }
                     textAlignVertical='center'
                     autoFocus={focus ? focus : false}
+                    editable={editable}
+                    value={value}
+                    onChangeText={setValue}
                 />
             </View>
         </View>

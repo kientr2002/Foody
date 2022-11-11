@@ -8,7 +8,7 @@ import Input from '../../../components/input/Input';
 import InputAttribute from "../../../components/input/Input";
 import styles from './styles'
 
-export default function SignUp({navigation}){
+export default function SignUp({navigation}:any){
   const Login = () => {
     navigation.navigate('Login')
 }
@@ -27,31 +27,31 @@ export default function SignUp({navigation}){
             </View>
             <View style={styles.space}></View>
             <View style={styles.Entity}>
-              <Input type='email' focus={false}/>
+              <Input type='email' focus={false} value='email'/>
             </View>
             <View style={styles.space}></View>
             <View style={styles.Entity}>
-            <Input type='name' focus={false}/>
+            <Input type='name' focus={false} value='name'/>
             </View>
             <View style={styles.space}></View>
             <View style={styles.Entity}>
-            <Input type='calendar' focus={false}/>
+            <Input type='calendar' focus={false} value='calendar'/>
             </View>
             <View style={styles.space}></View>
             <View style={styles.Entity}>
-            <Input type='password' focus={false}/>
+            <Input type='password' focus={false} value='password'/>
             </View>
             <View style={styles.space}></View>
             <View style={styles.Entity}>
-            <Input type='confirm_password' focus={false}/>
+            <Input type='confirm_password' focus={false} value = 'confirm_password'/>
             </View>
             <View style={styles.space}></View>
             <View style={styles.Entity}>
-            <Input type='question' focus={false}/>
+            <Input type='question' focus={false} value='question'/>
             </View>
             <View style={styles.space}></View>
             <View style={styles.Entity}>
-            <Input type='answer' focus={false}/>
+            <Input type='answer' focus={false} value='answer'/>
             </View>
             <View style={styles.litleSpace}></View>
             <View style={styles.Button}>

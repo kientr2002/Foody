@@ -13,7 +13,7 @@ const windowHeight = Dimensions.get('window').height;
 const SIGN_IN = 'SIGN_IN';
 const GET_STATE = 'GET_STATE';
 
-export default function Login({ navigation }){   
+export default function Login({ navigation }:any){   
   const [page, setPage] = useState(SIGN_IN);
   const [getPasswordVisible, setPasswordVisible] = useState(false);
   const [getEmail, setEmail] = useState('');

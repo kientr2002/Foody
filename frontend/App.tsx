@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import { View } from 'react-native'
 import * as SplashScreen from 'expo-splash-screen'
 import { NavigationContainer } from '@react-navigation/native'
@@ -13,6 +14,10 @@ import Login from './src/screens/authentication/login/login'
 import SignUp from './src/screens/authentication/signup/signup'
 import Caculate from './src/screens/authentication/caculate/caculate'
 import MainAuthentication from './src/screens/authentication/authenticationView'
+
+import UserView from './src/screens/user/UserView'
+import AdminView from './src/screens/admin/AdminView'
+
 
 
 export default function App() {
@@ -33,3 +38,8 @@ export default function App() {
         
     )
 }
+
+
+
+
+

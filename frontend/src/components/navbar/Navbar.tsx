@@ -54,7 +54,7 @@ export default function Navbar({ state, descriptors, navigation }: any) {
                         onLongPress={onLongPress}
                         style={styles.element}
                     >
-                        {label === 'Home' ? (
+                        {label === 'Home page' ? (
                             <Entypo
                                 name='home'
                                 size={25}
@@ -62,7 +62,7 @@ export default function Navbar({ state, descriptors, navigation }: any) {
                                     isFocused ? styles.iconActive : styles.icon
                                 }
                             />
-                        ) : label === 'Plan' ? (
+                        ) : label === 'MyPlan page' ? (
                             <FontAwesome5
                                 name='calendar-day'
                                 size={23}
@@ -70,7 +70,7 @@ export default function Navbar({ state, descriptors, navigation }: any) {
                                     isFocused ? styles.iconActive : styles.icon
                                 }
                             />
-                        ) : label === 'Search' ? (
+                        ) : label === 'Search page' ? (
                             <FontAwesome
                                 name='search'
                                 size={24}
@@ -78,7 +78,7 @@ export default function Navbar({ state, descriptors, navigation }: any) {
                                     isFocused ? styles.iconActive : styles.icon
                                 }
                             />
-                        ) : label === 'Favorite' ? (
+                        ) : label === 'Favorite page' ? (
                             <MaterialIcons
                                 name='favorite'
                                 size={26}
@@ -86,7 +86,7 @@ export default function Navbar({ state, descriptors, navigation }: any) {
                                     isFocused ? styles.iconActive : styles.icon
                                 }
                             />
-                        ) : label === 'Profile' ? (
+                        ) : label === 'Profile page' ? (
                             <FontAwesome
                                 name='user-circle-o'
                                 size={24}
@@ -94,7 +94,7 @@ export default function Navbar({ state, descriptors, navigation }: any) {
                                     isFocused ? styles.iconActive : styles.icon
                                 }
                             />
-                        ) : label === 'AccountManager' ? (
+                        ) : label === 'Manage Account' ? (
                             <FontAwesome
                                 name='users'
                                 size={21}

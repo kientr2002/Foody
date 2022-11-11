@@ -36,18 +36,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     nameText: {
-        marginBottom: 5,
+        marginBottom: 2,
 
         color: color.textBackground,
         fontFamily: 'SF-Pro-Rounded_semibold',
         fontSize: 10,
     },
     inputText: {
+        height: 35,
         fontFamily: 'SF-Pro-Rounded_medium',
         fontSize: 20,
-        paddingBottom: 5,
+        paddingTop: 5,
     },
     inputTextDefault: {
+        height: 40,
         paddingTop: 10,
         paddingBottom: 5,
         paddingLeft: 10,

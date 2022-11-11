@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native';
 import React, { FC,Component, useState } from 'react';
 import Select from 'react-select';
 import {View, Text, StyleSheet, Dimensions, Image, TouchableOpacity,StatusBar, SafeAreaView, TextInput, ImageBackground} from 'react-native'
@@ -12,7 +13,7 @@ import styles_caculate from './styles'
 import Dropdown from './dropdown/Dropdown'
 
 
-export default function Caculate({navigation, string}){
+export default function Caculate({navigation, string}: any){
   const [success, setSuccess] = React.useState<boolean>(false)
   const SignUp = () => {
     navigation.navigate('SignUp')
@@ -54,18 +55,18 @@ export default function Caculate({navigation, string}){
               <View style={styles_caculate.space}></View>
               {/* Weight  */}
               <View style={styles_caculate.Entity}>
-                <Input type='weight' focus={false}/>
+                <Input type='weight' focus={false} value='weight'/>
               </View >
               <View style={styles_caculate.space}></View>
               {/* Height  */}
               <View style={styles_caculate.Entity}>
-                <Input type='height' focus={false}/>
+                <Input type='height' focus={false} value='height'/>
               </View>
 
               <View style={styles_caculate.space}></View>
              {/* Activity */}
               <View style={styles_caculate.Entity}>
-              <Dropdown label="Activity" data={data} onSelect={setSelected} />
+              <Dropdown label="Activity" data={data} onSelect={() => setSelected} />
               </View>
               <View style={styles_caculate.space}></View>
               {/* Choose your target  */}

@@ -4,6 +4,7 @@ import color from '../../styles/color'
 const styles = StyleSheet.create({
     background: {
         borderRadius: 20,
+        marginBottom: 5,
 
         display: 'flex',
         flexDirection: 'column',
@@ -13,24 +14,26 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.15,
         shadowRadius: 5,
-        elevation: 10,
+        elevation: 2,
     },
     background_1: {
         width: 250,
-        height: 425,
+        height: 410,
         marginRight: 20,
     },
     background_2: {
         width: '80%',
+        marginBottom: 20,
     },
     background_3: {
         width: '90%',
         flexDirection: 'row',
+        marginBottom: 10,
     },
 
     img_1: {
         width: '100%',
-        height: 280,
+        height: 260,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
     },
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     },
     img_3: {
         width: 120,
-        height: '100%',
+        height: 100,
         borderTopLeftRadius: 20,
         borderBottomLeftRadius: 20,
     },
@@ -68,7 +71,12 @@ const styles = StyleSheet.create({
         fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 25,
     },
+    title_2: {
+        fontFamily: 'SF-Pro-Rounded_bold',
+        fontSize: 20,
+    },
     text: {
+        height: 50,
         fontFamily: 'SF-Pro-Rounded_regular',
         fontSize: 17,
         color: color.textBackground,
