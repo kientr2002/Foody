@@ -5,36 +5,23 @@ import Card from '../../../components/card/Card'
 import AccountCard from '../../../components/accountcard/AccountCard'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
+import styles from './styles'
 export default function AddEditDish() {
     return (
         <>
             <View
-                style={{
-                    flex: 4,
-                    backgroundColor: '#BBBBBB'
-                }}
+                style={styles.image}
             >
             </View>
 
             <View
-                style={{
-                    flex: 6,
-                    paddingLeft: 15,
-                    paddingRight: 15,
-                    marginBottom: 20
-                }}>
+                style={styles.information_container}>
                 <ScrollView>
                     {/* Dish name */}
                     <View
-                        style={{
-                            marginTop: 20
-                        }}>
+                        style={styles.space}>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 20,
-                                color: '#000000'
-                            }}>
+                            style={styles.text_1}>
                             Dish name
                         </Text>
                         <Input
@@ -45,15 +32,9 @@ export default function AddEditDish() {
 
                     {/* Calorioes */}
                     <View
-                        style={{
-                            marginTop: 20
-                        }}>
+                        style={styles.space}>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 20,
-                                color: '#000000'
-                            }}>
+                            style={styles.text_1}>
                             Calories
                         </Text>
                         <Input
@@ -63,21 +44,11 @@ export default function AddEditDish() {
                     </View>
                     {/* Protein-Fat-Carb */}
                     <View
-                        style={{
-                            flexDirection: 'row',
-                            marginTop: 20
-
-                        }}>
+                        style={styles.space_3items}>
                         <View
-                            style={{
-                                flex: 1
-                            }}>
+                            style={styles.protein_carb}>
                             <Text
-                                style={{
-                                    fontFamily: 'SF-Pro-Rounded_bold',
-                                    fontSize: 20,
-                                    color: '#000000'
-                                }}>
+                                style={styles.text_1}>
                                 Protein
                             </Text>
                             <Input
@@ -86,17 +57,9 @@ export default function AddEditDish() {
                             />
                         </View>
                         <View
-                            style={{
-                                flex: 1,
-                                marginLeft: 20,
-                                marginRight: 20
-                            }}>
+                            style={styles.fat}>
                             <Text
-                                style={{
-                                    fontFamily: 'SF-Pro-Rounded_bold',
-                                    fontSize: 20,
-                                    color: '#000000'
-                                }}>
+                                style={styles.text_1}>
                                 Fat
                             </Text>
                             <Input
@@ -105,15 +68,9 @@ export default function AddEditDish() {
                             />
                         </View>
                         <View
-                            style={{
-                                flex: 1
-                            }}>
+                            style={styles.protein_carb}>
                             <Text
-                                style={{
-                                    fontFamily: 'SF-Pro-Rounded_bold',
-                                    fontSize: 20,
-                                    color: '#000000'
-                                }}>
+                                style={styles.text_1}>
                                 Carb
                             </Text>
                             <Input
@@ -125,15 +82,9 @@ export default function AddEditDish() {
 
                     {/* Description */}
                     <View
-                        style={{
-                            marginTop: 20
-                        }}>
+                        style={styles.space}>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 20,
-                                color: '#000000'
-                            }}>
+                            style={styles.text_1}>
                             Description
                         </Text>
                         <Input
@@ -143,15 +94,9 @@ export default function AddEditDish() {
                     </View>
                     {/* Step 1 */}
                     <View
-                        style={{
-                            marginTop: 20
-                        }}>
+                        style={styles.space}>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 20,
-                                color: '#000000'
-                            }}>
+                            style={styles.text_1}>
                             Step 1
                         </Text>
 
@@ -164,15 +109,9 @@ export default function AddEditDish() {
                     </View>
                     {/* Step 2 */}
                     <View
-                        style={{
-                            marginTop: 20
-                        }}>
+                        style={styles.space}>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 20,
-                                color: '#000000'
-                            }}>
+                            style={styles.text_1}>
                             Step 2
                         </Text>
                         <Input
@@ -182,15 +121,9 @@ export default function AddEditDish() {
                     </View>
                     {/* Step 3 */}
                     <View
-                        style={{
-                            marginTop: 20
-                        }}>
+                        style={styles.space}>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 20,
-                                color: '#000000'
-                            }}>
+                            style={styles.text_1}>
                             Step 3
                         </Text>
                         <Input
@@ -201,15 +134,9 @@ export default function AddEditDish() {
 
                     {/* Step 4 */}
                     <View
-                        style={{
-                            marginTop: 20
-                        }}>
+                        style={styles.space}>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 20,
-                                color: '#000000'
-                            }}>
+                            style={styles.text_1}>
                             Step 4
                         </Text>
                         <Input
@@ -223,30 +150,16 @@ export default function AddEditDish() {
 
             {/* Button DELETE and EDIT */}
             < View
-                style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    paddingLeft: 30,
-                    paddingRight: 30
-                }
-                }>
+                style={styles.button_container}>
                 <View
-                    style={{
-                        flex: 1,
-                        alignItems: 'center'
-                    }}>
+                    style={styles.button}>
                     <Button
                         content='CANCEL'
                         type='error'
                     />
                 </View>
                 <View
-                    style={{
-                        flex: 1,
-                        alignItems: 'center'
-                    }}>
+                    style={styles.button}>
                     <Button
                         content='SUBMIT'
                         type='confirm'
