@@ -1,248 +1,131 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
 import { StyleSheet, View, Text, ScrollView } from 'react-native'
-import Card from '../../../components/card/Card'
-import AccountCard from '../../../components/accountcard/AccountCard'
 import Button from '../../../components/button/Button'
-import Input from '../../../components/input/Input'
+import styles from './styles'
 
 export default function AccountDetail() {
     return (
         <>
             <View
-                style={{
-                    flex: 3,
-                    flexDirection: 'row',
-                    justifyContent: 'center'
-                }}
+                style={styles.avatar_username_container}
             >
-                <View style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
+                <View style={styles.avatar_container}>
                     <View
-                        style={{
-                            width: 150,
-                            height: 150,
-                            borderRadius: 75,
-                            backgroundColor: '#ADAAAA',
-
-                        }}>
+                        style={styles.avatar}>
                     </View>
                 </View>
 
-                <View style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                }}>
+                <View style={styles.username_container}>
                     <Text
-                        style={{
-                            fontFamily: 'SF-Pro-Rounded_bold',
-                            fontSize: 25
-                        }}>
+                        style={styles.username}>
                         Username
                     </Text>
                     <Text
-                        style={{
-                            fontFamily: 'SF-Pro-Rounded_regular',
-                            fontSize: 17,
-                            color: '#ADAAAA'
-                        }}
+                        style={styles.email}
                     >Email
                     </Text>
                 </View>
             </View>
 
             <View
-                style={{
-                    flex: 5,
-                    paddingLeft: 30,
-                    paddingRight: 30
-                }}>
+                style={styles.information_container}>
 
                 {/* Name */}
                 <View
-                    style={{
-                        flexDirection: 'row',
-                        paddingBottom: 10
-                    }}>
+                    style={styles.line_container}>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> Name
+                            style={styles.text_1}> Name
                         </Text>
                     </View>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_regular',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> Bằng
+                            style={styles.text_2}> Bằng
                         </Text>
                     </View>
                 </View>
 
                 {/* Day of Birth */}
                 <View
-                    style={{
-                        flexDirection: 'row',
-                        paddingBottom: 10
-                    }}>
+                    style={styles.line_container}>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> Day of Birth
+                            style={styles.text_1}> Day of Birth
                         </Text>
                     </View>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_regular',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> 25/11/2002
+                            style={styles.text_2}> 25/11/2002
                         </Text>
                     </View>
                 </View>
 
                 {/* Weight */}
                 <View
-                    style={{
-                        flexDirection: 'row',
-                        paddingBottom: 10
-                    }}>
+                    style={styles.line_container}>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> Weight
+                            style={styles.text_1}> Weight
                         </Text>
                     </View>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_regular',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> 25/11/2002
+                            style={styles.text_2}> 25/11/2002
                         </Text>
                     </View>
                 </View>
 
                 {/* Height */}
                 <View
-                    style={{
-                        flexDirection: 'row',
-                        paddingBottom: 10
-                    }}>
+                    style={styles.line_container}>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> Height
+                            style={styles.text_1}> Height
                         </Text>
                     </View>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_regular',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> 25/11/2002
+                            style={styles.text_2}> 25/11/2002
                         </Text>
                     </View>
                 </View>
 
                 {/* Current TDEE */}
                 <View
-                    style={{
-                        flexDirection: 'row',
-                        paddingBottom: 10
-                    }}>
+                    style={styles.line_container}>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> Current TDEE
+                            style={styles.text_1}> Current TDEE
                         </Text>
                     </View>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_regular',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> 25/11/2002
+                            style={styles.text_2}> 25/11/2002
                         </Text>
                     </View>
                 </View>
 
                 {/* Current target */}
                 <View
-                    style={{
-                        flexDirection: 'row',
-                        marginBottom: 10
-                    }}>
+                    style={styles.line_container}>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> Current target
+                            style={styles.text_1}> Current target
                         </Text>
                     </View>
                     <View>
                         <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_regular',
-                                fontSize: 17,
-                                color: '#000000',
-                                marginRight: 20,
-                            }}> 25/11/2002
+                            style={styles.text_2}> 25/11/2002
                         </Text>
                     </View>
                 </View>
             </View >
 
             <View
-                style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                    paddingLeft: 30,
-                    paddingRight: 50,
-                }}>
+                style={styles.button_container}>
                 <View
-                    style={{
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
+                    style={styles.button}>
                     <Button
                         content='BAN'
                         type='error'
