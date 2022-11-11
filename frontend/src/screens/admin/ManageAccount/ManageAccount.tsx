@@ -3,38 +3,23 @@ import * as React from 'react'
 import { StyleSheet, View, Text, ScrollView } from 'react-native'
 import Card from '../../../components/card/Card'
 import AccountCard from '../../../components/accountcard/AccountCard'
+import styles from './styles'
 export default function ManageAccount({ navigation }: { navigation: any }) {
     return (
         <>
             <View
-                style={{
-                    flex: 1
-                }}>
+                style={styles.container}>
                 <Text
-                    style={{
-                        fontFamily: 'SF-Pro-Rounded_regular',
-                        fontStyle: 'italic',
-                        fontWeight: 'bold',
-                        fontSize: 20,
-                        paddingLeft: '8%',
-                        marginTop: 15,
-                        marginBottom: 20
-                    }}>All account
+                    style={styles.title}>All account
                 </Text>
                 <View
-                    style={{
-                        flex: 10,
-                        paddingLeft: '8%'
-                    }}>
+                    style={styles.account_list}>
                     <ScrollView
                         contentContainerStyle={{
                             paddingHorizontal: 0
                         }}>
                         <View
-                            style={{
-                                paddingTop: 10,
-                                paddingBottom: 10
-                            }}>
+                            style={styles.card}>
                             <AccountCard
                                 username='levanbang'
                                 role='Admin'
@@ -43,10 +28,7 @@ export default function ManageAccount({ navigation }: { navigation: any }) {
                             />
                         </View>
                         <View
-                            style={{
-                                paddingTop: 10,
-                                paddingBottom: 10
-                            }}>
+                            style={styles.card}>
                             <AccountCard
                                 username='levanbang'
                                 role='Admin'
@@ -54,10 +36,7 @@ export default function ManageAccount({ navigation }: { navigation: any }) {
                             />
                         </View>
                         <View
-                            style={{
-                                paddingTop: 10,
-                                paddingBottom: 10
-                            }}>
+                            style={styles.card}>
                             <AccountCard
                                 username='levanbang'
                                 role='Admin'
@@ -65,10 +44,7 @@ export default function ManageAccount({ navigation }: { navigation: any }) {
                             />
                         </View>
                         <View
-                            style={{
-                                paddingTop: 10,
-                                paddingBottom: 10
-                            }}>
+                            style={styles.card}>
                             <AccountCard
                                 username='levanbang'
                                 role='Admin'
@@ -76,10 +52,7 @@ export default function ManageAccount({ navigation }: { navigation: any }) {
                             />
                         </View>
                         <View
-                            style={{
-                                paddingTop: 10,
-                                paddingBottom: 10
-                            }}>
+                            style={styles.card}>
                             <AccountCard
                                 username='levanbang'
                                 role='Admin'
@@ -87,10 +60,7 @@ export default function ManageAccount({ navigation }: { navigation: any }) {
                             />
                         </View>
                         <View
-                            style={{
-                                paddingTop: 10,
-                                paddingBottom: 10
-                            }}>
+                            style={styles.card}>
                             <AccountCard
                                 username='levanbang'
                                 role='Admin'
@@ -98,10 +68,7 @@ export default function ManageAccount({ navigation }: { navigation: any }) {
                             />
                         </View>
                         <View
-                            style={{
-                                paddingTop: 10,
-                                paddingBottom: 10
-                            }}>
+                            style={styles.card}>
                             <AccountCard
                                 username='levanbang'
                                 role='Admin'
@@ -111,20 +78,10 @@ export default function ManageAccount({ navigation }: { navigation: any }) {
                     </ScrollView>
                 </View>
                 <View
-                    style={{
-                        flex: 1
-                    }}>
+                    style={styles.pads}>
 
                 </View>
             </View>
         </>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})

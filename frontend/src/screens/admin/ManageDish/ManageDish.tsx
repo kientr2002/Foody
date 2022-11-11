@@ -5,25 +5,16 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native'
 import FoodCardAdmin from '../../../components/FoodCardAdmin/FoodCardAdmin'
 import Button from '../../../components/button/Button'
 import color from '../../../styles/color'
+import styles from './styles'
 export default function ManageDish({ navigation }: { navigation: any }) {
     return (
         <>
             <View
-                style={{
-                    flex: 1,
-                    justifyContent: 'flex-start',
-                    alignItems: 'flex-start',
-                    paddingLeft: '8%',
-                    backgroundColor: color.background
-                }}
+                style={styles.container}
             >
                 {/* Add dish */}
                 <View
-                    style={{
-                        flex: 1,
-                        marginTop: 20,
-                        marginBottom: 10
-                    }}
+                    style={styles.button}
                 >
                     <Button
                         content='ADD DISH'
@@ -34,17 +25,10 @@ export default function ManageDish({ navigation }: { navigation: any }) {
                 </View>
                 {/* All dish */}
                 <View
-                    style={{
-                        flex: 1
-                    }}
+                    style={styles.title_container}
                 >
                     <Text
-                        style={{
-                            fontFamily: 'SF-Pro-Rounded_bold',
-                            fontSize: 20,
-                            fontStyle: 'italic',
-                            fontWeight: 'bold'
-                        }}
+                        style={styles.title}
                     >
                         All dish
                     </Text>
@@ -52,12 +36,7 @@ export default function ManageDish({ navigation }: { navigation: any }) {
 
                 {/* List */}
                 <View
-                    style={{
-                        flex: 10,
-                        width: '100%',
-                        justifyContent: 'center',
-                        paddingBottom: 70
-                    }}
+                    style={styles.food_list}
                 >
                     <ScrollView
                     >
@@ -164,11 +143,3 @@ export default function ManageDish({ navigation }: { navigation: any }) {
         </>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
