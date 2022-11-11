@@ -8,6 +8,8 @@ import color from "../../../styles/color"
 import styles from "./styles"
 
 export default function DishList({ navigation }:any) {
+    
+
     return (
         <>
             <View
@@ -21,7 +23,6 @@ export default function DishList({ navigation }:any) {
                         content='ADD DISH'
                         type='warning'
                         arrow={false}
-                        onPress={() => navigation.navigate('AddEditDish')}
                     />
                 </View>
                 {/* All dish */}
