@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
       backgroundColor: color.background
     },
     Body: {
-      height: '80%',
+      height: '81%',
       width: '100%',
       backgroundColor: color.background
     },
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
       backgroundColor: color.background
     },
     HeadBody: {
-      height: '7%',
+      height: '8%',
       width: '100%',
       backgroundColor: color.background
     },
@@ -51,8 +51,13 @@ const styles = StyleSheet.create({
       width: '100%',
       backgroundColor: color.background
     },
+    litleSpace: {
+      height: '2.8%',
+      width: '100%',
+      backgroundColor: color.background
+    },
     Footer: {
-      height: '5%',
+      height: '4%',
       width: '100%',
       backgroundColor: color.background,
       justifyContent: 'center', 

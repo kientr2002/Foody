@@ -9,8 +9,10 @@ import Button from './src/components/button/Button';
 import styles from './src/components/card/styles';
 import color from "./src/styles/color"
 
-import {Login} from './src/screens/authentication/login'
+import Login from './src/screens/authentication/login/login'
 import SignUp from './src/screens/authentication/signup/signup'
+import Caculate from './src/screens/authentication/caculate/caculate'
+import MainAuthentication from './src/screens/authentication/authenticationView'
 
 
 export default function App() {
@@ -27,6 +29,7 @@ export default function App() {
         return null 
         
     return (
-        <SignUp/>
+        <MainAuthentication/>
+        
     )
 }

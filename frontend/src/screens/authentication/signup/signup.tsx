@@ -8,11 +8,14 @@ import Input from '../../../components/input/Input';
 import InputAttribute from "../../../components/input/Input";
 import styles from './styles'
 
-export default function SignUp(){
+export default function SignUp({navigation}){
+  const Login = () => {
+    navigation.navigate('Login')
+}
   return(
     <View style= {styles.background}>
         <View style= {styles.header}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => Login()}>
           <Image source={require('../../../../assets/images-authentication/Vector-Left.png')} style={{marginTop: '12%'}} />
           </TouchableOpacity>
         </View>
@@ -50,7 +53,7 @@ export default function SignUp(){
             <View style={styles.Entity}>
             <Input type='answer' focus={false}/>
             </View>
-            <View style={styles.space}></View>
+            <View style={styles.litleSpace}></View>
             <View style={styles.Button}>
             <Button content='SIGN UP' type='confirm' arrow={true} />
             </View>
@@ -60,7 +63,7 @@ export default function SignUp(){
         </View>
         <View style={styles.Footer}>
             <Text style={styles.textFooter}>Already have account? </Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => Login()}>
         <Text style={styles.clicktextFooter}>Login</Text>
           </TouchableOpacity>  
         </View>
