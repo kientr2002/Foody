@@ -1,24 +1,9 @@
 import * as React from 'react'
-
-import { View } from 'react-native'
-import * as SplashScreen from 'expo-splash-screen'
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useFonts } from 'expo-font'
 
-import Button from './src/components/button/Button';
-import styles from './src/components/card/styles';
-import color from "./src/styles/color"
-
-import Login from './src/screens/authentication/login/login'
-import SignUp from './src/screens/authentication/signup/signup'
-import Caculate from './src/screens/authentication/caculate/caculate'
-import MainAuthentication from './src/screens/authentication/authenticationView'
-
-import UserView from './src/screens/user/UserView'
-import AdminView from './src/screens/admin/AdminView'
-
-
+import Login from './src/screens/authentication/login/Login'
+import Calculate from './src/screens/authentication/calculate/Calculate'
+import SignUp from './src/screens/authentication/signup/SignUp'
 
 export default function App() {
     //load font
@@ -34,8 +19,7 @@ export default function App() {
         return null 
         
     return (
-        <MainAuthentication/>
-        
+        <Calculate />
     )
 }
 

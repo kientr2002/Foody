@@ -1,37 +1,37 @@
 import { StyleSheet } from 'react-native'
-import color from "../../../../src/styles/color"
+import color from '../../../../src/styles/color'
 
 const styles = StyleSheet.create({
     background: {
-      flex: 1,
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
-      paddingLeft: '8%',
-      backgroundColor: color.background
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        paddingLeft: '8%',
+        backgroundColor: color.background,
     },
     header: {
-      height: '10%',
-      width: '100%',
-      backgroundColor: color.background
+        height: '10%',
+        width: '100%',
+        backgroundColor: color.background,
     },
     Body: {
-      height: '81%',
-      width: '100%',
-      backgroundColor: color.background
+        height: '81%',
+        width: '100%',
+        backgroundColor: color.background,
     },
     Entity: {
-      height: '7%',
-      width: '100%',
-      backgroundColor: color.background
+        height: '7%',
+        width: '100%',
+        backgroundColor: color.background,
     },
     HeadBody: {
-      height: '8%',
-      width: '100%',
-      backgroundColor: color.background
+        height: '8%',
+        width: '100%',
+        backgroundColor: color.background,
     },
     Title: {
-      fontFamily: 'SF-Pro-Rounded_heavy',
-      fontSize: 25
+        fontFamily: 'SF-Pro-Rounded_heavy',
+        fontSize: 25,
     },
     Button: {
         paddingTop: 5,
@@ -42,35 +42,34 @@ const styles = StyleSheet.create({
 
         display: 'flex',
         flexDirection: 'row',
-        marginLeft: 112, 
-        backgroundColor: color.background
-
+        marginLeft: 112,
+        backgroundColor: color.background,
     },
     space: {
-      height: '4.5%',
-      width: '100%',
-      backgroundColor: color.background
+        height: '4.5%',
+        width: '100%',
+        backgroundColor: color.background,
     },
     litleSpace: {
-      height: '2.8%',
-      width: '100%',
-      backgroundColor: color.background
+        height: '2.8%',
+        width: '100%',
+        backgroundColor: color.background,
     },
     Footer: {
-      height: '4%',
-      width: '100%',
-      backgroundColor: color.background,
-      justifyContent: 'center', 
-      alignItems: 'center', 
-      flexDirection: 'row'
+        height: '4%',
+        width: '100%',
+        backgroundColor: color.background,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
     },
     textFooter: {
-      fontFamily: 'SF-Pro-Rounded_regular'
+        fontFamily: 'SF-Pro-Rounded_regular',
     },
-    clicktextFooter : {
-      color: '#AED910',
-      fontFamily: 'SF-Pro-Rounded_heavy'
-    }
+    clicktextFooter: {
+        color: '#AED910',
+        fontFamily: 'SF-Pro-Rounded_heavy',
+    },
 })
 
 export default styles
