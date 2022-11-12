@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { useFonts } from 'expo-font'
 
-import Login from './src/screens/authentication/login/Login'
+import Login from './src/screens/authentication/login/login'
 import Calculate from './src/screens/authentication/calculate/Calculate'
-import SignUp from './src/screens/authentication/signup/SignUp'
+import SignUp from './src/screens/authentication/signup/signup'
 
 export default function App() {
     //load font
@@ -19,7 +19,7 @@ export default function App() {
         return null 
         
     return (
-        <Calculate />
+        <SignUp />
     )
 }
 

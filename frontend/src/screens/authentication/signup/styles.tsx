@@ -2,74 +2,43 @@ import { StyleSheet } from 'react-native'
 import color from '../../../../src/styles/color'
 
 const styles = StyleSheet.create({
-    background: {
+    container: {
         flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-        paddingLeft: '8%',
-        backgroundColor: color.background,
-    },
-    header: {
-        height: '10%',
-        width: '100%',
-        backgroundColor: color.background,
-    },
-    Body: {
-        height: '81%',
-        width: '100%',
-        backgroundColor: color.background,
-    },
-    Entity: {
-        height: '7%',
-        width: '100%',
-        backgroundColor: color.background,
-    },
-    HeadBody: {
-        height: '8%',
-        width: '100%',
-        backgroundColor: color.background,
-    },
-    Title: {
-        fontFamily: 'SF-Pro-Rounded_heavy',
-        fontSize: 25,
-    },
-    Button: {
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingLeft: 30,
-        paddingRight: 30,
-        borderRadius: 30,
-
-        display: 'flex',
-        flexDirection: 'row',
-        marginLeft: 112,
-        backgroundColor: color.background,
-    },
-    space: {
-        height: '4.5%',
-        width: '100%',
-        backgroundColor: color.background,
-    },
-    litleSpace: {
-        height: '2.8%',
-        width: '100%',
-        backgroundColor: color.background,
-    },
-    Footer: {
-        height: '4%',
-        width: '100%',
-        backgroundColor: color.background,
         justifyContent: 'center',
+        marginTop: 20,
+    },
+    title: {
+        fontFamily: 'SF-Pro-Rounded_bold',
+        fontSize: 33,
+        color: color.text,
+        marginBottom: 20,
+        marginLeft: 20,
+    },
+    inputContainer: {
+        flexDirection: 'column',
         alignItems: 'center',
-        flexDirection: 'row',
     },
-    textFooter: {
-        fontFamily: 'SF-Pro-Rounded_regular',
+    input: {
+        marginBottom: 10,
     },
-    clicktextFooter: {
-        color: '#AED910',
+    buttonContainer: {
+        alignItems: 'flex-end',
+        marginRight: 20,
+        marginTop: 10,
+    },
+    logInContainer: {
+        alignSelf: 'center',
+        marginBottom: 10,
+    },
+    highlightText: {
         fontFamily: 'SF-Pro-Rounded_heavy',
+        fontSize: 15,
+        color: color.primary,
     },
+    marginLeft_10: {
+        marginLeft: 5,
+    },
+
 })
 
 export default styles

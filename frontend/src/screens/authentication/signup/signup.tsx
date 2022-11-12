@@ -1,20 +1,112 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React, { Component, useState } from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-
+import React, { FC, Component, useState } from 'react'
+import Select from 'react-select'
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
+import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
-import color from '../../../styles/color'
 import Input from '../../../components/input/Input'
-import InputAttribute from '../../../components/input/Input'
 import styles from './styles'
 
-export default function SignUp({ navigation }: any) {
-    const Login = () => {
-        navigation.navigate('Login')
-    }
-    return (
-        <View style={styles.background}>
-            <View style={styles.header}>
+export default function SignUp() {
+    const [success, setSuccess] = React.useState<boolean>(false)
+    const [password, setPassword] = useState<string>('')
+    const [confirm_password, setconfirm_password] = useState<string>('')
+    const [name, setName] = useState<string>('')
+    const [Date, setDate] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [questions, setquestions] = useState<string>('')
+    const [answer, setanswer] = useState<string>('')
+   return(
+    <>
+            <Alert
+        type='create_plan'
+        title='Success'
+        message='Sign up success'
+        visible={success}
+        setVisible={setSuccess}
+            />
+        <ScrollView contentContainerStyle={styles.container}>
+            <View style={styles.container}>
+                <Text style={styles.title}>Sign up</Text>
+                <View style={styles.inputContainer}>
+                    <View style={styles.input}>
+                        <Input
+                            type='email'
+                            focus
+                            value={email}
+                            setValue={setEmail}
+                        />
+                    </View>
+                    <View style={styles.input}>
+                        <Input
+                            type='name'
+                            value={name}
+                            setValue={setName}
+                        />
+                    </View>
+                    <View style={styles.input}>
+                    <Input
+                            type='calendar'
+                            value={Date}
+                            setValue={setDate}
+                        />
+                    </View>
+                    <View style={styles.input}>
+                    <Input
+                            type='password'
+                            value={password}
+                            setValue={setPassword}
+                        />
+                    </View>
+                    <View style={styles.input}>
+                    <Input
+                            type='confirm_password'
+                            value={confirm_password}
+                            setValue={setconfirm_password}
+                        />                      
+                    </View>
+                    <View style={styles.input}>
+                    <Input
+                            type='question'
+                            value={questions}
+                            setValue={setquestions}
+                        />                         
+                    </View>
+                    <View style={styles.input}>
+                    <Input
+                            type='answer'
+                            value={answer}
+                            setValue={setanswer}
+                        />   
+                    </View>
+
+                </View>
+                <View style={styles.buttonContainer}>
+                    <Button content='SIGN UP' type='confirm' arrow />
+                </View>
+                <View style={styles.logInContainer}>
+                    <View style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}>
+                    <Text>Already have account?</Text>
+                    <Text style={[styles.highlightText, styles.marginLeft_10]}>
+                        Log In
+                    </Text>
+                    </View>
+
+                </View>
+            </View>
+        </ScrollView>
+    </>
+   )
+}
+
+
+
+
+//Old Code 
+            {/* <View style={styles.header}>
                 <TouchableOpacity onPress={() => Login()}>
                     <Image
                         source={require('../../../../assets/images-authentication/Vector-Left.png')}
@@ -69,7 +161,4 @@ export default function SignUp({ navigation }: any) {
                 <TouchableOpacity onPress={() => Login()}>
                     <Text style={styles.clicktextFooter}>Login</Text>
                 </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
+            </View> */}
