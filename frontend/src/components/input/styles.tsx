@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     nameText: {
-        marginBottom: 2,
+        marginBottom: 1,
 
         color: color.textBackground,
         fontFamily: 'SF-Pro-Rounded_semibold',

@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { useFonts } from 'expo-font'
-import UserView from './src/screens/user/UserView'
-import AdminView from './src/screens/admin/AdminView'
 
+import Login from './src/screens/authentication/login/Login'
+import Calculate from './src/screens/authentication/calculate/Calculate'
+import SignUp from './src/screens/authentication/signup/SignUp'
 
 export default function App() {
     //load font
@@ -16,10 +17,13 @@ export default function App() {
     
     if (!fontLoaded)
         return null 
-
+        
     return (
-        <AdminView />
+        <Calculate />
     )
 }
+
+
+
 
 

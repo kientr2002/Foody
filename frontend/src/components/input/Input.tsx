@@ -45,8 +45,8 @@ export default function Input({
                 setIcon('key')
                 break
             case 'confirm_password':
-                setName('NAME')
-                setIcon('signature')
+                setName('CONFIRM PASSWORD')
+                setIcon('lock')
                 break
             case 'name':
                 setName('NAME')
