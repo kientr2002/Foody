@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     logInContainer: {
         alignSelf: 'center',
-        marginBottom: 10,
+        marginTop: 20,
     },
     highlightText: {
         fontFamily: 'SF-Pro-Rounded_heavy',

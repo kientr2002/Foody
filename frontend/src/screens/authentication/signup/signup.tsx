@@ -13,8 +13,8 @@ export default function SignUp() {
     const [name, setName] = useState<string>('')
     const [Date, setDate] = useState<string>('')
     const [email, setEmail] = useState<string>('')
-    const [questions, setquestions] = useState<string>('')
-    const [answer, setanswer] = useState<string>('')
+    const [question, setQuestion] = useState<string>('')
+    const [answer, setAnswer] = useState<string>('')
    return(
     <>
             <Alert
@@ -67,15 +67,15 @@ export default function SignUp() {
                     <View style={styles.input}>
                     <Input
                             type='question'
-                            value={questions}
-                            setValue={setquestions}
+                            value={question}
+                            setValue={setQuestion}
                         />                         
                     </View>
                     <View style={styles.input}>
                     <Input
                             type='answer'
                             value={answer}
-                            setValue={setanswer}
+                            setValue={setAnswer}
                         />   
                     </View>
 
@@ -89,12 +89,11 @@ export default function SignUp() {
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}>
-                    <Text>Already have account?</Text>
-                    <Text style={[styles.highlightText, styles.marginLeft_10]}>
-                        Log In
-                    </Text>
+                        <Text>Already have account?</Text>
+                        <Text style={[styles.highlightText, styles.marginLeft_10]}>
+                            Log In
+                        </Text>
                     </View>
-
                 </View>
             </View>
         </ScrollView>
