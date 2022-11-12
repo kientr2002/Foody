@@ -6,7 +6,7 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 
-export default function SignUp() {
+export default function SignUp({navigation}:any) {
     const [success, setSuccess] = React.useState<boolean>(false)
     const [password, setPassword] = useState<string>('')
     const [confirm_password, setconfirm_password] = useState<string>('')
@@ -31,7 +31,6 @@ export default function SignUp() {
                     <View style={styles.input}>
                         <Input
                             type='email'
-                            focus
                             value={email}
                             setValue={setEmail}
                         />
@@ -90,7 +89,10 @@ export default function SignUp() {
                         alignItems: 'center',
                     }}>
                         <Text>Already have account?</Text>
-                        <Text style={[styles.highlightText, styles.marginLeft_10]}>
+                        <Text 
+                            accessibilityRole='button'
+                            onPress={() => navigation.navigate('Login')}
+                            style={[styles.highlightText, styles.marginLeft_10]}>
                             Log In
                         </Text>
                     </View>
@@ -100,64 +102,3 @@ export default function SignUp() {
     </>
    )
 }
-
-
-
-
-//Old Code 
-            {/* <View style={styles.header}>
-                <TouchableOpacity onPress={() => Login()}>
-                    <Image
-                        source={require('../../../../assets/images-authentication/Vector-Left.png')}
-                        style={{ marginTop: '12%' }}
-                    />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.Body}>
-                <View style={styles.HeadBody}>
-                    <Text style={styles.Title}>Sign up</Text>
-                </View>
-                <View style={styles.space}></View>
-                <View style={styles.Entity}>
-                    <Input type='email' focus={false} value='email' />
-                </View>
-                <View style={styles.space}></View>
-                <View style={styles.Entity}>
-                    <Input type='name' focus={false} value='name' />
-                </View>
-                <View style={styles.space}></View>
-                <View style={styles.Entity}>
-                    <Input type='calendar' focus={false} value='calendar' />
-                </View>
-                <View style={styles.space}></View>
-                <View style={styles.Entity}>
-                    <Input type='password' focus={false} value='password' />
-                </View>
-                <View style={styles.space}></View>
-                <View style={styles.Entity}>
-                    <Input
-                        type='confirm_password'
-                        focus={false}
-                        value='confirm_password'
-                    />
-                </View>
-                <View style={styles.space}></View>
-                <View style={styles.Entity}>
-                    <Input type='question' focus={false} value='question' />
-                </View>
-                <View style={styles.space}></View>
-                <View style={styles.Entity}>
-                    <Input type='answer' focus={false} value='answer' />
-                </View>
-                <View style={styles.litleSpace}></View>
-                <View style={styles.Button}>
-                    <Button content='SIGN UP' type='confirm' arrow={true} />
-                </View>
-            </View>
-            <View style={styles.space}></View>
-            <View style={styles.Footer}>
-                <Text style={styles.textFooter}>Already have account? </Text>
-                <TouchableOpacity onPress={() => Login()}>
-                    <Text style={styles.clicktextFooter}>Login</Text>
-                </TouchableOpacity>
-            </View> */}

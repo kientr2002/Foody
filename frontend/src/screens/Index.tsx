@@ -1,7 +1,7 @@
 import * as React from 'react'
 import UserContext, { UserProvider } from "../context/UserContext";
 import AdminView from './admin/AdminView';
-import Login from './authentication/login/Login';
+import AuthenticationView from './authentication/AuthenticationView';
 import UserView from './user/UserView';
 
 export default function Index() {
@@ -23,7 +23,7 @@ export default function Index() {
     return (
         <>
             {
-                page === 'login' ? <Login/>
+                page === 'login' ? <AuthenticationView/>
                 : page === 'user' ? <UserView />
                 : <AdminView />
             }

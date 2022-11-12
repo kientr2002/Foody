@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 33,
+        fontSize: 30,
         color: color.text,
         marginBottom: 20,
         marginLeft: 20,

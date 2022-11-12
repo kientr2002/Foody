@@ -19,7 +19,7 @@ const accounts = [
     }   
 ]
 
-export default function Login() {
+export default function Login({navigation}:any) {
     const {setAdmin, setLogin} = React.useContext<UserContextInterface>(UserContext)
 
     const [password, setPassword] = useState<string>('')
@@ -99,7 +99,10 @@ export default function Login() {
                     }}
                 >
                     <Text>Don't have any account?</Text>
-                    <Text style={[styles.highlightText, styles.marginLeft_10]}>
+                    <Text
+                        accessibilityRole='button'
+                        onPress={() => navigation.navigate('Sign Up')} 
+                        style={[styles.highlightText, styles.marginLeft_10]}>
                         Sign up
                     </Text>
                 </View>
