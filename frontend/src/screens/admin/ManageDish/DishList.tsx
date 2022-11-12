@@ -5,7 +5,7 @@ import { Food } from '../../../util/types'
 import Button from '../../../components/button/Button'
 
 import styles from './styles'
-import FoodCardAdmin from '../../../components/foodCardAdmin/FoodCardAdmin'
+import FoodCardAdmin from '../../../components/FoodCardAdmin/FoodCardAdmin'
 
 export default function DishList({ navigation }: any) {
     const [foods, setFoods] = React.useState<Array<Food>>([])

@@ -24,21 +24,19 @@ const MyTheme = {
 
 export default function UserView() {
     return (
-        <UserProvider>
-            <NavigationContainer theme={MyTheme}>
-                <Tab.Navigator
-                    tabBar={(props) => <Navbar {...props} />}
-                    screenOptions={{
-                        headerShown: false,
-                    }}
-                >
-                    <Tab.Screen name='Home page' component={Home} />
-                    <Tab.Screen name='MyPlan page' component={MyPlan} />
-                    <Tab.Screen name='Search page' component={Search} />
-                    <Tab.Screen name='Favorite page' component={Favorite} />
-                    <Tab.Screen name='Profile page' component={Profile} />
-                </Tab.Navigator>
-            </NavigationContainer>
-        </UserProvider>
+        <NavigationContainer theme={MyTheme}>
+            <Tab.Navigator
+                tabBar={(props) => <Navbar {...props} />}
+                screenOptions={{
+                    headerShown: false,
+                }}
+            >
+                <Tab.Screen name='Home page' component={Home} />
+                <Tab.Screen name='MyPlan page' component={MyPlan} />
+                <Tab.Screen name='Search page' component={Search} />
+                <Tab.Screen name='Favorite page' component={Favorite} />
+                <Tab.Screen name='Profile page' component={Profile} />
+            </Tab.Navigator>
+        </NavigationContainer>
     )
 }

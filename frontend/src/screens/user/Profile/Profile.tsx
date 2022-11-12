@@ -6,6 +6,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import HeaderButton from '../../../components/headerButton/HeaderButton'
 import color from '../../../styles/color'
 import MyProfile from './MyProfile'
+import Calculate from '../../authentication/calculate/Calculate'
 
 const Stack = createNativeStackNavigator<ProfileStackParamList>()
 type Props = BottomTabScreenProps<UserTabParamList, 'Profile page'>
@@ -29,6 +30,13 @@ export default function Profile({ navigation }: Props) {
                     headerRight: () => (
                         <HeaderButton type={1} navigation={navigation} />
                     ),
+                }}
+            />
+            <Stack.Screen 
+                name='Update status'
+                component={Calculate}
+                options={{
+                    headerShown: false
                 }}
             />
         </Stack.Navigator>

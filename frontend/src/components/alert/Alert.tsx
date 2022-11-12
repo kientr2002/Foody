@@ -10,6 +10,7 @@ export interface AlertAttribute {
     title?: string
     message?: string
     setVisible: (v: boolean) => void
+    handleOk?: () => void
 }
 
 function ButtonBox(props: any) {
@@ -25,7 +26,10 @@ function ButtonBox(props: any) {
             <Button
                 type='confirm'
                 content='ok'
-                onPress={() => props?.setVisible(false)}
+                onPress={() => {
+                    props?.setVisible(false)
+                    props?.handleOk?.()
+                }}
             />
         </View>
     )
@@ -49,6 +53,7 @@ export default function Alert({
     message,
     visible,
     setVisible,
+    handleOk
 }: AlertAttribute) {
     const [notifyType, setNotifyType] = React.useState<number | null>(null)
 
@@ -81,6 +86,7 @@ export default function Alert({
                     <ButtonBox
                         notifyType={notifyType}
                         setVisible={setVisible}
+                        handleOk={handleOk}
                     />
                 </View>
             </View>

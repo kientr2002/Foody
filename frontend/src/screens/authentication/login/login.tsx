@@ -3,22 +3,40 @@ import { View, Text, Image } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
-const SIGN_IN = 'SIGN_IN'
-const GET_STATE = 'GET_STATE'
+const accounts = [
+    {
+        email: 'thoaile',
+        password: '1234',
+        role: 'user'
+    },
+    {
+        email: 'cunle',
+        password: '1234',
+        role: 'admin'
+    }   
+]
 
-export default function Login({ navigation }: any) {
+export default function Login() {
+    const {setAdmin, setLogin} = React.useContext<UserContextInterface>(UserContext)
+
     const [password, setPassword] = useState<string>('')
     const [email, setEmail] = useState<string>('')
-    const [pwHidden, setpwHidden] = useState(true)
     const [success, setSuccess] = React.useState<boolean>(false)
-    const SignUp = () => {
-        navigation.navigate('SignUp')
+
+    const handleSignIn = (username: string, password: string) => {
+        accounts.forEach(account => {
+            if (account.email === email && account.password) {
+                setSuccess(true)
+
+                if (account.role === 'admin')
+                    setAdmin(true)
+            }
+        })
     }
-    const Caculate = () => {
-        navigation.navigate('Caculate')
-    }
+
     return (
         <>
             <Alert
@@ -27,6 +45,7 @@ export default function Login({ navigation }: any) {
                 message='Log in success'
                 visible={success}
                 setVisible={setSuccess}
+                handleOk={() => {setLogin(true)}}
             />
             <View style={styles.container}>
                 <View style={styles.logoContainer}>
@@ -63,7 +82,12 @@ export default function Login({ navigation }: any) {
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <Button content='LOGIN' type='confirm' arrow />
+                    <Button 
+                        content='LOGIN' 
+                        type='confirm' 
+                        arrow
+                        onPress={() => handleSignIn(email, password)}
+                    />
                 </View>
             </View>
             <View style={styles.signUpContainer}>

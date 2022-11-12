@@ -1,136 +1,167 @@
 import * as React from 'react'
 import { ScrollView, StyleSheet, View, Image, Text } from 'react-native'
+import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import color from '../../../styles/color'
 
-export default function MyProfile() {
+export default function MyProfile({ navigation }:any) {
+    const {setLogin, setAdmin} = React.useContext<UserContextInterface>(UserContext)
+    const [logOut, setLogOut] = React.useState<boolean>(false)
+
     return (
-        <ScrollView>
-            <View style={styles.headerContainer}>
-                <Image
-                    source={{
-                        uri: 'https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png',
-                    }}
-                    style={styles.avatar}
-                />
-                <View>
-                    <Text style={[styles.text_bold, styles.textSize_23]}>
-                        Username
-                    </Text>
-                    <Text
-                        style={[
-                            styles.text_regular,
-                            styles.textSize_18,
-                            styles.color_1,
-                            styles.marginBottom,
-                        ]}
-                    >
-                        Email
-                    </Text>
-                    <Button type='warning' content='UPDATE TDEE' />
+        <>
+            <Alert 
+                type='logout'
+                title='Log out'
+                message='Are you sure want to logout?'
+                visible={logOut}
+                setVisible={setLogOut}
+                handleOk={() => {
+                    setLogin(false)
+                    setAdmin(false)
+                }}
+            />
+            <ScrollView>
+                <View style={styles.headerContainer}>
+                    <Image
+                        source={{
+                            uri: 'https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png',
+                        }}
+                        style={styles.avatar}
+                    />
+                    <View>
+                        <Text style={[styles.text_bold, styles.textSize_23]}>
+                            Username
+                        </Text>
+                        <Text
+                            style={[
+                                styles.text_regular,
+                                styles.textSize_18,
+                                styles.color_1,
+                                styles.marginBottom,
+                            ]}
+                        >
+                            Email
+                        </Text>
+                        <Button 
+                            type='warning' 
+                            content='UPDATE TDEE' 
+                            onPress={() => {
+                                navigation.navigate('Update status')
+                            }}
+                        />
+                    </View>
                 </View>
-            </View>
 
-            <View style={styles.infoContainer}>
-                <View style={styles.textContainer}>
-                    <Text style={[styles.text_bold, styles.textSize_18]}>
-                        Name:
-                    </Text>
-                    <Text
-                        style={[
-                            styles.text_regular,
-                            styles.textSize_18,
-                            styles.color_1,
-                        ]}
-                    >
-                        Le Nguyen Huyen Thoai
-                    </Text>
+                <View style={styles.infoContainer}>
+                    <View style={styles.textContainer}>
+                        <Text style={[styles.text_bold, styles.textSize_18]}>
+                            Name:
+                        </Text>
+                        <Text
+                            style={[
+                                styles.text_regular,
+                                styles.textSize_18,
+                                styles.color_1,
+                            ]}
+                        >
+                            Le Nguyen Huyen Thoai
+                        </Text>
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={[styles.text_bold, styles.textSize_18]}>
+                            Day of Birth:
+                        </Text>
+                        <Text
+                            style={[
+                                styles.text_regular,
+                                styles.textSize_18,
+                                styles.color_1,
+                            ]}
+                        >
+                            09/10/2002
+                        </Text>
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={[styles.text_bold, styles.textSize_18]}>
+                            Weight:
+                        </Text>
+                        <Text
+                            style={[
+                                styles.text_regular,
+                                styles.textSize_18,
+                                styles.color_1,
+                            ]}
+                        >
+                            70 kg
+                        </Text>
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={[styles.text_bold, styles.textSize_18]}>
+                            Height:
+                        </Text>
+                        <Text
+                            style={[
+                                styles.text_regular,
+                                styles.textSize_18,
+                                styles.color_1,
+                            ]}
+                        >
+                            1.8 m
+                        </Text>
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={[styles.text_bold, styles.textSize_18]}>
+                            Current TDEE:
+                        </Text>
+                        <Text
+                            style={[
+                                styles.text_regular,
+                                styles.textSize_18,
+                                styles.color_1,
+                            ]}
+                        >
+                            2100
+                        </Text>
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={[styles.text_bold, styles.textSize_18]}>
+                            Current target:
+                        </Text>
+                        <Text
+                            style={[
+                                styles.text_regular,
+                                styles.textSize_18,
+                                styles.color_1,
+                            ]}
+                        >
+                            Increase weight
+                        </Text>
+                    </View>
                 </View>
-                <View style={styles.textContainer}>
-                    <Text style={[styles.text_bold, styles.textSize_18]}>
-                        Day of Birth:
-                    </Text>
-                    <Text
-                        style={[
-                            styles.text_regular,
-                            styles.textSize_18,
-                            styles.color_1,
-                        ]}
-                    >
-                        09/10/2002
-                    </Text>
-                </View>
-                <View style={styles.textContainer}>
-                    <Text style={[styles.text_bold, styles.textSize_18]}>
-                        Weight:
-                    </Text>
-                    <Text
-                        style={[
-                            styles.text_regular,
-                            styles.textSize_18,
-                            styles.color_1,
-                        ]}
-                    >
-                        70 kg
-                    </Text>
-                </View>
-                <View style={styles.textContainer}>
-                    <Text style={[styles.text_bold, styles.textSize_18]}>
-                        Height:
-                    </Text>
-                    <Text
-                        style={[
-                            styles.text_regular,
-                            styles.textSize_18,
-                            styles.color_1,
-                        ]}
-                    >
-                        1.8 m
-                    </Text>
-                </View>
-                <View style={styles.textContainer}>
-                    <Text style={[styles.text_bold, styles.textSize_18]}>
-                        Current TDEE:
-                    </Text>
-                    <Text
-                        style={[
-                            styles.text_regular,
-                            styles.textSize_18,
-                            styles.color_1,
-                        ]}
-                    >
-                        2100
-                    </Text>
-                </View>
-                <View style={styles.textContainer}>
-                    <Text style={[styles.text_bold, styles.textSize_18]}>
-                        Current target:
-                    </Text>
-                    <Text
-                        style={[
-                            styles.text_regular,
-                            styles.textSize_18,
-                            styles.color_1,
-                        ]}
-                    >
-                        Increase weight
-                    </Text>
-                </View>
-            </View>
 
-            <View style={styles.buttonContainer}>
-                <View
-                    style={{
-                        marginRight: 10,
-                    }}
-                >
-                    <Button type='confirm' content='CHANGE PASSWORD' />
+                <View style={styles.buttonContainer}>
+                    <View
+                        style={{
+                            marginRight: 10,
+                        }}
+                    >
+                        <Button type='confirm' content='CHANGE PASSWORD' />
+                    </View>
+                    <View>
+                        <Button 
+                            type='error' 
+                            content='LOG OUT' 
+                            onPress={() => {
+                                setLogOut(true)
+                            }}
+                        />
+                    </View>
                 </View>
-                <View>
-                    <Button type='error' content='LOG OUT' />
-                </View>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </>
+
     )
 }
 

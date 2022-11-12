@@ -7,7 +7,7 @@ import Input from '../../../components/input/Input'
 import styles from './styles'
 import Dropdown from '../../../components/dropdown/Dropdown'
 
-export default function Calculate({ navigation, string }: any) {
+export default function Calculate({ navigation }: any) {
     const targets = ['Increase Weight', 'Reduce Weight', 'Keep This Weight']
     const [success, setSuccess] = React.useState<boolean>(false)
     const [weight, setWeight] = React.useState<string>('')
@@ -37,7 +37,6 @@ export default function Calculate({ navigation, string }: any) {
                     <View style={styles.input}>
                         <Input
                             type='weight'
-                            focus
                             value={weight}
                             setValue={setWeight}
                         />
@@ -45,7 +44,7 @@ export default function Calculate({ navigation, string }: any) {
                     <View style={styles.input}>
                         <Input
                             type='height'
-                            value={height}
+                            value={height}  
                             setValue={setHeight}
                         />
                     </View>
@@ -83,7 +82,14 @@ export default function Calculate({ navigation, string }: any) {
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <Button content='Calculate TDEE' type='confirm' arrow />
+                    <Button 
+                        content='Calculate TDEE' 
+                        type='confirm' 
+                        arrow 
+                        onPress={() => {
+                            navigation.navigate('My profile')
+                        }}
+                    />
                 </View>
             </ScrollView>
         </>

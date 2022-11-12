@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     item: {
-        paddingVertical: 15,
+        paddingVertical: 10,
     },
     text: {
         fontFamily: 'SF-Pro-Rounded_medium',

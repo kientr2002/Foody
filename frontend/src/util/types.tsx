@@ -55,7 +55,7 @@ type SearchStackParamList = {
 }
 
 type ProfileStackParamList = {
-    'My profile': undefined
+    'My profile': undefined 
     'Update status': undefined
     'Change password': undefined
 }

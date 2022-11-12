@@ -2,6 +2,10 @@ import * as React from 'react'
 import { Food } from '../util/types'
 
 export interface UserContextInterface {
+    login: boolean,
+    setLogin: (a:boolean) => void,
+    admin: boolean,
+    setAdmin: (a:boolean) => void,
     username?: string
     createPlanList: Food[]
     myPlan: Food[]
@@ -14,6 +18,10 @@ export interface UserContextInterface {
 }
 
 const UserContext = React.createContext<UserContextInterface>({
+    login: false,
+    setLogin: () => {},
+    setAdmin: () => {},
+    admin: false,
     createPlanList: [],
     myFavorite: [],
     myPlan: [],
@@ -25,6 +33,8 @@ const UserContext = React.createContext<UserContextInterface>({
 })
 
 export function UserProvider({ children }: any) {
+    const [login, setLogin] = React.useState<boolean>(false)
+    const [admin, setAdmin] = React.useState<boolean>(false)
     const [createPlanList, setCreatePlanList] = React.useState<Food[]>([])
     const [myFavorite, setMyFavorite] = React.useState<Food[]>([])
     const [myPlan, setMyPlan] = React.useState<Food[]>([])
@@ -68,6 +78,10 @@ export function UserProvider({ children }: any) {
     return (
         <UserContext.Provider
             value={{
+                login,
+                admin,
+                setLogin,
+                setAdmin,
                 createPlanList,
                 myFavorite,
                 myPlan,
