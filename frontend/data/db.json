@@ -27,33 +27,33 @@
             "imgSrc": "https://izzycooking.com/wp-content/uploads/2022/05/Grilled-Beef-Steak-thumbnail.jpg",
             "rate": 4
         },
-            {
-                "id": 2,
-                "name": "Chicken Salad",
-                "body": {
-                    "description": "A easy, delicious dish for lunch",
-                    "calories": 210,
-                    "protein": 140,
-                    "fat": 20,
-                    "carb": 50
-                },
-                "recipe": [
-                    {
-                        "step": 1,
-                        "body": "Do step 1"
-                    },
-                    {
-                        "step": 2,
-                        "body": "Do step 2"
-                    },
-                    {
-                        "step": 3,
-                        "body": "Do step 3"
-                    }
-                ],
-                "imgSrc": "https://cafedelites.com/wp-content/uploads/2016/07/Lemon-Herb-Mediterranean-Chicken-Salad-208-1.jpg",
-                "rate": 3.5
+        {
+            "id": 2,
+            "name": "Chicken Salad",
+            "body": {
+                "description": "A easy, delicious dish for lunch",
+                "calories": 210,
+                "protein": 140,
+                "fat": 20,
+                "carb": 50
             },
+            "recipe": [
+                {
+                    "step": 1,
+                    "body": "Do step 1"
+                },
+                {
+                    "step": 2,
+                    "body": "Do step 2"
+                },
+                {
+                    "step": 3,
+                    "body": "Do step 3"
+                }
+            ],
+            "imgSrc": "https://cafedelites.com/wp-content/uploads/2016/07/Lemon-Herb-Mediterranean-Chicken-Salad-208-1.jpg",
+            "rate": 3.5
+        },
         {
             "id": 3,
             "name": "Granola with yogurt",
@@ -109,7 +109,7 @@
             "rate": 3
         }
     ],
-  "favorite": [
+    "favorite": [
         {
             "id": 1,
             "name": "Beef steak",
@@ -246,6 +246,29 @@
             ],
             "imgSrc": "https://izzycooking.com/wp-content/uploads/2022/05/Grilled-Beef-Steak-thumbnail.jpg",
             "rate": 4
+        }
+    ],
+    "account": [
+        {
+            "id": 1,
+            "username": "Le Van Bang",
+            "role": "Admin",
+            "status": "Active",
+            "imgSrc": "https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png"
+        },
+        {
+            "id": 2,
+            "username": "User 1",
+            "role": "User",
+            "status": "Active",
+            "imgSrc": "https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png"
+        },
+        {
+            "id": 3,
+            "username": "User 2",
+            "role": "User",
+            "status": "Active",
+            "imgSrc": "https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png"
         }
     ]
 }

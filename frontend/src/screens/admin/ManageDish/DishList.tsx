@@ -5,7 +5,7 @@ import { Food } from '../../../util/types'
 import Button from '../../../components/button/Button'
 
 import styles from './styles'
-import FoodCardAdmin from '../../../components/foodCardAdmin/FoodCardAdmin'
+import FoodCardAdmin from '../../../components/FoodCardAdmin/FoodCardAdmin'
 
 export default function DishList({ navigation }: any) {
     const [foods, setFoods] = React.useState<Array<Food>>([])
@@ -14,17 +14,28 @@ export default function DishList({ navigation }: any) {
         if (data) setFoods(data?.food)
     }, [])
 
-    const handleOnPress = (obj: any) => {
-        navigation.navigate('Dish detail', obj)
+    const handleOnPress = (page: string, obj: any) => {
+        page === 'Food detail'
+            ? navigation.navigate('Food detail', obj)
+            : [
+                  page === 'Edit Dish'
+                      ? navigation.navigate('Add Food', obj)
+                      : null,
+              ]
+    }
+
+    const handleOnPressAdd = () => {
+        navigation.navigate('Add Food', { undefined })
     }
 
     return (
         <View style={styles.container}>
             {/* Add dish */}
             <View style={styles.button}>
-                <Button 
-                    content='ADD DISH' 
+                <Button
+                    content='ADD DISH'
                     type='warning'
+                    onPress={() => handleOnPressAdd()}
                 />
             </View>
             {/* All dish */}
@@ -40,7 +51,9 @@ export default function DishList({ navigation }: any) {
                             key={i}
                             name={food.name}
                             imgSrc={food.imgSrc}
-                            onPress={() => handleOnPress(food)}
+                            onPress={(pageName) =>
+                                handleOnPress(pageName, food)
+                            }
                         />
                     ))}
                 </ScrollView>

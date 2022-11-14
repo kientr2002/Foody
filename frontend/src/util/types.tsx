@@ -80,8 +80,17 @@ interface Food {
     rate: number
 }
 
+interface Account {
+    id: number
+    username: string
+    role: string
+    status: string
+    imgSrc: string
+}
+
 export {
     Food,
+    Account,
     UserTabParamList,
     HomeStackParamList,
     MyPlanStackParamList,

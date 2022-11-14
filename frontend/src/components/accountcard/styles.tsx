@@ -4,9 +4,8 @@ import color from '../../styles/color'
 const styles = StyleSheet.create({
     view_layout: {
         flexDirection: 'row',
-        height: 120,
+        height: 130,
         width: '90%',
-        borderRadius: 20,
         backgroundColor: color.background,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },

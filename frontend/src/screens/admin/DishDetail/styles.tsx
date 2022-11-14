@@ -12,15 +12,15 @@ const styles = StyleSheet.create({
     },
 
     bodyContainer: {
-        flex: 1,
+        flex: 6,
     },
-
-    tabHeader: {
-        width: '50%',
-        display: 'flex',
+    buttonContainer: {
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         alignItems: 'center',
+        paddingLeft: 30,
+        paddingRight: 30,
     },
     headerText: {
         width: '100%',
@@ -73,12 +73,9 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         borderRadius: 10,
     },
-
-    reviewCardContainer: {
+    button: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 20,
     },
 })
 

@@ -63,7 +63,7 @@ export default function Profile() {
                 <View style={styles.textContainer}>
                     <Text style={[styles.text_bold, styles.textSize_18]}>
                         Email:
-                    </Text> 
+                    </Text>
                     <Text
                         style={[
                             styles.text_regular,

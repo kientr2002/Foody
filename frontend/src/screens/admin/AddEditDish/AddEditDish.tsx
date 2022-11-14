@@ -1,12 +1,30 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
 import { StyleSheet, View, Text, ScrollView } from 'react-native'
+import { writeJsonFile } from 'write-json-file'
 import Card from '../../../components/card/Card'
 import AccountCard from '../../../components/accountCard/AccountCard'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
-export default function AddEditDish() {
+
+export default function AddEditDish({ route }: any) {
+    const { name, recipe, body, imgSrc }: any = route?.params
+
+    const [dishName, setDishName] = React.useState<string>(name)
+    const [calories, setCalories] = React.useState<string>(
+        body?.calories.toString()
+    )
+    const [protein, setProtein] = React.useState<string>(
+        body?.protein.toString()
+    )
+    const [fat, setFat] = React.useState<string>(body?.fat.toString())
+    const [carb, setCarb] = React.useState<string>(body?.carb.toString())
+    const [description, setDescription] = React.useState<string>(
+        body?.description
+    )
+    const [step1, setStep1] = React.useState<string>('')
+
     return (
         <>
             <View style={styles.image}></View>
@@ -16,56 +34,75 @@ export default function AddEditDish() {
                     {/* Dish name */}
                     <View style={styles.space}>
                         <Text style={styles.text_1}>Dish name</Text>
-                        <Input type='' focus={false} />
+                        <Input
+                            type=''
+                            focus={false}
+                            value={dishName}
+                            setValue={setDishName}
+                        />
                     </View>
 
                     {/* Calorioes */}
                     <View style={styles.space}>
                         <Text style={styles.text_1}>Calories</Text>
-                        <Input type='' focus={false} />
+                        <Input
+                            type=''
+                            focus={false}
+                            value={calories}
+                            setValue={setCalories}
+                        />
                     </View>
                     {/* Protein-Fat-Carb */}
                     <View style={styles.space_3items}>
                         <View style={styles.protein_carb}>
                             <Text style={styles.text_1}>Protein</Text>
-                            <Input type='' focus={false} />
+                            <Input
+                                type=''
+                                focus={false}
+                                value={protein}
+                                setValue={setProtein}
+                            />
                         </View>
                         <View style={styles.fat}>
                             <Text style={styles.text_1}>Fat</Text>
-                            <Input type='' focus={false} />
+                            <Input
+                                type=''
+                                focus={false}
+                                value={fat}
+                                setValue={setFat}
+                            />
                         </View>
                         <View style={styles.protein_carb}>
                             <Text style={styles.text_1}>Carb</Text>
-                            <Input type='' focus={false} />
+                            <Input
+                                type=''
+                                focus={false}
+                                value={carb}
+                                setValue={setCarb}
+                            />
                         </View>
                     </View>
 
                     {/* Description */}
                     <View style={styles.space}>
                         <Text style={styles.text_1}>Description</Text>
-                        <Input type='' focus={false} />
+                        <Input
+                            type=''
+                            focus={false}
+                            value={description}
+                            setValue={setDescription}
+                        />
                     </View>
                     {/* Step 1 */}
                     <View style={styles.space}>
                         <Text style={styles.text_1}>Step 1</Text>
 
-                        <Input type='' focus={false} />
-                    </View>
-                    {/* Step 2 */}
-                    <View style={styles.space}>
-                        <Text style={styles.text_1}>Step 2</Text>
-                        <Input type='' focus={false} />
-                    </View>
-                    {/* Step 3 */}
-                    <View style={styles.space}>
-                        <Text style={styles.text_1}>Step 3</Text>
-                        <Input type='' focus={false} />
-                    </View>
-
-                    {/* Step 4 */}
-                    <View style={styles.space}>
-                        <Text style={styles.text_1}>Step 4</Text>
-                        <Input type='' focus={false} />
+                        <Input
+                            type=''
+                            focus={false}
+                            value={step1}
+                            setValue={setStep1}
+                        />
                     </View>
                 </ScrollView>
             </View>

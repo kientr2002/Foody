@@ -24,6 +24,7 @@ export default function FoodCardAdmin(
     const [imgSize, setImgSize] = React.useState<any>(null)
     const [textSize, setTextSize] = React.useState<any>(null)
     const [pressed, setPressed] = React.useState<any>(null)
+
     React.useEffect(() => {
         setBackgroundSize(styles.background_3)
         setImgSize(styles.img_3)
@@ -36,14 +37,14 @@ export default function FoodCardAdmin(
 
     React.useEffect(() => {
         pressed === 1
-            ? [onPress ? onPress('AccountName') : null]
-            : [pressed === 3 ? [onPress ? onPress('AddEditDish') : null] : null]
+            ? [onPress ? onPress('Food detail') : null]
+            : [pressed === 3 ? [onPress ? onPress('Edit Dish') : null] : null]
     }, [pressed])
     return (
         <View style={[styles.background, backgroundSize]}>
             <Image
                 style={imgSize}
-                source={{uri: imgSrc}}
+                source={{ uri: imgSrc }}
                 fadeDuration={300}
             />
             <View style={textSize}>
