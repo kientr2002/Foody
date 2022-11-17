@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Food } from '../util/types'
+import { Food } from '../util/interface'
 
 export interface UserContextInterface {
     login: boolean,

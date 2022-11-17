@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useFonts } from 'expo-font'
-import UserContext, { UserProvider } from './src/context/UserContext'
+import { UserProvider } from './src/context/UserContext'
 import Index from './src/screens/Index'
 
 export default function App() {

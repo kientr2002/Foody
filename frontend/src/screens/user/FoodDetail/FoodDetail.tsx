@@ -1,35 +1,71 @@
 import * as React from 'react'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { View, Text, Image, ScrollView } from 'react-native'
 import * as Progress from 'react-native-progress'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { View, Text, Image, ScrollView, Linking } from 'react-native'
 import { ReviewInput, ReviewCard } from '../../../components/review/Review'
+import { Comment } from '../../../util/interface'
 
 import styles from './styles'
 import color from '../../../styles/color'
+import Button from '../../../components/button/Button'
 
 const Tab = createMaterialTopTabNavigator()
 
-function Recipe({ recipe }: any) {
-    return (
-        <View style={styles.tabBody}>
-            {recipe?.map((item: any, i: any) => (
-                <View key={i} style={styles.recipe}>
-                    <Text style={styles.recipeTitle}>Step {item?.step}</Text>
-                    <Text>{item?.body}</Text>
-                </View>
-            ))}
-        </View>
-    )
-}
-
-function About({ body }: any) {
-    const [reviews, setReview] = React.useState<Array<Object>>([])
+function Review() {
+    const [reviews, setReview] = React.useState<Comment[]>([])
     const [rate, setRate] = React.useState<number>(0)
     const [comment, setComment] = React.useState<string>('')
 
     const handleSubmit = (rate: number, comment: string) => {
-        setReview([...reviews, { rate, body: comment, username: 'thoaile' }])
+        setReview([...reviews])
     }
+
+    return (
+        <ScrollView>
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                <ReviewInput
+                    rate={rate}
+                    setRate={setRate}
+                    comment={comment}
+                    setComment={setComment}
+                    handleSubmit={handleSubmit}
+                />
+            </View>
+            <View style={styles.reviewCardContainer}>
+                {reviews.length !== 0 &&
+                    reviews.map((review: Comment, i: any) => (
+                        <ReviewCard
+                            key={i}
+                            username={review.username}
+                            comment={review.comment}
+                            star={review.star}
+                        />
+                    ))}
+                {reviews.length === 0 && <Text>No comments</Text>}
+            </View>
+        </ScrollView>
+    )
+}
+
+function About({ des, recipt, calo, protein, fat, carb }: any) {
+    const [total, setTotal] = React.useState<number>(0)
+
+    React.useEffect(() => {
+        setTotal(protein + fat + carb)
+    }, [protein, carb, fat])
+
+    const handlePress = React.useCallback(async () => {
+        // Checking if the link is supported for links with custom URL scheme.
+        const supported = await Linking.canOpenURL(recipt);
+        if (supported)
+          await Linking.openURL(recipt);
+      }, [recipt]);
 
     return (
         <ScrollView style={styles.tabBody}>
@@ -48,7 +84,7 @@ function About({ body }: any) {
                         </Text>
                         <Progress.Bar
                             style={styles.progressBar}
-                            progress={1}
+                            progress={calo ? calo*0.7 : 0}
                             width={250}
                             height={13}
                             color={'#E3A74D'}
@@ -66,7 +102,7 @@ function About({ body }: any) {
                         </Text>
                         <Progress.Bar
                             style={styles.progressBar}
-                            progress={body ? body?.protein / body?.calories : 0}
+                            progress={protein ? protein / total : 0}
                             width={250}
                             height={13}
                             color={'#DC4040'}
@@ -84,7 +120,7 @@ function About({ body }: any) {
                         </Text>
                         <Progress.Bar
                             style={styles.progressBar}
-                            progress={body ? body?.carb / body?.calories : 0}
+                            progress={carb ? carb / total : 0}
                             width={250}
                             height={13}
                             color={'#3DC73A'}
@@ -102,7 +138,7 @@ function About({ body }: any) {
                         </Text>
                         <Progress.Bar
                             style={styles.progressBar}
-                            progress={body ? body?.fat / body?.calories : 0}
+                            progress={fat ? fat / total : 0}
                             width={250}
                             height={13}
                             color={'#DD34AE'}
@@ -116,39 +152,18 @@ function About({ body }: any) {
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Description</Text>
                 <View style={styles.sectionContainer}>
-                    <Text style={styles.sectionText}>{body?.description}</Text>
+                    <Text style={styles.sectionText}>{des}</Text>
                 </View>
             </View>
 
-            {/* Comment section */}
-            <View>
-                <Text style={styles.sectionTitle}>Reviews</Text>
-                <View
-                    style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    <ReviewInput
-                        rate={rate}
-                        setRate={setRate}
-                        comment={comment}
-                        setComment={setComment}
-                        handleSubmit={handleSubmit}
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Recipe</Text>
+                <View style={styles.sectionContainer}>
+                    <Button
+                        content='Go to recipe'
+                        type='confirm'
+                        onPress={handlePress}
                     />
-                </View>
-                <View style={styles.reviewCardContainer}>
-                    {reviews.length !== 0 &&
-                        reviews.map((review: any, i: any) => (
-                            <ReviewCard
-                                key={i}
-                                username={review.username}
-                                body={review.body}
-                                rate={review.rate}
-                            />
-                        ))}
-                    {reviews.length === 0 && <Text>No comments</Text>}
                 </View>
             </View>
         </ScrollView>
@@ -156,16 +171,20 @@ function About({ body }: any) {
 }
 
 export default function FoodDetail({ route }: any) {
-    const { name, recipe, body, imgSrc }: any = route?.params
-
-    const handleAddToFavorite = () => {}
-
-    const handeRemoveFromFavorite = () => {}
-
+    const {
+        des, 
+        image,
+        recipt, 
+        calo, 
+        protein, 
+        fat, 
+        carb 
+    }: any = route?.params
+    
     return (
         <>
-            <View style={styles.imgContainer}>
-                <Image source={{ uri: imgSrc }} style={styles.img} />
+            <View style={styles.videoContainer}>
+                <Image source={{ uri: image }} style={styles.video} />   
             </View>
 
             <Tab.Navigator
@@ -187,12 +206,10 @@ export default function FoodDetail({ route }: any) {
                     },
                 }}
             >
-                <Tab.Screen name='Recipe'>
-                    {(props) => <Recipe {...props} recipe={recipe} />}
-                </Tab.Screen>
                 <Tab.Screen name='About'>
-                    {(props) => <About {...props} body={body} />}
+                    {(props) => <About {...props} des={des} calo={calo} protein={protein} fat={fat} carb={carb} recipt={recipt} />}
                 </Tab.Screen>
+                <Tab.Screen name='Review' component={Review} />
             </Tab.Navigator>
         </>
     )

@@ -1,16 +1,10 @@
 import * as React from 'react'
 import { View, Image, Text, Pressable, TextInput } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
+import { Comment } from '../../util/interface'
 
 import styles from './styles'
 import Button from '../button/Button'
-
-export interface ReviewCardAttribute {
-    avatarSrc?: string
-    username: string
-    rate: number
-    body: string
-}
 
 export interface ReviewInputAttribute {
     rate: number
@@ -106,22 +100,19 @@ export function ReviewInput({
 }
 
 export function ReviewCard({
-    avatarSrc,
     username,
-    rate,
-    body,
-}: ReviewCardAttribute) {
+    star,
+    comment,
+}: Comment) {
+
+
     return (
         <View style={styles.reviewCard}>
             <View style={styles.reviewCardTitle}>
-                <Image
-                    source={require('../../../assets/icon.png')}
-                    style={styles.avatar}
-                />
                 <Text style={styles.username}>{username}</Text>
-                <Stars rate={rate} />
+                <Stars rate={star} />
             </View>
-            <Text style={styles.reviewCardBody}>{body}</Text>
+            <Text style={styles.reviewCardBody}>{comment}</Text>
         </View>
     )
 }

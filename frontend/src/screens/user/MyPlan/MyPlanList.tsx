@@ -1,7 +1,8 @@
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { ScrollView, View, Text, StyleSheet } from 'react-native'
-import { Food, MyPlanStackParamList } from '../../../util/types'
+import { MyPlanStackParamList } from '../../../util/types'
+import { Food } from '../../../util/interface'
 import Card from '../../../components/card/Card'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 
@@ -29,9 +30,14 @@ export default function MyPlanList({ route, navigation }: Props) {
                     <Card
                         cardStyle={2}
                         name={food.name}
-                        body={food.body}
-                        imgSrc={food.imgSrc}
-                        rate={food.rate}
+                        des={food.des}
+                        image={food.image}
+                        rate={food.avgStar}
+                        recipt={food.recipt}
+                        calo={food.calo}
+                        protein={food.protein}
+                        fat={food.fat}
+                        carb={food.carb}
                         onPress={() => handleOnPress(food)}
                     />
                 </View>

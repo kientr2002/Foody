@@ -3,19 +3,19 @@ import { View, Image, Text, Pressable } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 
 import styles from './styles'
+import { ResizeMode } from 'expo-av'
 
 export interface CardAttribute {
     cardStyle: number
     name: string
-    body: {
-        description: string
-        calories: number
-        protein: number
-        fat: number
-        carb: number
-    }
-    imgSrc: string
+    des: string
+    image: string
     rate: number
+    recipt: string,
+    calo: number | null
+    protein: number | null
+    fat: number | null
+    carb: number | null
     onPress?: () => void
 }
 
@@ -50,9 +50,13 @@ function Stars({ rate, style }: StarsAttribute) {
 export default function Card({
     cardStyle,
     name,
-    body,
+    des,
+    calo,
+    protein,
+    fat,
+    carb,
     rate,
-    imgSrc,
+    image,
     onPress,
 }: CardAttribute) {
     const [backgroundSize, setBackgroundSize] = React.useState<any>(null)
@@ -92,8 +96,9 @@ export default function Card({
         >
             <Image
                 style={imgSize}
-                source={{ uri: imgSrc }}
+                source={{ uri: image }}
                 fadeDuration={300}
+                resizeMode={ResizeMode.COVER}
             />
             <View style={textSize}>
                 <View>
@@ -110,18 +115,18 @@ export default function Card({
                                 cardStyle === 3 || cardStyle === 4 ? 3 : 2
                             }
                         >
-                            {body.description}
+                            {des}
                         </Text>
                     ) : (
                         <View>
                             <Text style={styles.text_2}>
-                                Calories: {body.calories}
+                                Calories: {calo ? calo : 0}
                             </Text>
                             <Text style={styles.text_2}>
-                                Protein: {body.protein}
+                                Protein: {protein ? protein : 0}
                             </Text>
-                            <Text style={styles.text_2}>Carb: {body.carb}</Text>
-                            <Text style={styles.text_2}>Fat: {body.fat}</Text>
+                            <Text style={styles.text_2}>Carb: {carb ? carb : 0}</Text>
+                            <Text style={styles.text_2}>Fat: {fat ? fat : 0}</Text>
                         </View>
                     )}
                 </View>

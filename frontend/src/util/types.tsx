@@ -1,4 +1,5 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
+import { Food } from './interface'
 
 type AuthenticationStackParamList = {
     Login: undefined,
@@ -67,28 +68,7 @@ type ProfileStackParamList = {
     'Change password': undefined
 }
 
-interface Food {
-    id: number
-    name: string
-    body: {
-        description: string
-        calories: number
-        protein: number
-        fat: number
-        carb: number
-    }
-    recipe: [
-        {
-            step: number
-            body: string
-        }
-    ]
-    imgSrc: string
-    rate: number
-}
-
 export {
-    Food,
     AuthenticationStackParamList,
     UserTabParamList,
     HomeStackParamList,
