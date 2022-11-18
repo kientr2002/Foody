@@ -147,7 +147,13 @@ export default function MyProfile({ navigation }:any) {
                             marginRight: 10,
                         }}
                     >
-                        <Button type='confirm' content='CHANGE PASSWORD' />
+                        <Button 
+                            type='confirm' 
+                            content='CHANGE PASSWORD' 
+                            onPress={() => {
+                                navigation.navigate('Change password')
+                            }}
+                        />
                     </View>
                     <View>
                         <Button 

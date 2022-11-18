@@ -21,16 +21,6 @@ const styles = StyleSheet.create({
         margin: 24,
         marginBottom: 0,
     },
-    notice: {
-        fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 25,
-        margin: 24,
-        marginTop: -24,
-        marginBottom: 12,
-        justifyContent: 'center',
-        alignItems: 'center',
-        textAlign: 'center'
-    },
     message: {
         fontFamily: 'SF-Pro-Rounded_medium',
         fontSize: 18,

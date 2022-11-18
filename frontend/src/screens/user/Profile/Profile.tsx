@@ -7,6 +7,7 @@ import HeaderButton from '../../../components/headerButton/HeaderButton'
 import color from '../../../styles/color'
 import MyProfile from './MyProfile'
 import Calculate from '../../authentication/calculate/Calculate'
+import ChangePassword from '../../authentication/changePassword/ChangePassword'
 
 const Stack = createNativeStackNavigator<ProfileStackParamList>()
 type Props = BottomTabScreenProps<UserTabParamList, 'Profile page'>
@@ -35,6 +36,13 @@ export default function Profile({ navigation }: Props) {
             <Stack.Screen 
                 name='Update status'
                 component={Calculate}
+                options={{
+                    headerShown: false
+                }}
+            />
+            <Stack.Screen
+                name='Change password'
+                component={ChangePassword}
                 options={{
                     headerShown: false
                 }}

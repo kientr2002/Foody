@@ -9,8 +9,6 @@ export interface AlertAttribute {
     type: string
     title?: string
     message?: string
-    notice?: string
-    password?: string
     setVisible: (v: boolean) => void
     handleOk?: () => void
 }
@@ -40,7 +38,7 @@ function ButtonBox(props: any) {
             {props?.notifyType !== 3 && (
                     <Button
                     type='confirm'
-                    content='ok'
+                    content='OK'
                     onPress={() => {
                         props?.setVisible(false)
                         props?.handleOk?.()
@@ -67,8 +65,6 @@ export default function Alert({
     type,
     title,
     message,
-    notice,
-    password,
     visible,
     setVisible,
     handleOk
@@ -105,8 +101,6 @@ export default function Alert({
                 <View style={styles.box}>
                     <Text style={styles.title}>{title}</Text>
                     <Text style={styles.message}>{message}</Text>
-                    <Text style={styles.notice}>{notice}</Text>
-                    <Text style={styles.notice}>{password}</Text>
                     <ButtonBox
                         notifyType={notifyType}
                         setVisible={setVisible}

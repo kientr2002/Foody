@@ -1,9 +1,8 @@
-import React, { Component, useState } from 'react'
-import { View, Text, Image, ScrollView } from 'react-native'
+import React, {  useState } from 'react'
+import { View, Text, ScrollView } from 'react-native'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import Alert from '../../../components/alert/Alert'
-import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 const questions = [
     {
@@ -32,12 +31,12 @@ export default function ForgotPasswordStep2({navigation}: any) {
     return (
         <>
             <Alert
-            type='change_password'
-            notice='Your password is:'
-            password='1234'
-            visible={user}
-            setVisible={setUser}
-            handleOk={() => {LogIn(true)}}
+                type='change_password'
+                title='Your password is:'
+                message='1234'
+                visible={user}
+                setVisible={setUser}
+                handleOk={() => {LogIn(true)}}
             />
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.title}>Forgot Password</Text>

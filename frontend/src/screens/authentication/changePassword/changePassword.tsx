@@ -1,61 +1,53 @@
-import React, { Component, useState } from 'react'
-import { View, Text, Image, ScrollView, TextInput } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, ScrollView } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
-import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
+
 const passwords = [
     {
         password: '1234',
     }  
 ]
 export default function ChangePassword({navigation}:any) {
-    const LogIn = (success: Boolean ) => {
-        if(success === true){
-            navigation.navigate('Login');
-        }
+    const [errorMessage, setErrorMessage] = React.useState<string>('')
+    const [oldPassword, setOldPassword] = useState<string>('')
+    const [newPassword, setNewPassword] = useState<string>('')
+    const [confirmNewPassword, setConfirmNewPassword] = useState<string>('')
+    const [visible, setVisible] = React.useState<boolean>(false)
+    const [success, setSuccess] = React.useState<boolean>(false)
+
+    const handleNavigate = (success: Boolean ) => {
+        if(success === true)
+            navigation.goBack()
+        else 
+            return null
     }
-    const handleSignIn = (oldPassword: string, newPassword: string, confirmNewPassword: string) => {
+
+    const handleChangePassword = (oldPassword: string, newPassword: string, confirmNewPassword: string) => {
         passwords.forEach(passwords => {
             if (passwords.password === oldPassword ) {
-                if(newPassword === confirmNewPassword){
+                if(newPassword === confirmNewPassword)
                     setSuccess(true);
-                } else {
-                    setSameNewPassword(true);
-                }               
+                else
+                    setErrorMessage('Confirm password is incorrect')              
             } else {
-                setSameOldPassword(true);
+                setErrorMessage('Old password is incorrect');
             }
+            setVisible(true)
         })
     }
-  const [sameOldPassword, setSameOldPassword] = React.useState<boolean>(false)
-  const [sameNewPassword, setSameNewPassword] = React.useState<boolean>(false)
-  const [oldPassword, setOldPassword] = useState<string>('')
-  const [newPassword, setNewPassword] = useState<string>('')
-  const [confirmNewPassword, setconfirmNewPassword] = useState<string>('')
-  const [success, setSuccess] = React.useState<boolean>(false)
+
     return (
         <>  
-                <Alert
+            <Alert
                 type='change_password'
-                notice='Change password success'
-                visible={success}
-                setVisible={setSuccess}
-                handleOk={() => {LogIn(true)}}                
-                />
-                 <Alert
-                type='change_password'
-                notice='Old password is incorrect'
-                visible={sameOldPassword}
-                setVisible={setSameOldPassword}                
-                />
-                <Alert
-                type='change_password'
-                notice='Confirm new password is incorrect'
-                visible={sameNewPassword}
-                setVisible={setSameNewPassword}                
-                />               
+                title={success ? 'Change password success' : errorMessage}
+                visible={visible}
+                setVisible={setVisible}
+                handleOk={() => {handleNavigate(success)}}                
+            />           
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.title}>Change password</Text>
                 <View style={styles.inputContainer}>
@@ -77,12 +69,15 @@ export default function ChangePassword({navigation}:any) {
                     <Input
                         type='confirm_new_password'
                         value={confirmNewPassword}
-                        setValue={setconfirmNewPassword}
+                        setValue={setConfirmNewPassword}
                     />
                 </View>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button content='SUBMIT' type='confirm' arrow onPress={() => handleSignIn(oldPassword, newPassword, confirmNewPassword)}/>
+                    <Button 
+                        content='SUBMIT' 
+                        type='confirm' 
+                        arrow onPress={() => handleChangePassword(oldPassword, newPassword, confirmNewPassword)}/>
                 </View>
             </ScrollView>
         </>

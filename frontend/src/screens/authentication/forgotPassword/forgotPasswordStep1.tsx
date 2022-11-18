@@ -1,8 +1,7 @@
-import React, { Component, useState } from 'react'
-import { View, Text, Image, ScrollView } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, ScrollView } from 'react-native'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
-import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
 const accounts = [
