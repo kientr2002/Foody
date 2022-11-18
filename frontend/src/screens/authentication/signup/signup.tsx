@@ -17,7 +17,7 @@ export default function SignUp({navigation}:any) {
     const [answer, setAnswer] = useState<string>('')
    return(
     <>
-            <Alert
+        <Alert
         type='create_plan'
         title='Success'
         message='Sign up success'
@@ -80,7 +80,7 @@ export default function SignUp({navigation}:any) {
 
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button content='SIGN UP' type='confirm' arrow />
+                    <Button content='SIGN UP' type='confirm' arrow  onPress={() => navigation.navigate('Login')}/>
                 </View>
                 <View style={styles.logInContainer}>
                     <View style={{

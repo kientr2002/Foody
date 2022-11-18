@@ -9,6 +9,8 @@ export interface AlertAttribute {
     type: string
     title?: string
     message?: string
+    notice?: string
+    password?: string
     setVisible: (v: boolean) => void
     handleOk?: () => void
 }
@@ -23,14 +25,28 @@ function ButtonBox(props: any) {
                     onPress={() => props?.setVisible(false)}
                 />
             )}
-            <Button
-                type='confirm'
-                content='ok'
-                onPress={() => {
-                    props?.setVisible(false)
-                    props?.handleOk?.()
-                }}
-            />
+            {
+                props?.notifyType === 3 && (
+                    <Button
+                        type='confirm'
+                        content='SUBMIT'
+                        onPress={() => {
+                            props?.setVisible(false)
+                            props?.handleOk?.()
+                        }}
+                    />
+                )
+            }
+            {props?.notifyType !== 3 && (
+                    <Button
+                    type='confirm'
+                    content='ok'
+                    onPress={() => {
+                        props?.setVisible(false)
+                        props?.handleOk?.()
+                    }}
+                />
+            )}
         </View>
     )
 }
@@ -51,6 +67,8 @@ export default function Alert({
     type,
     title,
     message,
+    notice,
+    password,
     visible,
     setVisible,
     handleOk
@@ -66,6 +84,10 @@ export default function Alert({
             type === 'create_plan'
         )
             setNotifyType(2)
+        else if(
+            type === 'change_password'
+        )
+            setNotifyType(3)
     }, [type])
 
     return (
@@ -83,6 +105,8 @@ export default function Alert({
                 <View style={styles.box}>
                     <Text style={styles.title}>{title}</Text>
                     <Text style={styles.message}>{message}</Text>
+                    <Text style={styles.notice}>{notice}</Text>
+                    <Text style={styles.notice}>{password}</Text>
                     <ButtonBox
                         notifyType={notifyType}
                         setVisible={setVisible}

@@ -4,7 +4,9 @@ import { Food } from './interface'
 type AuthenticationStackParamList = {
     Login: undefined,
     'Sign Up': undefined,
-    'Forgot password': undefined
+    'Forgot password step 1': undefined,
+    'Forgot password step 2': undefined,
+    'Change password': undefined
 }
 
 

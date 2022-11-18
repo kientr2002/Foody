@@ -71,13 +71,17 @@ export default function Login({navigation}:any) {
                             type='password'
                             value={password}
                             setValue={setPassword}
+                            editable={true}
                         />
                     </View>
                 </View>
 
                 <View style={styles.focusPassContainer}>
-                    <Text style={[styles.highlightText, styles.marginTop_10]}>
-                        Focus password?
+                    <Text 
+                    onPress={() => navigation.navigate('Forgot password step 1')}
+                    style={[styles.highlightText, styles.marginTop_10]}
+                    >
+                        Forgot password?
                     </Text>
                 </View>
 
