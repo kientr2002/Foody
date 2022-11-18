@@ -23,20 +23,18 @@ function ButtonBox(props: any) {
                     onPress={() => props?.setVisible(false)}
                 />
             )}
-            {
-                props?.notifyType === 3 && (
-                    <Button
-                        type='confirm'
-                        content='SUBMIT'
-                        onPress={() => {
-                            props?.setVisible(false)
-                            props?.handleOk?.()
-                        }}
-                    />
-                )
-            }
+            {props?.notifyType === 3 && (
+                <Button
+                    type='confirm'
+                    content='SUBMIT'
+                    onPress={() => {
+                        props?.setVisible(false)
+                        props?.handleOk?.()
+                    }}
+                />
+            )}
             {props?.notifyType !== 3 && (
-                    <Button
+                <Button
                     type='confirm'
                     content='OK'
                     onPress={() => {
@@ -67,7 +65,7 @@ export default function Alert({
     message,
     visible,
     setVisible,
-    handleOk
+    handleOk,
 }: AlertAttribute) {
     const [notifyType, setNotifyType] = React.useState<number | null>(null)
 
@@ -80,10 +78,7 @@ export default function Alert({
             type === 'create_plan'
         )
             setNotifyType(2)
-        else if(
-            type === 'change_password'
-        )
-            setNotifyType(3)
+        else if (type === 'change_password') setNotifyType(3)
     }, [type])
 
     return (

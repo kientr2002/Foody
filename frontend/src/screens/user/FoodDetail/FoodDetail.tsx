@@ -62,10 +62,9 @@ function About({ des, recipt, calo, protein, fat, carb }: any) {
 
     const handlePress = React.useCallback(async () => {
         // Checking if the link is supported for links with custom URL scheme.
-        const supported = await Linking.canOpenURL(recipt);
-        if (supported)
-          await Linking.openURL(recipt);
-      }, [recipt]);
+        const supported = await Linking.canOpenURL(recipt)
+        if (supported) await Linking.openURL(recipt)
+    }, [recipt])
 
     return (
         <ScrollView style={styles.tabBody}>
@@ -84,7 +83,7 @@ function About({ des, recipt, calo, protein, fat, carb }: any) {
                         </Text>
                         <Progress.Bar
                             style={styles.progressBar}
-                            progress={calo ? calo*0.7 : 0}
+                            progress={calo ? calo * 0.7 : 0}
                             width={250}
                             height={13}
                             color={'#E3A74D'}
@@ -171,20 +170,12 @@ function About({ des, recipt, calo, protein, fat, carb }: any) {
 }
 
 export default function FoodDetail({ route }: any) {
-    const {
-        des, 
-        image,
-        recipt, 
-        calo, 
-        protein, 
-        fat, 
-        carb 
-    }: any = route?.params
-    
+    const { des, image, recipt, calo, protein, fat, carb }: any = route?.params
+
     return (
         <>
             <View style={styles.videoContainer}>
-                <Image source={{ uri: image }} style={styles.video} />   
+                <Image source={{ uri: image }} style={styles.video} />
             </View>
 
             <Tab.Navigator
@@ -207,7 +198,17 @@ export default function FoodDetail({ route }: any) {
                 }}
             >
                 <Tab.Screen name='About'>
-                    {(props) => <About {...props} des={des} calo={calo} protein={protein} fat={fat} carb={carb} recipt={recipt} />}
+                    {(props) => (
+                        <About
+                            {...props}
+                            des={des}
+                            calo={calo}
+                            protein={protein}
+                            fat={fat}
+                            carb={carb}
+                            recipt={recipt}
+                        />
+                    )}
                 </Tab.Screen>
                 <Tab.Screen name='Review' component={Review} />
             </Tab.Navigator>

@@ -7,17 +7,17 @@ const useFetchData = (baseUrl: string, header?: any) => {
 
     const fetchData = async (url: string) => {
         try {
-            const response = await fetch(url);
-            const json = await response.json();
+            const response = await fetch(url)
+            const json = await response.json()
             if (json) {
                 setData(json)
                 setLoading(false)
             }
         } catch (error) {
-            console.error(error);
+            console.error(error)
         }
     }
-    
+
     React.useEffect(() => {
         fetchData(baseUrl)
     }, [])

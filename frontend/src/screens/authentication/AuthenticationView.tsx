@@ -29,9 +29,18 @@ export default function AuthenticationView() {
             >
                 <Stack.Screen name='Login' component={Login} />
                 <Stack.Screen name='Sign Up' component={SignUp} />
-                <Stack.Screen name='Forgot password step 1' component={ForgotPasswordStep1}/>
-                <Stack.Screen name='Forgot password step 2' component={ForgotPasswordStep2}/>
-                <Stack.Screen name='Change password' component={ChangePassword}/>
+                <Stack.Screen
+                    name='Forgot password step 1'
+                    component={ForgotPasswordStep1}
+                />
+                <Stack.Screen
+                    name='Forgot password step 2'
+                    component={ForgotPasswordStep2}
+                />
+                <Stack.Screen
+                    name='Change password'
+                    component={ChangePassword}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     )

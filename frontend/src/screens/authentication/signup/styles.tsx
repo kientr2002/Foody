@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     marginLeft_10: {
         marginLeft: 5,
     },
-
 })
 
 export default styles

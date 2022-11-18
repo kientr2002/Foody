@@ -22,10 +22,7 @@ export default function DishList({ navigation }: any) {
         <View style={styles.container}>
             {/* Add dish */}
             <View style={styles.button}>
-                <Button 
-                    content='ADD DISH' 
-                    type='warning'
-                />
+                <Button content='ADD DISH' type='warning' />
             </View>
             {/* All dish */}
             <View>

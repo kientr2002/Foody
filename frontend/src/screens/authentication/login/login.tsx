@@ -10,29 +10,29 @@ const accounts = [
     {
         email: 'thoaile',
         password: '1234',
-        role: 'user'
+        role: 'user',
     },
     {
         email: 'cunle',
         password: '1234',
-        role: 'admin'
-    }   
+        role: 'admin',
+    },
 ]
 
-export default function Login({navigation}:any) {
-    const {setAdmin, setLogin} = React.useContext<UserContextInterface>(UserContext)
+export default function Login({ navigation }: any) {
+    const { setAdmin, setLogin } =
+        React.useContext<UserContextInterface>(UserContext)
 
     const [password, setPassword] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [success, setSuccess] = React.useState<boolean>(false)
 
     const handleSignIn = (username: string, password: string) => {
-        accounts.forEach(account => {
+        accounts.forEach((account) => {
             if (account.email === email && account.password) {
                 setSuccess(true)
 
-                if (account.role === 'admin')
-                    setAdmin(true)
+                if (account.role === 'admin') setAdmin(true)
             }
         })
     }
@@ -45,7 +45,9 @@ export default function Login({navigation}:any) {
                 message='Log in success'
                 visible={success}
                 setVisible={setSuccess}
-                handleOk={() => {setLogin(true)}}
+                handleOk={() => {
+                    setLogin(true)
+                }}
             />
             <View style={styles.container}>
                 <View style={styles.logoContainer}>
@@ -77,18 +79,20 @@ export default function Login({navigation}:any) {
                 </View>
 
                 <View style={styles.focusPassContainer}>
-                    <Text 
-                    onPress={() => navigation.navigate('Forgot password step 1')}
-                    style={[styles.highlightText, styles.marginTop_10]}
+                    <Text
+                        onPress={() =>
+                            navigation.navigate('Forgot password step 1')
+                        }
+                        style={[styles.highlightText, styles.marginTop_10]}
                     >
                         Forgot password?
                     </Text>
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <Button 
-                        content='LOGIN' 
-                        type='confirm' 
+                    <Button
+                        content='LOGIN'
+                        type='confirm'
                         arrow
                         onPress={() => handleSignIn(email, password)}
                     />
@@ -105,8 +109,9 @@ export default function Login({navigation}:any) {
                     <Text>Don't have any account?</Text>
                     <Text
                         accessibilityRole='button'
-                        onPress={() => navigation.navigate('Sign Up')} 
-                        style={[styles.highlightText, styles.marginLeft_10]}>
+                        onPress={() => navigation.navigate('Sign Up')}
+                        style={[styles.highlightText, styles.marginLeft_10]}
+                    >
                         Sign up
                     </Text>
                 </View>

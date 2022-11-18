@@ -7,12 +7,13 @@ import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
 export default function Profile() {
-    const {setLogin, setAdmin} = React.useContext<UserContextInterface>(UserContext)
+    const { setLogin, setAdmin } =
+        React.useContext<UserContextInterface>(UserContext)
     const [logOut, setLogOut] = React.useState<boolean>(false)
-    
+
     return (
         <>
-            <Alert 
+            <Alert
                 type='logout'
                 title='Log out'
                 message='Are you sure want to logout?'
@@ -80,7 +81,7 @@ export default function Profile() {
                     <View style={styles.textContainer}>
                         <Text style={[styles.text_bold, styles.textSize_18]}>
                             Email:
-                        </Text> 
+                        </Text>
                         <Text
                             style={[
                                 styles.text_regular,
@@ -116,9 +117,9 @@ export default function Profile() {
                         <Button type='confirm' content='CHANGE PASSWORD' />
                     </View>
                     <View>
-                        <Button 
-                            type='error' 
-                            content='LOG OUT' 
+                        <Button
+                            type='error'
+                            content='LOG OUT'
                             onPress={() => {
                                 setLogOut(true)
                             }}

@@ -33,18 +33,18 @@ export default function Profile({ navigation }: Props) {
                     ),
                 }}
             />
-            <Stack.Screen 
+            <Stack.Screen
                 name='Update status'
                 component={Calculate}
                 options={{
-                    headerShown: false
+                    headerShown: false,
                 }}
             />
             <Stack.Screen
                 name='Change password'
                 component={ChangePassword}
                 options={{
-                    headerShown: false
+                    headerShown: false,
                 }}
             />
         </Stack.Navigator>

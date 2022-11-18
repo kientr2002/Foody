@@ -2,10 +2,10 @@ import * as React from 'react'
 import { Food } from '../util/interface'
 
 export interface UserContextInterface {
-    login: boolean,
-    setLogin: (a:boolean) => void,
-    admin: boolean,
-    setAdmin: (a:boolean) => void,
+    login: boolean
+    setLogin: (a: boolean) => void
+    admin: boolean
+    setAdmin: (a: boolean) => void
     username?: string
     createPlanList: Food[]
     myPlan: Food[]

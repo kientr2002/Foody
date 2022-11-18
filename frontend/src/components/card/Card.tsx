@@ -11,7 +11,7 @@ export interface CardAttribute {
     des: string
     image: string
     rate: number
-    recipt: string,
+    recipt: string
     calo: number | null
     protein: number | null
     fat: number | null
@@ -125,8 +125,12 @@ export default function Card({
                             <Text style={styles.text_2}>
                                 Protein: {protein ? protein : 0}
                             </Text>
-                            <Text style={styles.text_2}>Carb: {carb ? carb : 0}</Text>
-                            <Text style={styles.text_2}>Fat: {fat ? fat : 0}</Text>
+                            <Text style={styles.text_2}>
+                                Carb: {carb ? carb : 0}
+                            </Text>
+                            <Text style={styles.text_2}>
+                                Fat: {fat ? fat : 0}
+                            </Text>
                         </View>
                     )}
                 </View>

@@ -1,6 +1,12 @@
 import * as React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { StyleSheet, View, ScrollView, Text, ActivityIndicator } from 'react-native'
+import {
+    StyleSheet,
+    View,
+    ScrollView,
+    Text,
+    ActivityIndicator,
+} from 'react-native'
 import { HomeStackParamList } from '../../../util/types'
 import { Food } from '../../../util/interface'
 import Card from '../../../components/card/Card'
@@ -16,14 +22,16 @@ export default function FoodList({ route, navigation }: Props) {
     const [loading, setLoading] = React.useState<boolean>(true)
     const getFoods = async () => {
         try {
-            const response = await fetch('https://foodyforapi.herokuapp.com/getListFood');
-            const data = await response.json();
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/getListFood'
+            )
+            const data = await response.json()
             if (data.result === 'ok') {
                 setFoods(data.message)
                 setLoading(false)
             }
         } catch (error) {
-            console.error(error);
+            console.error(error)
         }
     }
 
@@ -43,14 +51,11 @@ export default function FoodList({ route, navigation }: Props) {
 
     return (
         <>
-            {loading ? 
+            {loading ? (
                 <View style={styles.loadingScreen}>
-                    <ActivityIndicator
-                        size='large'
-                        color={color.primary}
-                    />
+                    <ActivityIndicator size='large' color={color.primary} />
                 </View>
-                :
+            ) : (
                 <ScrollView style={styles.container}>
                     <View>
                         <Text style={styles.mealTitle}>Breakfast</Text>
@@ -76,7 +81,7 @@ export default function FoodList({ route, navigation }: Props) {
                                         onPress={() => handleOnPress(food)}
                                     />
                                 )
-                            } )}
+                            })}
                         </ScrollView>
                     </View>
                     <View>
@@ -131,7 +136,7 @@ export default function FoodList({ route, navigation }: Props) {
                     </View>
                     <View style={{ marginVertical: 10 }}></View>
                 </ScrollView>
-            }
+            )}
         </>
     )
 }
@@ -140,7 +145,7 @@ const styles = StyleSheet.create({
     loadingScreen: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     container: {
         backgroundColor: 'transparent',

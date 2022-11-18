@@ -74,7 +74,7 @@ export default function HeaderButton({
                                     calo: route?.params?.calo,
                                     protein: route?.params?.protein,
                                     fat: route?.params?.fat,
-                                    carb: route?.params?.carb
+                                    carb: route?.params?.carb,
                                 }
                                 handleAddToFavorite(food)
                             } else handleRemoveFromFavorite(route?.params?.id)
@@ -104,7 +104,7 @@ export default function HeaderButton({
                                     calo: route?.params?.calo,
                                     protein: route?.params?.protein,
                                     fat: route?.params?.fat,
-                                    carb: route?.params?.carb
+                                    carb: route?.params?.carb,
                                 }
                                 setInPlan(true)
                                 handleAddToCreatePlan(food)

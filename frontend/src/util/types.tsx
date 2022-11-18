@@ -2,13 +2,12 @@ import { NavigatorScreenParams } from '@react-navigation/native'
 import { Food } from './interface'
 
 type AuthenticationStackParamList = {
-    Login: undefined,
-    'Sign Up': undefined,
-    'Forgot password step 1': undefined,
-    'Forgot password step 2': undefined,
+    Login: undefined
+    'Sign Up': undefined
+    'Forgot password step 1': undefined
+    'Forgot password step 2': undefined
     'Change password': undefined
 }
-
 
 type AdminTabParamList = {
     'Manage Dish': NavigatorScreenParams<ManageDishStackParamList>
@@ -65,7 +64,7 @@ type SearchStackParamList = {
 }
 
 type ProfileStackParamList = {
-    'My profile': undefined 
+    'My profile': undefined
     'Update status': undefined
     'Change password': undefined
 }
@@ -83,4 +82,3 @@ export {
     ManageDishStackParamList,
     AdminProfileStackParamList,
 }
-

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     signUpContainer: {
         alignSelf: 'center',
         marginBottom: 10,
-        marginTop: 5
+        marginTop: 5,
     },
 })
 

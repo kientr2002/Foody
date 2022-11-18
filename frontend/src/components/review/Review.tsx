@@ -99,13 +99,7 @@ export function ReviewInput({
     )
 }
 
-export function ReviewCard({
-    username,
-    star,
-    comment,
-}: Comment) {
-
-
+export function ReviewCard({ username, star, comment }: Comment) {
     return (
         <View style={styles.reviewCard}>
             <View style={styles.reviewCardTitle}>

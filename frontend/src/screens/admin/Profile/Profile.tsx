@@ -1,6 +1,9 @@
 import * as React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { AdminProfileStackParamList, AdminTabParamList } from '../../../util/types'
+import {
+    AdminProfileStackParamList,
+    AdminTabParamList,
+} from '../../../util/types'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 
 import color from '../../../styles/color'
@@ -24,7 +27,7 @@ export default function Profile({ navigation }: Props) {
                 name='My profile'
                 component={MyProfile}
                 options={{
-                    title: 'Profile'
+                    title: 'Profile',
                 }}
             />
         </Stack.Navigator>

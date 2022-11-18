@@ -44,7 +44,7 @@ export default function Calculate({ navigation }: any) {
                     <View style={styles.input}>
                         <Input
                             type='height'
-                            value={height}  
+                            value={height}
                             setValue={setHeight}
                         />
                     </View>
@@ -82,10 +82,10 @@ export default function Calculate({ navigation }: any) {
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <Button 
-                        content='Calculate TDEE' 
-                        type='confirm' 
-                        arrow 
+                    <Button
+                        content='Calculate TDEE'
+                        type='confirm'
+                        arrow
                         onPress={() => {
                             navigation.navigate('My profile')
                         }}

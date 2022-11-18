@@ -5,13 +5,14 @@ import Button from '../../../components/button/Button'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import color from '../../../styles/color'
 
-export default function MyProfile({ navigation }:any) {
-    const {setLogin, setAdmin} = React.useContext<UserContextInterface>(UserContext)
+export default function MyProfile({ navigation }: any) {
+    const { setLogin, setAdmin } =
+        React.useContext<UserContextInterface>(UserContext)
     const [logOut, setLogOut] = React.useState<boolean>(false)
 
     return (
         <>
-            <Alert 
+            <Alert
                 type='logout'
                 title='Log out'
                 message='Are you sure want to logout?'
@@ -44,9 +45,9 @@ export default function MyProfile({ navigation }:any) {
                         >
                             Email
                         </Text>
-                        <Button 
-                            type='warning' 
-                            content='UPDATE TDEE' 
+                        <Button
+                            type='warning'
+                            content='UPDATE TDEE'
                             onPress={() => {
                                 navigation.navigate('Update status')
                             }}
@@ -147,18 +148,18 @@ export default function MyProfile({ navigation }:any) {
                             marginRight: 10,
                         }}
                     >
-                        <Button 
-                            type='confirm' 
-                            content='CHANGE PASSWORD' 
+                        <Button
+                            type='confirm'
+                            content='CHANGE PASSWORD'
                             onPress={() => {
                                 navigation.navigate('Change password')
                             }}
                         />
                     </View>
                     <View>
-                        <Button 
-                            type='error' 
-                            content='LOG OUT' 
+                        <Button
+                            type='error'
+                            content='LOG OUT'
                             onPress={() => {
                                 setLogOut(true)
                             }}
@@ -167,7 +168,6 @@ export default function MyProfile({ navigation }:any) {
                 </View>
             </ScrollView>
         </>
-
     )
 }
 

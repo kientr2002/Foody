@@ -11,20 +11,23 @@ export default function SearchList({ navigation }: any) {
 
     const searchFood = async () => {
         try {
-            const response = await fetch('https://foodyforapi.herokuapp.com/search', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({'text': searchKeyWord})
-            });
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/search',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: searchKeyWord }),
+                }
+            )
             const data = await response.json()
             if (data.result === 'ok') {
                 setResult(data.message)
             }
         } catch (error) {
-            console.error(error);
+            console.error(error)
         }
     }
 

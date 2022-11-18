@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import { View, Text, ScrollView } from 'react-native'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
@@ -7,25 +7,23 @@ import styles from './styles'
 const questions = [
     {
         question: 'What your name',
-        answer: 'Kien'
-    }
+        answer: 'Kien',
+    },
 ]
-export default function ForgotPasswordStep2({navigation}: any) {
- 
+export default function ForgotPasswordStep2({ navigation }: any) {
     const [user, setUser] = React.useState<boolean>(false)
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
-    const LogIn = (success: Boolean ) => {
-        if(success === true){
-            navigation.navigate('Login');
+    const LogIn = (success: Boolean) => {
+        if (success === true) {
+            navigation.navigate('Login')
         }
     }
     const handleSignIn = (question: string, answer: string) => {
-        questions.forEach(questions => {
+        questions.forEach((questions) => {
             if (questions.question === question) {
-                if (questions.answer === answer)
-                    setUser(true)
-                } 
+                if (questions.answer === answer) setUser(true)
+            }
         })
     }
     return (
@@ -36,7 +34,9 @@ export default function ForgotPasswordStep2({navigation}: any) {
                 message='1234'
                 visible={user}
                 setVisible={setUser}
-                handleOk={() => {LogIn(true)}}
+                handleOk={() => {
+                    LogIn(true)
+                }}
             />
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.title}>Forgot Password</Text>
@@ -58,7 +58,12 @@ export default function ForgotPasswordStep2({navigation}: any) {
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button content='SUBMIT' type='confirm' arrow onPress={() => handleSignIn(question,answer)} />
+                    <Button
+                        content='SUBMIT'
+                        type='confirm'
+                        arrow
+                        onPress={() => handleSignIn(question, answer)}
+                    />
                 </View>
             </ScrollView>
         </>

@@ -43,7 +43,7 @@ export default function FoodCardAdmin(
         <View style={[styles.background, backgroundSize]}>
             <Image
                 style={imgSize}
-                source={{uri: imgSrc}}
+                source={{ uri: imgSrc }}
                 fadeDuration={300}
             />
             <View style={textSize}>
