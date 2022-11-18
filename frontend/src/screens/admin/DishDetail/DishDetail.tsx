@@ -121,7 +121,7 @@ export default function FoodDetail({ route, navigation }: any) {
     const { name, recipe, body, imgSrc }: any = route?.params
 
     const handleOnPress = (obj: any) => {
-        navigation.navigate('Add Food', obj)
+        navigation.navigate('Edit Food', obj)
     }
 
     return (
@@ -163,7 +163,13 @@ export default function FoodDetail({ route, navigation }: any) {
                     <Button content='DELETE' type='error' />
                 </View>
                 <View style={styles.button}>
-                    <Button content='EDIT' type='confirm' onPress={() => handleOnPress({ name, recipe, body, imgSrc })} />
+                    <Button
+                        content='EDIT'
+                        type='confirm'
+                        onPress={() =>
+                            handleOnPress({ name, recipe, body, imgSrc })
+                        }
+                    />
                 </View>
             </View>
         </>

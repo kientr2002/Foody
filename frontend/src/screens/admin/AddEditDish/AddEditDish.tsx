@@ -8,7 +8,7 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 
-export default function AddEditDish({ route }: any) {
+export default function AddEditDish({ route, navigation }: any) {
     const { name, recipe, body, imgSrc }: any = route?.params
 
     const [dishName, setDishName] = React.useState<string>(name)
@@ -110,7 +110,13 @@ export default function AddEditDish({ route }: any) {
             {/* Button DELETE and EDIT */}
             <View style={styles.button_container}>
                 <View style={styles.button}>
-                    <Button content='CANCEL' type='error' />
+                    <Button
+                        content='CANCEL'
+                        type='error'
+                        onPress={() => {
+                            navigation.goBack()
+                        }}
+                    />
                 </View>
                 <View style={styles.button}>
                     <Button content='SUBMIT' type='confirm' />

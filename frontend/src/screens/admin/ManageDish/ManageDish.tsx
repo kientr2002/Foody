@@ -48,6 +48,15 @@ export default function ManageDish({ navigation }: Props) {
                     title: 'Add Dish',
                 }}
             />
+
+            <Stack.Screen
+                name='Edit Food'
+                component={AddEditDish}
+                options={({ route }) => ({
+                    title: route?.params?.name
+                })}
+            />
+
         </Stack.Navigator>
     )
 }

@@ -19,7 +19,7 @@ export default function DishList({ navigation }: any) {
             ? navigation.navigate('Food detail', obj)
             : [
                   page === 'Edit Dish'
-                      ? navigation.navigate('Add Food', obj)
+                      ? navigation.navigate('Edit Food', obj)
                       : null,
               ]
     }
