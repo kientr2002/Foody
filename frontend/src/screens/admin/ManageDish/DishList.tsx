@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { ScrollView, Text, View } from 'react-native'
 
-import { Food } from '../../../util/types'
+import { Food } from '../../../util/interface'
 import Button from '../../../components/button/Button'
 
 import styles from './styles'
-import FoodCardAdmin from '../../../components/foodCardAdmin/FoodCardAdmin'
+import FoodCardAdmin from '../../../components/FoodCardAdmin/FoodCardAdmin'
 
 export default function DishList({ navigation }: any) {
     const [foods, setFoods] = React.useState<Array<Food>>([])
@@ -22,10 +22,7 @@ export default function DishList({ navigation }: any) {
         <View style={styles.container}>
             {/* Add dish */}
             <View style={styles.button}>
-                <Button 
-                    content='ADD DISH' 
-                    type='warning'
-                />
+                <Button content='ADD DISH' type='warning' />
             </View>
             {/* All dish */}
             <View>
@@ -39,7 +36,7 @@ export default function DishList({ navigation }: any) {
                         <FoodCardAdmin
                             key={i}
                             name={food.name}
-                            imgSrc={food.imgSrc}
+                            imgSrc={food.image}
                             onPress={() => handleOnPress(food)}
                         />
                     ))}

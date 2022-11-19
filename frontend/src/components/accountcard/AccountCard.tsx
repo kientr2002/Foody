@@ -25,7 +25,9 @@ export default function AccountCard({
         <View style={styles.view_layout}>
             <Image
                 style={styles.img_1}
-                source={{uri: 'https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png'}}
+                source={{
+                    uri: 'https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png',
+                }}
                 fadeDuration={300}
             />
             <View

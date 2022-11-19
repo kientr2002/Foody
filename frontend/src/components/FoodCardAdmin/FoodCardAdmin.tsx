@@ -43,7 +43,7 @@ export default function FoodCardAdmin(
         <View style={[styles.background, backgroundSize]}>
             <Image
                 style={imgSize}
-                source={{uri: imgSrc}}
+                source={{ uri: imgSrc }}
                 fadeDuration={300}
             />
             <View style={textSize}>
@@ -66,7 +66,7 @@ export default function FoodCardAdmin(
                     >
                         <FontAwesome5
                             name='ellipsis-v'
-                            size={24}
+                            size={20}
                             color='black'
                         />
                     </Pressable>
