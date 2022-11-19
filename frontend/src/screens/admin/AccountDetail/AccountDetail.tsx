@@ -1,6 +1,5 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
-import { StyleSheet, View, Text, ScrollView, Image } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import Button from '../../../components/button/Button'
 import styles from './styles'
 

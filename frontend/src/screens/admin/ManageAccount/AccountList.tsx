@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, ScrollView, Text, StyleSheet } from 'react-native'
+import { View, ScrollView, Text } from 'react-native'
 
 import AccountCard from '../../../components/accountcard/AccountCard'
 import { Account } from '../../../util/types'

@@ -1,6 +1,5 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native'
+import { View, Text, Image, ScrollView } from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import * as Progress from 'react-native-progress'
 
