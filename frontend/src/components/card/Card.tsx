@@ -111,9 +111,7 @@ export default function Card({
                     {cardStyle !== 4 ? (
                         <Text
                             style={styles.text}
-                            numberOfLines={
-                                cardStyle === 3 || cardStyle === 4 ? 3 : 2
-                            }
+                            numberOfLines={2}
                         >
                             {des}
                         </Text>

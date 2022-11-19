@@ -66,7 +66,7 @@ export default function FoodCardAdmin(
                     >
                         <FontAwesome5
                             name='ellipsis-v'
-                            size={24}
+                            size={20}
                             color='black'
                         />
                     </Pressable>

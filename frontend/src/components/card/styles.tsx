@@ -69,16 +69,16 @@ const styles = StyleSheet.create({
 
     title: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 25,
+        fontSize: 23,
     },
     title_2: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 20,
+        fontSize: 19,
     },
     text: {
         height: 50,
         fontFamily: 'SF-Pro-Rounded_regular',
-        fontSize: 17,
+        fontSize: 15,
         color: color.textBackground,
     },
     text_2: {
