@@ -7,7 +7,7 @@ import HeaderButton from '../../../components/headerButton/HeaderButton'
 import color from '../../../styles/color'
 import MyProfile from './MyProfile'
 import Calculate from '../../authentication/calculate/Calculate'
-import ChangePassword from '../../authentication/changePassword/ChangePassword'
+import ChangePassword from '../../authentication/changePassword/changePassword'
 
 const Stack = createNativeStackNavigator<ProfileStackParamList>()
 type Props = BottomTabScreenProps<UserTabParamList, 'Profile page'>

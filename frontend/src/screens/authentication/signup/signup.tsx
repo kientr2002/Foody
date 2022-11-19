@@ -8,6 +8,8 @@ import styles from './styles'
 
 export default function SignUp({ navigation }: any) {
     const [success, setSuccess] = React.useState<boolean>(false)
+    const [visible, setVisible] = React.useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = React.useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirm_password, setconfirm_password] = useState<string>('')
     const [name, setName] = useState<string>('')
@@ -15,14 +17,41 @@ export default function SignUp({ navigation }: any) {
     const [email, setEmail] = useState<string>('')
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
+    
+    const handleNavigate = (success: Boolean) => {
+        if (success === true) navigation.goBack()
+        else return null
+    }
+    const handleSignUp = (
+    ) => {
+        if(password === ''||
+        confirm_password === '' ||
+        name === '' ||
+        Date === '' ||
+        email === '' ||
+        question === '' ||
+        answer === ''){
+           setErrorMessage('Please enter all information')
+        } else {
+            if(password !== confirm_password){
+                setErrorMessage('Confirm password is incorrect')
+            } else {
+                setSuccess(true)
+            }
+            
+        }
+        setVisible(true)
+    }
     return (
         <>
             <Alert
-                type='create_plan'
-                title='Success'
-                message='Sign up success'
-                visible={success}
-                setVisible={setSuccess}
+                type='change_password'
+                title={success ? 'Change password success' : errorMessage}
+                visible={visible}
+                setVisible={setVisible}
+                handleOk={() => {
+                    handleNavigate(success)
+                }}
             />
             <ScrollView contentContainerStyle={styles.container}>
                 <View style={styles.container}>
@@ -83,7 +112,7 @@ export default function SignUp({ navigation }: any) {
                             content='SIGN UP'
                             type='confirm'
                             arrow
-                            onPress={() => navigation.navigate('Login')}
+                            onPress={() => handleSignUp()}
                         />
                     </View>
                     <View style={styles.logInContainer}>

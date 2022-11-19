@@ -113,6 +113,11 @@ export default function Input({
                     }
                     textAlignVertical='center'
                     autoFocus={focus ? focus : false}
+                    secureTextEntry = {
+                        type === 'password' || type === 'old_password' || type === 'new_password' || type === 'confirm_password' || type === 'confirm_new_password'
+                        ? true
+                        : false
+                    }
                     editable={editable}
                     value={value}
                     onChangeText={setValue}
