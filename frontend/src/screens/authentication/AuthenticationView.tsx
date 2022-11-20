@@ -4,11 +4,11 @@ import { AuthenticationStackParamList } from '../../util/types'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import color from '../../styles/color'
-import Login from './login/Login'
-import SignUp from './signup/SignUp'
-import ForgotPasswordStep1 from './forgotPassword/ForgotPasswordStep1'
-import ForgotPasswordStep2 from './forgotPassword/ForgotPasswordStep2'
-import ChangePassword from './changePassword/ChangePassword'
+import Login from './Login/Login'
+import SignUp from './SignUp/SignUp'
+import ForgotPasswordStep1 from './ForgotPassword/ForgotPasswordStep1'
+import ForgotPasswordStep2 from './ForgotPassword/ForgotPasswordStep2'
+import ChangePassword from './ChangePassword/ChangePassword'
 
 const Stack = createStackNavigator<AuthenticationStackParamList>()
 const MyTheme = {
@@ -27,8 +27,12 @@ export default function AuthenticationView() {
                     headerShown: false,
                 }}
             >
-                <Stack.Screen name='Login' component={Login} />
-                <Stack.Screen name='Sign Up' component={SignUp} />
+                <Stack.Screen 
+                    name='Login' 
+                    component={Login} />
+                <Stack.Screen 
+                    name='Sign Up' 
+                    component={SignUp} />
                 <Stack.Screen
                     name='Forgot password step 1'
                     component={ForgotPasswordStep1}

@@ -6,35 +6,40 @@ import Input from '../../../components/input/Input'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
-const accounts = [
-    {
-        email: 'thoaile',
-        password: '1234',
-        role: 'user',
-    },
-    {
-        email: 'cunle',
-        password: '1234',
-        role: 'admin',
-    },
-]
 
 export default function Login({ navigation }: any) {
-    const { setAdmin, setLogin } =
+    const { setAdmin, setLogin, setUserId } =
         React.useContext<UserContextInterface>(UserContext)
 
     const [password, setPassword] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [success, setSuccess] = React.useState<boolean>(false)
 
-    const handleSignIn = (username: string, password: string) => {
-        accounts.forEach((account) => {
-            if (account.email === email && account.password) {
+    const handleLogin = async (username:string, password:string) => {
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/getAccount',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        pass: password
+                    }),
+                }
+            )
+            const data = await response.json()
+            if (data.result === 'ok') {
+                setAdmin(data?.role !== 1 )
+                setUserId(data?.userId)
                 setSuccess(true)
-
-                if (account.role === 'admin') setAdmin(true)
             }
-        })
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     return (
@@ -94,7 +99,7 @@ export default function Login({ navigation }: any) {
                         content='LOGIN'
                         type='confirm'
                         arrow
-                        onPress={() => handleSignIn(email, password)}
+                        onPress={() => handleLogin(email, password)}
                     />
                 </View>
             </View>

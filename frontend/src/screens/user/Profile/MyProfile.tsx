@@ -4,11 +4,50 @@ import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import color from '../../../styles/color'
+import { User } from '../../../util/interface'
 
 export default function MyProfile({ navigation }: any) {
-    const { setLogin, setAdmin } =
+    const { setLogin, setAdmin, setUserId, userId } =
         React.useContext<UserContextInterface>(UserContext)
     const [logOut, setLogOut] = React.useState<boolean>(false)
+    const [user, setUser] = React.useState<User | null>(null)
+    const [dateOfBirth, setDateOfBirth] = React.useState<Date>()
+
+    // Get user profile
+    const handleGetInfo = async () => {
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/getDetailAcc',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: 'client4'
+                    }),
+                }
+            )
+            const data = await response.json()
+            if (data.result === 'ok') {
+                setUser(data.message[0])
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    React.useEffect(() => {
+        handleGetInfo()
+    }, [userId])
+
+    React.useEffect(() => {
+        if (user?.dob) {
+            let date = new Date(user.dob)
+            setDateOfBirth(date)
+        }
+    }, [user])
 
     return (
         <>
@@ -21,6 +60,7 @@ export default function MyProfile({ navigation }: any) {
                 handleOk={() => {
                     setLogin(false)
                     setAdmin(false)
+                    setUserId(null)
                 }}
             />
             <ScrollView>
@@ -33,7 +73,7 @@ export default function MyProfile({ navigation }: any) {
                     />
                     <View>
                         <Text style={[styles.text_bold, styles.textSize_23]}>
-                            Username
+                            {user?.username}
                         </Text>
                         <Text
                             style={[
@@ -43,7 +83,7 @@ export default function MyProfile({ navigation }: any) {
                                 styles.marginBottom,
                             ]}
                         >
-                            Email
+                            {user?.email}
                         </Text>
                         <Button
                             type='warning'
@@ -67,7 +107,7 @@ export default function MyProfile({ navigation }: any) {
                                 styles.color_1,
                             ]}
                         >
-                            Le Nguyen Huyen Thoai
+                            {user?.name}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -81,7 +121,7 @@ export default function MyProfile({ navigation }: any) {
                                 styles.color_1,
                             ]}
                         >
-                            09/10/2002
+                            {`${dateOfBirth?.getDate()}/${dateOfBirth?.getMonth()}/${dateOfBirth?.getFullYear()}`}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -95,7 +135,7 @@ export default function MyProfile({ navigation }: any) {
                                 styles.color_1,
                             ]}
                         >
-                            70 kg
+                            {user?.weight} kg
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -109,7 +149,7 @@ export default function MyProfile({ navigation }: any) {
                                 styles.color_1,
                             ]}
                         >
-                            1.8 m
+                            {user?.height} m
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -123,7 +163,7 @@ export default function MyProfile({ navigation }: any) {
                                 styles.color_1,
                             ]}
                         >
-                            2100
+                            {user?.TDEE}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -137,7 +177,7 @@ export default function MyProfile({ navigation }: any) {
                                 styles.color_1,
                             ]}
                         >
-                            Increase weight
+                            {user?.object}
                         </Text>
                     </View>
                 </View>
