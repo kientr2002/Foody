@@ -6,8 +6,8 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import HeaderButton from '../../../components/headerButton/HeaderButton'
 import color from '../../../styles/color'
 import MyProfile from './MyProfile'
-import Calculate from '../../authentication/calculate/Calculate'
-import ChangePassword from '../../authentication/changePassword/changePassword'
+import Calculate from '../../authentication/Calculate/Calculate'
+import ChangePassword from '../../authentication/ChangePassword/ChangePassword'
 
 const Stack = createNativeStackNavigator<ProfileStackParamList>()
 type Props = BottomTabScreenProps<UserTabParamList, 'Profile page'>

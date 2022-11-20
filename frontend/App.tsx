@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useFonts } from 'expo-font'
 import { UserProvider } from './src/context/UserContext'
 import Index from './src/screens/Index'
-import ChangePassword from './src/screens/authentication/changePassword/ChangePassword'
+import ChangePassword from './src/screens/authentication/ChangePassword/ChangePassword'
 
 export default function App() {
     //load font
