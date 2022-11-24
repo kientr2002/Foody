@@ -6,15 +6,23 @@ import Input from '../../../components/input/Input'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
+let exportEmail = ''
+
+export function exportToChangePassword() {
+    return (
+        exportEmail
+    )
+}
+
 const accounts = [
     {
-        email: 'thoaile',
-        password: '1234',
+        email: 'thoaile@gmail.com',
+        password: '12345678',
         role: 'user',
     },
     {
-        email: 'cunle',
-        password: '1234',
+        email: 'cunle@gmail.com',
+        password: '87654321',
         role: 'admin',
     },
 ]
@@ -22,18 +30,42 @@ const accounts = [
 export default function Login({ navigation }: any) {
     const { setAdmin, setLogin } =
         React.useContext<UserContextInterface>(UserContext)
-
+    const [warningEmail, setwarningEmail] = React.useState<string>('')
+    const [warningPassword, setwarningPassword] = React.useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [success, setSuccess] = React.useState<boolean>(false)
-
+    const [visible, setVisible] = React.useState<boolean>(false)
+    const verifyInformation = (email: string, password: string) => {
+        let regexEmail = new RegExp(/^[\S]+@gmail.com$/)
+        // let regexPassword = new RegExp(/.{8,32}/)
+        setSuccess(false)
+        if(regexEmail.test(email)){
+            setwarningEmail('')
+            if(password === ''){
+                setwarningPassword('Please enter Password')
+            } else {
+                setwarningPassword('')
+                handleSignIn(email, password)
+            }
+            
+        } else {
+            if(email === ''){
+                setwarningEmail('Please enter Email')
+            } else {
+                setwarningEmail('Email must be in format ...@gmail.com')
+            }
+        }
+    }
     const handleSignIn = (username: string, password: string) => {
         accounts.forEach((account) => {
-            if (account.email === email && account.password) {
+            if (account.email === email && account.password == password) {
+                exportEmail = email
                 setSuccess(true)
 
                 if (account.role === 'admin') setAdmin(true)
             }
+            setVisible(true);
         })
     }
 
@@ -41,12 +73,12 @@ export default function Login({ navigation }: any) {
         <>
             <Alert
                 type='create_plan'
-                title='Success'
-                message='Log in success'
-                visible={success}
-                setVisible={setSuccess}
+                title= 'Login'
+                message= {success ? 'Log in success' : 'Email or Password is incorrect'}
+                visible={visible}
+                setVisible={setVisible}
                 handleOk={() => {
-                    setLogin(true)
+                    success ? setLogin(true) : setLogin(false)
                 }}
             />
             <View style={styles.container}>
@@ -67,6 +99,7 @@ export default function Login({ navigation }: any) {
                             value={email}
                             setValue={setEmail}
                         />
+                        <Text style={{color:'red'}}>{warningEmail}</Text>
                     </View>
                     <View>
                         <Input
@@ -75,6 +108,7 @@ export default function Login({ navigation }: any) {
                             setValue={setPassword}
                             editable={true}
                         />
+                        <Text style={{color:'red'}}>{warningPassword}</Text>
                     </View>
                 </View>
 
@@ -94,7 +128,7 @@ export default function Login({ navigation }: any) {
                         content='LOGIN'
                         type='confirm'
                         arrow
-                        onPress={() => handleSignIn(email, password)}
+                        onPress={() => verifyInformation(email, password)}
                     />
                 </View>
             </View>

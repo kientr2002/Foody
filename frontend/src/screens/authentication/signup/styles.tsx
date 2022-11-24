@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     input: {
-        marginBottom: 10,
+        marginBottom: 5,
     },
     buttonContainer: {
         alignItems: 'flex-end',
