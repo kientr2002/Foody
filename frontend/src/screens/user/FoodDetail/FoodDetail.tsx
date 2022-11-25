@@ -28,7 +28,7 @@ function Review() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     marginHorizontal: 10,
-                    marginTop: 5
+                    marginTop: 5,
                 }}
             >
                 <ReviewInput

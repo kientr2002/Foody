@@ -4,38 +4,77 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import Alert from '../../../components/alert/Alert'
 import styles from './styles'
-const questions = [
+
+import { exportStep2 } from './forgotPasswordStep1'
+
+const accounts = [
     {
+        email: 'thoaile@gmail.com',
+        password: '12345678',
         question: 'What your name',
-        answer: 'Kien',
+        answer: 'Thoai',
+    },
+    {
+        email: 'cunle@gmail.com',
+        password: '87654321',
+        question: 'School name',
+        answer: 'HCMUT',
     },
 ]
 export default function ForgotPasswordStep2({ navigation }: any) {
+    const [notification, setNotification] = React.useState<string>('')
+    const [warningQuestion, setwarningQuestion] = React.useState<string>('')
+    const [warningAnswer, setwarningAnswer] = React.useState<string>('')
     const [user, setUser] = React.useState<boolean>(false)
+    const [email, setEmail] = useState<string>('')
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
+    const [success, setSuccess] = React.useState<boolean>(false)
     const LogIn = (success: Boolean) => {
         if (success === true) {
             navigation.navigate('Login')
         }
     }
-    const handleSignIn = (question: string, answer: string) => {
-        questions.forEach((questions) => {
-            if (questions.question === question) {
-                if (questions.answer === answer) setUser(true)
+    const verifyInformation = (question: string, answer: string) => {
+        setSuccess(false)
+        if (question === '') {
+            setwarningQuestion('Please enter Question')
+        } else {
+            setwarningQuestion('')
+            if (answer === '') {
+                setwarningAnswer('Please enter Answer')
+            } else {
+                setwarningAnswer('')
+                setEmail(exportStep2)
+                handleSignIn(email, question, answer)
             }
+        }
+    }
+    const handleSignIn = (email: string, question: string, answer: string) => {
+        accounts.forEach((accounts) => {
+            if (
+                accounts.question === question &&
+                accounts.answer === answer &&
+                accounts.email === email
+            ) {
+                setNotification(accounts.password)
+                setSuccess(true)
+            }
+            setUser(true)
         })
     }
     return (
         <>
             <Alert
                 type='change_password'
-                title='Your password is:'
-                message='1234'
+                title={success ? 'Your password is:' : 'notification'}
+                message={
+                    success ? notification : 'Question or Answer is incorrect'
+                }
                 visible={user}
                 setVisible={setUser}
                 handleOk={() => {
-                    LogIn(true)
+                    if (success) LogIn(true)
                 }}
             />
             <ScrollView contentContainerStyle={styles.container}>
@@ -48,6 +87,9 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                             value={question}
                             setValue={setQuestion}
                         />
+                        <Text style={styles.warningText}>
+                            {warningQuestion}
+                        </Text>
                     </View>
                     <View style={styles.input}>
                         <Input
@@ -55,6 +97,8 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                             value={answer}
                             setValue={setAnswer}
                         />
+
+                        <Text style={styles.warningText}>{warningAnswer}</Text>
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>
@@ -62,7 +106,7 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                         content='SUBMIT'
                         type='confirm'
                         arrow
-                        onPress={() => handleSignIn(question, answer)}
+                        onPress={() => verifyInformation(question, answer)}
                     />
                 </View>
             </ScrollView>

@@ -33,7 +33,6 @@ export default function Input({
 }: InputAttribute) {
     const [name, setName] = React.useState<string>('')
     const [icon, setIcon] = React.useState<string>('')
-
     React.useEffect(() => {
         switch (type) {
             case 'email':
@@ -95,33 +94,44 @@ export default function Input({
     }, [type])
 
     return (
-        <View style={styles.container}>
-            {name !== '' && (
-                <View style={styles.icon}>
-                    <FontAwesome5 name={icon} size={22} color='black' />
-                </View>
-            )}
-            <View style={styles.inputContainer}>
-                {name !== '' && name !== 'SEARCH' && (
-                    <Text style={styles.nameText}>{name}</Text>
+        <View>
+            <View style={styles.container}>
+                {name !== '' && (
+                    <View style={styles.icon}>
+                        <FontAwesome5 name={icon} size={22} color='black' />
+                    </View>
                 )}
-                <TextInput
-                    style={
-                        name !== ''
-                            ? styles.inputText
-                            : [styles.inputText, styles.inputTextDefault]
-                    }
-                    textAlignVertical='center'
-                    autoFocus={focus ? focus : false}
-                    secureTextEntry = {
-                        type === 'password' || type === 'old_password' || type === 'new_password' || type === 'confirm_password' || type === 'confirm_new_password'
-                        ? true
-                        : false
-                    }
-                    editable={editable}
-                    value={value}
-                    onChangeText={setValue}
-                />
+                <View style={styles.inputContainer}>
+                    {name !== '' && name !== 'SEARCH' && (
+                        <Text style={styles.nameText}>{name}</Text>
+                    )}
+                    <TextInput
+                        style={
+                            name !== ''
+                                ? styles.inputText
+                                : [styles.inputText, styles.inputTextDefault]
+                        }
+                        textAlignVertical='center'
+                        autoFocus={focus ? focus : false}
+                        secureTextEntry={
+                            type === 'password' ||
+                            type === 'old_password' ||
+                            type === 'new_password' ||
+                            type === 'confirm_password' ||
+                            type === 'confirm_new_password'
+                                ? true
+                                : false
+                        }
+                        keyboardType={
+                            type === 'height' || type === 'weight'
+                                ? 'numeric'
+                                : 'default'
+                        }
+                        editable={editable}
+                        value={value}
+                        onChangeText={setValue}
+                    />
+                </View>
             </View>
         </View>
     )
