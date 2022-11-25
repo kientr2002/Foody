@@ -109,10 +109,7 @@ export default function Card({
                         {name}
                     </Text>
                     {cardStyle !== 4 ? (
-                        <Text
-                            style={styles.text}
-                            numberOfLines={2}
-                        >
+                        <Text style={styles.text} numberOfLines={2}>
                             {des}
                         </Text>
                     ) : (

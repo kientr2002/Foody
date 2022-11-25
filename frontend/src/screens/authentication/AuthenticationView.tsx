@@ -4,11 +4,11 @@ import { AuthenticationStackParamList } from '../../util/types'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import color from '../../styles/color'
-import Login from './login/login'
-import SignUp from './signup/signup'
-import ForgotPasswordStep1 from './forgotPassword/forgotPasswordStep1'
-import ForgotPasswordStep2 from './forgotPassword/forgotPasswordStep2'
-import ChangePassword from './changePassword/changePassword'
+import Login from './Login/login'
+import SignUp from './SignUp/signup'
+import ForgotPasswordStep1 from './ForgotPassword/forgotPasswordStep1'
+import ForgotPasswordStep2 from './ForgotPassword/forgotPasswordStep2'
+import ChangePassword from './ChangePassword/ChangePassword'
 
 const Stack = createStackNavigator<AuthenticationStackParamList>()
 const MyTheme = {

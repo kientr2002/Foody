@@ -15,9 +15,7 @@ const accounts = [
 ]
 let exportEmail = ''
 export function exportStep2() {
-    return (
-        exportEmail
-    )
+    return exportEmail
 }
 export default function ForgotPasswordStep1({ navigation }: any) {
     const [email, setEmail] = useState<string>('')
@@ -28,11 +26,11 @@ export default function ForgotPasswordStep1({ navigation }: any) {
         let regexEmail = new RegExp(/^[\S]+@gmail.com$/)
         // let regexPassword = new RegExp(/.{8,32}/)
         setSuccess(false)
-        if(regexEmail.test(email)){
+        if (regexEmail.test(email)) {
             setwarningEmail('')
-            handleForgotPassword(email)           
+            handleForgotPassword(email)
         } else {
-            if(email === ''){
+            if (email === '') {
                 setwarningEmail('Please enter Email')
             } else {
                 setwarningEmail('Email must be in format ...@gmail.com')
@@ -52,12 +50,14 @@ export default function ForgotPasswordStep1({ navigation }: any) {
         <>
             <Alert
                 type='change_password'
-                title= 'Notification'
-                message= {success ? 'Press OK to continue' : 'Your email is not found'}
+                title='Notification'
+                message={
+                    success ? 'Press OK to continue' : 'Your email is not found'
+                }
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {
-                    if(success) navigation.navigate('Forgot password step 2')
+                    if (success) navigation.navigate('Forgot password step 2')
                 }}
             />
             <ScrollView contentContainerStyle={styles.container}>
@@ -71,7 +71,7 @@ export default function ForgotPasswordStep1({ navigation }: any) {
                             value={email}
                             setValue={setEmail}
                         />
-                        <Text style={{color:'red'}}>{warningEmail}</Text>
+                        <Text style={styles.warningText}>{warningEmail}</Text>
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>
@@ -85,5 +85,4 @@ export default function ForgotPasswordStep1({ navigation }: any) {
             </ScrollView>
         </>
     )
-} 
-
+}

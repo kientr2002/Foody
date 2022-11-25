@@ -12,7 +12,6 @@ export interface InputAttribute {
     setValue?: (value: string) => void
 }
 
-
 /*
     Component Input
         type (String): 
@@ -32,7 +31,6 @@ export default function Input({
     value,
     setValue,
 }: InputAttribute) {
-    
     const [name, setName] = React.useState<string>('')
     const [icon, setIcon] = React.useState<string>('')
     React.useEffect(() => {
@@ -97,7 +95,7 @@ export default function Input({
 
     return (
         <View>
-                <View style={styles.container}>
+            <View style={styles.container}>
                 {name !== '' && (
                     <View style={styles.icon}>
                         <FontAwesome5 name={icon} size={22} color='black' />
@@ -115,15 +113,19 @@ export default function Input({
                         }
                         textAlignVertical='center'
                         autoFocus={focus ? focus : false}
-                        secureTextEntry = {
-                            type === 'password' || type === 'old_password' || type === 'new_password' || type === 'confirm_password' || type === 'confirm_new_password'
-                            ? true
-                            : false
+                        secureTextEntry={
+                            type === 'password' ||
+                            type === 'old_password' ||
+                            type === 'new_password' ||
+                            type === 'confirm_password' ||
+                            type === 'confirm_new_password'
+                                ? true
+                                : false
                         }
-                        keyboardType = {
+                        keyboardType={
                             type === 'height' || type === 'weight'
-                            ? 'numeric'
-                            : 'default'
+                                ? 'numeric'
+                                : 'default'
                         }
                         editable={editable}
                         value={value}
@@ -131,8 +133,6 @@ export default function Input({
                     />
                 </View>
             </View>
-            
         </View>
-        
     )
 }

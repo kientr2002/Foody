@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
         fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 30,
         color: color.text,
-        marginBottom: 20,
         marginLeft: 20,
     },
     inputContainer: {
@@ -31,13 +30,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     input: {
-        marginBottom: 20,
+        alignItems: 'center',
+        marginBottom: 5,
     },
 
     buttonContainer: {
         alignItems: 'flex-end',
         marginRight: 20,
         marginTop: 10,
+        marginBottom: 10,
     },
 
     focusPassContainer: {
@@ -58,9 +59,17 @@ const styles = StyleSheet.create({
     },
 
     signUpContainer: {
-        alignSelf: 'center',
+        alignSelf: 'flex-start',
         marginBottom: 10,
+        marginLeft: 20,
+    },
+    warningText: {
+        color: 'tomato',
+        alignSelf: 'flex-start',
+        fontWeight: 'bold',
+
         marginTop: 5,
+        marginBottom: 5,
     },
 })
 

@@ -3,7 +3,6 @@ import color from '../../../styles/color'
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         marginTop: 20,
     },
@@ -11,7 +10,6 @@ const styles = StyleSheet.create({
         fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 30,
         color: color.text,
-        marginBottom: 20,
         marginLeft: 20,
     },
     inputContainer: {
@@ -19,16 +17,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     input: {
+        alignItems: 'center',
         marginBottom: 5,
     },
     buttonContainer: {
-        alignItems: 'flex-end',
+        alignSelf: 'flex-end',
         marginRight: 20,
         marginTop: 10,
+        marginBottom: 5,
     },
     logInContainer: {
-        alignSelf: 'center',
-        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        marginLeft: 20,
+        marginBottom: 10,
     },
     highlightText: {
         fontFamily: 'SF-Pro-Rounded_heavy',
@@ -37,6 +40,11 @@ const styles = StyleSheet.create({
     },
     marginLeft_10: {
         marginLeft: 5,
+    },
+    warningText: {
+        color: 'tomato',
+        alignSelf: 'flex-start',
+        fontWeight: 'bold',
     },
 })
 

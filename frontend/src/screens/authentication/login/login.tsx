@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react'
 import { View, Text, Image } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
@@ -9,9 +10,7 @@ import styles from './styles'
 let exportEmail = ''
 
 export function exportToChangePassword() {
-    return (
-        exportEmail
-    )
+    return exportEmail
 }
 
 const accounts = [
@@ -40,17 +39,16 @@ export default function Login({ navigation }: any) {
         let regexEmail = new RegExp(/^[\S]+@gmail.com$/)
         // let regexPassword = new RegExp(/.{8,32}/)
         setSuccess(false)
-        if(regexEmail.test(email)){
+        if (regexEmail.test(email)) {
             setwarningEmail('')
-            if(password === ''){
+            if (password === '') {
                 setwarningPassword('Please enter Password')
             } else {
                 setwarningPassword('')
                 handleSignIn(email, password)
             }
-            
         } else {
-            if(email === ''){
+            if (email === '') {
                 setwarningEmail('Please enter Email')
             } else {
                 setwarningEmail('Email must be in format ...@gmail.com')
@@ -65,7 +63,7 @@ export default function Login({ navigation }: any) {
 
                 if (account.role === 'admin') setAdmin(true)
             }
-            setVisible(true);
+            setVisible(true)
         })
     }
 
@@ -73,15 +71,19 @@ export default function Login({ navigation }: any) {
         <>
             <Alert
                 type='create_plan'
-                title= 'Login'
-                message= {success ? 'Log in success' : 'Email or Password is incorrect'}
+                title='Login'
+                message={
+                    success
+                        ? 'Log in success'
+                        : 'Email or Password is incorrect'
+                }
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {
                     success ? setLogin(true) : setLogin(false)
                 }}
             />
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.container}>
                 <View style={styles.logoContainer}>
                     <Image
                         style={styles.logo}
@@ -90,6 +92,24 @@ export default function Login({ navigation }: any) {
                 </View>
 
                 <Text style={styles.title}>Login</Text>
+                <View style={styles.signUpContainer}>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Text>Don't have any account?</Text>
+                        <Text
+                            accessibilityRole='button'
+                            onPress={() => navigation.navigate('Sign Up')}
+                            style={[styles.highlightText, styles.marginLeft_10]}
+                        >
+                            Sign up
+                        </Text>
+                    </View>
+                </View>
 
                 <View style={styles.inputContainer}>
                     <View style={styles.input}>
@@ -99,16 +119,18 @@ export default function Login({ navigation }: any) {
                             value={email}
                             setValue={setEmail}
                         />
-                        <Text style={{color:'red'}}>{warningEmail}</Text>
+                        <Text style={styles.warningText}>{warningEmail}</Text>
                     </View>
-                    <View>
+                    <View style={styles.input}>
                         <Input
                             type='password'
                             value={password}
                             setValue={setPassword}
                             editable={true}
                         />
-                        <Text style={{color:'red'}}>{warningPassword}</Text>
+                        <Text style={styles.warningText}>
+                            {warningPassword}
+                        </Text>
                     </View>
                 </View>
 
@@ -131,25 +153,7 @@ export default function Login({ navigation }: any) {
                         onPress={() => verifyInformation(email, password)}
                     />
                 </View>
-            </View>
-            <View style={styles.signUpContainer}>
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Text>Don't have any account?</Text>
-                    <Text
-                        accessibilityRole='button'
-                        onPress={() => navigation.navigate('Sign Up')}
-                        style={[styles.highlightText, styles.marginLeft_10]}
-                    >
-                        Sign up
-                    </Text>
-                </View>
-            </View>
+            </ScrollView>
         </>
     )
 }

@@ -34,43 +34,47 @@ export default function ForgotPasswordStep2({ navigation }: any) {
         if (success === true) {
             navigation.navigate('Login')
         }
-        
     }
     const verifyInformation = (question: string, answer: string) => {
-            setSuccess(false)
-            if(question === ''){
-                setwarningQuestion('Please enter Question')
+        setSuccess(false)
+        if (question === '') {
+            setwarningQuestion('Please enter Question')
+        } else {
+            setwarningQuestion('')
+            if (answer === '') {
+                setwarningAnswer('Please enter Answer')
             } else {
-                setwarningQuestion('')
-                if(answer === ''){
-                    setwarningAnswer('Please enter Answer')
-                } else {
-                    setwarningAnswer('')
-                    setEmail(exportStep2)
-                    handleSignIn(email,question, answer)
-                }
+                setwarningAnswer('')
+                setEmail(exportStep2)
+                handleSignIn(email, question, answer)
             }
-            
+        }
     }
     const handleSignIn = (email: string, question: string, answer: string) => {
         accounts.forEach((accounts) => {
-            if (accounts.question === question && accounts.answer === answer && accounts.email === email) {
+            if (
+                accounts.question === question &&
+                accounts.answer === answer &&
+                accounts.email === email
+            ) {
                 setNotification(accounts.password)
                 setSuccess(true)
-            } 
+            }
             setUser(true)
-    })
+        })
     }
     return (
         <>
             <Alert
                 type='change_password'
-                title= {success ? 'Your password is:' : 'notification'}
-                message= {success ? notification : 'Question or Answer is incorrect'}
+                title={success ? 'Your password is:' : 'notification'}
+                message={
+                    success ? notification : 'Question or Answer is incorrect'
+                }
                 visible={user}
                 setVisible={setUser}
                 handleOk={() => {
-                    if(success) LogIn(true)
+                    if (success) LogIn(true)
                 }}
             />
             <ScrollView contentContainerStyle={styles.container}>
@@ -83,7 +87,9 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                             value={question}
                             setValue={setQuestion}
                         />
-                        <Text style={{color:'red'}}>{warningQuestion}</Text>
+                        <Text style={styles.warningText}>
+                            {warningQuestion}
+                        </Text>
                     </View>
                     <View style={styles.input}>
                         <Input
@@ -91,8 +97,8 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                             value={answer}
                             setValue={setAnswer}
                         />
-                        
-                         <Text style={{color:'red'}}>{warningAnswer}</Text>
+
+                        <Text style={styles.warningText}>{warningAnswer}</Text>
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>
@@ -102,7 +108,6 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                         arrow
                         onPress={() => verifyInformation(question, answer)}
                     />
-                   
                 </View>
             </ScrollView>
         </>
