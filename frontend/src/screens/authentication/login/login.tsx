@@ -92,25 +92,6 @@ export default function Login({ navigation }: any) {
                 </View>
 
                 <Text style={styles.title}>Login</Text>
-                <View style={styles.signUpContainer}>
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Text>Don't have any account?</Text>
-                        <Text
-                            accessibilityRole='button'
-                            onPress={() => navigation.navigate('Sign Up')}
-                            style={[styles.highlightText, styles.marginLeft_10]}
-                        >
-                            Sign up
-                        </Text>
-                    </View>
-                </View>
-
                 <View style={styles.inputContainer}>
                     <View style={styles.input}>
                         <Input
@@ -154,6 +135,24 @@ export default function Login({ navigation }: any) {
                     />
                 </View>
             </ScrollView>
+            <View style={styles.signUpContainer}>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Text>Don't have any account?</Text>
+                    <Text
+                        accessibilityRole='button'
+                        onPress={() => navigation.navigate('Sign Up')}
+                        style={[styles.highlightText, styles.marginLeft_10]}
+                    >
+                        Sign up
+                    </Text>
+                </View>
+            </View>
         </>
     )
 }

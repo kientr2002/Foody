@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         marginTop: 20,
+        flex : 1,
     },
     title: {
         fontFamily: 'SF-Pro-Rounded_bold',
@@ -27,9 +28,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     logInContainer: {
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
+        alignSelf: 'center',
         marginLeft: 20,
         marginBottom: 10,
     },

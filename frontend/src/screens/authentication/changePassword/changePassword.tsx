@@ -5,9 +5,18 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 
-const passwords = [
+import { exportToChangePassword } from '../login/login'
+
+const accounts = [
     {
-        password: '1234',
+        email: 'thoaile@gmail.com',
+        password: '12345678',
+        role: 'user',
+    },
+    {
+        email: 'cunle@gmail.com',
+        password: '87654321',
+        role: 'admin',
     },
 ]
 export default function ChangePassword({ navigation }: any) {
@@ -28,8 +37,8 @@ export default function ChangePassword({ navigation }: any) {
         newPassword: string,
         confirmNewPassword: string
     ) => {
-        passwords.forEach((passwords) => {
-            if (passwords.password === oldPassword) {
+        accounts.forEach((accounts) => {
+            if (accounts.password === oldPassword) {
                 if (newPassword === confirmNewPassword) setSuccess(true)
                 else setErrorMessage('Confirm password is incorrect')
             } else {

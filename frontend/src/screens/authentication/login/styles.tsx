@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     },
 
     signUpContainer: {
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
         marginBottom: 10,
         marginLeft: 20,
     },

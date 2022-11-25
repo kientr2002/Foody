@@ -21,8 +21,11 @@ const accounts = [
         answer: 'HCMUT',
     },
 ]
+
+
 export default function ForgotPasswordStep2({ navigation }: any) {
     const [notification, setNotification] = React.useState<string>('')
+    const [checkEmailNull, SetCheckEmailNull] = React.useState<boolean>(false)
     const [warningQuestion, setwarningQuestion] = React.useState<string>('')
     const [warningAnswer, setwarningAnswer] = React.useState<string>('')
     const [user, setUser] = React.useState<boolean>(false)
@@ -45,32 +48,44 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                 setwarningAnswer('Please enter Answer')
             } else {
                 setwarningAnswer('')
-                setEmail(exportStep2)
-                handleSignIn(email, question, answer)
+                             
+                handleSignIn(question, answer)
             }
         }
     }
-    const handleSignIn = (email: string, question: string, answer: string) => {
+    const handleSignIn = (question: string, answer: string) => {
+        setEmail(exportStep2)
+        SetCheckEmailNull(false)
         accounts.forEach((accounts) => {
             if (
                 accounts.question === question &&
                 accounts.answer === answer &&
                 accounts.email === email
+                
             ) {
-                setNotification(accounts.password)
-                setSuccess(true)
+                    setSuccess(true)
+                    setNotification(accounts.password)
+
+                
             }
-            setUser(true)
+            if(email === ''){
+                setNotification('Press OK and SUBMIT again to continue')
+                SetCheckEmailNull(true)
+            } 
+            
         })
+        setUser(true)
     }
     return (
         <>
             <Alert
                 type='change_password'
                 title={success ? 'Your password is:' : 'notification'}
-                message={
-                    success ? notification : 'Question or Answer is incorrect'
-                }
+                message={success 
+                    ? notification 
+                    : checkEmailNull 
+                        ? notification
+                        : 'Answer and Question is incorrect'}
                 visible={user}
                 setVisible={setUser}
                 handleOk={() => {

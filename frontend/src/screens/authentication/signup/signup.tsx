@@ -152,17 +152,6 @@ export default function SignUp({ navigation }: any) {
             />
             <View style={styles.container}>
                 <Text style={styles.title}>Sign up</Text>
-                <View style={styles.logInContainer}>
-                    <Text>Already have account?</Text>
-                    <Text
-                        accessibilityRole='button'
-                        onPress={() => navigation.navigate('Login')}
-                        style={[styles.highlightText, styles.marginLeft_10]}
-                    >
-                        Log In
-                    </Text>
-                </View>
-
                 <ScrollView contentContainerStyle={styles.inputContainer}>
                     <View style={styles.input}>
                         <Input type='email' value={email} setValue={setEmail} />
@@ -228,6 +217,27 @@ export default function SignUp({ navigation }: any) {
                         />
                     </View>
                 </ScrollView>
+                <View style={styles.logInContainer}>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Text>Already have account?</Text>
+                            <Text
+                                accessibilityRole='button'
+                                onPress={() => navigation.navigate('Login')}
+                                style={[
+                                    styles.highlightText,
+                                    styles.marginLeft_10,
+                                ]}
+                            >
+                                Log In
+                            </Text>
+                        </View>
+                    </View>
             </View>
         </>
     )
