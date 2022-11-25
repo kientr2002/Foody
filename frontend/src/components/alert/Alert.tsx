@@ -26,7 +26,7 @@ function ButtonBox(props: any) {
             {props?.notifyType === 3 && (
                 <Button
                     type='confirm'
-                    content='SUBMIT'
+                    content='OK'
                     onPress={() => {
                         props?.setVisible(false)
                         props?.handleOk?.()

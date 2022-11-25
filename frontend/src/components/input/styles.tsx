@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.1,
         shadowRadius: 2,
-        elevation: 2,
+        elevation: 1,
     },
     icon: {
         width: '15%',
@@ -43,10 +43,9 @@ const styles = StyleSheet.create({
         fontSize: 10,
     },
     inputText: {
-        height: 35,
+        height: 32,
         fontFamily: 'SF-Pro-Rounded_medium',
         fontSize: 20,
-        paddingTop: 5,
     },
     inputTextDefault: {
         height: 40,

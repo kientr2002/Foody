@@ -28,12 +28,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     input: {
-        marginBottom: 20,
+        alignItems: 'center',
     },
     buttonContainer: {
         alignItems: 'flex-end',
         marginRight: 20,
         marginTop: 10,
+    },
+    warningText: {
+        color: 'tomato',
+        alignSelf: 'flex-start',
+        fontWeight: 'bold',
+
+        marginTop: 5,
+        marginBottom: 5,
     },
 })
 
