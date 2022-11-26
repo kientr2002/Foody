@@ -10,6 +10,9 @@ import Dropdown from '../../../components/dropdown/Dropdown'
 export default function Calculate({ navigation }: any) {
     const targets = ['Increase Weight', 'Reduce Weight', 'Keep This Weight']
     const [success, setSuccess] = React.useState<boolean>(false)
+    const [warningWeight, setWarningWeight] = React.useState<string>('')
+    const [warningHeight, setWarningHeight] = React.useState<string>('')
+    const [warningActivity, setWarningActivity] = React.useState<string>('')
     const [weight, setWeight] = React.useState<string>('')
     const [height, setHeight] = React.useState<string>('')
     const [activity, setActivity] = useState(undefined)
@@ -21,6 +24,19 @@ export default function Calculate({ navigation }: any) {
         { label: 'Heavy exercise (6-7 days/week)', value: '4' },
         { label: 'Athlete exercise (2x per day)', value: '5' },
     ]
+
+    const verifyInformation = (weight: string, height: string, activity: undefined) => {
+        setSuccess(false)
+        if(weight === ''){
+            setWarningWeight('Please enter Information')
+        }
+        if(height === ''){
+            setWarningHeight('Please enter Information')
+        }
+        if(activity === '1'){
+            setWarningActivity('Please enter Information')
+        }
+    }
     return (
         <>
             <Alert
@@ -40,6 +56,9 @@ export default function Calculate({ navigation }: any) {
                             value={weight}
                             setValue={setWeight}
                         />
+                        <Text style={styles.warningText}>
+                            {warningWeight}
+                        </Text>
                     </View>
                     <View style={styles.input}>
                         <Input
@@ -47,6 +66,9 @@ export default function Calculate({ navigation }: any) {
                             value={height}
                             setValue={setHeight}
                         />
+                        <Text style={styles.warningText}>
+                            {warningHeight}
+                        </Text>
                     </View>
 
                     <View style={styles.dropdown}>
@@ -55,6 +77,9 @@ export default function Calculate({ navigation }: any) {
                             data={data}
                             onSelect={() => setActivity}
                         />
+                        <Text style={styles.warningText}>
+                            {warningActivity}
+                        </Text>
                     </View>
 
                     <View style={styles.target}>

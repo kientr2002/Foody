@@ -9,7 +9,7 @@ import styles from './styles'
 
 let exportEmail = ''
 
-export function exportToChangePassword() {
+export function accountEmail() {
     return exportEmail
 }
 
@@ -57,8 +57,8 @@ export default function Login({ navigation }: any) {
     }
     const handleSignIn = (username: string, password: string) => {
         accounts.forEach((account) => {
-            if (account.email === email && account.password == password) {
-                exportEmail = email
+            if (account.email === username && account.password == password) {
+                exportEmail = account.email
                 setSuccess(true)
 
                 if (account.role === 'admin') setAdmin(true)

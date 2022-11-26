@@ -5,7 +5,7 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 
-import { exportToChangePassword } from '../login/login'
+import { accountEmail } from '../login/login'
 
 const accounts = [
     {
@@ -20,13 +20,69 @@ const accounts = [
     },
 ]
 export default function ChangePassword({ navigation }: any) {
-    const [errorMessage, setErrorMessage] = React.useState<string>('')
+   
+    const [checkEmailNull, SetCheckEmailNull] = React.useState<boolean>(false)
+    const [email, setEmail] = useState<string>('')
+    const [warningOldPassword, setWarningOldPassword] = React.useState<string>('')
+    const [warningNewPassword, setWarningNewPassword] = React.useState<string>('')
+    const [warningConfirmNewPassword, setWarningConfirmNewPassword] = React.useState<string>('')
     const [oldPassword, setOldPassword] = useState<string>('')
     const [newPassword, setNewPassword] = useState<string>('')
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>('')
+    const [notification, setNotification] = useState<string>('')
     const [visible, setVisible] = React.useState<boolean>(false)
     const [success, setSuccess] = React.useState<boolean>(false)
 
+    const verifyInformation = (oldPassword: string, newPassword: string, confirmNewPassword: string) => {
+        var flag = 0
+        setSuccess(false)
+        let regexPassword = new RegExp(/.{8,32}/)
+        if(oldPassword === ''){
+            flag++
+            setWarningOldPassword('Please enter Password')
+        } else {
+            if(regexPassword.test(oldPassword)){
+                setWarningOldPassword('')
+            } else {
+                flag++
+                setWarningOldPassword('Password must be longer than 8 characters')
+            }
+        }
+        if(newPassword === ''){
+            flag++
+            setWarningNewPassword('Please enter new Password')
+        } else {
+            if(regexPassword.test(newPassword)){
+                if(oldPassword === newPassword){
+                    flag++
+                    setWarningNewPassword('New Password cannot be the same as Old Password')
+                } else  setWarningNewPassword('')
+            }  else {
+                flag++
+                setWarningNewPassword('Password must be longer than 8 characters')
+            }
+        }
+        if(confirmNewPassword === ''){
+            flag++
+            setWarningConfirmNewPassword('Please enter confirm new Password')
+        } else {
+            if(newPassword === confirmNewPassword){
+                setWarningConfirmNewPassword('')
+            } else {
+                flag++
+                setWarningConfirmNewPassword('Confirm Password does not match with Password')
+            }
+        }
+        if(flag === 0){
+            handleChangePassword(
+                oldPassword,
+                newPassword,
+                confirmNewPassword
+            )
+        }
+        
+        
+    }
     const handleNavigate = (success: Boolean) => {
         if (success === true) navigation.goBack()
         else return null
@@ -37,22 +93,34 @@ export default function ChangePassword({ navigation }: any) {
         newPassword: string,
         confirmNewPassword: string
     ) => {
+        SetCheckEmailNull(false)
+        setEmail(accountEmail)
         accounts.forEach((accounts) => {
-            if (accounts.password === oldPassword) {
-                if (newPassword === confirmNewPassword) setSuccess(true)
-                else setErrorMessage('Confirm password is incorrect')
-            } else {
-                setErrorMessage('Old password is incorrect')
+            if(accounts.email === email){
+                if(accounts.password === oldPassword){
+                    accounts.password = newPassword
+                    setNotification('Your Password has been changed')
+                    setSuccess(true)
+                }
+            } 
+            if(email === '') {
+                setNotification('Press OK and SUBMIT again to continue')
+                SetCheckEmailNull(true)
             }
-            setVisible(true)
         })
+            setVisible(true)
     }
 
     return (
         <>
             <Alert
                 type='change_password'
-                title={success ? 'Change password success' : errorMessage}
+                title={'Notification'}
+                message={success 
+                    ? notification
+                    : checkEmailNull 
+                        ? notification
+                        : 'Old password is Incorrect'}
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {
@@ -68,6 +136,9 @@ export default function ChangePassword({ navigation }: any) {
                             value={oldPassword}
                             setValue={setOldPassword}
                         />
+                        <Text style={styles.warningText}>
+                            {warningOldPassword}
+                        </Text>
                     </View>
                     <View style={styles.input}>
                         <Input
@@ -75,6 +146,9 @@ export default function ChangePassword({ navigation }: any) {
                             value={newPassword}
                             setValue={setNewPassword}
                         />
+                        <Text style={styles.warningText}>
+                            {warningNewPassword}
+                        </Text>
                     </View>
                     <View style={styles.input}>
                         <Input
@@ -82,6 +156,9 @@ export default function ChangePassword({ navigation }: any) {
                             value={confirmNewPassword}
                             setValue={setConfirmNewPassword}
                         />
+                        <Text style={styles.warningText}>
+                            {warningConfirmNewPassword}
+                        </Text>
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>
@@ -90,7 +167,7 @@ export default function ChangePassword({ navigation }: any) {
                         type='confirm'
                         arrow
                         onPress={() =>
-                            handleChangePassword(
+                            verifyInformation(
                                 oldPassword,
                                 newPassword,
                                 confirmNewPassword
