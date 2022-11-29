@@ -5,19 +5,18 @@ import styles from './styles'
 
 interface Props {
     label: string
-    data: Array<Item>
-    onSelect: (item: Item) => void
+    data: Array<string>
+    onSelect: (item: string) => void
 }
 
 interface Item {
     label: string
-    value: string
 }
 
 const Dropdown: FC<Props> = ({ label, data, onSelect }) => {
     const DropdownButton = useRef<TouchableOpacity>(null)
     const [visible, setVisible] = useState(false)
-    const [selected, setSelected] = useState<Item>()
+    const [selected, setSelected] = useState<string>()
     const [dropdownTop, setDropdownTop] = useState(0)
 
     const toggleDropdown = (): void => {
@@ -31,7 +30,7 @@ const Dropdown: FC<Props> = ({ label, data, onSelect }) => {
         setVisible(true)
     }
 
-    const onItemPress = (item: Item): void => {
+    const onItemPress = (item: string): void => {
         setSelected(item)
         onSelect(item)
         setVisible(false)
@@ -39,7 +38,7 @@ const Dropdown: FC<Props> = ({ label, data, onSelect }) => {
 
     const renderItem = ({ item }: any): ReactElement<any, any> => (
         <TouchableOpacity style={styles.item} onPress={() => onItemPress(item)}>
-            <Text style={styles.text}>{item.label}</Text>
+            <Text style={styles.text}>{item}</Text>
         </TouchableOpacity>
     )
 
@@ -70,7 +69,7 @@ const Dropdown: FC<Props> = ({ label, data, onSelect }) => {
         >
             {renderDropdown()}
             <Text style={styles.buttonText}>
-                {(selected && selected.label) || label}
+                {(selected) || label}
             </Text>
             <FontAwesome name='caret-down' size={22} color='black' />
         </TouchableOpacity>

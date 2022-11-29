@@ -8,7 +8,7 @@ import Login from './Login/login'
 import SignUp from './SignUp/signup'
 import ForgotPasswordStep1 from './ForgotPassword/forgotPasswordStep1'
 import ForgotPasswordStep2 from './ForgotPassword/forgotPasswordStep2'
-import ChangePassword from './ChangePassword/ChangePassword'
+import ChangePassword from './ChangePassword/changePassword'
 
 const Stack = createStackNavigator<AuthenticationStackParamList>()
 const MyTheme = {

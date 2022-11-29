@@ -3,6 +3,7 @@ import { View, Text, ScrollView } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
+
 import styles from './styles'
 
 const accounts = [
@@ -13,7 +14,7 @@ const accounts = [
         email: 'cunle@gmail.com',
     },
 ]
-let exportEmail = ''
+ let exportEmail : string
 export function exportStep2() {
     return exportEmail
 }
