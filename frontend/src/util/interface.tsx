@@ -18,23 +18,23 @@ interface Comment {
 }
 
 interface User {
-    userId: number,
-    username: string,
-    pass: string,
-    name: string,
-    sex: string,
-    email: string,
-    ques: string,
-    ans: string,
-    role: number,
+    userId: number
+    username: string
+    pass: string
+    name: string
+    sex: string
+    email: string
+    ques: string
+    ans: string
+    role: number
     weight: number
-    height: number,
-    acin: string,
-    object: string,
-    TDEE: number,
-    adminId: number,
-    dob: string,
-    id: number,
+    height: number
+    acin: string
+    object: string
+    TDEE: number
+    adminId: number
+    dob: string
+    id: number
 }
 
 export { Food, Comment, User }

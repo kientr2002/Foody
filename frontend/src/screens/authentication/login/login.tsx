@@ -7,7 +7,6 @@ import Input from '../../../components/input/Input'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
-
 export default function Login({ navigation }: any) {
     const { setAdmin, setLogin, setUserId } =
         React.useContext<UserContextInterface>(UserContext)
@@ -35,7 +34,7 @@ export default function Login({ navigation }: any) {
         }
     }
 
-    const handleLogin = async (username:string, password:string) => {
+    const handleLogin = async (username: string, password: string) => {
         try {
             const response = await fetch(
                 'https://foodyforapi.herokuapp.com/getAccount',
@@ -47,17 +46,16 @@ export default function Login({ navigation }: any) {
                     },
                     body: JSON.stringify({
                         username: username,
-                        pass: password
+                        pass: password,
                     }),
                 }
             )
             const data = await response.json()
             if (data.result === 'ok') {
-                setAdmin(data?.role !== 1 )
+                setAdmin(data?.role !== 1)
                 setUserId(data?.userId)
                 setSuccess(true)
-            }
-            else {
+            } else {
                 setSuccess(false)
             }
             setVisible(true)
@@ -65,7 +63,6 @@ export default function Login({ navigation }: any) {
             console.error(error)
         }
     }
-
 
     return (
         <>

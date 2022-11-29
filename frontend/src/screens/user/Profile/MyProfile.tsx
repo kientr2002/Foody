@@ -25,7 +25,7 @@ export default function MyProfile({ navigation }: any) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        username: 'client4'
+                        username: 'client4',
                     }),
                 }
             )

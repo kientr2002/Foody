@@ -6,8 +6,8 @@ export interface UserContextInterface {
     setLogin: (a: boolean) => void
     admin: boolean
     setAdmin: (a: boolean) => void
-    userId: number | null,
-    setUserId: (a:number | null) => void
+    userId: number | null
+    setUserId: (a: number | null) => void
     createPlanList: Food[]
     myPlan: Food[]
     myFavorite: Food[]
@@ -44,8 +44,7 @@ export function UserProvider({ children }: any) {
     const [myPlan, setMyPlan] = React.useState<Food[]>([])
 
     // get user favorite dishes
-    React.useEffect(() => {
-    }, [])
+    React.useEffect(() => {}, [])
 
     const handleAddToCreatePlan = (food: Food) => {
         if (food) setCreatePlanList([...createPlanList, food])

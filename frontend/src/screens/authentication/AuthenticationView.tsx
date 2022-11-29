@@ -27,12 +27,8 @@ export default function AuthenticationView() {
                     headerShown: false,
                 }}
             >
-                <Stack.Screen 
-                    name='Login' 
-                    component={Login} />
-                <Stack.Screen 
-                    name='Sign Up' 
-                    component={SignUp} />
+                <Stack.Screen name='Login' component={Login} />
+                <Stack.Screen name='Sign Up' component={SignUp} />
                 <Stack.Screen
                     name='Forgot password step 1'
                     component={ForgotPasswordStep1}
