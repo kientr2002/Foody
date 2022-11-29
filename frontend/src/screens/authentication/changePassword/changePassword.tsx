@@ -5,8 +5,6 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 
-import { accountEmail } from '../Login/login'
-
 const accounts = [
     {
         email: 'thoaile@gmail.com',
@@ -93,7 +91,6 @@ export default function ChangePassword({ navigation }: any) {
         confirmNewPassword: string
     ) => {
         SetCheckEmailNull(false)
-        setEmail(accountEmail)
         accounts.forEach((accounts) => {
             if(accounts.email === email){
                 if(accounts.password === oldPassword){
