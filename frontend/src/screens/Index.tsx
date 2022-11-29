@@ -24,7 +24,8 @@ export default function Index() {
             ) : page === 'user' ? (
                 <UserView />
             ) : (
-                <AdminView />
+                <></>
+                // <AdminView />
             )}
         </>
     )

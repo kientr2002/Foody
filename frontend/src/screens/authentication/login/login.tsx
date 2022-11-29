@@ -7,25 +7,6 @@ import Input from '../../../components/input/Input'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
-let exportEmail = ''
-
-export function accountEmail() {
-    return exportEmail
-}
-
-const accounts = [
-    {
-        email: 'thoaile@gmail.com',
-        password: '12345678',
-        role: 'user',
-    },
-    {
-        email: 'cunle@gmail.com',
-        password: '87654321',
-        role: 'admin',
-    },
-]
-
 export default function Login({ navigation }: any) {
     const { setAdmin, setLogin } =
         React.useContext<UserContextInterface>(UserContext)
@@ -45,7 +26,6 @@ export default function Login({ navigation }: any) {
                 setwarningPassword('Please enter Password')
             } else {
                 setwarningPassword('')
-                handleSignIn(email, password)
             }
         } else {
             if (email === '') {
@@ -54,17 +34,6 @@ export default function Login({ navigation }: any) {
                 setwarningEmail('Email must be in format ...@gmail.com')
             }
         }
-    }
-    const handleSignIn = (username: string, password: string) => {
-        accounts.forEach((account) => {
-            if (account.email === username && account.password == password) {
-                exportEmail = account.email
-                setSuccess(true)
-
-                if (account.role === 'admin') setAdmin(true)
-            }
-            setVisible(true)
-        })
     }
 
     return (

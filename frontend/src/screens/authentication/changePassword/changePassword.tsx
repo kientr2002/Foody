@@ -5,7 +5,7 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 
-import { accountEmail } from '../login/login'
+import { accountEmail } from '../Login/login'
 
 const accounts = [
     {
@@ -50,12 +50,12 @@ export default function ChangePassword({ navigation }: any) {
         }
         if(newPassword === ''){
             flag++
-            setWarningNewPassword('Please enter new Password')
+            setWarningNewPassword('Please enter new password')
         } else {
             if(regexPassword.test(newPassword)){
                 if(oldPassword === newPassword){
                     flag++
-                    setWarningNewPassword('New Password cannot be the same as Old Password')
+                    setWarningNewPassword('New Password cannot be the same as current password')
                 } else  setWarningNewPassword('')
             }  else {
                 flag++
@@ -64,13 +64,13 @@ export default function ChangePassword({ navigation }: any) {
         }
         if(confirmNewPassword === ''){
             flag++
-            setWarningConfirmNewPassword('Please enter confirm new Password')
+            setWarningConfirmNewPassword('Please enter confirm password')
         } else {
             if(newPassword === confirmNewPassword){
                 setWarningConfirmNewPassword('')
             } else {
                 flag++
-                setWarningConfirmNewPassword('Confirm Password does not match with Password')
+                setWarningConfirmNewPassword('Confirm Password does not match')
             }
         }
         if(flag === 0){
@@ -80,11 +80,10 @@ export default function ChangePassword({ navigation }: any) {
                 confirmNewPassword
             )
         }
-        
-        
     }
+
     const handleNavigate = (success: Boolean) => {
-        if (success === true) navigation.goBack()
+        if (success) navigation.goBack()
         else return null
     }
 
@@ -102,13 +101,9 @@ export default function ChangePassword({ navigation }: any) {
                     setNotification('Your Password has been changed')
                     setSuccess(true)
                 }
-            } 
-            if(email === '') {
-                setNotification('Press OK and SUBMIT again to continue')
-                SetCheckEmailNull(true)
             }
         })
-            setVisible(true)
+        setVisible(true)
     }
 
     return (
@@ -120,7 +115,7 @@ export default function ChangePassword({ navigation }: any) {
                     ? notification
                     : checkEmailNull 
                         ? notification
-                        : 'Old password is Incorrect'}
+                        : 'Old password is incorrect'}
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {

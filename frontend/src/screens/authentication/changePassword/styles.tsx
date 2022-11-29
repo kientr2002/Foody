@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 30,
         color: color.text,
-        marginBottom: 4,
+        marginBottom: 10,
         marginLeft: 20,
     },
     inputContainer: {
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     input: {
+        alignItems: 'center',
         marginBottom: 10,
     },
     buttonContainer: {
