@@ -8,31 +8,59 @@ import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
 export default function Login({ navigation }: any) {
-    const { setAdmin, setLogin } =
+    const { setAdmin, setLogin, setUserId } =
         React.useContext<UserContextInterface>(UserContext)
-    const [warningEmail, setwarningEmail] = React.useState<string>('')
-    const [warningPassword, setwarningPassword] = React.useState<string>('')
+    const [warningEmail, setWarningEmail] = React.useState<string>('')
+    const [warningPassword, setWarningPassword] = React.useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [email, setEmail] = useState<string>('')
+    const [username, setUsername] = useState<string>('')
     const [success, setSuccess] = React.useState<boolean>(false)
     const [visible, setVisible] = React.useState<boolean>(false)
+
     const verifyInformation = (email: string, password: string) => {
-        let regexEmail = new RegExp(/^[\S]+@gmail.com$/)
-        // let regexPassword = new RegExp(/.{8,32}/)
         setSuccess(false)
-        if (regexEmail.test(email)) {
-            setwarningEmail('')
+        if (username !== '') {
+            setWarningEmail('')
             if (password === '') {
-                setwarningPassword('Please enter Password')
+                setWarningPassword('Please enter password')
             } else {
-                setwarningPassword('')
+                setWarningPassword('')
+                handleLogin(username, password)
             }
         } else {
             if (email === '') {
-                setwarningEmail('Please enter Email')
-            } else {
-                setwarningEmail('Email must be in format ...@gmail.com')
+                setWarningEmail('Please enter username')
             }
+        }
+    }
+
+    const handleLogin = async (username: string, password: string) => {
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/getAccount',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        pass: password,
+                    }),
+                }
+            )
+            const data = await response.json()
+            if (data.result === 'ok') {
+                setAdmin(data?.role !== 1)
+                setUserId(data?.userId)
+                setSuccess(true)
+            } else {
+                setSuccess(false)
+            }
+            setVisible(true)
+        } catch (error) {
+            console.error(error)
         }
     }
 
@@ -66,8 +94,8 @@ export default function Login({ navigation }: any) {
                         <Input
                             type='email'
                             focus
-                            value={email}
-                            setValue={setEmail}
+                            value={username}
+                            setValue={setUsername}
                         />
                         <Text style={styles.warningText}>{warningEmail}</Text>
                     </View>
@@ -100,7 +128,7 @@ export default function Login({ navigation }: any) {
                         content='LOGIN'
                         type='confirm'
                         arrow
-                        onPress={() => verifyInformation(email, password)}
+                        onPress={() => verifyInformation(username, password)}
                     />
                 </View>
             </ScrollView>
