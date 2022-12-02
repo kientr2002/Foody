@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ScrollView, Text, View } from 'react-native'
 
-import { Food } from '../../../util/types'
+import { Food } from '../../../util/interface'
 import Button from '../../../components/button/Button'
 
 import styles from './styles'
@@ -19,7 +19,7 @@ export default function DishList({ navigation }: any) {
             ? navigation.navigate('Food detail', obj)
             : [
                   page === 'Edit Dish'
-                      ? navigation.navigate('Add Food', obj)
+                      ? navigation.navigate('Edit Food', obj)
                       : null,
               ]
     }
@@ -50,7 +50,7 @@ export default function DishList({ navigation }: any) {
                         <FoodCardAdmin
                             key={i}
                             name={food.name}
-                            imgSrc={food.imgSrc}
+                            imgSrc={food.image}
                             onPress={(pageName) =>
                                 handleOnPress(pageName, food)
                             }

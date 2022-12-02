@@ -44,9 +44,21 @@ export default function Input({
                 setName('PASSWORD')
                 setIcon('key')
                 break
+            case 'old_password':
+                setName('OLD PASSWORD')
+                setIcon('key')
+                break
+            case 'new_password':
+                setName('NEW PASSWORD')
+                setIcon('key')
+                break
             case 'confirm_password':
-                setName('NAME')
-                setIcon('signature')
+                setName('CONFIRM PASSWORD')
+                setIcon('lock')
+                break
+            case 'confirm_new_password':
+                setName('CONFIRM NEW PASSWORD')
+                setIcon('lock')
                 break
             case 'name':
                 setName('NAME')
@@ -101,6 +113,15 @@ export default function Input({
                     }
                     textAlignVertical='center'
                     autoFocus={focus ? focus : false}
+                    secureTextEntry={
+                        type === 'password' ||
+                        type === 'old_password' ||
+                        type === 'new_password' ||
+                        type === 'confirm_password' ||
+                        type === 'confirm_new_password'
+                            ? true
+                            : false
+                    }
                     editable={editable}
                     value={value}
                     onChangeText={setValue}
