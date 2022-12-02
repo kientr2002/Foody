@@ -1,20 +1,28 @@
 import * as React from 'react'
-import { View, Text, Image, ScrollView } from 'react-native'
+import { StyleSheet, View, Text, Image, ScrollView } from 'react-native'
+import Alert from '../../../components/alert/Alert'
 
 import Button from '../../../components/button/Button'
-import Alert from '../../../components/alert/Alert'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
 export default function Profile() {
-    const [confirm, setConfirm] = React.useState<boolean>(false)
+    const { setLogin, setAdmin } =
+        React.useContext<UserContextInterface>(UserContext)
+    const [logOut, setLogOut] = React.useState<boolean>(false)
+
     return (
         <>
             <Alert
-                type='remove'
-                title='Are you sure want to do this?'
-                message=''
-                visible={confirm}
-                setVisible={setConfirm}
+                type='logout'
+                title='Log out'
+                message='Are you sure want to logout?'
+                visible={logOut}
+                setVisible={setLogOut}
+                handleOk={() => {
+                    setLogin(false)
+                    setAdmin(false)
+                }}
             />
             <ScrollView>
                 <View style={styles.headerContainer}>
@@ -109,7 +117,13 @@ export default function Profile() {
                         <Button type='confirm' content='CHANGE PASSWORD' />
                     </View>
                     <View>
-                        <Button type='error' content='LOG OUT' onPress={() => { setConfirm(true) }} />
+                        <Button
+                            type='error'
+                            content='LOG OUT'
+                            onPress={() => {
+                                setLogOut(true)
+                            }}
+                        />
                     </View>
                 </View>
             </ScrollView>

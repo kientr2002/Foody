@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-    imgContainer: {
+    videoContainer: {
         width: '100%',
         height: 270,
     },
-    img: {
-        width: '100%',
-        height: '100%',
+    video: {
+        width: 400,
+        height: 270,
     },
 
     bodyContainer: {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     sectionContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
     },
 
     nutrientElement: {

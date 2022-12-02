@@ -4,7 +4,7 @@ import color from '../../styles/color'
 const styles = StyleSheet.create({
     view_layout: {
         flexDirection: 'row',
-        height: 130,
+        height: 100,
         width: '90%',
         backgroundColor: color.background,
         shadowColor: '#000',
@@ -29,13 +29,13 @@ const styles = StyleSheet.create({
     },
     text_2: {
         fontFamily: 'SF-Pro-Rounded_regular',
-        fontSize: 20,
+        fontSize: 15,
         marginRight: 10,
         marginLeft: 20,
     },
     text_3: {
         fontFamily: 'SF-Pro-Rounded_regular',
-        fontSize: 20,
+        fontSize: 15,
         color: '#9ABF11',
     },
 })

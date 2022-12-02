@@ -3,34 +3,26 @@ import axios from 'axios'
 
 const useFetchData = (baseUrl: string, header?: any) => {
     const [data, setData] = React.useState([])
-    const [fetchErr, setFetchErr] = React.useState('')
+    const [loading, setLoading] = React.useState<boolean>(true)
+
+    const fetchData = async (url: string) => {
+        try {
+            const response = await fetch(url)
+            const json = await response.json()
+            if (json) {
+                setData(json)
+                setLoading(false)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     React.useEffect(() => {
-        const source = axios.CancelToken.source()
-
-        const fetchData = async (url: string) => {
-            try {
-                const response = await axios(url, {
-                    cancelToken: source.token,
-                    headers: header
-                        ? { Authorization: `Bearer ${header}` }
-                        : {},
-                })
-                setData(response.data)
-                setFetchErr('')
-            } catch (err: any) {
-                setData([])
-                setFetchErr(err?.message)
-            }
-        }
         fetchData(baseUrl)
+    }, [])
 
-        return () => {
-            source.cancel()
-        }
-    }, [baseUrl])
-
-    return { data, fetchErr }
+    return { data, loading }
 }
 
 export default useFetchData

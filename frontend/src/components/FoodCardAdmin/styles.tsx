@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     background: {
         position: 'relative',
         borderRadius: 20,
+        marginHorizontal: 5,
         marginTop: 10,
         marginBottom: 10,
         flexDirection: 'row',
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 25,
+        fontSize: 20,
     },
     background_3: {
         height: 90,

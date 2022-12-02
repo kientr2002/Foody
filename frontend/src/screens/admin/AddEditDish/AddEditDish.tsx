@@ -23,6 +23,7 @@ export default function AddEditDish({ route, navigation }: any) {
     return (
         <>
             <AlertAdmin visible={submit} setVisible={setSubmit} />
+
             <ScrollView contentContainerStyle={styles.information_container}>
                 <View style={styles.image}></View>
                 {/* Dish name */}

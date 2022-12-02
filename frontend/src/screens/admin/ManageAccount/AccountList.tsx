@@ -2,15 +2,10 @@ import * as React from 'react'
 import { View, ScrollView, Text } from 'react-native'
 
 import AccountCard from '../../../components/accountcard/AccountCard'
-import { Account } from '../../../util/types'
 import styles from './styles'
 
 export default function AccountList({ navigation }: any) {
-    const [accounts, setAccounts] = React.useState<Array<Account>>([])
-    React.useEffect(() => {
-        const data = require('../../../../data/db.json')
-        if (data) setAccounts(data?.account)
-    }, [])
+    const [accounts, setAccounts] = React.useState<Array<any>>([])
 
     const handleOnPress = (obj: any) => {
         navigation.navigate('Account detail', obj)
@@ -26,7 +21,7 @@ export default function AccountList({ navigation }: any) {
                             paddingHorizontal: 0,
                         }}
                     >
-                        {accounts.map((account: Account, i: number) => (
+                        {accounts.map((account: any, i: number) => (
                             <View style={styles.card} key={i}>
                                 <AccountCard
                                     username={account.username}

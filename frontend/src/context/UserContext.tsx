@@ -1,8 +1,13 @@
 import * as React from 'react'
-import { Food } from '../util/types'
+import { Food } from '../util/interface'
 
 export interface UserContextInterface {
-    username?: string
+    login: boolean
+    setLogin: (a: boolean) => void
+    admin: boolean
+    setAdmin: (a: boolean) => void
+    userId: number | null
+    setUserId: (a: number | null) => void
     createPlanList: Food[]
     myPlan: Food[]
     myFavorite: Food[]
@@ -14,6 +19,12 @@ export interface UserContextInterface {
 }
 
 const UserContext = React.createContext<UserContextInterface>({
+    login: false,
+    setLogin: () => {},
+    setAdmin: () => {},
+    admin: false,
+    userId: null,
+    setUserId: () => {},
     createPlanList: [],
     myFavorite: [],
     myPlan: [],
@@ -25,15 +36,15 @@ const UserContext = React.createContext<UserContextInterface>({
 })
 
 export function UserProvider({ children }: any) {
+    const [login, setLogin] = React.useState<boolean>(false)
+    const [admin, setAdmin] = React.useState<boolean>(false)
+    const [userId, setUserId] = React.useState<number | null>(null)
     const [createPlanList, setCreatePlanList] = React.useState<Food[]>([])
     const [myFavorite, setMyFavorite] = React.useState<Food[]>([])
     const [myPlan, setMyPlan] = React.useState<Food[]>([])
 
     // get user favorite dishes
-    React.useEffect(() => {
-        const data = require('../../data/db.json')
-        if (data) setMyFavorite(data?.favorite)
-    }, [])
+    React.useEffect(() => {}, [])
 
     const handleAddToCreatePlan = (food: Food) => {
         if (food) setCreatePlanList([...createPlanList, food])
@@ -68,6 +79,12 @@ export function UserProvider({ children }: any) {
     return (
         <UserContext.Provider
             value={{
+                login,
+                admin,
+                userId,
+                setUserId,
+                setLogin,
+                setAdmin,
                 createPlanList,
                 myFavorite,
                 myPlan,

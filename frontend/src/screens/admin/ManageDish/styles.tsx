@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 20,
     },
+    loadingScreen: {
+        height: 500,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 })
 
 export default styles

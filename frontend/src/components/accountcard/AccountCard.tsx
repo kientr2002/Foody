@@ -24,24 +24,27 @@ export default function AccountCard({
         if (onPress) onPress()
     }
     return (
-        <Pressable onPress={handlePressIn}>
-            <View style={styles.view_layout}>
-                <Image
-                    style={styles.img_1}
-                    source={{
-                        uri: imgSrc,
-                    }}
-                    fadeDuration={300}
-                />
-                <View
-                    // style={textSize}
-                    style={{
-                        borderRadius: 20,
-                    }}
-                >
-                    <View>
+        <View style={styles.view_layout}>
+            <Image
+                style={styles.img_1}
+                source={{
+                    uri: 'https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png',
+                }}
+                fadeDuration={300}
+            />
+            <View
+                // style={textSize}
+                style={{
+                    borderRadius: 20,
+                }}
+            >
+                <View>
+                    <Pressable
+                        onPressIn={handlePressIn}
+                        onPressOut={() => setPressed(false)}
+                    >
                         <Text style={styles.text_1}>{username}</Text>
-                    </View>
+                    </Pressable>
                     {/* Role */}
                     <View style={styles.text_direction}>
                         <View>

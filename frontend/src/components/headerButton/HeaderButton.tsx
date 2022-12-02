@@ -5,7 +5,7 @@ import UserContext, { UserContextInterface } from '../../context/UserContext'
 
 import styles from './styles'
 import color from '../../styles/color'
-import { Food } from '../../util/types'
+import { Food } from '../../util/interface'
 
 interface HeaderButtonAttribute {
     type: number
@@ -67,10 +67,14 @@ export default function HeaderButton({
                                 const food: Food = {
                                     id: route?.params?.id,
                                     name: route?.params?.name,
-                                    body: route?.params?.body,
-                                    recipe: route?.params?.recipe,
-                                    imgSrc: route?.params?.imgSrc,
-                                    rate: route?.params?.rate,
+                                    des: route?.params?.des,
+                                    image: route?.params?.image,
+                                    avgStar: route?.params?.avgStar,
+                                    recipt: route?.params?.recipt,
+                                    calo: route?.params?.calo,
+                                    protein: route?.params?.protein,
+                                    fat: route?.params?.fat,
+                                    carb: route?.params?.carb,
                                 }
                                 handleAddToFavorite(food)
                             } else handleRemoveFromFavorite(route?.params?.id)
@@ -93,10 +97,14 @@ export default function HeaderButton({
                                 const food: Food = {
                                     id: route?.params?.id,
                                     name: route?.params?.name,
-                                    body: route?.params?.body,
-                                    recipe: route?.params?.recipe,
-                                    imgSrc: route?.params?.imgSrc,
-                                    rate: route?.params?.rate,
+                                    des: route?.params?.des,
+                                    image: route?.params?.image,
+                                    avgStar: route?.params?.avgStar,
+                                    recipt: route?.params?.recipt,
+                                    calo: route?.params?.calo,
+                                    protein: route?.params?.protein,
+                                    fat: route?.params?.fat,
+                                    carb: route?.params?.carb,
                                 }
                                 setInPlan(true)
                                 handleAddToCreatePlan(food)

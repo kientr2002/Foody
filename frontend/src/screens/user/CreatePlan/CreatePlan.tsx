@@ -6,7 +6,7 @@ import Button from '../../../components/button/Button'
 
 import Card from '../../../components/card/Card'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
-import { Food } from '../../../util/types'
+import { Food } from '../../../util/interface'
 
 export default function CreatePlan({ navigation }: any) {
     const { createPlanList, handleCreatePlan, handleRemoveFromCreatePlan } =
@@ -23,10 +23,10 @@ export default function CreatePlan({ navigation }: any) {
             f = 0,
             cb = 0
         createPlanList.forEach((food: Food) => {
-            c += food.body.calories
-            p += food.body.protein
-            f += food.body.fat
-            cb += food.body.carb
+            c += food.calo ? food.calo : 0
+            p += food.protein ? food.protein : 0
+            f += food.fat ? food.fat : 0
+            cb += food.carb ? food.carb : 0
         })
         setTotalCalories(c)
         setTotalProtein(p)
@@ -51,9 +51,14 @@ export default function CreatePlan({ navigation }: any) {
                                 key={i}
                                 cardStyle={4}
                                 name={food.name}
-                                body={food.body}
-                                imgSrc={food.imgSrc}
-                                rate={food.rate}
+                                des={food.des}
+                                image={food.image}
+                                rate={food.avgStar}
+                                recipt={food.recipt}
+                                calo={food.calo}
+                                protein={food.protein}
+                                fat={food.fat}
+                                carb={food.carb}
                             />
                         ))}
                     </View>
