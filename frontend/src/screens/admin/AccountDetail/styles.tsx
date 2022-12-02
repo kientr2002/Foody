@@ -14,8 +14,6 @@ const styles = StyleSheet.create({
     avatar: {
         width: 150,
         height: 150,
-        borderRadius: 75,
-        backgroundColor: '#ADAAAA',
     },
     username_container: {
         flex: 1,

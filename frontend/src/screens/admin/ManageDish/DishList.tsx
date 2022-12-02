@@ -14,8 +14,18 @@ export default function DishList({ navigation }: any) {
         if (data) setFoods(data?.food)
     }, [])
 
-    const handleOnPress = (obj: any) => {
-        navigation.navigate('Dish detail', obj)
+    const handleOnPress = (page: string, obj: any) => {
+        page === 'Food detail'
+            ? navigation.navigate('Food detail', obj)
+            : [
+                  page === 'Edit Dish'
+                      ? navigation.navigate('Edit Food', obj)
+                      : null,
+              ]
+    }
+
+    const handleOnPressAdd = () => {
+        navigation.navigate('Add Food', { undefined })
     }
 
     return (

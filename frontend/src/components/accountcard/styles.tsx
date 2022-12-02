@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 100,
         width: '90%',
-        borderRadius: 20,
         backgroundColor: color.background,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },

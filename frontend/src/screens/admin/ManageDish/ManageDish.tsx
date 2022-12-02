@@ -8,6 +8,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 
 import DishList from './DishList'
 import DishDetail from '../DishDetail/DishDetail'
+import AddEditDish from '../AddEditDish/AddEditDish'
 
 import color from '../../../styles/color'
 
@@ -35,9 +36,25 @@ export default function ManageDish({ navigation }: Props) {
             <Stack.Screen
                 name='Food detail'
                 component={DishDetail}
-                // options={({ route }) => ({
-                //     title: route.params.name,
-                // })}
+                options={({ route }) => ({
+                    title: route.params.name,
+                })}
+            />
+
+            <Stack.Screen
+                name='Add Food'
+                component={AddEditDish}
+                options={{
+                    title: 'Add Dish',
+                }}
+            />
+
+            <Stack.Screen
+                name='Edit Food'
+                component={AddEditDish}
+                options={({ route }) => ({
+                    title: route?.params?.name,
+                })}
             />
         </Stack.Navigator>
     )

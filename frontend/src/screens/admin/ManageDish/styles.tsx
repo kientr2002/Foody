@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native'
-import color from '../../../styles/color'
+
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
     },
     button: {
-        width: 115,
+        width: 120,
         marginTop: 20,
         marginBottom: 10,
     },
