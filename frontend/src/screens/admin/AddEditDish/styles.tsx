@@ -2,8 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     image: {
-        flex: 4,
-        backgroundColor: '#BBBBBB',
+        height: 250,
     },
     information_container: {
         flex: 6,
@@ -32,12 +31,12 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     button_container: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         paddingLeft: 30,
         paddingRight: 30,
+        paddingTop: 30,
     },
     button: {
         flex: 1,

@@ -1,30 +1,65 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native'
+import {
+    StyleSheet,
+    View,
+    Text,
+    Image,
+    ScrollView,
+    Linking,
+} from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import * as Progress from 'react-native-progress'
 
 import Button from '../../../components/button/Button'
-
+import { ReviewInput, ReviewCard } from '../../../components/review/Review'
+import Alert from '../../../components/alert/Alert'
+import { Comment } from '../../../util/interface'
 import styles from './styles'
 import color from '../../../styles/color'
 
 const Tab = createMaterialTopTabNavigator()
 
-function Recipe({ recipe }: any) {
+function Review() {
+    const [reviews, setReview] = React.useState<Comment[]>([])
+    const [rate, setRate] = React.useState<number>(0)
+    const [comment, setComment] = React.useState<string>('')
+
+    const handleSubmit = (rate: number, comment: string) => {
+        setReview([...reviews])
+    }
+
     return (
-        <View style={styles.tabBody}>
-            {recipe?.map((item: any, i: any) => (
-                <View key={i} style={styles.recipe}>
-                    <Text style={styles.recipeTitle}>Step {item?.step}</Text>
-                    <Text>{item?.body}</Text>
-                </View>
-            ))}
-        </View>
+        <ScrollView>
+            <View style={styles.reviewCardContainer}>
+                {reviews.length !== 0 &&
+                    reviews.map((review: Comment, i: any) => (
+                        <ReviewCard
+                            key={i}
+                            username={review.username}
+                            comment={review.comment}
+                            star={review.star}
+                        />
+                    ))}
+                {reviews.length === 0 && <Text>No comments</Text>}
+            </View>
+        </ScrollView>
     )
 }
 
-function About({ body }: any) {
+function About({ des, recipt, calo, protein, fat, carb }: any) {
+    const [total, setTotal] = React.useState<number>(0)
+
+    React.useEffect(() => {
+        setTotal(protein + fat + carb)
+    }, [protein, carb, fat])
+
+    const handlePress = React.useCallback(async () => {
+        // Checking if the link is supported for links with custom URL scheme.
+        const supported = await Linking.canOpenURL(recipt)
+        if (supported) await Linking.openURL(recipt)
+    }, [recipt])
+
     return (
         <ScrollView style={styles.tabBody}>
             {/* Nutrient section */}
@@ -42,7 +77,7 @@ function About({ body }: any) {
                         </Text>
                         <Progress.Bar
                             style={styles.progressBar}
-                            progress={1}
+                            progress={calo ? calo * 0.7 : 0}
                             width={250}
                             height={13}
                             color={'#E3A74D'}
@@ -60,7 +95,7 @@ function About({ body }: any) {
                         </Text>
                         <Progress.Bar
                             style={styles.progressBar}
-                            progress={body ? body?.protein / body?.calories : 0}
+                            progress={protein ? protein / total : 0}
                             width={250}
                             height={13}
                             color={'#DC4040'}
@@ -78,7 +113,7 @@ function About({ body }: any) {
                         </Text>
                         <Progress.Bar
                             style={styles.progressBar}
-                            progress={body ? body?.carb / body?.calories : 0}
+                            progress={carb ? carb / total : 0}
                             width={250}
                             height={13}
                             color={'#3DC73A'}
@@ -96,7 +131,7 @@ function About({ body }: any) {
                         </Text>
                         <Progress.Bar
                             style={styles.progressBar}
-                            progress={body ? body?.fat / body?.calories : 0}
+                            progress={fat ? fat / total : 0}
                             width={250}
                             height={13}
                             color={'#DD34AE'}
@@ -110,24 +145,42 @@ function About({ body }: any) {
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Description</Text>
                 <View style={styles.sectionContainer}>
-                    <Text style={styles.sectionText}>{body?.description}</Text>
+                    <Text style={styles.sectionText}>{des}</Text>
                 </View>
+            </View>
+
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Recipe</Text>
+                {/* <View style={styles.sectionContainer}>
+                    <Button
+                        content='Go to recipe'
+                        type='confirm'
+                        onPress={handlePress}
+                    />
+                </View> */}
             </View>
         </ScrollView>
     )
 }
 
 export default function FoodDetail({ route, navigation }: any) {
-    const { name, recipe, body, imgSrc }: any = route?.params
-
+    const { name, des, image, recipt, calo, protein, fat, carb }: any = route?.params
+    const [confirm, setConfirm] = React.useState<boolean>(false)
     const handleOnPress = (obj: any) => {
         navigation.navigate('Edit Food', obj)
     }
 
     return (
         <>
-            <View style={styles.imgContainer}>
-                <Image source={{ uri: imgSrc }} style={styles.img} />
+            <Alert
+                type='remove'
+                title='Are you sure want to do this?'
+                message=''
+                visible={confirm}
+                setVisible={setConfirm}
+            />
+            <View style={styles.videoContainer}>
+                <Image source={{ uri: image }} style={styles.video} />
             </View>
 
             <Tab.Navigator
@@ -149,25 +202,40 @@ export default function FoodDetail({ route, navigation }: any) {
                     },
                 }}
             >
-                <Tab.Screen name='Recipe'>
-                    {(props) => <Recipe {...props} recipe={recipe} />}
-                </Tab.Screen>
                 <Tab.Screen name='About'>
-                    {(props) => <About {...props} body={body} />}
+                    {(props) => (
+                        <About
+                            {...props}
+                            des={des}
+                            calo={calo}
+                            protein={protein}
+                            fat={fat}
+                            carb={carb}
+                            recipt={recipt}
+                        />
+                    )}
                 </Tab.Screen>
+                <Tab.Screen name='Review' component={Review} />
             </Tab.Navigator>
 
             {/* Button DELETE and EDIT */}
             <View style={styles.buttonContainer}>
                 <View style={styles.button}>
-                    <Button content='DELETE' type='error' />
+                    <Button content='DELETE' type='error' onPress={() => { setConfirm(true) }} />
                 </View>
                 <View style={styles.button}>
                     <Button
                         content='EDIT'
                         type='confirm'
                         onPress={() =>
-                            handleOnPress({ name, recipe, body, imgSrc })
+                            handleOnPress({
+                                name,
+                                des,
+                                calo,
+                                protein,
+                                fat,
+                                carb,
+                            })
                         }
                     />
                 </View>

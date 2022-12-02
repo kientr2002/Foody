@@ -77,6 +77,20 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
     },
+    reviewCardContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginVertical: 20,
+    },
+    videoContainer: {
+        width: '100%',
+        height: 270,
+    },
+    video: {
+        width: 400,
+        height: 270,
+    },
 })
 
 export default styles

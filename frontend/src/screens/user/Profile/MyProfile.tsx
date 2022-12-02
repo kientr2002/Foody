@@ -131,6 +131,7 @@ export default function MyProfile() {
                 </View>
             </View>
         </ScrollView>
+
     )
 }
 

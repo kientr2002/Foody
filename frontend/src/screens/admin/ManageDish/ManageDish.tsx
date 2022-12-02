@@ -53,10 +53,9 @@ export default function ManageDish({ navigation }: Props) {
                 name='Edit Food'
                 component={AddEditDish}
                 options={({ route }) => ({
-                    title: route?.params?.name
+                    title: route?.params?.name,
                 })}
             />
-
         </Stack.Navigator>
     )
 }
