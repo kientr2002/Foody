@@ -15,13 +15,8 @@ export default function App() {
     })
 
     if (!fontLoaded)
-<<<<<<< HEAD
         return null 
         
-=======
-        return null
-
->>>>>>> admin-view
     return (
         <UserProvider>
             <Index/>

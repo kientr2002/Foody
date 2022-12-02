@@ -5,9 +5,8 @@ const styles = StyleSheet.create({
         height: 250,
     },
     information_container: {
-        width: '100%',
+        flexDirection: 'column',
         alignItems: 'center',
-        marginBottom: 20,
     },
     inputContainer: {
         width: 120,

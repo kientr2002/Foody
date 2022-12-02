@@ -1,17 +1,34 @@
 import * as React from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import {ActivityIndicator, ScrollView, Text, View} from 'react-native'
 
 import { Food } from '../../../util/interface'
 import Button from '../../../components/button/Button'
 
 import styles from './styles'
 import FoodCardAdmin from '../../../components/FoodCardAdmin/FoodCardAdmin'
+import color from "../../../styles/color";
 
 export default function DishList({ navigation }: any) {
     const [foods, setFoods] = React.useState<Array<Food>>([])
+    const [loading, setLoading] = React.useState<boolean>(true)
+
+    const getFoods = async () => {
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/getListFood'
+            )
+            const data = await response.json()
+            if (data.result === 'ok') {
+                setFoods(data.message)
+                setLoading(false)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     React.useEffect(() => {
-        const data = require('../../../../data/db.json')
-        if (data) setFoods(data?.food)
+        getFoods()
     }, [])
 
     const handleOnPress = (page: string, obj: any) => {
@@ -32,7 +49,11 @@ export default function DishList({ navigation }: any) {
         <View style={styles.container}>
             {/* Add dish */}
             <View style={styles.button}>
-                <Button content='ADD DISH' type='warning' />
+                <Button
+                    content='ADD DISH'
+                    type='warning'
+                    onPress={() => handleOnPressAdd()}
+                />
             </View>
             {/* All dish */}
             <View>
@@ -40,18 +61,26 @@ export default function DishList({ navigation }: any) {
             </View>
 
             {/* List */}
-            <View style={styles.food_list}>
+            {
+                loading
+                    ?
+                <View style={styles.loadingScreen}>
+                    <ActivityIndicator size='large' color={color.primary} />
+                </View>
+                    :
+                <View style={styles.food_list}>
                 <ScrollView>
                     {foods.map((food: Food, i: number) => (
                         <FoodCardAdmin
                             key={i}
                             name={food.name}
                             imgSrc={food.image}
-                            onPress={() => handleOnPress(food)}
+                            onPress={() => handleOnPress('Food detail', food)}
                         />
                     ))}
                 </ScrollView>
             </View>
+            }
         </View>
     )
 }

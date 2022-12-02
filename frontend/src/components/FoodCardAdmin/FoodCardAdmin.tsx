@@ -40,6 +40,7 @@ export default function FoodCardAdmin(
             ? [onPress ? onPress('Food detail') : null]
             : [pressed === 3 ? [onPress ? onPress('Edit Dish') : null] : null]
     }, [pressed])
+
     return (
         <View style={[styles.background, backgroundSize]}>
             <Image

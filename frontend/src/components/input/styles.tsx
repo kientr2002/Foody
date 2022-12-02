@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     inputTextDefault: {
-        height: 40,
+        height: 45,
         paddingTop: 10,
         paddingBottom: 5,
         paddingLeft: 10,

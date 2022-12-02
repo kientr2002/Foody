@@ -44,7 +44,7 @@ export default function AccountCard({
                         onPressOut={() => setPressed(false)}
                     >
                         <Text style={styles.text_1}>{username}</Text>
-                    </View>
+                    </Pressable>
                     {/* Role */}
                     <View style={styles.text_direction}>
                         <View>
@@ -65,6 +65,6 @@ export default function AccountCard({
                     </View>
                 </View>
             </View>
-        </Pressable>
+        </View>
     )
 }
