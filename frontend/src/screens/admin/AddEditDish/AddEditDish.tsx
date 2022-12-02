@@ -23,97 +23,99 @@ export default function AddEditDish({ route, navigation }: any) {
     return (
         <>
             <AlertAdmin visible={submit} setVisible={setSubmit} />
-            <View style={styles.information_container}>
-                <ScrollView>
-                    <View style={styles.image}></View>
-                    {/* Dish name */}
-                    <View style={styles.space}>
-                        <Text style={styles.text_1}>Dish name</Text>
-                        <Input
-                            type=''
-                            focus={false}
-                            value={dishName}
-                            setValue={setDishName}
-                        />
-                    </View>
+            <ScrollView contentContainerStyle={styles.information_container}>
+                <View style={styles.image}></View>
+                {/* Dish name */}
+                <Text style={styles.text_1}>Dish name</Text>
+                <Input
+                    focus={false}
+                    value={dishName}
+                    setValue={setDishName}
+                />
 
-                    {/* Calorioes */}
-                    <View style={styles.space}>
-                        <Text style={styles.text_1}>Calories</Text>
-                        <Input
-                            type=''
-                            focus={false}
-                            value={dishCalo}
-                            setValue={setDishCalo}
-                        />
-                    </View>
-                    {/* Protein-Fat-Carb */}
-                    <View style={styles.space_3items}>
-                        <View style={styles.protein_carb}>
-                            <Text style={styles.text_1}>Protein</Text>
+                {/* Calorioes */}
+                <Text style={styles.text_1}>Calories</Text>
+                <Input
+                    focus={false}
+                    value={dishCalo}
+                    setValue={setDishCalo}
+                />
+
+                <Text style={styles.text_1}>Recipe video</Text>
+                <Input
+                    focus={false}
+                    value={dishCalo}
+                    setValue={setDishCalo}
+                />
+
+                <Text style={styles.text_1}>Image</Text>
+                <Input
+                    focus={false}
+                    value={dishCalo}
+                    setValue={setDishCalo}
+                />
+
+                <View style={styles.space_3items}>
+                    <View>
+                        <Text style={styles.text_1}>Protein</Text>
+                        <View style={styles.inputContainer}>
                             <Input
-                                type=''
                                 focus={false}
                                 value={dishProtein}
                                 setValue={setDishProtein}
                             />
                         </View>
-                        <View style={styles.fat}>
-                            <Text style={styles.text_1}>Fat</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.text_1}>Fat</Text>
+                        <View style={styles.inputContainer}>
                             <Input
-                                type=''
                                 focus={false}
                                 value={dishFat}
                                 setValue={setDishFat}
                             />
                         </View>
-                        <View style={styles.protein_carb}>
-                            <Text style={styles.text_1}>Carb</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.text_1}>Carb</Text>
+                        <View style={styles.inputContainer}>
                             <Input
-                                type=''
                                 focus={false}
                                 value={dishCarb}
                                 setValue={setDishCarb}
                             />
                         </View>
                     </View>
+                </View>
 
-                    {/* Description */}
-                    <View style={styles.space}>
-                        <Text style={styles.text_1}>Description</Text>
-                        {/* <TextInput
-                            type=''
-                            focus={false}
-                            value={description}
-                            setValue={setDescription}
-                        /> */}
-                        <TextArea
-                            value={description}
-                            setValue={setDescription}
+                {/* Description */}
+                <Text style={styles.text_1}>Description</Text>
+                <TextArea
+                    value={description}
+                    setValue={setDescription}
+                />
+
+                {/* Button DELETE and EDIT */}
+                <View style={styles.button_container}>
+                    <View style={styles.button}>
+                        <Button
+                            content='CANCEL'
+                            type='error'
+                            onPress={() => {
+                                setSubmit(false)
+                                navigation.goBack()
+                            }}
                         />
                     </View>
-                    {/* Button DELETE and EDIT */}
-                    <View style={styles.button_container}>
-                        <View style={styles.button}>
-                            <Button
-                                content='CANCEL'
-                                type='error'
-                                onPress={() => {
-                                    setSubmit(false)
-                                    navigation.goBack()
-                                }}
-                            />
-                        </View>
-                        <View style={styles.button}>
-                            <Button
-                                content='SUBMIT'
-                                type='confirm'
-                                onPress={() => setSubmit(true)}
-                            />
-                        </View>
+                    <View>
+                        <Button
+                            content='SUBMIT'
+                            type='confirm'
+                            onPress={() => setSubmit(true)}
+                        />
                     </View>
-                </ScrollView>
-            </View>
+                </View>
+            </ScrollView>
         </>
     )
 }

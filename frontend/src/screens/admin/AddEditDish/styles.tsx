@@ -5,43 +5,34 @@ const styles = StyleSheet.create({
         height: 250,
     },
     information_container: {
-        flex: 6,
-        paddingLeft: 15,
-        paddingRight: 15,
+        width: '100%',
+        alignItems: 'center',
         marginBottom: 20,
     },
-    space: {
-        marginTop: 20,
+    inputContainer: {
+        width: 120,
     },
     space_3items: {
         flexDirection: 'row',
-        marginTop: 20,
+        marginTop: 10,
     },
     text_1: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 20,
-        color: '#000000',
-    },
-    protein_carb: {
-        flex: 1,
-    },
-    fat: {
-        flex: 1,
+        fontSize: 19,
+        alignSelf: 'flex-start',
         marginLeft: 20,
-        marginRight: 20,
+        marginTop: 10
     },
     button_container: {
+        alignSelf: 'flex-end',
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingLeft: 30,
-        paddingRight: 30,
         paddingTop: 30,
+        marginRight: 20,
+        marginBottom: 20
     },
     button: {
-        flex: 1,
-        alignItems: 'center',
-    },
+        marginHorizontal: 10
+    }
 })
 
 export default styles
