@@ -7,7 +7,7 @@ import color from '../../../styles/color'
 import { User } from '../../../util/interface'
 
 export default function MyProfile({ navigation }: any) {
-    const { setLogin, setAdmin, setUserId, userId } =
+    const { setLogin, setAdmin, name, setName } =
         React.useContext<UserContextInterface>(UserContext)
     const [logOut, setLogOut] = React.useState<boolean>(false)
     const [user, setUser] = React.useState<User | null>(null)
@@ -25,7 +25,7 @@ export default function MyProfile({ navigation }: any) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        username: 'client4',
+                        username: name,
                     }),
                 }
             )
@@ -40,7 +40,7 @@ export default function MyProfile({ navigation }: any) {
 
     React.useEffect(() => {
         handleGetInfo()
-    }, [userId])
+    }, [name])
 
     React.useEffect(() => {
         if (user?.dob) {
@@ -60,14 +60,14 @@ export default function MyProfile({ navigation }: any) {
                 handleOk={() => {
                     setLogin(false)
                     setAdmin(false)
-                    setUserId(null)
+                    setName(null)
                 }}
             />
             <ScrollView>
                 <View style={styles.headerContainer}>
                     <Image
                         source={{
-                            uri: 'https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png',
+                            uri: `https://api.multiavatar.com/${name}.png`,
                         }}
                         style={styles.avatar}
                     />

@@ -9,12 +9,29 @@ import UserContext, { UserContextInterface } from '../../../context/UserContext'
 type Props = NativeStackScreenProps<MyPlanStackParamList>
 
 export default function MyPlanList({ route, navigation }: Props) {
-    const { myPlan } = React.useContext<UserContextInterface>(UserContext)
-    const [foods, setFoods] = React.useState<Array<Food>>([])
+    const { name, myPlan, setMyPlan } = React.useContext<UserContextInterface>(UserContext)
 
     React.useEffect(() => {
-        setFoods(myPlan)
-    }, [myPlan])
+        fetch(
+            'https://foodyforapi.herokuapp.com/getPlan',
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: name
+                }),
+            }
+        )
+            .then(res => res.json())
+            .then(obj => {
+                if (obj.result === 'ok')
+                    setMyPlan(obj.message)
+            })
+    }, [name])
+
 
     const handleOnPress = (obj: any) => {
         navigation.navigate('Food Detail', obj)
@@ -22,7 +39,7 @@ export default function MyPlanList({ route, navigation }: Props) {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            {foods.map((food: Food, i: number) => (
+            {myPlan.map((food: Food, i: number) => (
                 <View key={i} style={styles.mealContainer}>
                     <Text style={styles.text}>
                         {i === 0 ? 'Breakfast' : i === 1 ? 'Lunch' : 'Dinner'}

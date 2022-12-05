@@ -9,13 +9,15 @@ import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import { Food } from '../../../util/interface'
 
 export default function CreatePlan({ navigation }: any) {
-    const { createPlanList, handleCreatePlan, handleRemoveFromCreatePlan } =
+    const { name, createPlanList, setMyPlan} =
         React.useContext<UserContextInterface>(UserContext)
     const [totalCalories, setTotalCalories] = React.useState<number>(0)
     const [totalProtein, setTotalProtein] = React.useState<number>(0)
     const [totalFat, setTotalFat] = React.useState<number>(0)
     const [totalCarb, setTotalCarb] = React.useState<number>(0)
+    const [visible, setVisible] = React.useState<boolean>(false)
     const [success, setSuccess] = React.useState<boolean>(false)
+    const [alertMessage, setAlertMessage] = React.useState<string>('')
 
     React.useEffect(() => {
         let c = 0,
@@ -34,14 +36,46 @@ export default function CreatePlan({ navigation }: any) {
         setTotalCarb(cb)
     }, [createPlanList])
 
+    const handleCreatePlan = async () => {
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/plan',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: name,
+                        breakfast: createPlanList[0].id,
+                        lunch: createPlanList[1].id,
+                        dinner: createPlanList[2].id
+                    }),
+                }
+            )
+            const data = await response.json()
+            if (data?.result === 'ok') {
+                setSuccess(true)
+                setMyPlan(createPlanList)
+            }
+            else
+                setSuccess(false)
+            setAlertMessage(data?.message)
+            setVisible(true)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return (
         <>
             <Alert
                 type='create_plan'
-                title='Success'
-                message='Today plan has been created'
-                visible={success}
-                setVisible={setSuccess}
+                title={success ? 'Success' : 'Fail'}
+                message={alertMessage}
+                visible={visible}
+                setVisible={setVisible}
             />
             {createPlanList.length !== 0 ? (
                 <ScrollView>
@@ -130,21 +164,21 @@ export default function CreatePlan({ navigation }: any) {
                                 content='CANCEL'
                                 type='error'
                                 onPress={() => {
-                                    setSuccess(false)
+                                    setVisible(false)
                                     navigation.goBack()
                                 }}
                             />
                         </View>
-                        <View style={{ marginLeft: 10 }}>
+                        <View
+                            style={{
+                                marginLeft: 10,
+                                display: createPlanList.length === 3 ? 'flex' : 'none'
+                            }
+                        }>
                             <Button
                                 content='CREATE'
                                 type='confirm'
-                                onPress={() => {
-                                    if (handleCreatePlan(createPlanList)) {
-                                        setSuccess(true)
-                                        handleRemoveFromCreatePlan(undefined)
-                                    }
-                                }}
+                                onPress={handleCreatePlan}
                             />
                         </View>
                     </View>
