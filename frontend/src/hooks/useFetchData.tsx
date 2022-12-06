@@ -1,17 +1,25 @@
 import React from 'react'
-import axios from 'axios'
 
-const useFetchData = (baseUrl: string, header?: any) => {
-    const [data, setData] = React.useState([])
+const useFetchData = (baseUrl: string, method?: string, obj?: Object) => {
+    const [data, setData] = React.useState<any>(undefined)
     const [loading, setLoading] = React.useState<boolean>(true)
 
     const fetchData = async (url: string) => {
         try {
-            const response = await fetch(url)
-            const json = await response.json()
-            if (json) {
-                setData(json)
-                setLoading(false)
+            const response = await fetch(
+                baseUrl,
+                {
+                    method: method ? method : 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: obj ? JSON.stringify(obj) : null,
+                }
+            )
+            const data = await response.json()
+            if (data.result === 'ok') {
+                setData(data.message[0])
             }
         } catch (error) {
             console.error(error)
@@ -20,7 +28,7 @@ const useFetchData = (baseUrl: string, header?: any) => {
 
     React.useEffect(() => {
         fetchData(baseUrl)
-    }, [])
+    }, [baseUrl])
 
     return { data, loading }
 }

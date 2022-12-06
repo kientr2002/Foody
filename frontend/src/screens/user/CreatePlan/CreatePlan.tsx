@@ -1,30 +1,24 @@
-import AnimatedLottieView from 'lottie-react-native'
 import * as React from 'react'
 import { StyleSheet, ScrollView, View, Text } from 'react-native'
+import AnimatedLottieView from 'lottie-react-native'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
-
 import Card from '../../../components/card/Card'
-import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import { Food } from '../../../util/interface'
 
-export default function CreatePlan({ navigation }: any) {
-    const { name, createPlanList, setMyPlan} =
-        React.useContext<UserContextInterface>(UserContext)
+const useCalculateNutrition = (planList:Food[]) => {
     const [totalCalories, setTotalCalories] = React.useState<number>(0)
     const [totalProtein, setTotalProtein] = React.useState<number>(0)
     const [totalFat, setTotalFat] = React.useState<number>(0)
     const [totalCarb, setTotalCarb] = React.useState<number>(0)
-    const [visible, setVisible] = React.useState<boolean>(false)
-    const [success, setSuccess] = React.useState<boolean>(false)
-    const [alertMessage, setAlertMessage] = React.useState<string>('')
 
     React.useEffect(() => {
         let c = 0,
             p = 0,
             f = 0,
             cb = 0
-        createPlanList.forEach((food: Food) => {
+        planList.forEach((food: Food) => {
             c += food.calo ? food.calo : 0
             p += food.protein ? food.protein : 0
             f += food.fat ? food.fat : 0
@@ -34,7 +28,18 @@ export default function CreatePlan({ navigation }: any) {
         setTotalProtein(p)
         setTotalFat(f)
         setTotalCarb(cb)
-    }, [createPlanList])
+    }, [planList])
+
+    return {totalCalories, totalCarb, totalProtein, totalFat}
+}
+
+export default function CreatePlan({ navigation }: any) {
+    const { name, createPlanList, setCreatePlanList, setMyPlan} =
+        React.useContext<UserContextInterface>(UserContext)
+    const [visible, setVisible] = React.useState<boolean>(false)
+    const [success, setSuccess] = React.useState<boolean>(false)
+    const [alertMessage, setAlertMessage] = React.useState<string>('')
+    const {totalCalories, totalCarb, totalProtein, totalFat} = useCalculateNutrition(createPlanList)
 
     const handleCreatePlan = async () => {
         try {
@@ -57,6 +62,7 @@ export default function CreatePlan({ navigation }: any) {
             const data = await response.json()
             if (data?.result === 'ok') {
                 setSuccess(true)
+                setCreatePlanList([])
                 setMyPlan(createPlanList)
             }
             else

@@ -8,9 +8,7 @@ import UserContext, { UserContextInterface } from '../../../context/UserContext'
 
 type Props = NativeStackScreenProps<MyPlanStackParamList>
 
-export default function MyPlanList({ route, navigation }: Props) {
-    const { name, myPlan, setMyPlan } = React.useContext<UserContextInterface>(UserContext)
-
+const useMyPlan = (name:string | null, setMyPlan:any) => {
     React.useEffect(() => {
         fetch(
             'https://foodyforapi.herokuapp.com/getPlan',
@@ -31,7 +29,11 @@ export default function MyPlanList({ route, navigation }: Props) {
                     setMyPlan(obj.message)
             })
     }, [name])
+}
 
+export default function MyPlanList({ route, navigation }: Props) {
+    const { name, myPlan, setMyPlan } = React.useContext<UserContextInterface>(UserContext)
+    useMyPlan(name, setMyPlan)
 
     const handleOnPress = (obj: any) => {
         navigation.navigate('Food Detail', obj)

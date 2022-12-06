@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Food } from '../util/interface'
+import useFetchData from "../hooks/useFetchData";
 
 export interface UserContextInterface {
     login: boolean
@@ -10,14 +11,15 @@ export interface UserContextInterface {
     setName: (a: string | null) => void
     createPlanList: Food[]
     myPlan: Food[]
+    setCreatePlanList: (a:Food[]) => void
     setMyPlan: (a: Food[]) => void
+    setMyFavorite: (a: Food[]) => void
     myFavorite: Food[]
     handleAddToCreatePlan: (food: Food) => void
     handleRemoveFromCreatePlan: (id: number | undefined) => void
     handleAddToFavorite: (food: Food) => void
     handleRemoveFromFavorite: (id: number) => void
 }
-
 const UserContext = React.createContext<UserContextInterface>({
     login: false,
     setLogin: () => {},
@@ -28,7 +30,9 @@ const UserContext = React.createContext<UserContextInterface>({
     createPlanList: [],
     myFavorite: [],
     myPlan: [],
+    setCreatePlanList: () => {},
     setMyPlan: () => {},
+    setMyFavorite: () => {},
     handleAddToCreatePlan: () => {},
     handleRemoveFromCreatePlan: () => {},
     handleAddToFavorite: () => {},
@@ -42,8 +46,8 @@ export function UserProvider({ children }: any) {
     const [createPlanList, setCreatePlanList] = React.useState<Food[]>([])
     const [myFavorite, setMyFavorite] = React.useState<Food[]>([])
     const [myPlan, setMyPlan] = React.useState<Food[]>([])
-
     // get user favorite dishes
+
     React.useEffect(() => {
         if (login && name) {
             fetch(
@@ -144,7 +148,9 @@ export function UserProvider({ children }: any) {
                 createPlanList,
                 myFavorite,
                 myPlan,
+                setCreatePlanList,
                 setMyPlan,
+                setMyFavorite,
                 handleAddToCreatePlan,
                 handleRemoveFromCreatePlan,
                 handleAddToFavorite,

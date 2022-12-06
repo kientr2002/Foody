@@ -2,52 +2,24 @@ import * as React from 'react'
 import { ScrollView, StyleSheet, View, Image, Text } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
-import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import color from '../../../styles/color'
-import { User } from '../../../util/interface'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
+import useFetchData from "../../../hooks/useFetchData"
+import convertDate from "../../../util/convertDate";
 
 export default function MyProfile({ navigation }: any) {
-    const { setLogin, setAdmin, name, setName } =
+    const { setLogin, setAdmin, name, setName, setCreatePlanList, setMyFavorite } =
         React.useContext<UserContextInterface>(UserContext)
     const [logOut, setLogOut] = React.useState<boolean>(false)
-    const [user, setUser] = React.useState<User | null>(null)
     const [dateOfBirth, setDateOfBirth] = React.useState<Date>()
-
     // Get user profile
-    const handleGetInfo = async () => {
-        try {
-            const response = await fetch(
-                'https://foodyforapi.herokuapp.com/getDetailAcc',
-                {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: name,
-                    }),
-                }
-            )
-            const data = await response.json()
-            if (data.result === 'ok') {
-                setUser(data.message[0])
-            }
-        } catch (error) {
-            console.error(error)
+    const {data: user} = useFetchData(
+        'https://foodyforapi.herokuapp.com/getDetailAcc',
+        'POST',
+        {
+            username: name,
         }
-    }
-
-    React.useEffect(() => {
-        handleGetInfo()
-    }, [name])
-
-    React.useEffect(() => {
-        if (user?.dob) {
-            let date = new Date(user.dob)
-            setDateOfBirth(date)
-        }
-    }, [user])
+    )
 
     return (
         <>
@@ -121,7 +93,7 @@ export default function MyProfile({ navigation }: any) {
                                 styles.color_1,
                             ]}
                         >
-                            {`${dateOfBirth?.getDate()}/${dateOfBirth?.getMonth()}/${dateOfBirth?.getFullYear()}`}
+                            {convertDate(user?.dob)}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -202,6 +174,10 @@ export default function MyProfile({ navigation }: any) {
                             content='LOG OUT'
                             onPress={() => {
                                 setLogOut(true)
+                                setAdmin(false)
+                                setName(null)
+                                setMyFavorite([])
+                                setCreatePlanList([])
                             }}
                         />
                     </View>

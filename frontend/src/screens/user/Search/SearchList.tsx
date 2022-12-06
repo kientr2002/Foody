@@ -5,10 +5,7 @@ import Card from '../../../components/card/Card'
 import Input from '../../../components/input/Input'
 import { Food } from '../../../util/interface'
 
-export default function SearchList({ navigation }: any) {
-    const [searchKeyWord, setSearchKeyWord] = React.useState<string>('')
-    const [result, setResult] = React.useState<Food[]>([])
-
+const useSearch = (key:string, setResult:any) => {
     const searchFood = async () => {
         try {
             const response = await fetch(
@@ -19,7 +16,7 @@ export default function SearchList({ navigation }: any) {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ text: searchKeyWord }),
+                    body: JSON.stringify({ text: key }),
                 }
             )
             const data = await response.json()
@@ -32,11 +29,17 @@ export default function SearchList({ navigation }: any) {
     }
 
     React.useEffect(() => {
-        if (searchKeyWord === '') setResult([])
+        if (key === '') setResult([])
         else {
             searchFood()
         }
-    }, [searchKeyWord])
+    }, [key])
+}
+
+export default function SearchList({ navigation }: any) {
+    const [searchKeyWord, setSearchKeyWord] = React.useState<string>('')
+    const [result, setResult] = React.useState<Food[]>([])
+    useSearch(searchKeyWord, setResult)
 
     const handleOnPress = (obj: any) => {
         navigation.navigate('Food Detail', obj)
