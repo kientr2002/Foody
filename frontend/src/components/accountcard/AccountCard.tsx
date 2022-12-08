@@ -65,6 +65,6 @@ export default function AccountCard({
                     </View>
                 </View>
             </View>
-        </Pressable>
+        </View>
     )
 }

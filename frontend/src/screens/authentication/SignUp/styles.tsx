@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         marginTop: 20,
-        flex : 1,
+        flex: 1,
     },
     title: {
         fontFamily: 'SF-Pro-Rounded_bold',

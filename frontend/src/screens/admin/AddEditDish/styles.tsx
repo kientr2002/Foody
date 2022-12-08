@@ -20,18 +20,18 @@ const styles = StyleSheet.create({
         fontSize: 19,
         alignSelf: 'flex-start',
         marginLeft: 20,
-        marginTop: 10
+        marginTop: 10,
     },
     button_container: {
         alignSelf: 'flex-end',
         flexDirection: 'row',
         paddingTop: 30,
         marginRight: 20,
-        marginBottom: 20
+        marginBottom: 20,
     },
     button: {
-        marginHorizontal: 10
-    }
+        marginHorizontal: 10,
+    },
 })
 
 export default styles

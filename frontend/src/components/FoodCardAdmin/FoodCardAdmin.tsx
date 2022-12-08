@@ -13,12 +13,14 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 export interface CardAttribute {
     name: string
     imgSrc: string
-    onPress?: (name: string) => void
+    onPress?: () => void
+    onPressEdit?: () => void
+    onPressDelete?: () => void
 }
 
 export default function FoodCardAdmin(
-    { name, imgSrc, onPress }: CardAttribute,
-    { navigation }: { navigation: any }
+    { name, imgSrc, onPress, onPressEdit, onPressDelete }: CardAttribute,
+    { navigation }: any
 ) {
     const [backgroundSize, setBackgroundSize] = React.useState<any>(null)
     const [imgSize, setImgSize] = React.useState<any>(null)
@@ -37,8 +39,9 @@ export default function FoodCardAdmin(
 
     React.useEffect(() => {
         pressed === 1
-            ? [onPress ? onPress('Food detail') : null]
-            : [pressed === 3 ? [onPress ? onPress('Edit Dish') : null] : null]
+            ? [onPress ? onPress() : null]
+            : [pressed === 3 ? [onPressEdit ? onPressEdit() : null]
+                : [pressed === 4 ? [onPressDelete ? onPressDelete() : null] : null]]
     }, [pressed])
 
     return (
@@ -51,7 +54,7 @@ export default function FoodCardAdmin(
             <View style={textSize}>
                 <View style={styles.name}>
                     <Pressable
-                        onPressIn={() =>
+                        onPress={() =>
                             pressed === 2 ? null : handlePressIn(1)
                         }
                         onPressOut={() => setPressed(0)}
@@ -64,7 +67,7 @@ export default function FoodCardAdmin(
                         onPressIn={() =>
                             pressed === 2 ? setPressed(0) : handlePressIn(2)
                         }
-                        // onPressOut={() => setPressed(0)}
+                    // onPressOut={() => setPressed(0)}
                     >
                         <FontAwesome5
                             name='ellipsis-v'
@@ -73,10 +76,7 @@ export default function FoodCardAdmin(
                         />
                     </Pressable>
                     <View style={pressed === 2 ? styles.menu2 : styles.menu1}>
-                        <Pressable
-                            onPressIn={() => handlePressIn(3)}
-                            onPressOut={() => setPressed(0)}
-                        >
+                        <Pressable onPress={() => handlePressIn(3)}>
                             <Text
                                 style={{
                                     fontFamily: 'SF-Pro-Rounded_bold',
@@ -95,7 +95,7 @@ export default function FoodCardAdmin(
                             }}
                         ></View>
                         <Pressable
-                        // onPress={() => handlePressIn(4)}
+                            onPress={() => handlePressIn(4)}
                         >
                             <Text
                                 style={{

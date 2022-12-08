@@ -99,7 +99,13 @@ export default function AccountDetail({ route }: any) {
 
             <View style={styles.button_container}>
                 <View style={styles.button}>
-                    <Button content='BAN' type='error' onPress={() => { setConfirm(true) }} />
+                    <Button
+                        content='BAN'
+                        type='error'
+                        onPress={() => {
+                            setConfirm(true)
+                        }}
+                    />
                 </View>
             </View>
         </>

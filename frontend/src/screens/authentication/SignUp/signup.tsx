@@ -218,26 +218,23 @@ export default function SignUp({ navigation }: any) {
                     </View>
                 </ScrollView>
                 <View style={styles.logInContainer}>
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Text>Already have account?</Text>
+                        <Text
+                            accessibilityRole='button'
+                            onPress={() => navigation.navigate('Login')}
+                            style={[styles.highlightText, styles.marginLeft_10]}
                         >
-                            <Text>Already have account?</Text>
-                            <Text
-                                accessibilityRole='button'
-                                onPress={() => navigation.navigate('Login')}
-                                style={[
-                                    styles.highlightText,
-                                    styles.marginLeft_10,
-                                ]}
-                            >
-                                Log In
-                            </Text>
-                        </View>
+                            Log In
+                        </Text>
                     </View>
+                </View>
             </View>
         </>
     )

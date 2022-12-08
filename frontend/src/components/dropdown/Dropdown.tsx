@@ -68,9 +68,7 @@ const Dropdown: FC<Props> = ({ label, data, onSelect }) => {
             onPress={toggleDropdown}
         >
             {renderDropdown()}
-            <Text style={styles.buttonText}>
-                {(selected) || label}
-            </Text>
+            <Text style={styles.buttonText}>{selected || label}</Text>
             <FontAwesome name='caret-down' size={22} color='black' />
         </TouchableOpacity>
     )

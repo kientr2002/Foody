@@ -163,10 +163,11 @@ function About({ des, recipt, calo, protein, fat, carb }: any) {
 }
 
 export default function FoodDetail({ route, navigation }: any) {
-    const { name, des, image, recipt, calo, protein, fat, carb }: any = route?.params
+    const { id, name, des, image, recipt, calo, protein, fat, carb }: any =
+        route?.params
     const [confirm, setConfirm] = React.useState<boolean>(false)
     const handleOnPress = (obj: any) => {
-        navigation.navigate('Edit Food', obj)
+        navigation.navigate('Edit Food', obj, 'edit')
     }
 
     return (
@@ -220,7 +221,13 @@ export default function FoodDetail({ route, navigation }: any) {
             {/* Button DELETE and EDIT */}
             <View style={styles.buttonContainer}>
                 <View style={styles.button}>
-                    <Button content='DELETE' type='error' onPress={() => { setConfirm(true) }} />
+                    <Button
+                        content='DELETE'
+                        type='error'
+                        onPress={() => {
+                            setConfirm(true)
+                        }}
+                    />
                 </View>
                 <View style={styles.button}>
                     <Button
@@ -228,8 +235,11 @@ export default function FoodDetail({ route, navigation }: any) {
                         type='confirm'
                         onPress={() =>
                             handleOnPress({
+                                id,
                                 name,
                                 des,
+                                image,
+                                recipt,
                                 calo,
                                 protein,
                                 fat,

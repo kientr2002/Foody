@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     },
     food_list: {
         justifyContent: 'center',
-        marginBottom: 20,
+        marginBottom: 100,
     },
     loadingScreen: {
         height: 500,

@@ -15,11 +15,11 @@ export default function App() {
     })
 
     if (!fontLoaded)
-        return null 
-        
+        return null
+
     return (
         <UserProvider>
-            <Index/>
+            <Index />
         </UserProvider>
     )
 }

@@ -7,8 +7,6 @@ import Input from '../../../components/input/Input'
 import styles from './styles'
 import Dropdown from '../../../components/dropdown/Dropdown'
 
-
-
 var outputHeight = 0
 var outputWeight = 0
 var outputActivity = 0
@@ -26,69 +24,73 @@ export default function Calculate({ navigation }: any) {
     const [activity, setActivity] = React.useState<string>('')
     const [yourTarget, setYourTarget] = useState<string>('')
 
-    const data = [ 'Sedentary',
-    'Light exercise (1-2 days/week)',
-    'Moderate exercise (3-4 days/week)',
-    'Heavy exercise (6-7 days/week)',
-    'Athlete exercise (2x per day)',
+    const data = [
+        'Sedentary',
+        'Light exercise (1-2 days/week)',
+        'Moderate exercise (3-4 days/week)',
+        'Heavy exercise (6-7 days/week)',
+        'Athlete exercise (2x per day)',
     ]
 
-    const verifyInformation = (weight: string, height: string, activity: string, target: string) => {
-        var  flag = 0
+    const verifyInformation = (
+        weight: string,
+        height: string,
+        activity: string,
+        target: string
+    ) => {
+        var flag = 0
         setSuccess(false)
-        if(weight === ''){
+        if (weight === '') {
             flag++
             outputWeight = 0
             setWarningWeight('Please enter Information')
         } else {
-            outputWeight= parseInt(weight,10)
+            outputWeight = parseInt(weight, 10)
             setWarningWeight('')
         }
-        if(height === ''){
+        if (height === '') {
             flag++
             outputHeight = 0
             setWarningHeight('Please enter Information')
         } else {
-            outputHeight= parseInt(height,10)
+            outputHeight = parseInt(height, 10)
             setWarningHeight('')
         }
-        if(activity === ''){
+        if (activity === '') {
             flag++
             outputActivity = 0
             setWarningActivity('Please choose Information')
-        }else {
-            if(activity === 'Sedentary'){
+        } else {
+            if (activity === 'Sedentary') {
                 outputActivity = 1
-            } else if (activity === 'Light exercise (1-2 days/week)'){
+            } else if (activity === 'Light exercise (1-2 days/week)') {
                 outputActivity = 2
-            } else if (activity ===  'Moderate exercise (3-4 days/week)') {
+            } else if (activity === 'Moderate exercise (3-4 days/week)') {
                 outputActivity = 3
-            } else if (activity === 'Heavy exercise (6-7 days/week)'){
+            } else if (activity === 'Heavy exercise (6-7 days/week)') {
                 outputActivity = 4
             } else {
                 outputActivity = 5
             }
             setWarningActivity('')
         }
-        if(target === ''){
+        if (target === '') {
             flag++
             outputTarget = 0
             setWarningYourTarget('Please choose Information')
         } else {
-            if(target === 'Increase Weight'){
+            if (target === 'Increase Weight') {
                 outputTarget = 1
-            } else if(target === 'Reduce Weight'){
+            } else if (target === 'Reduce Weight') {
                 outputTarget = 2
             } else {
                 outputTarget = 3
             }
             setWarningYourTarget('')
-           
         }
-        if(flag === 0){
+        if (flag === 0) {
             setSuccess(true)
         }
-        
     }
     return (
         <>
@@ -98,7 +100,7 @@ export default function Calculate({ navigation }: any) {
                 message='Your TDEE has been caculated'
                 visible={success}
                 setVisible={setSuccess}
-                handleOk = {() => navigation.goBack()}
+                handleOk={() => navigation.goBack()}
             />
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.title}>Update your status</Text>
@@ -110,9 +112,7 @@ export default function Calculate({ navigation }: any) {
                             value={weight}
                             setValue={setWeight}
                         />
-                        <Text style={styles.warningText}>
-                            {warningWeight}
-                        </Text>
+                        <Text style={styles.warningText}>{warningWeight}</Text>
                     </View>
                     <View style={styles.input}>
                         <Input
@@ -120,9 +120,7 @@ export default function Calculate({ navigation }: any) {
                             value={height}
                             setValue={setHeight}
                         />
-                        <Text style={styles.warningText}>
-                            {warningHeight}
-                        </Text>
+                        <Text style={styles.warningText}>{warningHeight}</Text>
                     </View>
 
                     <View style={styles.dropdown}>
@@ -130,7 +128,7 @@ export default function Calculate({ navigation }: any) {
                             label='Activity'
                             data={data}
                             onSelect={(data) => {
-                                setActivity(data)                               
+                                setActivity(data)
                             }}
                         />
                         <Text style={styles.warningText}>
@@ -171,7 +169,12 @@ export default function Calculate({ navigation }: any) {
                         type='confirm'
                         arrow
                         onPress={() => {
-                            verifyInformation(weight, height, activity, yourTarget)
+                            verifyInformation(
+                                weight,
+                                height,
+                                activity,
+                                yourTarget
+                            )
                         }}
                     />
                 </View>

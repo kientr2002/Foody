@@ -18,12 +18,14 @@ const accounts = [
     },
 ]
 export default function ChangePassword({ navigation }: any) {
-   
     const [checkEmailNull, SetCheckEmailNull] = React.useState<boolean>(false)
     const [email, setEmail] = useState<string>('')
-    const [warningOldPassword, setWarningOldPassword] = React.useState<string>('')
-    const [warningNewPassword, setWarningNewPassword] = React.useState<string>('')
-    const [warningConfirmNewPassword, setWarningConfirmNewPassword] = React.useState<string>('')
+    const [warningOldPassword, setWarningOldPassword] =
+        React.useState<string>('')
+    const [warningNewPassword, setWarningNewPassword] =
+        React.useState<string>('')
+    const [warningConfirmNewPassword, setWarningConfirmNewPassword] =
+        React.useState<string>('')
     const [oldPassword, setOldPassword] = useState<string>('')
     const [newPassword, setNewPassword] = useState<string>('')
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>('')
@@ -31,52 +33,58 @@ export default function ChangePassword({ navigation }: any) {
     const [visible, setVisible] = React.useState<boolean>(false)
     const [success, setSuccess] = React.useState<boolean>(false)
 
-    const verifyInformation = (oldPassword: string, newPassword: string, confirmNewPassword: string) => {
+    const verifyInformation = (
+        oldPassword: string,
+        newPassword: string,
+        confirmNewPassword: string
+    ) => {
         var flag = 0
         setSuccess(false)
         let regexPassword = new RegExp(/.{8,32}/)
-        if(oldPassword === ''){
+        if (oldPassword === '') {
             flag++
             setWarningOldPassword('Please enter Password')
         } else {
-            if(regexPassword.test(oldPassword)){
+            if (regexPassword.test(oldPassword)) {
                 setWarningOldPassword('')
             } else {
                 flag++
-                setWarningOldPassword('Password must be longer than 8 characters')
+                setWarningOldPassword(
+                    'Password must be longer than 8 characters'
+                )
             }
         }
-        if(newPassword === ''){
+        if (newPassword === '') {
             flag++
             setWarningNewPassword('Please enter new password')
         } else {
-            if(regexPassword.test(newPassword)){
-                if(oldPassword === newPassword){
+            if (regexPassword.test(newPassword)) {
+                if (oldPassword === newPassword) {
                     flag++
-                    setWarningNewPassword('New Password cannot be the same as current password')
-                } else  setWarningNewPassword('')
-            }  else {
+                    setWarningNewPassword(
+                        'New Password cannot be the same as current password'
+                    )
+                } else setWarningNewPassword('')
+            } else {
                 flag++
-                setWarningNewPassword('Password must be longer than 8 characters')
+                setWarningNewPassword(
+                    'Password must be longer than 8 characters'
+                )
             }
         }
-        if(confirmNewPassword === ''){
+        if (confirmNewPassword === '') {
             flag++
             setWarningConfirmNewPassword('Please enter confirm password')
         } else {
-            if(newPassword === confirmNewPassword){
+            if (newPassword === confirmNewPassword) {
                 setWarningConfirmNewPassword('')
             } else {
                 flag++
                 setWarningConfirmNewPassword('Confirm Password does not match')
             }
         }
-        if(flag === 0){
-            handleChangePassword(
-                oldPassword,
-                newPassword,
-                confirmNewPassword
-            )
+        if (flag === 0) {
+            handleChangePassword(oldPassword, newPassword, confirmNewPassword)
         }
     }
 
@@ -92,8 +100,8 @@ export default function ChangePassword({ navigation }: any) {
     ) => {
         SetCheckEmailNull(false)
         accounts.forEach((accounts) => {
-            if(accounts.email === email){
-                if(accounts.password === oldPassword){
+            if (accounts.email === email) {
+                if (accounts.password === oldPassword) {
                     accounts.password = newPassword
                     setNotification('Your Password has been changed')
                     setSuccess(true)
@@ -108,11 +116,13 @@ export default function ChangePassword({ navigation }: any) {
             <Alert
                 type='change_password'
                 title={'Notification'}
-                message={success 
-                    ? notification
-                    : checkEmailNull 
+                message={
+                    success
                         ? notification
-                        : 'Old password is incorrect'}
+                        : checkEmailNull
+                        ? notification
+                        : 'Old password is incorrect'
+                }
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {
