@@ -5,10 +5,13 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 
 import styles from './styles'
-
- let exportEmail : string
+ let exportPassword : string
+ let exportUsername : string
 export function exportStep2() {
-    return exportEmail
+    return exportUsername
+}
+export function exportStep2pw() {
+    return exportPassword
 }
 export default function ForgotPasswordStep1({ navigation }: any) {
     const [username, setUsername] = useState<string>('')
@@ -44,6 +47,8 @@ export default function ForgotPasswordStep1({ navigation }: any) {
             )
             const data = await response.json()
             if (data.result === 'ok') {
+                exportUsername = username
+                exportPassword = data.password
                 setSuccess(true)
             } else {
                 setSuccess(false)

@@ -6,21 +6,7 @@ import Alert from '../../../components/alert/Alert'
 import styles from './styles'
 
 import { exportStep2 } from './forgotPasswordStep1'
-
-const accounts = [
-    {
-        email: 'thoaile@gmail.com',
-        password: '12345678',
-        question: 'What your name',
-        answer: 'Thoai',
-    },
-    {
-        email: 'cunle@gmail.com',
-        password: '87654321',
-        question: 'School name',
-        answer: 'HCMUT',
-    },
-]
+import { exportStep2pw } from './forgotPasswordStep1'
 
 
 export default function ForgotPasswordStep2({ navigation }: any) {
@@ -29,7 +15,8 @@ export default function ForgotPasswordStep2({ navigation }: any) {
     const [warningQuestion, setwarningQuestion] = React.useState<string>('')
     const [warningAnswer, setwarningAnswer] = React.useState<string>('')
     const [user, setUser] = React.useState<boolean>(false)
-    const [email, setEmail] = useState<string>('')
+    const [username, setUsername] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
     const [success, setSuccess] = React.useState<boolean>(false)
@@ -39,6 +26,7 @@ export default function ForgotPasswordStep2({ navigation }: any) {
         }
     }
     const verifyInformation = (question: string, answer: string) => {
+        
         setSuccess(false)
         if (question === '') {
             setwarningQuestion('Please enter Question')
@@ -47,33 +35,48 @@ export default function ForgotPasswordStep2({ navigation }: any) {
             if (answer === '') {
                 setwarningAnswer('Please enter Answer')
             } else {
-                setwarningAnswer('')
-                             
-                handleSignIn(question, answer)
+                setwarningAnswer('')                                      
+                handleSignIn(username,question, answer)
             }
         }
     }
-    const handleSignIn = (question: string, answer: string) => {
-        setEmail(exportStep2)
+    const handleSignIn = async (user: string,question: string, answer: string) => {
         SetCheckEmailNull(false)
-        accounts.forEach((accounts) => {
-            if (
-                accounts.question === question &&
-                accounts.answer === answer &&
-                accounts.email === email
-                
-            ) {
-                    setSuccess(true)
-                    setNotification(accounts.password)
-
-                
-            }
-            if(email === ''){
-                setNotification('Press OK and SUBMIT again to continue')
-                SetCheckEmailNull(true)
-            } 
+        setUsername(exportStep2)
+        setPassword(exportStep2pw)
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/getForgotpass',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: user,
+                        ques: question,
+                        ans: answer
+                    }),
+                }
+            )
             
-        })
+            if(username === ''){
+                setNotification('Press OK and SUBMIT again to continue')
+                setSuccess(false)
+                SetCheckEmailNull(true)
+            }  else {
+                const data = await response.json()
+                if (data.result === 'ok') {
+                    setNotification(password)
+                    setSuccess(true)
+                } else {
+                    setSuccess(false)
+                }
+            }
+        } catch (error) {
+            console.error(error)
+        }
         setUser(true)
     }
     return (

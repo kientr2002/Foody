@@ -7,6 +7,17 @@ import Input from '../../../components/input/Input'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
+
+let exportUser: string
+let exportPass: string
+export function exportLoginUser(){
+    return exportUser
+}
+
+export function exportLoginPass(){
+    return exportPass
+}
+
 export default function Login({ navigation }: any) {
     const { setAdmin, setLogin, setUserId } =
         React.useContext<UserContextInterface>(UserContext)
@@ -17,7 +28,7 @@ export default function Login({ navigation }: any) {
     const [success, setSuccess] = React.useState<boolean>(false)
     const [visible, setVisible] = React.useState<boolean>(false)
 
-    const verifyInformation = (email: string, password: string) => {
+    const verifyInformation = (user: string, password: string) => {
         setSuccess(false)
         if (username !== '') {
             setWarningUsername('')
@@ -28,7 +39,7 @@ export default function Login({ navigation }: any) {
                 handleLogin(username, password)
             }
         } else {
-            if (email === '') {
+            if (user === '') {
                 setWarningUsername('Please enter username')
             }
         }
@@ -52,6 +63,8 @@ export default function Login({ navigation }: any) {
             )
             const data = await response.json()
             if (data.result === 'ok') {
+                exportUser = username
+                exportPass = password
                 setAdmin(data?.role !== 1)
                 setUserId(data?.userId)
                 setSuccess(true)
@@ -72,7 +85,7 @@ export default function Login({ navigation }: any) {
                 message={
                     success
                         ? 'Log in success'
-                        : 'Email or Password is incorrect'
+                        : 'User or Password is incorrect'
                 }
                 visible={visible}
                 setVisible={setVisible}
