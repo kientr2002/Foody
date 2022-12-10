@@ -1,33 +1,34 @@
 import React, { FC, Component, useState } from 'react'
 import Select from 'react-select'
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 
-const accounts = [
-    {
-        email: 'thoaile@gmail.com',
-    },
-    {
-        email: 'cunle@gmail.com',
-    },
-]
+
 
 export default function SignUp({ navigation }: any) {
+    const { setAdmin, setLogin, setUserId } =
+    React.useContext<UserContextInterface>(UserContext)
+    const [success, setSuccess] = React.useState<boolean>(false)
     const [visible, setVisible] = React.useState<boolean>(false)
+    const [warningUser, setWarningUser] = React.useState<string>('')
     const [warningEmail, setwarningEmail] = React.useState<string>('')
     const [warningPassword, setWarningPassword] = React.useState<string>('')
     const [warningConfirm_password, setWarningConfirm_password] =
         useState<string>('')
     const [warningName, setWarningName] = useState<string>('')
+    const [warningSex, setWarningSex] = useState<string>('')
     const [warningDate, setWarningDate] = useState<string>('')
     const [warningQuestion, setwarningQuestion] = React.useState<string>('')
     const [warningAnswer, setwarningAnswer] = React.useState<string>('')
+    const [user, setUser] = React.useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [confirm_password, setconfirm_password] = useState<string>('')
     const [name, setName] = useState<string>('')
+    const [sex, setSex] = useState<string>('')
     const [Date, setDate] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [question, setQuestion] = useState<string>('')
@@ -35,27 +36,27 @@ export default function SignUp({ navigation }: any) {
 
     const verifyInformation = () => {
         var flag = 0
-        let regexEmail = new RegExp(/^[\S]+@gmail.com$/)
+        let regexEmail = new RegExp(/^[\S]+@email.com$/)
         let regexPassword = new RegExp(/.{8,32}/)
         let regexName = new RegExp(/^[a-z|A-Z|\s]{1,128}$/)
         let regexDate = new RegExp(
-            /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
+            /^(?:(?:31(-)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(-)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(-)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(-)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
         )
-
+        if(user === ''){
+            setWarningUser('Please enter Username')
+            flag++;
+        } else {
+            setWarningUser('')
+        }
         if (email === '') {
             setwarningEmail('Please enter Email')
             flag++
         } else {
-            setwarningEmail('')
+            
             if (regexEmail.test(email)) {
-                accounts.forEach((accounts) => {
-                    if (accounts.email === email) {
-                        setwarningEmail('Your email already exists')
-                        flag++
-                    }
-                })
+                setwarningEmail('')
             } else {
-                setwarningEmail('Email must be in format ...@gmail.com')
+                setwarningEmail('Email must be in format ...@email.com')
                 flag++
             }
         }
@@ -97,7 +98,17 @@ export default function SignUp({ navigation }: any) {
                 flag++
             }
         }
-
+        if (sex === '') {
+            setWarningSex('Please enter Sex')
+            flag++
+        } else {
+            if (sex === 'male' || sex === 'female' || sex === 'other') {
+                setWarningSex('')
+            } else {
+                setWarningSex('You must enter "male", "female" or "other"')
+                flag++
+            }
+        }
         if (Date === '') {
             setWarningDate('Please enter Date')
             flag++
@@ -115,7 +126,7 @@ export default function SignUp({ navigation }: any) {
                 }
             } else {
                 setWarningDate(
-                    'Please enter the date in the format dd/mm/yyyy and Enter it correctly'
+                    'Please enter the date in the format dd-mm-yyyy and Enter it correctly'
                 )
                 flag++
             }
@@ -135,24 +146,69 @@ export default function SignUp({ navigation }: any) {
             setwarningAnswer('')
         }
         if (flag === 0) {
-            setVisible(true)
+            handleLogin(email,user,password,name,sex,Date,question,answer)
         }
+    }
+    const  handleLogin = async (
+        email: string,
+        user: string,
+        password: string,
+        name: string,
+        sex: string,
+        date: string,
+        question: string,
+        answer: string) => {
+            try{
+                const response = await fetch(
+                    'https://foodyforapi.herokuapp.com/Account',
+                    {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            username: user,
+                            pass: password,
+                            name: name,
+                            sex: sex,
+                            dob: date,
+                            ques: question,
+                            ans: answer
+                        }),
+                    }
+                ) 
+                const data = await response.json()
+                if(data.result === 'fail'){
+                    setSuccess(false)
+                } else {
+                    setSuccess(true)
+                }
+                setVisible(true)
+            } catch (error) {
+                console.error(error)
+            }
     }
     return (
         <>
             <Alert
                 type='change_password'
-                title={'Sign Up success'}
-                message={'Please press OK to Login'}
+                title={success? 'Sign Up success' : 'Notification'}
+                message={success? 'Please press OK to Login': 'Username has been existed'}
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {
-                    navigation.navigate('Login')
+                    success ? navigation.navigate('Login') : undefined
                 }}
             />
             <View style={styles.container}>
                 <Text style={styles.title}>Sign up</Text>
                 <ScrollView contentContainerStyle={styles.inputContainer}>
+                    <View style={styles.input}>
+                        <Input type='user' value={user} setValue={setUser} />
+                        <Text style={styles.warningText}>{warningUser}</Text>
+                    </View>
                     <View style={styles.input}>
                         <Input type='email' value={email} setValue={setEmail} />
                         <Text style={styles.warningText}>{warningEmail}</Text>
@@ -160,6 +216,10 @@ export default function SignUp({ navigation }: any) {
                     <View style={styles.input}>
                         <Input type='name' value={name} setValue={setName} />
                         <Text style={styles.warningText}>{warningName}</Text>
+                    </View>
+                    <View style={styles.input}>
+                        <Input type='sex' value={sex} setValue={setSex} />
+                        <Text style={styles.warningText}>{warningSex}</Text>
                     </View>
                     <View style={styles.input}>
                         <Input

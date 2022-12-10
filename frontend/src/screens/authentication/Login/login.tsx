@@ -10,7 +10,7 @@ import styles from './styles'
 export default function Login({ navigation }: any) {
     const { setAdmin, setLogin, setUserId } =
         React.useContext<UserContextInterface>(UserContext)
-    const [warningEmail, setWarningEmail] = React.useState<string>('')
+    const [warningUsername, setWarningUsername] = React.useState<string>('')
     const [warningPassword, setWarningPassword] = React.useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [username, setUsername] = useState<string>('')
@@ -20,7 +20,7 @@ export default function Login({ navigation }: any) {
     const verifyInformation = (email: string, password: string) => {
         setSuccess(false)
         if (username !== '') {
-            setWarningEmail('')
+            setWarningUsername('')
             if (password === '') {
                 setWarningPassword('Please enter password')
             } else {
@@ -29,7 +29,7 @@ export default function Login({ navigation }: any) {
             }
         } else {
             if (email === '') {
-                setWarningEmail('Please enter username')
+                setWarningUsername('Please enter username')
             }
         }
     }
@@ -92,12 +92,12 @@ export default function Login({ navigation }: any) {
                 <View style={styles.inputContainer}>
                     <View style={styles.input}>
                         <Input
-                            type='email'
+                            type='user'
                             focus
                             value={username}
                             setValue={setUsername}
                         />
-                        <Text style={styles.warningText}>{warningEmail}</Text>
+                        <Text style={styles.warningText}>{warningUsername}</Text>
                     </View>
                     <View style={styles.input}>
                         <Input
