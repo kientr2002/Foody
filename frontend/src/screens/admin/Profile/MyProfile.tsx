@@ -7,9 +7,46 @@ import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
 export default function Profile() {
-    const { setLogin, setAdmin } =
+    const { setLogin, setAdmin, name } =
         React.useContext<UserContextInterface>(UserContext)
     const [logOut, setLogOut] = React.useState<boolean>(false)
+    const [adminDetail, setAdminDetail] = React.useState<{
+        ans: string
+        dob: string
+        email: string
+        name: string
+        pass: string
+        ques: string
+        role: number
+        username: string
+    }>()
+    const getAdminDetail = async (username: string | null) => {
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/getDetailAcc',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                    }),
+                }
+            )
+            const data = await response.json()
+            if (data.result === 'ok') {
+                setAdminDetail(data.message[0])
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    React.useEffect(() => {
+        getAdminDetail(name)
+    }, [])
 
     return (
         <>
@@ -34,7 +71,7 @@ export default function Profile() {
                     />
                     <View>
                         <Text style={[styles.text_bold, styles.textSize_23]}>
-                            Username
+                            {name}
                         </Text>
                         <Text
                             style={[
@@ -44,7 +81,7 @@ export default function Profile() {
                                 styles.marginBottom,
                             ]}
                         >
-                            Email
+                            {adminDetail?.email}
                         </Text>
                     </View>
                 </View>
@@ -61,7 +98,7 @@ export default function Profile() {
                                 styles.color_1,
                             ]}
                         >
-                            Le Nguyen Huyen Thoai
+                            {adminDetail?.name}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -75,7 +112,7 @@ export default function Profile() {
                                 styles.color_1,
                             ]}
                         >
-                            09/10/2002
+                            {adminDetail?.dob}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -89,7 +126,7 @@ export default function Profile() {
                                 styles.color_1,
                             ]}
                         >
-                            lenguyenhuyenthoai@gmail.com
+                            {adminDetail?.email}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -103,7 +140,7 @@ export default function Profile() {
                                 styles.color_1,
                             ]}
                         >
-                            0355770987
+                            None
                         </Text>
                     </View>
                 </View>

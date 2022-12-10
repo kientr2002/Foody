@@ -6,8 +6,8 @@ export interface UserContextInterface {
     setLogin: (a: boolean) => void
     admin: boolean
     setAdmin: (a: boolean) => void
-    userId: number | null
-    setUserId: (a: number | null) => void
+    name: string | null
+    setName: (a: string | null) => void
     createPlanList: Food[]
     myPlan: Food[]
     myFavorite: Food[]
@@ -20,31 +20,31 @@ export interface UserContextInterface {
 
 const UserContext = React.createContext<UserContextInterface>({
     login: false,
-    setLogin: () => {},
-    setAdmin: () => {},
+    setLogin: () => { },
+    setAdmin: () => { },
     admin: false,
-    userId: null,
-    setUserId: () => {},
+    name: null,
+    setName: () => { },
     createPlanList: [],
     myFavorite: [],
     myPlan: [],
-    handleAddToCreatePlan: () => {},
-    handleRemoveFromCreatePlan: () => {},
-    handleAddToFavorite: () => {},
-    handleRemoveFromFavorite: () => {},
+    handleAddToCreatePlan: () => { },
+    handleRemoveFromCreatePlan: () => { },
+    handleAddToFavorite: () => { },
+    handleRemoveFromFavorite: () => { },
     handleCreatePlan: () => true,
 })
 
 export function UserProvider({ children }: any) {
     const [login, setLogin] = React.useState<boolean>(false)
     const [admin, setAdmin] = React.useState<boolean>(false)
-    const [userId, setUserId] = React.useState<number | null>(null)
+    const [name, setName] = React.useState<string | null>(null)
     const [createPlanList, setCreatePlanList] = React.useState<Food[]>([])
     const [myFavorite, setMyFavorite] = React.useState<Food[]>([])
     const [myPlan, setMyPlan] = React.useState<Food[]>([])
 
     // get user favorite dishes
-    React.useEffect(() => {}, [])
+    React.useEffect(() => { }, [])
 
     const handleAddToCreatePlan = (food: Food) => {
         if (food) setCreatePlanList([...createPlanList, food])
@@ -81,8 +81,8 @@ export function UserProvider({ children }: any) {
             value={{
                 login,
                 admin,
-                userId,
-                setUserId,
+                name,
+                setName,
                 setLogin,
                 setAdmin,
                 createPlanList,

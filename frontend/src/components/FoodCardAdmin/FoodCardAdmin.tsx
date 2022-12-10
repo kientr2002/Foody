@@ -40,8 +40,15 @@ export default function FoodCardAdmin(
     React.useEffect(() => {
         pressed === 1
             ? [onPress ? onPress() : null]
-            : [pressed === 3 ? [onPressEdit ? onPressEdit() : null]
-                : [pressed === 4 ? [onPressDelete ? onPressDelete() : null] : null]]
+            : [
+                  pressed === 3
+                      ? [onPressEdit ? onPressEdit() : null]
+                      : [
+                            pressed === 4
+                                ? [onPressDelete ? onPressDelete() : null]
+                                : null,
+                        ],
+              ]
     }, [pressed])
 
     return (
@@ -67,7 +74,7 @@ export default function FoodCardAdmin(
                         onPressIn={() =>
                             pressed === 2 ? setPressed(0) : handlePressIn(2)
                         }
-                    // onPressOut={() => setPressed(0)}
+                        // onPressOut={() => setPressed(0)}
                     >
                         <FontAwesome5
                             name='ellipsis-v'
@@ -94,9 +101,7 @@ export default function FoodCardAdmin(
                                 margin: 5,
                             }}
                         ></View>
-                        <Pressable
-                            onPress={() => handlePressIn(4)}
-                        >
+                        <Pressable onPress={() => handlePressIn(4)}>
                             <Text
                                 style={{
                                     fontFamily: 'SF-Pro-Rounded_bold',

@@ -94,7 +94,7 @@ export default function AddEditDish({ route, addOrEdit, navigation }: any) {
                         carb: carb,
                         description: description,
                         recipt: recipt,
-                        image: image
+                        image: image,
                     }),
                 }
             )
@@ -115,29 +115,27 @@ export default function AddEditDish({ route, addOrEdit, navigation }: any) {
                 visible={submit}
                 setVisible={setSubmit}
                 handleOk={() => {
-                    addOrEdit === 'add' ? (
-                        handleAdd(
-                            dishName,
-                            Number(dishCalo),
-                            Number(dishProtein),
-                            Number(dishFat),
-                            Number(dishCarb),
-                            description,
-                            dishImage,
-                            dishRecipt
-                        )
-                    ) : (
-                        handleEdit(
-                            id,
-                            Number(dishCalo),
-                            Number(dishProtein),
-                            Number(dishFat),
-                            Number(dishCarb),
-                            description,
-                            dishImage,
-                            dishRecipt
-                        )
-                    )
+                    addOrEdit === 'add'
+                        ? handleAdd(
+                              dishName,
+                              Number(dishCalo),
+                              Number(dishProtein),
+                              Number(dishFat),
+                              Number(dishCarb),
+                              description,
+                              dishImage,
+                              dishRecipt
+                          )
+                        : handleEdit(
+                              id,
+                              Number(dishCalo),
+                              Number(dishProtein),
+                              Number(dishFat),
+                              Number(dishCarb),
+                              description,
+                              dishImage,
+                              dishRecipt
+                          )
                 }}
             />
             <Alert

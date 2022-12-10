@@ -24,6 +24,11 @@ const styles = StyleSheet.create({
     pads: {
         flex: 1,
     },
+    loadingScreen: {
+        height: 500,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 })
 
 export default styles

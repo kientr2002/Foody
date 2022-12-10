@@ -8,7 +8,7 @@ import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
 export default function Login({ navigation }: any) {
-    const { setAdmin, setLogin, setUserId } =
+    const { setAdmin, setLogin, setName } =
         React.useContext<UserContextInterface>(UserContext)
     const [warningEmail, setWarningEmail] = React.useState<string>('')
     const [warningPassword, setWarningPassword] = React.useState<string>('')
@@ -53,7 +53,7 @@ export default function Login({ navigation }: any) {
             const data = await response.json()
             if (data.result === 'ok') {
                 setAdmin(data?.role !== 1)
-                setUserId(data?.userId)
+                setName(username)
                 setSuccess(true)
             } else {
                 setSuccess(false)

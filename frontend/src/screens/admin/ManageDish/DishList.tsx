@@ -36,10 +36,10 @@ export default function DishList({ navigation }: any) {
         page === 'Food detail'
             ? navigation.navigate('Food detail', obj)
             : [
-                page === 'Edit Dish'
-                    ? navigation.navigate('Edit Food', obj, 'edit')
-                    : null,
-            ]
+                  page === 'Edit Dish'
+                      ? navigation.navigate('Edit Food', obj, 'edit')
+                      : null,
+              ]
     }
 
     const handleOnPressAdd = () => {
@@ -57,7 +57,7 @@ export default function DishList({ navigation }: any) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        foodId: id
+                        foodId: id,
                     }),
                 }
             )

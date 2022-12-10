@@ -5,8 +5,9 @@ import Alert from '../../../components/alert/Alert'
 import styles from './styles'
 
 export default function AccountDetail({ route }: any) {
-    const { username, role, status, imgSrc }: any = route?.params
+    const { username, name, email, dob, weight, height, TDEE }: any = route?.params
     const [confirm, setConfirm] = React.useState<boolean>(false)
+
     return (
         <>
             <Alert
@@ -31,7 +32,7 @@ export default function AccountDetail({ route }: any) {
 
                 <View style={styles.username_container}>
                     <Text style={styles.username}>{username}</Text>
-                    <Text style={styles.email}>Email</Text>
+                    <Text style={styles.email}>{email}</Text>
                 </View>
             </View>
 
@@ -42,7 +43,7 @@ export default function AccountDetail({ route }: any) {
                         <Text style={styles.text_1}> Name</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_2}> Bằng</Text>
+                        <Text style={styles.text_2}>{name}</Text>
                     </View>
                 </View>
 
@@ -52,7 +53,7 @@ export default function AccountDetail({ route }: any) {
                         <Text style={styles.text_1}> Day of Birth</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_2}> 25/11/2002</Text>
+                        <Text style={styles.text_2}>{dob}</Text>
                     </View>
                 </View>
 
@@ -62,7 +63,7 @@ export default function AccountDetail({ route }: any) {
                         <Text style={styles.text_1}> Weight</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_2}> 55</Text>
+                        <Text style={styles.text_2}>{weight}</Text>
                     </View>
                 </View>
 
@@ -72,7 +73,7 @@ export default function AccountDetail({ route }: any) {
                         <Text style={styles.text_1}> Height</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_2}> 170</Text>
+                        <Text style={styles.text_2}>{height}</Text>
                     </View>
                 </View>
 
@@ -82,7 +83,7 @@ export default function AccountDetail({ route }: any) {
                         <Text style={styles.text_1}> Current TDEE</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_2}> 2022</Text>
+                        <Text style={styles.text_2}>{TDEE}</Text>
                     </View>
                 </View>
 
@@ -92,7 +93,7 @@ export default function AccountDetail({ route }: any) {
                         <Text style={styles.text_1}> Current target</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_2}> 52</Text>
+                        <Text style={styles.text_2}>None</Text>
                     </View>
                 </View>
             </View>
