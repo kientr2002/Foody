@@ -9,14 +9,11 @@ import styles from './styles'
 
 
 let exportUser: string
-let exportPass: string
+
 export function exportLoginUser(){
     return exportUser
 }
 
-export function exportLoginPass(){
-    return exportPass
-}
 
 export default function Login({ navigation }: any) {
     const { setAdmin, setLogin, setUserId } =
@@ -64,7 +61,6 @@ export default function Login({ navigation }: any) {
             const data = await response.json()
             if (data.result === 'ok') {
                 exportUser = username
-                exportPass = password
                 setAdmin(data?.role !== 1)
                 setUserId(data?.userId)
                 setSuccess(true)

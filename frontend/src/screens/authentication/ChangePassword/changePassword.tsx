@@ -4,23 +4,12 @@ import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
+import { exportLoginUser } from '../Login/login'
 
-const accounts = [
-    {
-        email: 'thoaile@gmail.com',
-        password: '12345678',
-        role: 'user',
-    },
-    {
-        email: 'cunle@gmail.com',
-        password: '87654321',
-        role: 'admin',
-    },
-]
 export default function ChangePassword({ navigation }: any) {
    
-    const [checkEmailNull, SetCheckEmailNull] = React.useState<boolean>(false)
-    const [email, setEmail] = useState<string>('')
+    const [checkUsernameNull, SetCheckUsernameNull] = React.useState<boolean>(false)
+    const [Username, setUsername] = useState<string>('')
     const [warningOldPassword, setWarningOldPassword] = React.useState<string>('')
     const [warningNewPassword, setWarningNewPassword] = React.useState<string>('')
     const [warningConfirmNewPassword, setWarningConfirmNewPassword] = React.useState<string>('')
@@ -72,11 +61,8 @@ export default function ChangePassword({ navigation }: any) {
             }
         }
         if(flag === 0){
-            handleChangePassword(
-                oldPassword,
-                newPassword,
-                confirmNewPassword
-            )
+            setUsername(exportLoginUser);
+            handleUsernameNull(Username, oldPassword, newPassword)
         }
     }
 
@@ -85,24 +71,76 @@ export default function ChangePassword({ navigation }: any) {
         else return null
     }
 
-    const handleChangePassword = (
+    const handleUsernameNull = async(
+        Username: string,
         oldPassword: string,
         newPassword: string,
-        confirmNewPassword: string
     ) => {
-        SetCheckEmailNull(false)
-        accounts.forEach((accounts) => {
-            if(accounts.email === email){
-                if(accounts.password === oldPassword){
-                    accounts.password = newPassword
-                    setNotification('Your Password has been changed')
-                    setSuccess(true)
+        if(Username == ''){
+            setSuccess(false)
+            SetCheckUsernameNull(true)
+            setNotification('Please press OK, waiting and SUBMIT again.')
+            setVisible(true)
+        } else {
+            try{
+                const response = await fetch(
+                    'https://foodyforapi.herokuapp.com/getPassword',
+                    {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: Username,
+                        }),
+                    }
+                )
+                const data = await response.json()
+                if(data.password != oldPassword){
+                    SetCheckUsernameNull(true)
+                    setNotification('Old Password is incorrect!')
+                } else {
+                     handleChangePassword(Username, newPassword)
+                    
                 }
+            }  catch (error) {
+                console.error(error)
             }
-        })
-        setVisible(true)
-    }
-
+        }
+        
+    }   
+    const handleChangePassword = async(
+        Username: string,
+        newPassword: string,
+    ) => {
+            try{
+                const response = await fetch(
+                    'https://foodyforapi.herokuapp.com/password',
+                    {
+                        method: 'PUT',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: Username,
+                            newPass: newPassword,
+                        }),
+                    }
+                )
+                const data = await response.json()
+                if(data.result === 'fail'){
+                    setSuccess(false)
+                } else {
+                    setSuccess(true)
+                    setNotification('Change Password success.')
+                }
+                setVisible(true)
+            }  catch (error) {
+                console.error(error)
+            }
+    }   
     return (
         <>
             <Alert
@@ -110,7 +148,7 @@ export default function ChangePassword({ navigation }: any) {
                 title={'Notification'}
                 message={success 
                     ? notification
-                    : checkEmailNull 
+                    : checkUsernameNull 
                         ? notification
                         : 'Old password is incorrect'}
                 visible={visible}
