@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Food } from '../util/interface'
-import useFetchData from "../hooks/useFetchData";
 
 export interface UserContextInterface {
     login: boolean

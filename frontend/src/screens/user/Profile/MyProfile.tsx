@@ -4,22 +4,34 @@ import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import color from '../../../styles/color'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
-import useFetchData from "../../../hooks/useFetchData"
 import convertDate from "../../../util/convertDate";
+import { User } from '../../../util/interface'
 
 export default function MyProfile({ navigation }: any) {
     const { setLogin, setAdmin, name, setName, setCreatePlanList, setMyFavorite } =
         React.useContext<UserContextInterface>(UserContext)
+    const [user, setUser] = React.useState<User>()
     const [logOut, setLogOut] = React.useState<boolean>(false)
-    const [dateOfBirth, setDateOfBirth] = React.useState<Date>()
-    // Get user profile
-    const {data: user} = useFetchData(
+
+    fetch(
         'https://foodyforapi.herokuapp.com/getDetailAcc',
-        'POST',
         {
-            username: name,
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: name
+            })
         }
     )
+        .then(res => res.json())
+        .then(obj => {
+            if (obj?.result === 'ok')
+                setUser(obj.message[0])
+        })
+        .catch(error => console.log(error))
 
     return (
         <>
@@ -93,7 +105,7 @@ export default function MyProfile({ navigation }: any) {
                                 styles.color_1,
                             ]}
                         >
-                            {convertDate(user?.dob)}
+                            {convertDate(user ? user.dob : null)}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
