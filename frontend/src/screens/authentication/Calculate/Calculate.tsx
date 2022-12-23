@@ -6,17 +6,17 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 import Dropdown from '../../../components/dropdown/Dropdown'
-
-
+import { exportLoginUser } from '../Login/login'
 
 var outputHeight = 0
 var outputWeight = 0
-var outputActivity = 0
-var outputTarget = 0
+
 
 export default function Calculate({ navigation }: any) {
     const targets = ['Increase Weight', 'Reduce Weight', 'Keep This Weight']
     const [success, setSuccess] = React.useState<boolean>(false)
+    const [checkUsernameNull, SetCheckUsernameNull] = React.useState<boolean>(false)
+    const [username, setUsername] =  React.useState<string>('')
     const [warningWeight, setWarningWeight] = React.useState<string>('')
     const [warningHeight, setWarningHeight] = React.useState<string>('')
     const [warningActivity, setWarningActivity] = React.useState<string>('')
@@ -25,7 +25,10 @@ export default function Calculate({ navigation }: any) {
     const [height, setHeight] = React.useState<string>('')
     const [activity, setActivity] = React.useState<string>('')
     const [yourTarget, setYourTarget] = useState<string>('')
-
+    const [activity1, setActivity1] = React.useState<string>('')
+    const [object, setObject] = useState<string>('')
+    const [visible, setVisible] = React.useState<boolean>(false)
+    const [notification, setNotification] = useState<string>('')
     const data = [ 'Sedentary',
     'Light exercise (1-2 days/week)',
     'Moderate exercise (3-4 days/week)',
@@ -38,7 +41,6 @@ export default function Calculate({ navigation }: any) {
         setSuccess(false)
         if(weight === ''){
             flag++
-            outputWeight = 0
             setWarningWeight('Please enter Information')
         } else {
             outputWeight= parseInt(weight,10)
@@ -46,7 +48,6 @@ export default function Calculate({ navigation }: any) {
         }
         if(height === ''){
             flag++
-            outputHeight = 0
             setWarningHeight('Please enter Information')
         } else {
             outputHeight= parseInt(height,10)
@@ -54,51 +55,108 @@ export default function Calculate({ navigation }: any) {
         }
         if(activity === ''){
             flag++
-            outputActivity = 0
             setWarningActivity('Please choose Information')
         }else {
             if(activity === 'Sedentary'){
-                outputActivity = 1
+                setActivity1('very little')
             } else if (activity === 'Light exercise (1-2 days/week)'){
-                outputActivity = 2
+                setActivity1('little')
             } else if (activity ===  'Moderate exercise (3-4 days/week)') {
-                outputActivity = 3
+                setActivity1('normal')
             } else if (activity === 'Heavy exercise (6-7 days/week)'){
-                outputActivity = 4
+                setActivity1('heavy')
             } else {
-                outputActivity = 5
+                setActivity1('very heavy')
             }
             setWarningActivity('')
         }
         if(target === ''){
             flag++
-            outputTarget = 0
             setWarningYourTarget('Please choose Information')
         } else {
             if(target === 'Increase Weight'){
-                outputTarget = 1
+                setObject('increase')
             } else if(target === 'Reduce Weight'){
-                outputTarget = 2
+                setObject('stable')               
             } else {
-                outputTarget = 3
+                setObject('decrease')
             }
             setWarningYourTarget('')
            
         }
         if(flag === 0){
-            setSuccess(true)
+            setUsername(exportLoginUser);
+            handleUsernameNull(username);
         }
         
     }
+    const handleNavigate = (success: Boolean) => {
+        if (success) navigation.goBack()
+        else return null
+    }
+    const handleUsernameNull = async(
+        Username: string,
+    ) => {
+        if(Username == ''){
+            setSuccess(false)
+            SetCheckUsernameNull(true)
+            setNotification('Please press OK, waiting and SUBMIT again.')
+            setVisible(true)
+        } else {
+            handleChangePassword(Username, outputHeight, outputWeight,activity1,object)
+        }
+        
+    }
+    const handleChangePassword = async(
+        Username: string, 
+        outputHeight: number,
+        outputWeight: number,
+        activity: string,
+        object: string,
+    ) => {
+            try{
+                const response = await fetch(
+                    'https://foodyforapi.herokuapp.com/CalcTDEE',
+                    {
+                        method: 'PUT',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: Username,
+                            height: outputHeight,
+                            weight: outputWeight,
+                            activity: activity,
+                            object: object,
+                        }),
+                    }
+                )
+                const data = await response.json()
+                
+                if(data.result == 'fail'){
+                    setNotification('Caculate has been failed!')
+                } else {
+                    setNotification(data.TDEE)
+                    setSuccess(true)
+                }
+                setVisible(true)
+            }  catch (error) {
+                console.error(error)
+            }
+    }   
     return (
         <>
             <Alert
                 type='create_plan'
-                title='Success'
-                message='Your TDEE has been caculated'
-                visible={success}
-                setVisible={setSuccess}
-                handleOk = {() => navigation.goBack()}
+                title= {checkUsernameNull ? 'Notification' : 'Your TDEE is'}
+                message= {notification}
+                // 'Your TDEE has been caculated'
+                visible={visible}
+                setVisible={setVisible}
+                handleOk={() => {
+                    handleNavigate(success)
+                }}
             />
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.title}>Update your status</Text>
