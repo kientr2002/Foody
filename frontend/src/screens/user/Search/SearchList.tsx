@@ -5,7 +5,7 @@ import Card from '../../../components/card/Card'
 import Input from '../../../components/input/Input'
 import { Food } from '../../../util/interface'
 
-const useSearch = (key:string, setResult:any) => {
+const useSearch = (key: string, setResult: any) => {
     const searchFood = async () => {
         try {
             const response = await fetch(

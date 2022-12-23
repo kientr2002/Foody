@@ -22,7 +22,6 @@ const accounts = [
     },
 ]
 
-
 export default function ForgotPasswordStep2({ navigation }: any) {
     const [notification, setNotification] = React.useState<string>('')
     const [checkEmailNull, SetCheckEmailNull] = React.useState<boolean>(false)
@@ -48,7 +47,7 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                 setwarningAnswer('Please enter Answer')
             } else {
                 setwarningAnswer('')
-                             
+
                 handleSignIn(question, answer)
             }
         }
@@ -61,18 +60,14 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                 accounts.question === question &&
                 accounts.answer === answer &&
                 accounts.email === email
-                
             ) {
-                    setSuccess(true)
-                    setNotification(accounts.password)
-
-                
+                setSuccess(true)
+                setNotification(accounts.password)
             }
-            if(email === ''){
+            if (email === '') {
                 setNotification('Press OK and SUBMIT again to continue')
                 SetCheckEmailNull(true)
-            } 
-            
+            }
         })
         setUser(true)
     }
@@ -81,11 +76,13 @@ export default function ForgotPasswordStep2({ navigation }: any) {
             <Alert
                 type='change_password'
                 title={success ? 'Your password is:' : 'notification'}
-                message={success 
-                    ? notification 
-                    : checkEmailNull 
+                message={
+                    success
                         ? notification
-                        : 'Answer and Question is incorrect'}
+                        : checkEmailNull
+                        ? notification
+                        : 'Answer and Question is incorrect'
+                }
                 visible={user}
                 setVisible={setUser}
                 handleOk={() => {

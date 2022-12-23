@@ -7,7 +7,7 @@ import Button from '../../../components/button/Button'
 import Card from '../../../components/card/Card'
 import { Food } from '../../../util/interface'
 
-const useCalculateNutrition = (planList:Food[]) => {
+const useCalculateNutrition = (planList: Food[]) => {
     const [totalCalories, setTotalCalories] = React.useState<number>(0)
     const [totalProtein, setTotalProtein] = React.useState<number>(0)
     const [totalFat, setTotalFat] = React.useState<number>(0)
@@ -30,16 +30,17 @@ const useCalculateNutrition = (planList:Food[]) => {
         setTotalCarb(cb)
     }, [planList])
 
-    return {totalCalories, totalCarb, totalProtein, totalFat}
+    return { totalCalories, totalCarb, totalProtein, totalFat }
 }
 
 export default function CreatePlan({ navigation }: any) {
-    const { name, createPlanList, setCreatePlanList, setMyPlan} =
+    const { name, createPlanList, setCreatePlanList, setMyPlan } =
         React.useContext<UserContextInterface>(UserContext)
     const [visible, setVisible] = React.useState<boolean>(false)
     const [success, setSuccess] = React.useState<boolean>(false)
     const [alertMessage, setAlertMessage] = React.useState<string>('')
-    const {totalCalories, totalCarb, totalProtein, totalFat} = useCalculateNutrition(createPlanList)
+    const { totalCalories, totalCarb, totalProtein, totalFat } =
+        useCalculateNutrition(createPlanList)
 
     const handleCreatePlan = async () => {
         try {
@@ -55,7 +56,7 @@ export default function CreatePlan({ navigation }: any) {
                         username: name,
                         breakfast: createPlanList[0].id,
                         lunch: createPlanList[1].id,
-                        dinner: createPlanList[2].id
+                        dinner: createPlanList[2].id,
                     }),
                 }
             )
@@ -64,9 +65,7 @@ export default function CreatePlan({ navigation }: any) {
                 setSuccess(true)
                 setCreatePlanList([])
                 setMyPlan(createPlanList)
-            }
-            else
-                setSuccess(false)
+            } else setSuccess(false)
             setAlertMessage(data?.message)
             setVisible(true)
         } catch (error) {
@@ -178,9 +177,12 @@ export default function CreatePlan({ navigation }: any) {
                         <View
                             style={{
                                 marginLeft: 10,
-                                display: createPlanList.length === 3 ? 'flex' : 'none'
-                            }
-                        }>
+                                display:
+                                    createPlanList.length === 3
+                                        ? 'flex'
+                                        : 'none',
+                            }}
+                        >
                             <Button
                                 content='CREATE'
                                 type='confirm'

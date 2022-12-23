@@ -4,34 +4,36 @@ import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import color from '../../../styles/color'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
-import convertDate from "../../../util/convertDate";
+import convertDate from '../../../util/convertDate'
 import { User } from '../../../util/interface'
 
 export default function MyProfile({ navigation }: any) {
-    const { setLogin, setAdmin, name, setName, setCreatePlanList, setMyFavorite } =
-        React.useContext<UserContextInterface>(UserContext)
+    const {
+        setLogin,
+        setAdmin,
+        name,
+        setName,
+        setCreatePlanList,
+        setMyFavorite,
+    } = React.useContext<UserContextInterface>(UserContext)
     const [user, setUser] = React.useState<User>()
     const [logOut, setLogOut] = React.useState<boolean>(false)
 
-    fetch(
-        'https://foodyforapi.herokuapp.com/getDetailAcc',
-        {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: name
-            })
-        }
-    )
-        .then(res => res.json())
-        .then(obj => {
-            if (obj?.result === 'ok')
-                setUser(obj.message[0])
+    fetch('https://foodyforapi.herokuapp.com/getDetailAcc', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: name,
+        }),
+    })
+        .then((res) => res.json())
+        .then((obj) => {
+            if (obj?.result === 'ok') setUser(obj.message[0])
         })
-        .catch(error => console.log(error))
+        .catch((error) => console.log(error))
 
     return (
         <>

@@ -10,7 +10,7 @@ export interface UserContextInterface {
     setName: (a: string | null) => void
     createPlanList: Food[]
     myPlan: Food[]
-    setCreatePlanList: (a:Food[]) => void
+    setCreatePlanList: (a: Food[]) => void
     setMyPlan: (a: Food[]) => void
     setMyFavorite: (a: Food[]) => void
     myFavorite: Food[]
@@ -49,31 +49,26 @@ export function UserProvider({ children }: any) {
 
     React.useEffect(() => {
         if (login && name) {
-            fetch(
-                'https://foodyforapi.herokuapp.com/getFavList',
-                {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: name
-                    }),
-                }
-            )
-                .then(res => res.json())
-                .then(obj => {
-                    if (obj.result === 'ok')
-                        setMyFavorite(obj.message)
+            fetch('https://foodyforapi.herokuapp.com/getFavList', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: name,
+                }),
+            })
+                .then((res) => res.json())
+                .then((obj) => {
+                    if (obj.result === 'ok') setMyFavorite(obj.message)
                 })
-                .catch(error => console.log(error))
+                .catch((error) => console.log(error))
         }
     }, [name, login])
 
     const handleAddToCreatePlan = (food: Food) => {
-        if (food)
-            setCreatePlanList([...createPlanList, food])
+        if (food) setCreatePlanList([...createPlanList, food])
     }
 
     const handleRemoveFromCreatePlan = (id: number | undefined) => {
@@ -85,53 +80,47 @@ export function UserProvider({ children }: any) {
 
     const handleAddToFavorite = (food: Food) => {
         if (food) {
-            fetch(
-                'https://foodyforapi.herokuapp.com/favList',
-                {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: name,
-                        foodId: food.id
-                    }),
-                }
-            )
-                .then(res => res.json())
-                .then(obj => {
+            fetch('https://foodyforapi.herokuapp.com/favList', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: name,
+                    foodId: food.id,
+                }),
+            })
+                .then((res) => res.json())
+                .then((obj) => {
                     if (obj.result === 'ok')
                         setMyFavorite([...myFavorite, food])
                 })
-                .catch(error => console.log(error))
+                .catch((error) => console.log(error))
         }
     }
 
     const handleRemoveFromFavorite = (id: number) => {
         if (id) {
-            fetch(
-                'https://foodyforapi.herokuapp.com/favList',
-                {
-                    method: 'DELETE',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: name,
-                        foodId: id
-                    }),
-                }
-            )
-                .then(res => res.json())
-                .then(obj => {
+            fetch('https://foodyforapi.herokuapp.com/favList', {
+                method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: name,
+                    foodId: id,
+                }),
+            })
+                .then((res) => res.json())
+                .then((obj) => {
                     if (obj.result === 'ok') {
                         const arr = myFavorite.filter((food) => food.id !== id)
                         setMyFavorite(arr)
                     }
                 })
-                .catch(error => console.log(error))
+                .catch((error) => console.log(error))
         }
     }
 

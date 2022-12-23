@@ -14,7 +14,7 @@ const accounts = [
         email: 'cunle@gmail.com',
     },
 ]
- let exportEmail : string
+let exportEmail: string
 export function exportStep2() {
     return exportEmail
 }

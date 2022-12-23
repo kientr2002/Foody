@@ -8,31 +8,28 @@ import UserContext, { UserContextInterface } from '../../../context/UserContext'
 
 type Props = NativeStackScreenProps<MyPlanStackParamList>
 
-const useMyPlan = (name:string | null, setMyPlan:any) => {
+const useMyPlan = (name: string | null, setMyPlan: any) => {
     React.useEffect(() => {
-        fetch(
-            'https://foodyforapi.herokuapp.com/getPlan',
-            {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: name
-                }),
-            }
-        )
-            .then(res => res.json())
-            .then(obj => {
-                if (obj.result === 'ok')
-                    setMyPlan(obj.message)
+        fetch('https://foodyforapi.herokuapp.com/getPlan', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: name,
+            }),
+        })
+            .then((res) => res.json())
+            .then((obj) => {
+                if (obj.result === 'ok') setMyPlan(obj.message)
             })
     }, [name])
 }
 
 export default function MyPlanList({ route, navigation }: Props) {
-    const { name, myPlan, setMyPlan } = React.useContext<UserContextInterface>(UserContext)
+    const { name, myPlan, setMyPlan } =
+        React.useContext<UserContextInterface>(UserContext)
     useMyPlan(name, setMyPlan)
 
     const handleOnPress = (obj: any) => {

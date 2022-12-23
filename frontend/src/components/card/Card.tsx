@@ -103,7 +103,11 @@ export default function Card({
             <View style={textSize}>
                 <View>
                     <Text
-                        style={cardStyle !== 3 && cardStyle !== 4 ? styles.title : styles.title_2}
+                        style={
+                            cardStyle !== 3 && cardStyle !== 4
+                                ? styles.title
+                                : styles.title_2
+                        }
                         numberOfLines={1}
                         ellipsizeMode='tail'
                     >
