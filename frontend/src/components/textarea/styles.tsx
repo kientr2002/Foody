@@ -23,32 +23,20 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 1,
     },
-    icon: {
-        width: '15%',
-        paddingTop: 5,
-        paddingLeft: 5,
-        paddingBottom: 5,
-    },
     inputContainer: {
-        width: '85%',
+        width: '100%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
     },
-    nameText: {
-        marginBottom: 1,
-
-        color: color.textBackground,
-        fontFamily: 'SF-Pro-Rounded_semibold',
-        fontSize: 10,
-    },
     inputText: {
-        height: 32,
+        // height: 35,
         fontFamily: 'SF-Pro-Rounded_medium',
         fontSize: 20,
+        paddingTop: 5,
     },
     inputTextDefault: {
-        height: 45,
+        // height: 40,
         paddingTop: 10,
         paddingBottom: 5,
         paddingLeft: 10,

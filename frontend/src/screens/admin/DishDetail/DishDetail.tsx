@@ -1,388 +1,242 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
-import { StyleSheet, View, Text, ScrollView } from 'react-native'
-import Card from '../../../components/card/Card'
-import AccountCard from '../../../components/accountCard/AccountCard'
-import Button from '../../../components/button/Button'
-import Input from '../../../components/input/Input'
+import {
+    StyleSheet,
+    View,
+    Text,
+    Image,
+    ScrollView,
+    Linking,
+} from 'react-native'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import * as Progress from 'react-native-progress'
 
-export default function DishDetail() {
+import Button from '../../../components/button/Button'
+import { ReviewInput, ReviewCard } from '../../../components/review/Review'
+import Alert from '../../../components/alert/Alert'
+import { Comment } from '../../../util/interface'
+import styles from './styles'
+import color from '../../../styles/color'
+
+const Tab = createMaterialTopTabNavigator()
+
+function Review() {
+    const [reviews, setReview] = React.useState<Comment[]>([])
+    const [rate, setRate] = React.useState<number>(0)
+    const [comment, setComment] = React.useState<string>('')
+
+    const handleSubmit = (rate: number, comment: string) => {
+        setReview([...reviews])
+    }
+
+    return (
+        <ScrollView>
+            <View style={styles.reviewCardContainer}>
+                {reviews.length !== 0 &&
+                    reviews.map((review: Comment, i: any) => (
+                        <ReviewCard
+                            key={i}
+                            username={review.username}
+                            comment={review.comment}
+                            star={review.star}
+                        />
+                    ))}
+                {reviews.length === 0 && <Text>No comments</Text>}
+            </View>
+        </ScrollView>
+    )
+}
+
+function About({ des, recipt, calo, protein, fat, carb }: any) {
+    const [total, setTotal] = React.useState<number>(0)
+
+    React.useEffect(() => {
+        setTotal(protein + fat + carb)
+    }, [protein, carb, fat])
+
+    const handlePress = React.useCallback(async () => {
+        // Checking if the link is supported for links with custom URL scheme.
+        const supported = await Linking.canOpenURL(recipt)
+        if (supported) await Linking.openURL(recipt)
+    }, [recipt])
+
+    return (
+        <ScrollView style={styles.tabBody}>
+            {/* Nutrient section */}
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Nutrient</Text>
+                <View style={styles.sectionContainer}>
+                    <View style={styles.nutrientElement}>
+                        <Text
+                            style={[
+                                styles.sectionText,
+                                styles.nutrientElementTitle,
+                            ]}
+                        >
+                            Calories
+                        </Text>
+                        <Progress.Bar
+                            style={styles.progressBar}
+                            progress={calo ? calo * 0.7 : 0}
+                            width={250}
+                            height={13}
+                            color={'#E3A74D'}
+                            borderWidth={0}
+                        />
+                    </View>
+                    <View style={styles.nutrientElement}>
+                        <Text
+                            style={[
+                                styles.sectionText,
+                                styles.nutrientElementTitle,
+                            ]}
+                        >
+                            Protein
+                        </Text>
+                        <Progress.Bar
+                            style={styles.progressBar}
+                            progress={protein ? protein / total : 0}
+                            width={250}
+                            height={13}
+                            color={'#DC4040'}
+                            borderWidth={0}
+                        />
+                    </View>
+                    <View style={styles.nutrientElement}>
+                        <Text
+                            style={[
+                                styles.sectionText,
+                                styles.nutrientElementTitle,
+                            ]}
+                        >
+                            Carb
+                        </Text>
+                        <Progress.Bar
+                            style={styles.progressBar}
+                            progress={carb ? carb / total : 0}
+                            width={250}
+                            height={13}
+                            color={'#3DC73A'}
+                            borderWidth={0}
+                        />
+                    </View>
+                    <View style={styles.nutrientElement}>
+                        <Text
+                            style={[
+                                styles.sectionText,
+                                styles.nutrientElementTitle,
+                            ]}
+                        >
+                            Fat
+                        </Text>
+                        <Progress.Bar
+                            style={styles.progressBar}
+                            progress={fat ? fat / total : 0}
+                            width={250}
+                            height={13}
+                            color={'#DD34AE'}
+                            borderWidth={0}
+                        />
+                    </View>
+                </View>
+            </View>
+
+            {/* Description section */}
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Description</Text>
+                <View style={styles.sectionContainer}>
+                    <Text style={styles.sectionText}>{des}</Text>
+                </View>
+            </View>
+
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Recipe</Text>
+                {/* <View style={styles.sectionContainer}>
+                    <Button
+                        content='Go to recipe'
+                        type='confirm'
+                        onPress={handlePress}
+                    />
+                </View> */}
+            </View>
+        </ScrollView>
+    )
+}
+
+export default function FoodDetail({ route, navigation }: any) {
+    const { name, des, image, recipt, calo, protein, fat, carb }: any = route?.params
+    const [confirm, setConfirm] = React.useState<boolean>(false)
+    const handleOnPress = (obj: any) => {
+        navigation.navigate('Edit Food', obj)
+    }
+
     return (
         <>
-            <View
-                style={{
-                    flex: 4,
-                    marginTop: 70,
-                    backgroundColor: '#BBBBBB',
-                }}
-            ></View>
-
-            <View
-                style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    paddingLeft: 30,
-                    paddingRight: 30,
-                }}
-            >
-                <View
-                    style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Text
-                        style={{
-                            fontFamily: 'SF-Pro-Rounded_bold',
-                            fontSize: 17,
-                            color: '#000000',
-                        }}
-                    >
-                        Recipe
-                    </Text>
-                </View>
-
-                <View
-                    style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Text
-                        style={{
-                            fontFamily: 'SF-Pro-Rounded_bold',
-                            fontSize: 17,
-                            color: '#000000',
-                        }}
-                    >
-                        About
-                    </Text>
-                </View>
+            <Alert
+                type='remove'
+                title='Are you sure want to do this?'
+                message=''
+                visible={confirm}
+                setVisible={setConfirm}
+            />
+            <View style={styles.videoContainer}>
+                <Image source={{ uri: image }} style={styles.video} />
             </View>
 
-            {/* Recipe */}
-            {/* <View
-                style={{
-                    flex: 6,
-                    paddingLeft: 30,
-                    paddingRight: 30
-                }}>
-                <ScrollView>
-                    <View
-                    >
-                        <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 17,
-                                color: '#000000'
-                            }}>
-                            Step 1
-                        </Text>
-                        <View
-                            style={{
-                                marginTop: 10,
-                                width: '100%',
-                                height: 162,
-                                backgroundColor: '#BBBBBB'
-                            }}>
-                        </View>
-                    </View>
-
-                    <View
-                    >
-                        <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 17,
-                                color: '#000000'
-                            }}>
-                            Step 1
-                        </Text>
-                        <View
-                            style={{
-                                marginTop: 10,
-                                width: '100%',
-                                height: 162,
-                                backgroundColor: '#BBBBBB'
-                            }}>
-                        </View>
-                    </View>
-
-                    <View
-                    >
-                        <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 17,
-                                color: '#000000'
-                            }}>
-                            Step 1
-                        </Text>
-                        <View
-                            style={{
-                                marginTop: 10,
-                                width: '100%',
-                                height: 162,
-                                backgroundColor: '#BBBBBB'
-                            }}>
-                        </View>
-                    </View>
-
-                    <View
-                    >
-                        <Text
-                            style={{
-                                fontFamily: 'SF-Pro-Rounded_bold',
-                                fontSize: 17,
-                                color: '#000000'
-                            }}>
-                            Step 1
-                        </Text>
-                        <View
-                            style={{
-                                marginTop: 10,
-                                width: '100%',
-                                height: 162,
-                                backgroundColor: '#BBBBBB'
-                            }}>
-                        </View>
-                    </View>
-                </ScrollView>
-            </View> */}
-
-            {/* About */}
-            <View
-                style={{
-                    flex: 6,
-                    paddingLeft: 30,
-                    paddingRight: 30,
+            <Tab.Navigator
+                style={styles.bodyContainer}
+                screenOptions={{
+                    tabBarInactiveTintColor: color.textBackground,
+                    tabBarActiveTintColor: color.text,
+                    tabBarLabelStyle: styles.headerText,
+                    tabBarStyle: {
+                        elevation: 0,
+                        backgroundColor: color.background,
+                    },
+                    tabBarPressColor: '000000',
+                    tabBarItemStyle: {
+                        paddingVertical: 5,
+                    },
+                    tabBarIndicatorStyle: {
+                        backgroundColor: color.primary,
+                    },
                 }}
             >
-                <ScrollView>
-                    {/* Nutries */}
-                    <View
-                        style={{
-                            backgroundColor: '#MMMMMM',
-                        }}
-                    >
-                        {/* Nutries */}
-                        <View>
-                            <Text
-                                style={{
-                                    fontFamily: 'SF-Pro-Rounded_bold',
-                                    fontSize: 17,
-                                    color: '#000000',
-                                }}
-                            >
-                                Nutries
-                            </Text>
-                        </View>
-                        {/* Calories */}
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                            }}
-                        >
-                            <View
-                                style={{
-                                    backgroundColor: '#E8DF07',
-                                }}
-                            >
-                                <Text
-                                    style={{
-                                        fontFamily: 'SF-Pro-Rounded_regular',
-                                        fontSize: 17,
-                                        color: '#000000',
-                                        marginRight: 20,
-                                    }}
-                                >
-                                    Calories
-                                </Text>
-                            </View>
-                            <View>
-                                {/* <Text
-                                    style={{
-                                        fontFamily: 'SF-Pro-Rounded_regular',
-                                        fontSize: 17,
-                                        color: '#000000'
-                                    }}>
-                                    150
-                                </Text> */}
-                            </View>
-                        </View>
-
-                        {/* Fat */}
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                            }}
-                        >
-                            <View
-                                style={{
-                                    backgroundColor: '#E8DF07',
-                                }}
-                            >
-                                <Text
-                                    style={{
-                                        fontFamily: 'SF-Pro-Rounded_regular',
-                                        fontSize: 17,
-                                        color: '#000000',
-                                        marginRight: 20,
-                                    }}
-                                >
-                                    Fat
-                                </Text>
-                            </View>
-                            <View>
-                                {/* <Text
-                                    style={{
-                                        fontFamily: 'SF-Pro-Rounded_regular',
-                                        fontSize: 17,
-                                        color: '#000000'
-                                    }}>
-                                    150
-                                </Text> */}
-                            </View>
-                        </View>
-
-                        {/* Protein */}
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                            }}
-                        >
-                            <View
-                                style={{
-                                    backgroundColor: '#E8DF07',
-                                }}
-                            >
-                                <Text
-                                    style={{
-                                        fontFamily: 'SF-Pro-Rounded_regular',
-                                        fontSize: 17,
-                                        color: '#000000',
-                                        marginRight: 20,
-                                    }}
-                                >
-                                    Protein
-                                </Text>
-                            </View>
-                            <View>
-                                {/* <Text
-                                    style={{
-                                        fontFamily: 'SF-Pro-Rounded_regular',
-                                        fontSize: 17,
-                                        color: '#000000'
-                                    }}>
-                                    150
-                                </Text> */}
-                            </View>
-                        </View>
-
-                        {/* Carb */}
-                        <View
-                            style={{
-                                flexDirection: 'row',
-                            }}
-                        >
-                            <View
-                                style={{
-                                    backgroundColor: '#E8DF07',
-                                }}
-                            >
-                                <Text
-                                    style={{
-                                        fontFamily: 'SF-Pro-Rounded_regular',
-                                        fontSize: 17,
-                                        color: '#000000',
-                                        marginRight: 20,
-                                    }}
-                                >
-                                    Carb
-                                </Text>
-                            </View>
-                            <View>
-                                {/* <Text
-                                    style={{
-                                        fontFamily: 'SF-Pro-Rounded_regular',
-                                        fontSize: 17,
-                                        color: '#000000'
-                                    }}>
-                                    150
-                                </Text> */}
-                            </View>
-                        </View>
-                    </View>
-
-                    {/* Description */}
-                    <View>
-                        <View>
-                            <Text
-                                style={{
-                                    fontFamily: 'SF-Pro-Rounded_bold',
-                                    fontSize: 17,
-                                    color: '#000000',
-                                }}
-                            >
-                                Description
-                            </Text>
-                        </View>
-                        <View>
-                            <Text
-                                style={{
-                                    fontFamily: 'SF-Pro-Rounded_regular',
-                                    fontSize: 17,
-                                    color: '#000000',
-                                }}
-                            >
-                                It is a long established fact that a reader will
-                                be distracted by the readable content of a page
-                                when looking at its layout. The point of using
-                                Lorem Ipsum is that it has a more-or-less normal
-                                distribution of letters, as opposed to using
-                                'Content here, content here', making it look
-                                like readable English. Many desktop publishing
-                                packages and web page editors now use Lorem
-                                Ipsum as their default model text, and a search
-                                for 'lorem ipsum' will uncover many web sites
-                                still in their infancy. Various versions have
-                                evolved over the years, sometimes by accident,
-                                sometimes on purpose (injected humour and the
-                                like).
-                            </Text>
-                        </View>
-                    </View>
-                </ScrollView>
-            </View>
+                <Tab.Screen name='About'>
+                    {(props) => (
+                        <About
+                            {...props}
+                            des={des}
+                            calo={calo}
+                            protein={protein}
+                            fat={fat}
+                            carb={carb}
+                            recipt={recipt}
+                        />
+                    )}
+                </Tab.Screen>
+                <Tab.Screen name='Review' component={Review} />
+            </Tab.Navigator>
 
             {/* Button DELETE and EDIT */}
-            <View
-                style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    paddingLeft: 30,
-                    paddingRight: 30,
-                }}
-            >
-                <View
-                    style={{
-                        flex: 1,
-                        alignItems: 'center',
-                    }}
-                >
-                    <Button content='DELETE' type='error' />
+            <View style={styles.buttonContainer}>
+                <View style={styles.button}>
+                    <Button content='DELETE' type='error' onPress={() => { setConfirm(true) }} />
                 </View>
-                <View
-                    style={{
-                        flex: 1,
-                        alignItems: 'center',
-                    }}
-                >
-                    <Button content='EDIT' type='confirm' />
+                <View style={styles.button}>
+                    <Button
+                        content='EDIT'
+                        type='confirm'
+                        onPress={() =>
+                            handleOnPress({
+                                name,
+                                des,
+                                calo,
+                                protein,
+                                fat,
+                                carb,
+                            })
+                        }
+                    />
                 </View>
             </View>
         </>

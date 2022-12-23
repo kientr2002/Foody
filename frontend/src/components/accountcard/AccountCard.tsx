@@ -7,6 +7,7 @@ export interface AccountCardAttribute {
     username: string
     role: string
     status: string
+    imgSrc: string
     onPress?: () => void
 }
 
@@ -14,6 +15,7 @@ export default function AccountCard({
     username,
     role,
     status,
+    imgSrc,
     onPress,
 }: AccountCardAttribute) {
     const [pressed, setPressed] = React.useState<boolean>(false)
@@ -43,23 +45,23 @@ export default function AccountCard({
                     >
                         <Text style={styles.text_1}>{username}</Text>
                     </Pressable>
-                </View>
-                {/* Role */}
-                <View style={styles.text_direction}>
-                    <View>
-                        <Text style={styles.text_2}>Role:</Text>
+                    {/* Role */}
+                    <View style={styles.text_direction}>
+                        <View>
+                            <Text style={styles.text_2}>Role:</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.text_3}>{role}</Text>
+                        </View>
                     </View>
-                    <View>
-                        <Text style={styles.text_3}>{role}</Text>
-                    </View>
-                </View>
-                {/* Status */}
-                <View style={styles.text_direction}>
-                    <View>
-                        <Text style={styles.text_2}>Status:</Text>
-                    </View>
-                    <View>
-                        <Text style={styles.text_3}>{status}</Text>
+                    {/* Status */}
+                    <View style={styles.text_direction}>
+                        <View>
+                            <Text style={styles.text_2}>Status:</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.text_3}>{status}</Text>
+                        </View>
                     </View>
                 </View>
             </View>

@@ -13,7 +13,7 @@ export default function App() {
         'SF-Pro-Rounded_medium': require('./assets/font/SF-Pro-Rounded-Medium.otf'),
         'SF-Pro-Rounded_regular': require('./assets/font/SF-Pro-Rounded-Regular.otf'),
     })
-    
+
     if (!fontLoaded)
         return null 
         

@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native'
-import color from '../../../styles/color'
+
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
     },
     button: {
-        width: 115,
+        width: 120,
         marginTop: 20,
         marginBottom: 10,
     },
@@ -18,6 +18,11 @@ const styles = StyleSheet.create({
     food_list: {
         justifyContent: 'center',
         marginBottom: 20,
+    },
+    loadingScreen: {
+        height: 500,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 })
 
