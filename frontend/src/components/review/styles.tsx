@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
 
     reviewCard: {
         width: '95%',
+        marginVertical: 5,
         paddingVertical: 10,
         paddingHorizontal: 10,
         borderRadius: 20,

@@ -8,19 +8,19 @@ import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
 export default function Login({ navigation }: any) {
-    const { setAdmin, setLogin, setUserId } =
+    const { setAdmin, setLogin, setName } =
         React.useContext<UserContextInterface>(UserContext)
-    const [warningEmail, setWarningEmail] = React.useState<string>('')
+    const [warningUsername, setWarningUsername] = React.useState<string>('')
     const [warningPassword, setWarningPassword] = React.useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [username, setUsername] = useState<string>('')
     const [success, setSuccess] = React.useState<boolean>(false)
     const [visible, setVisible] = React.useState<boolean>(false)
 
-    const verifyInformation = (email: string, password: string) => {
+    const verifyInformation = (user: string, password: string) => {
         setSuccess(false)
         if (username !== '') {
-            setWarningEmail('')
+            setWarningUsername('')
             if (password === '') {
                 setWarningPassword('Please enter password')
             } else {
@@ -28,8 +28,8 @@ export default function Login({ navigation }: any) {
                 handleLogin(username, password)
             }
         } else {
-            if (email === '') {
-                setWarningEmail('Please enter username')
+            if (user === '') {
+                setWarningUsername('Please enter username')
             }
         }
     }
@@ -53,7 +53,7 @@ export default function Login({ navigation }: any) {
             const data = await response.json()
             if (data.result === 'ok') {
                 setAdmin(data?.role !== 1)
-                setUserId(data?.userId)
+                setName(username)
                 setSuccess(true)
             } else {
                 setSuccess(false)
@@ -72,7 +72,7 @@ export default function Login({ navigation }: any) {
                 message={
                     success
                         ? 'Log in success'
-                        : 'Email or Password is incorrect'
+                        : 'User or Password is incorrect'
                 }
                 visible={visible}
                 setVisible={setVisible}
@@ -92,12 +92,12 @@ export default function Login({ navigation }: any) {
                 <View style={styles.inputContainer}>
                     <View style={styles.input}>
                         <Input
-                            type='email'
+                            type='user'
                             focus
                             value={username}
                             setValue={setUsername}
                         />
-                        <Text style={styles.warningText}>{warningEmail}</Text>
+                        <Text style={styles.warningText}>{warningUsername}</Text>
                     </View>
                     <View style={styles.input}>
                         <Input

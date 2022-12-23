@@ -3,24 +3,11 @@ import { View, Text, ScrollView } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
-const accounts = [
-    {
-        email: 'thoaile@gmail.com',
-        password: '12345678',
-        role: 'user',
-    },
-    {
-        email: 'cunle@gmail.com',
-        password: '87654321',
-        role: 'admin',
-    },
-]
 export default function ChangePassword({ navigation }: any) {
-   
-    const [checkEmailNull, SetCheckEmailNull] = React.useState<boolean>(false)
-    const [email, setEmail] = useState<string>('')
+    const { name } = React.useContext<UserContextInterface>(UserContext)
     const [warningOldPassword, setWarningOldPassword] = React.useState<string>('')
     const [warningNewPassword, setWarningNewPassword] = React.useState<string>('')
     const [warningConfirmNewPassword, setWarningConfirmNewPassword] = React.useState<string>('')
@@ -32,39 +19,45 @@ export default function ChangePassword({ navigation }: any) {
     const [success, setSuccess] = React.useState<boolean>(false)
 
     const verifyInformation = (oldPassword: string, newPassword: string, confirmNewPassword: string) => {
-        var flag = 0
-        setSuccess(false)
+        let flag = 0
         let regexPassword = new RegExp(/.{8,32}/)
+
         if(oldPassword === ''){
             flag++
             setWarningOldPassword('Please enter Password')
         } else {
-            if(regexPassword.test(oldPassword)){
+            if (regexPassword.test(oldPassword)) {
                 setWarningOldPassword('')
             } else {
                 flag++
-                setWarningOldPassword('Password must be longer than 8 characters')
+                setWarningOldPassword(
+                    'Password must be longer than 8 characters'
+                )
             }
         }
-        if(newPassword === ''){
+        if (newPassword === '') {
             flag++
             setWarningNewPassword('Please enter new password')
         } else {
-            if(regexPassword.test(newPassword)){
-                if(oldPassword === newPassword){
+            if (regexPassword.test(newPassword)) {
+                if (oldPassword === newPassword) {
                     flag++
-                    setWarningNewPassword('New Password cannot be the same as current password')
-                } else  setWarningNewPassword('')
-            }  else {
+                    setWarningNewPassword(
+                        'New Password cannot be the same as current password'
+                    )
+                } else setWarningNewPassword('')
+            } else {
                 flag++
-                setWarningNewPassword('Password must be longer than 8 characters')
+                setWarningNewPassword(
+                    'Password must be longer than 8 characters'
+                )
             }
         }
-        if(confirmNewPassword === ''){
+        if (confirmNewPassword === '') {
             flag++
             setWarningConfirmNewPassword('Please enter confirm password')
         } else {
-            if(newPassword === confirmNewPassword){
+            if (newPassword === confirmNewPassword) {
                 setWarningConfirmNewPassword('')
             } else {
                 flag++
@@ -72,11 +65,7 @@ export default function ChangePassword({ navigation }: any) {
             }
         }
         if(flag === 0){
-            handleChangePassword(
-                oldPassword,
-                newPassword,
-                confirmNewPassword
-            )
+            handleChangePassword(oldPassword, newPassword)
         }
     }
 
@@ -85,34 +74,61 @@ export default function ChangePassword({ navigation }: any) {
         else return null
     }
 
-    const handleChangePassword = (
-        oldPassword: string,
-        newPassword: string,
-        confirmNewPassword: string
-    ) => {
-        SetCheckEmailNull(false)
-        accounts.forEach((accounts) => {
-            if(accounts.email === email){
-                if(accounts.password === oldPassword){
-                    accounts.password = newPassword
-                    setNotification('Your Password has been changed')
-                    setSuccess(true)
-                }
+    const handleChangePassword = (oldPassword: string, newPassword: string) => {
+        fetch(
+            'https://foodyforapi.herokuapp.com/getPassword',
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: name,
+                }),
             }
-        })
-        setVisible(true)
+        )
+            .then(res => res.json())
+            .then(obj => {
+                if (obj?.result === 'ok' && obj?.password !== oldPassword)
+                    throw new Error('Old password is incorrect')
+
+                return fetch(
+                    'https://foodyforapi.herokuapp.com/password',
+                    {
+                        method: 'PUT',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: name,
+                            newPass: newPassword
+                        }),
+                    }
+                ) 
+            })
+            .then(res => res.json())
+            .then(obj => {
+                if (obj?.result === 'ok')
+                    setSuccess(true)
+                    setNotification('Password has been changed')
+                    setVisible(true)
+            })
+            .catch(error => {
+                console.log(error)
+                setSuccess(false)
+                setNotification(error.message)
+                setVisible(true)
+            })
     }
 
     return (
         <>
             <Alert
                 type='change_password'
-                title={'Notification'}
-                message={success 
-                    ? notification
-                    : checkEmailNull 
-                        ? notification
-                        : 'Old password is incorrect'}
+                title={success ? 'Success' : 'Fail'}
+                message={notification}
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {

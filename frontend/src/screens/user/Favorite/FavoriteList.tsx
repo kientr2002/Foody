@@ -10,11 +10,6 @@ type Props = NativeStackScreenProps<FavoriteStackParamList>
 
 export default function FavoriteList({ route, navigation }: Props) {
     const { myFavorite } = React.useContext<UserContextInterface>(UserContext)
-    const [foods, setFoods] = React.useState<Array<Food>>([])
-
-    React.useEffect(() => {
-        setFoods(myFavorite)
-    }, [myFavorite])
 
     const handleOnPress = (obj: any) => {
         navigation.navigate('Food Detail', obj)
@@ -22,7 +17,7 @@ export default function FavoriteList({ route, navigation }: Props) {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            {foods?.map((food: Food, i: number) => (
+            {myFavorite?.map((food: Food, i: number) => (
                 <Card
                     key={i}
                     cardStyle={2}

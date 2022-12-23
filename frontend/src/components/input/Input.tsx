@@ -19,7 +19,7 @@ export interface InputAttribute {
             default: '' 
             values 
                 'email', 'password' , 'confirm_password', 'name', 'calendar',
-                'weight', 'height', 'question', 'answer', 'search', ''
+                'weight', 'height', 'question', 'answer', 'search', 'sex'
         focus (boolean): set auto focus on that input
         editable
 */
@@ -35,6 +35,10 @@ export default function Input({
     const [icon, setIcon] = React.useState<string>('')
     React.useEffect(() => {
         switch (type) {
+            case 'user':
+                setName('USER')
+                setIcon('user')
+                break
             case 'email':
                 setName('EMAIL')
                 setIcon('envelope')
@@ -87,6 +91,11 @@ export default function Input({
                 setName('SEARCH')
                 setIcon('search')
                 break
+            case 'sex':
+                setName('SEX')
+                setIcon('venus-mars')
+                break;
+            
             default:
                 setName('')
                 setIcon('')

@@ -63,15 +63,17 @@ const styles = StyleSheet.create({
     },
     content_2: {
         width: '65%',
+        paddingTop: 10,
         paddingBottom: 15,
         paddingHorizontal: 10,
     },
 
     title: {
         fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 23,
+        fontSize: 21,
     },
     title_2: {
+        width: '80%',
         fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 19,
     },

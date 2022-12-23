@@ -4,93 +4,95 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import Alert from '../../../components/alert/Alert'
 import styles from './styles'
-
-import { exportStep2 } from './forgotPasswordStep1'
-
-const accounts = [
-    {
-        email: 'thoaile@gmail.com',
-        password: '12345678',
-        question: 'What your name',
-        answer: 'Thoai',
-    },
-    {
-        email: 'cunle@gmail.com',
-        password: '87654321',
-        question: 'School name',
-        answer: 'HCMUT',
-    },
-]
-
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 
 export default function ForgotPasswordStep2({ navigation }: any) {
+    const { name } = React.useContext<UserContextInterface>(UserContext)
     const [notification, setNotification] = React.useState<string>('')
-    const [checkEmailNull, SetCheckEmailNull] = React.useState<boolean>(false)
     const [warningQuestion, setwarningQuestion] = React.useState<string>('')
     const [warningAnswer, setwarningAnswer] = React.useState<string>('')
-    const [user, setUser] = React.useState<boolean>(false)
-    const [email, setEmail] = useState<string>('')
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
     const [success, setSuccess] = React.useState<boolean>(false)
-    const LogIn = (success: Boolean) => {
+    const [visible, setVisible] = React.useState<boolean>(false)
+
+    const handleNavigate = (success: Boolean) => {
         if (success === true) {
             navigation.navigate('Login')
         }
     }
+
     const verifyInformation = (question: string, answer: string) => {
-        setSuccess(false)
         if (question === '') {
             setwarningQuestion('Please enter Question')
         } else {
-            setwarningQuestion('')
             if (answer === '') {
                 setwarningAnswer('Please enter Answer')
             } else {
-                setwarningAnswer('')
-                             
-                handleSignIn(question, answer)
+                handleForgotPassword(name, question, answer)                                     
             }
         }
     }
-    const handleSignIn = (question: string, answer: string) => {
-        setEmail(exportStep2)
-        SetCheckEmailNull(false)
-        accounts.forEach((accounts) => {
-            if (
-                accounts.question === question &&
-                accounts.answer === answer &&
-                accounts.email === email
-                
-            ) {
-                    setSuccess(true)
-                    setNotification(accounts.password)
 
-                
+    const handleForgotPassword = (username: string | null, question: string, answer: string) => {
+        fetch(
+            'https://foodyforapi.herokuapp.com/getForgotpass',
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    ques: question,
+                    ans: answer
+                }),
             }
-            if(email === ''){
-                setNotification('Press OK and SUBMIT again to continue')
-                SetCheckEmailNull(true)
-            } 
-            
-        })
-        setUser(true)
+        )
+            .then(res => res.json())
+            .then(obj => {
+                if (obj?.result !== 'ok')
+                    throw new Error('Secret question or answer is incorrect')
+                return fetch(
+                    'https://foodyforapi.herokuapp.com/getPassword',
+                    {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: username
+                        }),
+                    }
+                )
+            })
+            .then(res => res.json())
+            .then(obj => {
+                if (obj?.result === 'ok') {
+                    setNotification(obj?.password)
+                    setSuccess(true)
+                    setVisible(true)
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                setSuccess(false)
+                setNotification(error.message)
+                setVisible(true)
+            })
     }
+
     return (
         <>
             <Alert
                 type='change_password'
-                title={success ? 'Your password is:' : 'notification'}
-                message={success 
-                    ? notification 
-                    : checkEmailNull 
-                        ? notification
-                        : 'Answer and Question is incorrect'}
-                visible={user}
-                setVisible={setUser}
-                handleOk={() => {
-                    if (success) LogIn(true)
-                }}
+                title={success ? 'Your password is:' : 'Fail'}
+                message={notification}
+                visible={visible}
+                setVisible={setVisible}
+                handleOk={() => handleNavigate(success)}
             />
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.title}>Forgot Password</Text>
@@ -112,7 +114,6 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                             value={answer}
                             setValue={setAnswer}
                         />
-
                         <Text style={styles.warningText}>{warningAnswer}</Text>
                     </View>
                 </View>
