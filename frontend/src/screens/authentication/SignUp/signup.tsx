@@ -7,8 +7,6 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 
-
-
 export default function SignUp({ navigation }: any) {
     const { setAdmin, setLogin, setUserId } =
     React.useContext<UserContextInterface>(UserContext)
@@ -35,7 +33,7 @@ export default function SignUp({ navigation }: any) {
     const [answer, setAnswer] = useState<string>('')
 
     const verifyInformation = () => {
-        var flag = 0
+        let flag = 0
         let regexEmail = new RegExp(/^[\S]+@email.com$/)
         let regexPassword = new RegExp(/.{8,32}/)
         let regexName = new RegExp(/^[a-z|A-Z|\s]{1,128}$/)
@@ -146,10 +144,11 @@ export default function SignUp({ navigation }: any) {
             setwarningAnswer('')
         }
         if (flag === 0) {
-            handleLogin(email,user,password,name,sex,Date,question,answer)
+            handleSignUp(email,user,password,name,sex,Date,question,answer)
         }
     }
-    const  handleLogin = async (
+
+    const  handleSignUp = async (
         email: string,
         user: string,
         password: string,
@@ -190,6 +189,7 @@ export default function SignUp({ navigation }: any) {
                 console.error(error)
             }
     }
+
     return (
         <>
             <Alert

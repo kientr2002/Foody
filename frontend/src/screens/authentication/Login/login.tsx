@@ -7,14 +7,6 @@ import Input from '../../../components/input/Input'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
-
-let exportUser: string
-
-export function exportLoginUser(){
-    return exportUser
-}
-
-
 export default function Login({ navigation }: any) {
     const { setAdmin, setLogin, setUserId } =
         React.useContext<UserContextInterface>(UserContext)
@@ -60,7 +52,6 @@ export default function Login({ navigation }: any) {
             )
             const data = await response.json()
             if (data.result === 'ok') {
-                exportUser = username
                 setAdmin(data?.role !== 1)
                 setUserId(data?.userId)
                 setSuccess(true)

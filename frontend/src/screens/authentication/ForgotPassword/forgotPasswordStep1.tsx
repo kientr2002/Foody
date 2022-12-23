@@ -5,23 +5,14 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 
 import styles from './styles'
- let exportPassword : string
- let exportUsername : string
-export function exportStep2() {
-    return exportUsername
-}
-export function exportStep2pw() {
-    return exportPassword
-}
+
 export default function ForgotPasswordStep1({ navigation }: any) {
     const [username, setUsername] = useState<string>('')
     const [warningUsername, setwarningUsername] = React.useState<string>('')
     const [success, setSuccess] = React.useState<boolean>(false)
     const [visible, setVisible] = React.useState<boolean>(false)
+    
     const verifyInformation = (email: string) => {
-        let regexEmail = new RegExp(/^[\S]+@gmail.com$/)
-        // let regexPassword = new RegExp(/.{8,32}/)
-        setSuccess(false)
         if (email === '') {
             setwarningUsername('Please enter Username')
         } else {
@@ -47,8 +38,6 @@ export default function ForgotPasswordStep1({ navigation }: any) {
             )
             const data = await response.json()
             if (data.result === 'ok') {
-                exportUsername = username
-                exportPassword = data.password
                 setSuccess(true)
             } else {
                 setSuccess(false)
@@ -58,6 +47,7 @@ export default function ForgotPasswordStep1({ navigation }: any) {
             console.error(error)
         }
     }
+
     return (
         <>
             <Alert

@@ -4,12 +4,8 @@ import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
-import { exportLoginUser } from '../Login/login'
 
 export default function ChangePassword({ navigation }: any) {
-   
-    const [checkUsernameNull, SetCheckUsernameNull] = React.useState<boolean>(false)
-    const [Username, setUsername] = useState<string>('')
     const [warningOldPassword, setWarningOldPassword] = React.useState<string>('')
     const [warningNewPassword, setWarningNewPassword] = React.useState<string>('')
     const [warningConfirmNewPassword, setWarningConfirmNewPassword] = React.useState<string>('')
@@ -21,9 +17,9 @@ export default function ChangePassword({ navigation }: any) {
     const [success, setSuccess] = React.useState<boolean>(false)
 
     const verifyInformation = (oldPassword: string, newPassword: string, confirmNewPassword: string) => {
-        var flag = 0
-        setSuccess(false)
+        let flag = 0
         let regexPassword = new RegExp(/.{8,32}/)
+
         if(oldPassword === ''){
             flag++
             setWarningOldPassword('Please enter Password')
@@ -61,8 +57,7 @@ export default function ChangePassword({ navigation }: any) {
             }
         }
         if(flag === 0){
-            setUsername(exportLoginUser);
-            handleUsernameNull(Username, oldPassword, newPassword)
+            handleChangePassword(oldPassword, newPassword)
         }
     }
 
@@ -71,51 +66,26 @@ export default function ChangePassword({ navigation }: any) {
         else return null
     }
 
-    const handleUsernameNull = async(
-        Username: string,
-        oldPassword: string,
-        newPassword: string,
-    ) => {
-        if(Username == ''){
-            setSuccess(false)
-            SetCheckUsernameNull(true)
-            setNotification('Please press OK, waiting and SUBMIT again.')
-            setVisible(true)
-        } else {
-            try{
-                const response = await fetch(
-                    'https://foodyforapi.herokuapp.com/getPassword',
-                    {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            username: Username,
-                        }),
-                    }
-                )
-                const data = await response.json()
-                if(data.password != oldPassword){
-                    SetCheckUsernameNull(true)
-                    setNotification('Old Password is incorrect!')
-                } else {
-                     handleChangePassword(Username, newPassword)
-                    
-                }
-            }  catch (error) {
-                console.error(error)
+    const handleChangePassword = (oldPassword: string, newPassword: string) => {
+        fetch(
+            'https://foodyforapi.herokuapp.com/getPassword',
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: name,
+                }),
             }
-        }
-        
-    }   
-    const handleChangePassword = async(
-        Username: string,
-        newPassword: string,
-    ) => {
-            try{
-                const response = await fetch(
+        )
+            .then(res => res.json())
+            .then(obj => {
+                if (obj?.result === 'ok' && obj?.password !== oldPassword)
+                    throw new Error('Old password is incorrect')
+
+                return fetch(
                     'https://foodyforapi.herokuapp.com/password',
                     {
                         method: 'PUT',
@@ -124,33 +94,33 @@ export default function ChangePassword({ navigation }: any) {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            username: Username,
-                            newPass: newPassword,
+                            username: name,
+                            newPass: newPassword
                         }),
                     }
-                )
-                const data = await response.json()
-                if(data.result === 'fail'){
-                    setSuccess(false)
-                } else {
+                ) 
+            })
+            .then(res => res.json())
+            .then(obj => {
+                if (obj?.result === 'ok')
                     setSuccess(true)
-                    setNotification('Change Password success.')
-                }
+                    setNotification('Password has been changed')
+                    setVisible(true)
+            })
+            .catch(error => {
+                console.log(error)
+                setSuccess(false)
+                setNotification(error.message)
                 setVisible(true)
-            }  catch (error) {
-                console.error(error)
-            }
-    }   
+            })
+    }
+
     return (
         <>
             <Alert
                 type='change_password'
-                title={'Notification'}
-                message={success 
-                    ? notification
-                    : checkUsernameNull 
-                        ? notification
-                        : 'Old password is incorrect'}
+                title={success ? 'Success' : 'Fail'}
+                message={notification}
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {

@@ -1,22 +1,22 @@
-import React, { FC, Component, useState } from 'react'
-import Select from 'react-select'
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 import Dropdown from '../../../components/dropdown/Dropdown'
-import { exportLoginUser } from '../Login/login'
-
-var outputHeight = 0
-var outputWeight = 0
-
 
 export default function Calculate({ navigation }: any) {
     const targets = ['Increase Weight', 'Reduce Weight', 'Keep This Weight']
+    const data = [ 
+        'Sedentary',
+        'Light exercise (1-2 days/week)',
+        'Moderate exercise (3-4 days/week)',
+        'Heavy exercise (6-7 days/week)',
+        'Athlete exercise (2x per day)',
+    ]
+
     const [success, setSuccess] = React.useState<boolean>(false)
-    const [checkUsernameNull, SetCheckUsernameNull] = React.useState<boolean>(false)
-    const [username, setUsername] =  React.useState<string>('')
     const [warningWeight, setWarningWeight] = React.useState<string>('')
     const [warningHeight, setWarningHeight] = React.useState<string>('')
     const [warningActivity, setWarningActivity] = React.useState<string>('')
@@ -25,32 +25,31 @@ export default function Calculate({ navigation }: any) {
     const [height, setHeight] = React.useState<string>('')
     const [activity, setActivity] = React.useState<string>('')
     const [yourTarget, setYourTarget] = useState<string>('')
+
     const [activity1, setActivity1] = React.useState<string>('')
     const [object, setObject] = useState<string>('')
+
     const [visible, setVisible] = React.useState<boolean>(false)
     const [notification, setNotification] = useState<string>('')
-    const data = [ 'Sedentary',
-    'Light exercise (1-2 days/week)',
-    'Moderate exercise (3-4 days/week)',
-    'Heavy exercise (6-7 days/week)',
-    'Athlete exercise (2x per day)',
-    ]
+
+    
+    const handleNavigate = (success: Boolean) => {
+        if (success) navigation.goBack()
+        else return null
+    }
 
     const verifyInformation = (weight: string, height: string, activity: string, target: string) => {
-        var  flag = 0
-        setSuccess(false)
+        let  flag = 0
         if(weight === ''){
             flag++
             setWarningWeight('Please enter Information')
         } else {
-            outputWeight= parseInt(weight,10)
             setWarningWeight('')
         }
         if(height === ''){
             flag++
             setWarningHeight('Please enter Information')
         } else {
-            outputHeight= parseInt(height,10)
             setWarningHeight('')
         }
         if(activity === ''){
@@ -85,30 +84,12 @@ export default function Calculate({ navigation }: any) {
            
         }
         if(flag === 0){
-            setUsername(exportLoginUser);
-            handleUsernameNull(username);
+
         }
         
     }
-    const handleNavigate = (success: Boolean) => {
-        if (success) navigation.goBack()
-        else return null
-    }
-    const handleUsernameNull = async(
-        Username: string,
-    ) => {
-        if(Username == ''){
-            setSuccess(false)
-            SetCheckUsernameNull(true)
-            setNotification('Please press OK, waiting and SUBMIT again.')
-            setVisible(true)
-        } else {
-            handleChangePassword(Username, outputHeight, outputWeight,activity1,object)
-        }
-        
-    }
+
     const handleChangePassword = async(
-        Username: string, 
         outputHeight: number,
         outputWeight: number,
         activity: string,
@@ -124,7 +105,7 @@ export default function Calculate({ navigation }: any) {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            username: Username,
+                            username: name,
                             height: outputHeight,
                             weight: outputWeight,
                             activity: activity,
@@ -144,14 +125,14 @@ export default function Calculate({ navigation }: any) {
             }  catch (error) {
                 console.error(error)
             }
-    }   
+    }
+
     return (
         <>
             <Alert
                 type='create_plan'
-                title= {checkUsernameNull ? 'Notification' : 'Your TDEE is'}
+                title=''
                 message= {notification}
-                // 'Your TDEE has been caculated'
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {
