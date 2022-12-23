@@ -3,10 +3,12 @@ import { View, Text, ScrollView } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 
 import styles from './styles'
 
 export default function ForgotPasswordStep1({ navigation }: any) {
+    const { setName } = React.useContext<UserContextInterface>(UserContext)
     const [username, setUsername] = useState<string>('')
     const [warningUsername, setwarningUsername] = React.useState<string>('')
     const [success, setSuccess] = React.useState<boolean>(false)
@@ -17,11 +19,11 @@ export default function ForgotPasswordStep1({ navigation }: any) {
             setwarningUsername('Please enter Username')
         } else {
             setwarningUsername('')
-            handleForgotPassword(username)
+            handleVerifyUser(username)
         }
 
     }
-    const handleForgotPassword = async (username: string) => {
+    const handleVerifyUser = async (username: string) => {
         try {
             const response = await fetch(
                 'https://foodyforapi.herokuapp.com/getPassword',
@@ -38,6 +40,7 @@ export default function ForgotPasswordStep1({ navigation }: any) {
             )
             const data = await response.json()
             if (data.result === 'ok') {
+                setName(username)
                 setSuccess(true)
             } else {
                 setSuccess(false)

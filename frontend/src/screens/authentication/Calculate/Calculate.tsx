@@ -5,6 +5,7 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import styles from './styles'
 import Dropdown from '../../../components/dropdown/Dropdown'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 
 export default function Calculate({ navigation }: any) {
     const targets = ['Increase Weight', 'Reduce Weight', 'Keep This Weight']
@@ -16,6 +17,7 @@ export default function Calculate({ navigation }: any) {
         'Athlete exercise (2x per day)',
     ]
 
+    const { name } = React.useContext<UserContextInterface>(UserContext)
     const [success, setSuccess] = React.useState<boolean>(false)
     const [warningWeight, setWarningWeight] = React.useState<string>('')
     const [warningHeight, setWarningHeight] = React.useState<string>('')
@@ -42,19 +44,19 @@ export default function Calculate({ navigation }: any) {
         let  flag = 0
         if(weight === ''){
             flag++
-            setWarningWeight('Please enter Information')
+            setWarningWeight('Please enter weight')
         } else {
             setWarningWeight('')
         }
         if (height === '') {
             flag++
-            setWarningHeight('Please enter Information')
+            setWarningHeight('Please enter height')
         } else {
             setWarningHeight('')
         }
         if (activity === '') {
             flag++
-            setWarningActivity('Please choose Information')
+            setWarningActivity('Please choose activity')
         }else {
             if(activity === 'Sedentary'){
                 setActivity1('very little')
@@ -71,7 +73,7 @@ export default function Calculate({ navigation }: any) {
         }
         if (target === '') {
             flag++
-            setWarningYourTarget('Please choose Information')
+            setWarningYourTarget('Please choose target')
         } else {
             if(target === 'Increase Weight'){
                 setObject('increase')
@@ -83,11 +85,16 @@ export default function Calculate({ navigation }: any) {
             setWarningYourTarget('')
         }
         if(flag === 0){
-
+            handleChangeTDEE(
+                Number.parseInt(height),
+                Number.parseInt(weight),
+                activity1,
+                object
+            )
         }
     }
 
-    const handleChangePassword = async(
+    const handleChangeTDEE = async(
         outputHeight: number,
         outputWeight: number,
         activity: string,
@@ -112,11 +119,10 @@ export default function Calculate({ navigation }: any) {
                     }
                 )
                 const data = await response.json()
-                
                 if(data.result == 'fail'){
                     setNotification('Caculate has been failed!')
                 } else {
-                    setNotification(data.TDEE)
+                    setNotification('TDEE has been update')
                     setSuccess(true)
                 }
                 setVisible(true)
@@ -129,7 +135,7 @@ export default function Calculate({ navigation }: any) {
         <>
             <Alert
                 type='create_plan'
-                title=''
+                title={success ? 'Success' : 'Fail'}
                 message= {notification}
                 visible={visible}
                 setVisible={setVisible}

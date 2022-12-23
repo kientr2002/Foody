@@ -8,15 +8,13 @@ import Input from '../../../components/input/Input'
 import styles from './styles'
 
 export default function SignUp({ navigation }: any) {
-    const { setAdmin, setLogin, setUserId } =
-    React.useContext<UserContextInterface>(UserContext)
+        React.useContext<UserContextInterface>(UserContext)
     const [success, setSuccess] = React.useState<boolean>(false)
     const [visible, setVisible] = React.useState<boolean>(false)
     const [warningUser, setWarningUser] = React.useState<string>('')
     const [warningEmail, setwarningEmail] = React.useState<string>('')
     const [warningPassword, setWarningPassword] = React.useState<string>('')
-    const [warningConfirm_password, setWarningConfirm_password] =
-        useState<string>('')
+    const [warningConfirm_password, setWarningConfirm_password] = useState<string>('')
     const [warningName, setWarningName] = useState<string>('')
     const [warningSex, setWarningSex] = useState<string>('')
     const [warningDate, setWarningDate] = useState<string>('')
@@ -34,7 +32,7 @@ export default function SignUp({ navigation }: any) {
 
     const verifyInformation = () => {
         let flag = 0
-        let regexEmail = new RegExp(/^[\S]+@email.com$/)
+        let regexEmail = new RegExp(/^[\S]+$/)
         let regexPassword = new RegExp(/.{8,32}/)
         let regexName = new RegExp(/^[a-z|A-Z|\s]{1,128}$/)
         let regexDate = new RegExp(
@@ -54,7 +52,7 @@ export default function SignUp({ navigation }: any) {
             if (regexEmail.test(email)) {
                 setwarningEmail('')
             } else {
-                setwarningEmail('Email must be in format ...@email.com')
+                setwarningEmail('Email must be in format')
                 flag++
             }
         }
@@ -150,7 +148,7 @@ export default function SignUp({ navigation }: any) {
 
     const  handleSignUp = async (
         email: string,
-        user: string,
+        username: string,
         password: string,
         name: string,
         sex: string,
@@ -168,7 +166,7 @@ export default function SignUp({ navigation }: any) {
                         },
                         body: JSON.stringify({
                             email: email,
-                            username: user,
+                            username: username,
                             pass: password,
                             name: name,
                             sex: sex,
@@ -194,8 +192,8 @@ export default function SignUp({ navigation }: any) {
         <>
             <Alert
                 type='change_password'
-                title={success? 'Sign Up success' : 'Notification'}
-                message={success? 'Please press OK to Login': 'Username has been existed'}
+                title={success ? 'Success' : 'Fail'}
+                message={success? 'Your account has been created': 'Something wrong has happened'}
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {

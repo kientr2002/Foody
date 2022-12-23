@@ -3,9 +3,11 @@ import { View, Text, ScrollView } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
 export default function ChangePassword({ navigation }: any) {
+    const { name } = React.useContext<UserContextInterface>(UserContext)
     const [warningOldPassword, setWarningOldPassword] = React.useState<string>('')
     const [warningNewPassword, setWarningNewPassword] = React.useState<string>('')
     const [warningConfirmNewPassword, setWarningConfirmNewPassword] = React.useState<string>('')

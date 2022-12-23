@@ -4,11 +4,11 @@ import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import Alert from '../../../components/alert/Alert'
 import styles from './styles'
-
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 
 export default function ForgotPasswordStep2({ navigation }: any) {
+    const { name } = React.useContext<UserContextInterface>(UserContext)
     const [notification, setNotification] = React.useState<string>('')
-    const [checkEmailNull, SetCheckEmailNull] = React.useState<boolean>(false)
     const [warningQuestion, setwarningQuestion] = React.useState<string>('')
     const [warningAnswer, setwarningAnswer] = React.useState<string>('')
     const [question, setQuestion] = useState<string>('')
@@ -16,7 +16,7 @@ export default function ForgotPasswordStep2({ navigation }: any) {
     const [success, setSuccess] = React.useState<boolean>(false)
     const [visible, setVisible] = React.useState<boolean>(false)
 
-    const LogIn = (success: Boolean) => {
+    const handleNavigate = (success: Boolean) => {
         if (success === true) {
             navigation.navigate('Login')
         }
@@ -29,30 +29,70 @@ export default function ForgotPasswordStep2({ navigation }: any) {
             if (answer === '') {
                 setwarningAnswer('Please enter Answer')
             } else {
-                                                      
+                handleForgotPassword(name, question, answer)                                     
             }
         }
     }
 
-    const handleForgotPassword = (user: string, question: string, answer: string) => {
-        
+    const handleForgotPassword = (username: string | null, question: string, answer: string) => {
+        fetch(
+            'https://foodyforapi.herokuapp.com/getForgotpass',
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    ques: question,
+                    ans: answer
+                }),
+            }
+        )
+            .then(res => res.json())
+            .then(obj => {
+                if (obj?.result !== 'ok')
+                    throw new Error('Secret question or answer is incorrect')
+                return fetch(
+                    'https://foodyforapi.herokuapp.com/getPassword',
+                    {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: username
+                        }),
+                    }
+                )
+            })
+            .then(res => res.json())
+            .then(obj => {
+                if (obj?.result === 'ok') {
+                    setNotification(obj?.password)
+                    setSuccess(true)
+                    setVisible(true)
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                setSuccess(false)
+                setNotification(error.message)
+                setVisible(true)
+            })
     }
 
     return (
         <>
             <Alert
                 type='change_password'
-                title={success ? 'Your password is:' : 'notification'}
-                message={success 
-                    ? notification 
-                    : checkEmailNull 
-                        ? notification
-                        : 'Answer and Question is incorrect'}
+                title={success ? 'Your password is:' : 'Fail'}
+                message={notification}
                 visible={visible}
                 setVisible={setVisible}
-                handleOk={() => {
-                    if (success) LogIn(true)
-                }}
+                handleOk={() => handleNavigate(success)}
             />
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.title}>Forgot Password</Text>
@@ -74,7 +114,6 @@ export default function ForgotPasswordStep2({ navigation }: any) {
                             value={answer}
                             setValue={setAnswer}
                         />
-
                         <Text style={styles.warningText}>{warningAnswer}</Text>
                     </View>
                 </View>
