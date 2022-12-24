@@ -169,6 +169,30 @@ export default function FoodDetail({ route, navigation }: any) {
     const handleOnPress = (obj: any) => {
         navigation.navigate('Edit Food', obj, 'edit')
     }
+    const [success, setSuccess] = React.useState<boolean>(false)
+    const handleOnPressDelete = async (id: number) => {
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/food',
+                {
+                    method: 'DELETE',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        foodId: id,
+                    }),
+                }
+            )
+            const data = await response.json()
+            if (data.result === 'ok') {
+                setSuccess(true)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <>
@@ -178,6 +202,14 @@ export default function FoodDetail({ route, navigation }: any) {
                 message=''
                 visible={confirm}
                 setVisible={setConfirm}
+                handleOk={() => handleOnPressDelete(id)}
+            />
+            <Alert
+                type='change_password'
+                title='Success'
+                message='Success'
+                visible={success}
+                setVisible={setSuccess}
             />
             <View style={styles.videoContainer}>
                 <Image source={{ uri: image }} style={styles.video} />

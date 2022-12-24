@@ -21,9 +21,6 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
     },
-    pads: {
-        flex: 1,
-    },
     loadingScreen: {
         height: 500,
         justifyContent: 'center',

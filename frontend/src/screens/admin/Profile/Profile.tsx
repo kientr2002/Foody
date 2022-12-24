@@ -8,6 +8,7 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 
 import color from '../../../styles/color'
 import MyProfile from './MyProfile'
+import ChangePassword from '../../authentication/ChangePassword/changePassword'
 
 const Stack = createNativeStackNavigator<AdminProfileStackParamList>()
 type Props = BottomTabScreenProps<AdminTabParamList, 'Profile page'>
@@ -28,6 +29,14 @@ export default function Profile({ navigation }: Props) {
                 component={MyProfile}
                 options={{
                     title: 'Profile',
+                }}
+            />
+
+            <Stack.Screen
+                name='Change password'
+                component={ChangePassword}
+                options={{
+                    headerShown: false,
                 }}
             />
         </Stack.Navigator>

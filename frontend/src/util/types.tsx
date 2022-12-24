@@ -29,6 +29,7 @@ type ManageAccountStackParamList = {
 
 type AdminProfileStackParamList = {
     'My profile': undefined
+    'Change password': undefined
 }
 
 type UserTabParamList = {

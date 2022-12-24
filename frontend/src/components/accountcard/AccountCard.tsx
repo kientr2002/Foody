@@ -23,11 +23,9 @@ export default function AccountCard({
         setPressed(true)
         if (onPress) onPress()
     }
+
     return (
-        <Pressable
-            onPress={handlePressIn}
-            onPressOut={() => setPressed(false)}
-        >
+        <Pressable onPress={handlePressIn} onPressOut={() => setPressed(false)}>
             <View style={styles.view_layout}>
                 <Image
                     style={styles.img_1}
@@ -43,7 +41,6 @@ export default function AccountCard({
                     }}
                 >
                     <View>
-
                         <Text style={styles.text_1}>{username}</Text>
                         {/* Role */}
                         <View style={styles.text_direction}>
@@ -60,7 +57,15 @@ export default function AccountCard({
                                 <Text style={styles.text_2}>Status:</Text>
                             </View>
                             <View>
-                                <Text style={styles.text_3}>{status}</Text>
+                                <Text
+                                    style={
+                                        status === 'Active'
+                                            ? styles.text_3
+                                            : styles.text_4
+                                    }
+                                >
+                                    {status}
+                                </Text>
                             </View>
                         </View>
                     </View>

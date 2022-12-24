@@ -10,8 +10,8 @@ export default function AccountList({ navigation }: any) {
     const [users, setUsers] = React.useState<
         Array<{ id: number; role: number; username: String }>
     >([])
-    const [usersDetail, setUsersDetail] = React.useState<Array<
-        {
+    const [usersDetail, setUsersDetail] = React.useState<
+        Array<{
             username: String
             pass: String
             name: String
@@ -26,7 +26,8 @@ export default function AccountList({ navigation }: any) {
             object: String
             TDEE: Number
             dob: String
-        }>>([])
+        }>
+    >([])
     const [loading, setLoading] = React.useState<boolean>(true)
 
     const getUsers = async () => {
@@ -68,7 +69,10 @@ export default function AccountList({ navigation }: any) {
             )
             const data = await response.json()
             if (data.result === 'ok') {
-                setUsersDetail(usersDetail => [...usersDetail, data.message[0]])
+                setUsersDetail((usersDetail) => [
+                    ...usersDetail,
+                    data.message[0],
+                ])
             }
         } catch (error) {
             console.error(error)
@@ -102,9 +106,15 @@ export default function AccountList({ navigation }: any) {
                                 <View style={styles.card} key={i}>
                                     <AccountCard
                                         username={user.username}
-                                        role={user.role === 1 ? "User" : "Admin"}
-                                        status="Online"
-                                        imgSrc=""
+                                        role={
+                                            user.role === 1 ? 'User' : 'Admin'
+                                        }
+                                        status={
+                                            user.status === 1
+                                                ? 'Active'
+                                                : 'Banned'
+                                        }
+                                        imgSrc=''
                                         onPress={() => handleOnPress(user)}
                                     />
                                 </View>
@@ -112,7 +122,6 @@ export default function AccountList({ navigation }: any) {
                         </ScrollView>
                     </View>
                 )}
-                <View style={styles.pads}></View>
             </View>
         </>
     )

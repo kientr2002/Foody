@@ -2,11 +2,62 @@ import * as React from 'react'
 import { View, Text, Image } from 'react-native'
 import Button from '../../../components/button/Button'
 import Alert from '../../../components/alert/Alert'
+import convertDate from '../../../util/convertDate'
 import styles from './styles'
 
 export default function AccountDetail({ route }: any) {
-    const { username, name, email, dob, weight, height, TDEE }: any = route?.params
+    const { username, name, email, dob, weight, height, TDEE, object, status }: any =
+        route?.params
     const [confirm, setConfirm] = React.useState<boolean>(false)
+    const [success, setSuccess] = React.useState<boolean>(false)
+
+    const handleBan = async (username: string) => {
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/banAcc',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                    }),
+                }
+            )
+            const data = await response.json()
+            if (data.result === 'ok') {
+                setSuccess(true)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const handleActive = async (username: string) => {
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/unlockAcc',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                    }),
+                }
+            )
+            const data = await response.json()
+            if (data.result === 'ok') {
+                setSuccess(true)
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <>
@@ -16,6 +67,14 @@ export default function AccountDetail({ route }: any) {
                 message=''
                 visible={confirm}
                 setVisible={setConfirm}
+                handleOk={() => [status === 1 ? handleBan(username) : handleActive(username)]}
+            />
+            <Alert
+                type='change_password'
+                title='Success'
+                message='Success'
+                visible={success}
+                setVisible={setSuccess}
             />
             <View style={styles.avatar_username_container}>
                 <View style={styles.avatar_container}>
@@ -53,7 +112,7 @@ export default function AccountDetail({ route }: any) {
                         <Text style={styles.text_1}> Day of Birth</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_2}>{dob}</Text>
+                        <Text style={styles.text_2}>{convertDate(String(dob))}</Text>
                     </View>
                 </View>
 
@@ -93,20 +152,31 @@ export default function AccountDetail({ route }: any) {
                         <Text style={styles.text_1}> Current target</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_2}>None</Text>
+                        <Text style={styles.text_2}>{object}</Text>
                     </View>
                 </View>
             </View>
 
             <View style={styles.button_container}>
                 <View style={styles.button}>
-                    <Button
-                        content='BAN'
-                        type='error'
-                        onPress={() => {
-                            setConfirm(true)
-                        }}
-                    />
+                    {status === 1 ?
+                        <Button
+                            content='BAN'
+                            type='error'
+                            onPress={() => {
+                                setConfirm(true)
+                            }}
+                        /> :
+                        <Button
+                            content='ACTIVE'
+                            type='confirm'
+                            onPress={() => {
+                                setConfirm(true)
+                            }}
+                        />
+
+                    }
+
                 </View>
             </View>
         </>

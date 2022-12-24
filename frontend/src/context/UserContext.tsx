@@ -20,18 +20,18 @@ export interface UserContextInterface {
 
 const UserContext = React.createContext<UserContextInterface>({
     login: false,
-    setLogin: () => { },
-    setAdmin: () => { },
+    setLogin: () => {},
+    setAdmin: () => {},
     admin: false,
     name: null,
-    setName: () => { },
+    setName: () => {},
     createPlanList: [],
     myFavorite: [],
     myPlan: [],
-    handleAddToCreatePlan: () => { },
-    handleRemoveFromCreatePlan: () => { },
-    handleAddToFavorite: () => { },
-    handleRemoveFromFavorite: () => { },
+    handleAddToCreatePlan: () => {},
+    handleRemoveFromCreatePlan: () => {},
+    handleAddToFavorite: () => {},
+    handleRemoveFromFavorite: () => {},
     handleCreatePlan: () => true,
 })
 
@@ -44,7 +44,7 @@ export function UserProvider({ children }: any) {
     const [myPlan, setMyPlan] = React.useState<Food[]>([])
 
     // get user favorite dishes
-    React.useEffect(() => { }, [])
+    React.useEffect(() => {}, [])
 
     const handleAddToCreatePlan = (food: Food) => {
         if (food) setCreatePlanList([...createPlanList, food])

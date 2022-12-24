@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { StyleSheet, View, Text, Image, ScrollView } from 'react-native'
 import Alert from '../../../components/alert/Alert'
-
 import Button from '../../../components/button/Button'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
-
-export default function Profile() {
+import convertDate from '../../../util/convertDate'
+export default function Profile({ navigation }: any) {
     const { setLogin, setAdmin, name } =
         React.useContext<UserContextInterface>(UserContext)
     const [logOut, setLogOut] = React.useState<boolean>(false)
@@ -112,7 +111,7 @@ export default function Profile() {
                                 styles.color_1,
                             ]}
                         >
-                            {adminDetail?.dob}
+                            {convertDate(adminDetail ? adminDetail.dob : null)}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -140,7 +139,7 @@ export default function Profile() {
                                 styles.color_1,
                             ]}
                         >
-                            None
+                            0368514720
                         </Text>
                     </View>
                 </View>
@@ -151,7 +150,13 @@ export default function Profile() {
                             marginRight: 10,
                         }}
                     >
-                        <Button type='confirm' content='CHANGE PASSWORD' />
+                        <Button
+                            type='confirm'
+                            content='CHANGE PASSWORD'
+                            onPress={() => {
+                                navigation.navigate('Change password')
+                            }}
+                        />
                     </View>
                     <View>
                         <Button
