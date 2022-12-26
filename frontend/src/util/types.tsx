@@ -16,15 +16,15 @@ type AdminTabParamList = {
 }
 
 type ManageDishStackParamList = {
-    'Food list': undefined
+    'Food list': {id: any} | Food | undefined
     'Food detail': Food
-    'Edit Food': undefined
+    'Edit Food': Food
     'Add Food': undefined
 }
 
 type ManageAccountStackParamList = {
-    'Account list': undefined
-    'Account detail': undefined
+    'Account list': {username: string, isBanned: boolean} | undefined
+    'Account detail': {username: string} | undefined
 }
 
 type AdminProfileStackParamList = {

@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {
-    StyleSheet,
     View,
     Text,
     Image,
@@ -148,16 +147,16 @@ function About({ des, recipt, calo, protein, fat, carb }: any) {
                 </View>
             </View>
 
-            <View style={styles.section}>
+            {/* <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Recipe</Text>
-                {/* <View style={styles.sectionContainer}>
+                <View style={styles.sectionContainer}>
                     <Button
                         content='Go to recipe'
                         type='confirm'
                         onPress={handlePress}
                     />
-                </View> */}
-            </View>
+                </View>
+            </View> */}
         </ScrollView>
     )
 }
@@ -166,10 +165,11 @@ export default function FoodDetail({ route, navigation }: any) {
     const { id, name, des, image, recipt, calo, protein, fat, carb }: any =
         route?.params
     const [confirm, setConfirm] = React.useState<boolean>(false)
+    const [success, setSuccess] = React.useState<boolean>(false)
     const handleOnPress = (obj: any) => {
         navigation.navigate('Edit Food', obj, 'edit')
     }
-    const [success, setSuccess] = React.useState<boolean>(false)
+    
     const handleOnPressDelete = async (id: number) => {
         try {
             const response = await fetch(
@@ -210,6 +210,7 @@ export default function FoodDetail({ route, navigation }: any) {
                 message='Success'
                 visible={success}
                 setVisible={setSuccess}
+                handleOk={() => navigation.navigate('Food list', {id})}
             />
             <View style={styles.videoContainer}>
                 <Image source={{ uri: image }} style={styles.video} />

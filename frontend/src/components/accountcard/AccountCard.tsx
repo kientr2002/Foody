@@ -30,7 +30,7 @@ export default function AccountCard({
                 <Image
                     style={styles.img_1}
                     source={{
-                        uri: 'https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png',
+                        uri: imgSrc,
                     }}
                     fadeDuration={300}
                 />

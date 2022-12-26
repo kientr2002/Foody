@@ -8,11 +8,58 @@ import styles from './styles'
 import FoodCardAdmin from '../../../components/FoodCardAdmin/FoodCardAdmin'
 import color from '../../../styles/color'
 
-export default function DishList({ navigation }: any) {
+export default function DishList({ route, navigation }: any) {
     const [foods, setFoods] = React.useState<Array<Food>>([])
     const [loading, setLoading] = React.useState<boolean>(true)
-    const [fail, setFail] = React.useState<boolean>(false)
     const [success, setSuccess] = React.useState<boolean>(false)
+    const [visible, setVisible] = React.useState<boolean>(false)
+
+    // handle when route has value
+    React.useEffect(() => {
+        if (route.params) {
+            if (route?.params.id && !route?.params.calo) {
+                let arr = foods.filter((food:Food) => food.id !== route?.params?.id)
+                setFoods(arr)
+            }
+            else if (route?.params.id && route?.params.calo) {
+                let arr:Food[] = foods.map((food:Food) => {
+                    if (food.id === route.params.id)
+                        return {
+                            ...food,
+                            id: route.params.id,
+                            des: route.params.des,
+                            image: route.params.image,
+                            avgStar: route.params.avgStar,
+                            recipt: route.params.recipt,
+                            calo: route.params.calo,
+                            protein: route.params.protein,
+                            fat: route.params.fat,
+                            carb: route.params.carb
+                        }
+                    else 
+                        return food
+                })
+                setFoods(arr)
+            }
+            else if (route?.params.name) {
+                setFoods([...foods, {
+                    id: route.params.id,
+                    name: route.params.name,
+                    des: route.params.des,
+                    image: route.params.image,
+                    avgStar: route.params.avgStar,
+                    recipt: route.params.recipt,
+                    calo: route.params.calo,
+                    protein: route.params.protein,
+                    fat: route.params.fat,
+                    carb: route.params.carb
+                }])
+            }
+        }
+
+    }, [route])
+
+
     const getFoods = async () => {
         try {
             const response = await fetch(
@@ -46,7 +93,7 @@ export default function DishList({ navigation }: any) {
         navigation.navigate('Add Food', { undefined }, 'add')
     }
 
-    const handleOnPressDelete = async (id: number) => {
+    const handleDelete = async (id: number) => {
         try {
             const response = await fetch(
                 'https://foodyforapi.herokuapp.com/food',
@@ -63,51 +110,46 @@ export default function DishList({ navigation }: any) {
             )
             const data = await response.json()
             if (data.result === 'ok') {
+                let arr = foods.filter((food:Food) => food.id !== id)
+                setFoods(arr)
                 setSuccess(true)
-            } else {
-                setFail(true)
             }
+            setVisible(true)
         } catch (error) {
             console.error(error)
         }
     }
 
     return (
-        <View style={styles.container}>
+        <>
             <Alert
                 type='change_password'
-                title='Success'
-                message='Success'
-                visible={success}
-                setVisible={setSuccess}
+                title={success ? 'Success' : 'Fail'}
+                message={success ? 'Food has been deleted' : 'Something wrong were happened'}
+                visible={visible}
+                setVisible={setVisible}
             />
-            <Alert
-                type='change_password'
-                title='Fail'
-                message='Delete failed'
-                visible={fail}
-                setVisible={setFail}
-            />
-            {/* Add dish */}
-            <View style={styles.button}>
-                <Button
-                    content='ADD DISH'
-                    type='warning'
-                    onPress={() => handleOnPressAdd()}
-                />
-            </View>
-            {/* All dish */}
-            <View>
-                <Text style={styles.title}>All dish</Text>
-            </View>
 
-            {/* List */}
-            {loading ? (
-                <View style={styles.loadingScreen}>
-                    <ActivityIndicator size='large' color={color.primary} />
+            <View style={styles.container}>
+                {/* Add dish */}
+                <View style={styles.button}>
+                    <Button
+                        content='ADD DISH'
+                        type='warning'
+                        onPress={() => handleOnPressAdd()}
+                    />
                 </View>
-            ) : (
-                <View style={styles.food_list}>
+                {/* All dish */}
+                <View>
+                    <Text style={styles.title}>All dish</Text>
+                </View>
+
+                {/* List */}
+                {loading ? (
+                    <View style={styles.loadingScreen}>
+                        <ActivityIndicator size='large' color={color.primary} />
+                    </View>
+                ) : (
                     <ScrollView>
                         {foods.map((food: Food, i: number) => (
                             <FoodCardAdmin
@@ -121,13 +163,13 @@ export default function DishList({ navigation }: any) {
                                     handleOnPress('Edit Dish', food)
                                 }
                                 onPressDelete={() =>
-                                    handleOnPressDelete(food.id)
+                                    handleDelete(food.id)
                                 }
                             />
                         ))}
                     </ScrollView>
-                </View>
-            )}
-        </View>
+                )}
+            </View>
+        </>
     )
 }

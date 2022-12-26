@@ -1,8 +1,13 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-    image: {
-        height: 250,
+    videoContainer: {
+        width: '100%',
+        height: 270,
+    },
+    video: {
+        width: 400,
+        height: 270,
     },
     information_container: {
         flexDirection: 'column',

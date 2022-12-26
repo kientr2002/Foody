@@ -18,10 +18,10 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'SF-Pro-Rounded_bold',
         textAlign: 'center',
-        fontSize: 25,
+        fontSize: 20,
         margin: 40,
         marginTop: 10,
-        marginBottom: 0,
+        marginBottom: 10,
     },
     message: {
         fontFamily: 'SF-Pro-Rounded_medium',

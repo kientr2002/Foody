@@ -1,14 +1,12 @@
 import * as React from 'react'
-import { View, Text, ScrollView, TextInput } from 'react-native'
-import Card from '../../../components/card/Card'
-import AccountCard from '../../../components/accountCard/AccountCard'
+import { View, Text, ScrollView, Image } from 'react-native'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
 import AlertAdmin from '../../../components/alertAdmin/AlertAdmin'
 import Alert from '../../../components/alert/Alert'
 import TextArea from '../../../components/textarea/TextArea'
 import styles from './styles'
-export default function AddEditDish({ route, addOrEdit, navigation }: any) {
+export default function AddEditDish({ route, navigation }: any) {
     const { id, name, des, image, recipt, calo, protein, fat, carb }: any =
         route?.params
     const [dishName, setDishName] = React.useState<string>(name)
@@ -25,6 +23,7 @@ export default function AddEditDish({ route, addOrEdit, navigation }: any) {
     const [fail, setFail] = React.useState<boolean>(false)
     const [success, setSuccess] = React.useState<boolean>(false)
     const [failEdit, setFailEdit] = React.useState<boolean>(false)
+
     const handleAdd = async (
         name: string,
         calo: number,
@@ -102,7 +101,7 @@ export default function AddEditDish({ route, addOrEdit, navigation }: any) {
             if (data.result === 'ok') {
                 setSuccess(true)
             } else {
-                setFail(true)
+                setFailEdit(true)
             }
         } catch (error) {
             console.error(error)
@@ -115,23 +114,23 @@ export default function AddEditDish({ route, addOrEdit, navigation }: any) {
                 visible={submit}
                 setVisible={setSubmit}
                 handleOk={() => {
-                    addOrEdit === 'add'
+                    !id 
                         ? handleAdd(
                               dishName,
-                              Number(dishCalo),
-                              Number(dishProtein),
-                              Number(dishFat),
-                              Number(dishCarb),
+                              Number.parseInt(dishCalo),
+                              Number.parseInt(dishProtein),
+                              Number.parseInt(dishFat),
+                              Number.parseInt(dishCarb),
                               description,
                               dishImage,
                               dishRecipt
                           )
                         : handleEdit(
                               id,
-                              Number(dishCalo),
-                              Number(dishProtein),
-                              Number(dishFat),
-                              Number(dishCarb),
+                              Number.parseInt(dishCalo),
+                              Number.parseInt(dishProtein),
+                              Number.parseInt(dishFat),
+                              Number.parseInt(dishCarb),
                               description,
                               dishImage,
                               dishRecipt
@@ -144,6 +143,18 @@ export default function AddEditDish({ route, addOrEdit, navigation }: any) {
                 message='Success'
                 visible={success}
                 setVisible={setSuccess}
+                handleOk={() => navigation.navigate('Food list', {
+                    id: id,
+                    name: dishName,
+                    des: description,
+                    image: dishImage,
+                    avgStar: 0,
+                    recipt: dishRecipt,
+                    calo: Number(dishCalo),
+                    protein: Number(dishProtein),
+                    fat: Number(dishFat),
+                    carb: Number(dishCarb)
+                })}
             />
             <Alert
                 type='change_password'
@@ -159,15 +170,26 @@ export default function AddEditDish({ route, addOrEdit, navigation }: any) {
                 visible={failEdit}
                 setVisible={setFailEdit}
             />
+            
             <ScrollView contentContainerStyle={styles.information_container}>
-                <View style={styles.image}></View>
+                <View style={styles.videoContainer}>
+                    <Image source={{ uri: dishImage !== '' ? dishImage : undefined }} style={styles.video} />
+                </View>
                 {/* Dish name */}
                 <Text style={styles.text_1}>Dish name</Text>
-                <Input focus={false} value={dishName} setValue={setDishName} />
+                <Input
+                    focus={false}
+                    value={dishName}
+                    setValue={setDishName}
+                />
 
                 {/* Calorioes */}
                 <Text style={styles.text_1}>Calories</Text>
-                <Input focus={false} value={dishCalo} setValue={setDishCalo} />
+                <Input
+                    focus={false}
+                    value={dishCalo}
+                    setValue={setDishCalo}
+                />
 
                 <Text style={styles.text_1}>Recipe video</Text>
                 <Input
@@ -218,7 +240,10 @@ export default function AddEditDish({ route, addOrEdit, navigation }: any) {
 
                 {/* Description */}
                 <Text style={styles.text_1}>Description</Text>
-                <TextArea value={description} setValue={setDescription} />
+                <TextArea
+                    value={description}
+                    setValue={setDescription}
+                />
 
                 {/* Button DELETE and EDIT */}
                 <View style={styles.button_container}>

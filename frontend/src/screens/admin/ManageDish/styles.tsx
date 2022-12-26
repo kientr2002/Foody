@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         paddingHorizontal: 20,
     },
     button: {
@@ -15,12 +16,7 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         fontWeight: 'bold',
     },
-    food_list: {
-        justifyContent: 'center',
-        marginBottom: 100,
-    },
     loadingScreen: {
-        height: 500,
         justifyContent: 'center',
         alignItems: 'center',
     },

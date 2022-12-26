@@ -35,6 +35,7 @@ interface User {
     adminId: number
     dob: string
     id: number
+    status: number
 }
 
 export { Food, Comment, User }
