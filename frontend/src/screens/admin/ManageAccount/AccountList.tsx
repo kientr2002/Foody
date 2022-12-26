@@ -3,12 +3,10 @@ import { ActivityIndicator, View, ScrollView, Text } from 'react-native'
 
 import AccountCard from '../../../components/accountcard/AccountCard'
 import styles from './styles'
-import { User } from '../../../util/interface'
 import color from '../../../styles/color'
-import Button from '../../../components/button/Button'
-export default function AccountList({ navigation }: any) {
+export default function AccountList({ navigation, route }: any) {
     const [users, setUsers] = React.useState<
-        Array<{ id: number; role: number; username: String }>
+        Array<{ id: number; role: number; username: String; status: number }>
     >([])
     const [usersDetail, setUsersDetail] = React.useState<
         Array<{
@@ -26,10 +24,16 @@ export default function AccountList({ navigation }: any) {
             object: String
             TDEE: Number
             dob: String
+            status: Number
         }>
     >([])
+    const [usersStatus, setUsersStatus] = React.useState<
+        Array<{ id: number; role: number; username: String; status: number }>
+    >([])
+    const [banList, setBanList] = React.useState<Array<{ username: string }>>(
+        []
+    )
     const [loading, setLoading] = React.useState<boolean>(true)
-
     const getUsers = async () => {
         try {
             const response = await fetch(
@@ -38,6 +42,7 @@ export default function AccountList({ navigation }: any) {
             const data = await response.json()
             if (data.result === 'ok') {
                 setUsers(data.message)
+                setUsersStatus(data.message)
                 setLoading(false)
                 if (usersDetail.length === 0) {
                     {
@@ -79,9 +84,33 @@ export default function AccountList({ navigation }: any) {
         }
     }
 
+    const check = (username: string) => {
+        let result = false
+        {
+            banList.map((element) => {
+                if (element.username === username) {
+                    result = true
+                }
+            })
+        }
+        return result
+    }
     React.useEffect(() => {
         getUsers()
     }, [])
+
+    React.useEffect(() => {
+        const func = navigation.addListener('focus', () => {
+            // if (
+            //     route?.params?.username !== undefined &&
+            //     !check(route?.params?.username)
+            // ) {
+            //     setBanList([...banList, { username: route?.params?.username }])
+            // }
+            console.log(route)
+        })
+        return func
+    }, [navigation])
 
     const handleOnPress = (obj: any) => {
         navigation.navigate('Account detail', obj)
@@ -110,9 +139,15 @@ export default function AccountList({ navigation }: any) {
                                             user.role === 1 ? 'User' : 'Admin'
                                         }
                                         status={
-                                            user.status === 1
-                                                ? 'Active'
-                                                : 'Banned'
+                                            banList
+                                                ? check(user.username)
+                                                    ? 'Banned'
+                                                    : user.status === 1
+                                                        ? 'Active'
+                                                        : 'Banned'
+                                                : user.status === 1
+                                                    ? 'Active'
+                                                    : 'Banned'
                                         }
                                         imgSrc=''
                                         onPress={() => handleOnPress(user)}

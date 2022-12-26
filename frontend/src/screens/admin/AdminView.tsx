@@ -2,7 +2,7 @@ import * as React from 'react'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { AdminTabParamList } from '../../util/types'
-
+import { AdminProvider } from '../../context/AdminContext'
 import Navbar from '../../components/navbar/Navbar'
 import ManageAccount from './ManageAccount/ManageAccount'
 import ManageDish from './ManageDish/ManageDish'

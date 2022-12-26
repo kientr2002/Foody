@@ -4,13 +4,23 @@ import Button from '../../../components/button/Button'
 import Alert from '../../../components/alert/Alert'
 import convertDate from '../../../util/convertDate'
 import styles from './styles'
-
-export default function AccountDetail({ route }: any) {
-    const { username, name, email, dob, weight, height, TDEE, object, status }: any =
-        route?.params
+import AdminContext, {
+    AdminContextInterface,
+} from '../../../context/AdminContext'
+export default function AccountDetail({ route, navigation }: any) {
+    const {
+        username,
+        name,
+        email,
+        dob,
+        weight,
+        height,
+        TDEE,
+        object,
+        status,
+    }: any = route?.params
     const [confirm, setConfirm] = React.useState<boolean>(false)
     const [success, setSuccess] = React.useState<boolean>(false)
-
     const handleBan = async (username: string) => {
         try {
             const response = await fetch(
@@ -67,7 +77,9 @@ export default function AccountDetail({ route }: any) {
                 message=''
                 visible={confirm}
                 setVisible={setConfirm}
-                handleOk={() => [status === 1 ? handleBan(username) : handleActive(username)]}
+                handleOk={() => [
+                    status === 1 ? handleBan(username) : handleActive(username),
+                ]}
             />
             <Alert
                 type='change_password'
@@ -75,6 +87,11 @@ export default function AccountDetail({ route }: any) {
                 message='Success'
                 visible={success}
                 setVisible={setSuccess}
+                handleOk={() => {
+                    console.log({ username: username })
+                    navigation.navigate('Account list', { username: username })
+                }
+                }
             />
             <View style={styles.avatar_username_container}>
                 <View style={styles.avatar_container}>
@@ -112,7 +129,9 @@ export default function AccountDetail({ route }: any) {
                         <Text style={styles.text_1}> Day of Birth</Text>
                     </View>
                     <View>
-                        <Text style={styles.text_2}>{convertDate(String(dob))}</Text>
+                        <Text style={styles.text_2}>
+                            {convertDate(String(dob))}
+                        </Text>
                     </View>
                 </View>
 
@@ -159,14 +178,15 @@ export default function AccountDetail({ route }: any) {
 
             <View style={styles.button_container}>
                 <View style={styles.button}>
-                    {status === 1 ?
+                    {status === 1 ? (
                         <Button
                             content='BAN'
                             type='error'
                             onPress={() => {
                                 setConfirm(true)
                             }}
-                        /> :
+                        />
+                    ) : (
                         <Button
                             content='ACTIVE'
                             type='confirm'
@@ -174,9 +194,7 @@ export default function AccountDetail({ route }: any) {
                                 setConfirm(true)
                             }}
                         />
-
-                    }
-
+                    )}
                 </View>
             </View>
         </>

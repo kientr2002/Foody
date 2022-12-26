@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useFonts } from 'expo-font'
 import { UserProvider } from './src/context/UserContext'
+import { AdminProvider } from './src/context/AdminContext'
 import Index from './src/screens/Index'
 import ChangePassword from './src/screens/authentication/ChangePassword/ChangePassword'
 
@@ -19,7 +20,9 @@ export default function App() {
 
     return (
         <UserProvider>
-            <Index />
+            <AdminProvider>
+                <Index />
+            </AdminProvider>
         </UserProvider>
     )
 }
