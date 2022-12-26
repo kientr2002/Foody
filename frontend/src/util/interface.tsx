@@ -12,7 +12,7 @@ interface Food {
 }
 
 interface Comment {
-    username: string
+    username: string | null
     star: number
     comment: string
 }

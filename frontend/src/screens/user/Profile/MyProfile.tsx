@@ -2,52 +2,38 @@ import * as React from 'react'
 import { ScrollView, StyleSheet, View, Image, Text } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
-import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import color from '../../../styles/color'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
+import convertDate from '../../../util/convertDate'
 import { User } from '../../../util/interface'
 
 export default function MyProfile({ navigation }: any) {
-    const { setLogin, setAdmin, setUserId, userId } =
-        React.useContext<UserContextInterface>(UserContext)
+    const {
+        setLogin,
+        setAdmin,
+        name,
+        setName,
+        setCreatePlanList,
+        setMyFavorite,
+    } = React.useContext<UserContextInterface>(UserContext)
+    const [user, setUser] = React.useState<User>()
     const [logOut, setLogOut] = React.useState<boolean>(false)
-    const [user, setUser] = React.useState<User | null>(null)
-    const [dateOfBirth, setDateOfBirth] = React.useState<Date>()
 
-    // Get user profile
-    const handleGetInfo = async () => {
-        try {
-            const response = await fetch(
-                'https://foodyforapi.herokuapp.com/getDetailAcc',
-                {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: 'client4',
-                    }),
-                }
-            )
-            const data = await response.json()
-            if (data.result === 'ok') {
-                setUser(data.message[0])
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    React.useEffect(() => {
-        handleGetInfo()
-    }, [userId])
-
-    React.useEffect(() => {
-        if (user?.dob) {
-            let date = new Date(user.dob)
-            setDateOfBirth(date)
-        }
-    }, [user])
+    fetch('https://foodyforapi.herokuapp.com/getDetailAcc', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: name,
+        }),
+    })
+        .then((res) => res.json())
+        .then((obj) => {
+            if (obj?.result === 'ok') setUser(obj.message[0])
+        })
+        .catch((error) => console.log(error))
 
     return (
         <>
@@ -60,14 +46,14 @@ export default function MyProfile({ navigation }: any) {
                 handleOk={() => {
                     setLogin(false)
                     setAdmin(false)
-                    setUserId(null)
+                    setName(null)
                 }}
             />
             <ScrollView>
                 <View style={styles.headerContainer}>
                     <Image
                         source={{
-                            uri: 'https://www.clipartmax.com/png/middle/171-1716274_animaljake-the-dog-jake-the-dog-adventure-time.png',
+                            uri: `https://api.multiavatar.com/${name}.png`,
                         }}
                         style={styles.avatar}
                     />
@@ -121,7 +107,7 @@ export default function MyProfile({ navigation }: any) {
                                 styles.color_1,
                             ]}
                         >
-                            {`${dateOfBirth?.getDate()}/${dateOfBirth?.getMonth()}/${dateOfBirth?.getFullYear()}`}
+                            {convertDate(user ? user.dob : null)}
                         </Text>
                     </View>
                     <View style={styles.textContainer}>
@@ -202,6 +188,10 @@ export default function MyProfile({ navigation }: any) {
                             content='LOG OUT'
                             onPress={() => {
                                 setLogOut(true)
+                                setAdmin(false)
+                                setName(null)
+                                setMyFavorite([])
+                                setCreatePlanList([])
                             }}
                         />
                     </View>

@@ -10,14 +10,15 @@ export interface UserContextInterface {
     setName: (a: string | null) => void
     createPlanList: Food[]
     myPlan: Food[]
+    setCreatePlanList: (a: Food[]) => void
+    setMyPlan: (a: Food[]) => void
+    setMyFavorite: (a: Food[]) => void
     myFavorite: Food[]
     handleAddToCreatePlan: (food: Food) => void
     handleRemoveFromCreatePlan: (id: number | undefined) => void
     handleAddToFavorite: (food: Food) => void
     handleRemoveFromFavorite: (id: number) => void
-    handleCreatePlan: (list: Food[]) => boolean
 }
-
 const UserContext = React.createContext<UserContextInterface>({
     login: false,
     setLogin: () => {},
@@ -28,11 +29,13 @@ const UserContext = React.createContext<UserContextInterface>({
     createPlanList: [],
     myFavorite: [],
     myPlan: [],
+    setCreatePlanList: () => {},
+    setMyPlan: () => {},
+    setMyFavorite: () => {},
     handleAddToCreatePlan: () => {},
     handleRemoveFromCreatePlan: () => {},
     handleAddToFavorite: () => {},
     handleRemoveFromFavorite: () => {},
-    handleCreatePlan: () => true,
 })
 
 export function UserProvider({ children }: any) {
@@ -42,9 +45,27 @@ export function UserProvider({ children }: any) {
     const [createPlanList, setCreatePlanList] = React.useState<Food[]>([])
     const [myFavorite, setMyFavorite] = React.useState<Food[]>([])
     const [myPlan, setMyPlan] = React.useState<Food[]>([])
-
     // get user favorite dishes
-    React.useEffect(() => {}, [])
+
+    React.useEffect(() => {
+        if (login && name) {
+            fetch('https://foodyforapi.herokuapp.com/getFavList', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: name,
+                }),
+            })
+                .then((res) => res.json())
+                .then((obj) => {
+                    if (obj.result === 'ok') setMyFavorite(obj.message)
+                })
+                .catch((error) => console.log(error))
+        }
+    }, [name, login])
 
     const handleAddToCreatePlan = (food: Food) => {
         if (food) setCreatePlanList([...createPlanList, food])
@@ -58,22 +79,49 @@ export function UserProvider({ children }: any) {
     }
 
     const handleAddToFavorite = (food: Food) => {
-        if (food) setMyFavorite([...myFavorite, food])
+        if (food) {
+            fetch('https://foodyforapi.herokuapp.com/favList', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: name,
+                    foodId: food.id,
+                }),
+            })
+                .then((res) => res.json())
+                .then((obj) => {
+                    if (obj.result === 'ok')
+                        setMyFavorite([...myFavorite, food])
+                })
+                .catch((error) => console.log(error))
+        }
     }
 
     const handleRemoveFromFavorite = (id: number) => {
         if (id) {
-            const arr = myFavorite.filter((food) => food.id !== id)
-            setMyFavorite(arr)
+            fetch('https://foodyforapi.herokuapp.com/favList', {
+                method: 'DELETE',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: name,
+                    foodId: id,
+                }),
+            })
+                .then((res) => res.json())
+                .then((obj) => {
+                    if (obj.result === 'ok') {
+                        const arr = myFavorite.filter((food) => food.id !== id)
+                        setMyFavorite(arr)
+                    }
+                })
+                .catch((error) => console.log(error))
         }
-    }
-
-    const handleCreatePlan = (list: Food[]) => {
-        if (list) {
-            setMyPlan(list)
-            return true
-        }
-        return false
     }
 
     return (
@@ -88,11 +136,13 @@ export function UserProvider({ children }: any) {
                 createPlanList,
                 myFavorite,
                 myPlan,
+                setCreatePlanList,
+                setMyPlan,
+                setMyFavorite,
                 handleAddToCreatePlan,
                 handleRemoveFromCreatePlan,
                 handleAddToFavorite,
                 handleRemoveFromFavorite,
-                handleCreatePlan,
             }}
         >
             {children}

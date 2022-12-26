@@ -8,16 +8,57 @@ import { Comment } from '../../../util/interface'
 import styles from './styles'
 import color from '../../../styles/color'
 import Button from '../../../components/button/Button'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 
 const Tab = createMaterialTopTabNavigator()
 
-function Review() {
+function Review({ foodId }: any) {
+    const { name } = React.useContext<UserContextInterface>(UserContext)
     const [reviews, setReview] = React.useState<Comment[]>([])
     const [rate, setRate] = React.useState<number>(0)
     const [comment, setComment] = React.useState<string>('')
 
-    const handleSubmit = (rate: number, comment: string) => {
-        setReview([...reviews])
+    React.useEffect(() => {
+        fetch('https://foodyforapi.herokuapp.com/getFoodReviews', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                foodId,
+            }),
+        })
+            .then((res) => res.json())
+            .then((obj) => {
+                if (obj?.result === 'ok') setReview(obj?.message)
+            })
+            .catch((error) => console.log(error))
+    }, [foodId])
+
+    const handleSubmitComment = (rate: number, comment: string) => {
+        fetch('https://foodyforapi.herokuapp.com/foodReviews', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                foodId,
+                username: name,
+                comment,
+                star: rate,
+            }),
+        })
+            .then((res) => res.json())
+            .then((obj) => {
+                if (obj?.result === 'ok')
+                    setReview([
+                        ...reviews,
+                        { username: name, comment, star: rate },
+                    ])
+            })
+            .catch((error) => console.log(error))
     }
 
     return (
@@ -36,7 +77,7 @@ function Review() {
                     setRate={setRate}
                     comment={comment}
                     setComment={setComment}
-                    handleSubmit={handleSubmit}
+                    handleSubmit={handleSubmitComment}
                 />
             </View>
             <View style={styles.reviewCardContainer}>
@@ -172,7 +213,8 @@ function About({ des, recipt, calo, protein, fat, carb }: any) {
 }
 
 export default function FoodDetail({ route }: any) {
-    const { des, image, recipt, calo, protein, fat, carb }: any = route?.params
+    const { id, des, image, recipt, calo, protein, fat, carb }: any =
+        route?.params
 
     return (
         <>
@@ -212,7 +254,9 @@ export default function FoodDetail({ route }: any) {
                         />
                     )}
                 </Tab.Screen>
-                <Tab.Screen name='Review' component={Review} />
+                <Tab.Screen name='Review'>
+                    {(props) => <Review {...props} foodId={id} />}
+                </Tab.Screen>
             </Tab.Navigator>
         </>
     )
