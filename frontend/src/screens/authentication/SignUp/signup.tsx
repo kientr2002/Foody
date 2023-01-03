@@ -1,20 +1,21 @@
-import React, { FC, Component, useState } from 'react'
+import React, { Component, FC, useState } from 'react'
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import Select from 'react-select'
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
-import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import styles from './styles'
 
 export default function SignUp({ navigation }: any) {
-        React.useContext<UserContextInterface>(UserContext)
+    React.useContext<UserContextInterface>(UserContext)
     const [success, setSuccess] = React.useState<boolean>(false)
     const [visible, setVisible] = React.useState<boolean>(false)
     const [warningUser, setWarningUser] = React.useState<string>('')
     const [warningEmail, setwarningEmail] = React.useState<string>('')
     const [warningPassword, setWarningPassword] = React.useState<string>('')
-    const [warningConfirm_password, setWarningConfirm_password] = useState<string>('')
+    const [warningConfirm_password, setWarningConfirm_password] =
+        useState<string>('')
     const [warningName, setWarningName] = useState<string>('')
     const [warningSex, setWarningSex] = useState<string>('')
     const [warningDate, setWarningDate] = useState<string>('')
@@ -38,9 +39,9 @@ export default function SignUp({ navigation }: any) {
         let regexDate = new RegExp(
             /^(?:(?:31(-)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(-)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(-)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(-)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
         )
-        if(user === ''){
+        if (user === '') {
             setWarningUser('Please enter Username')
-            flag++;
+            flag++
         } else {
             setWarningUser('')
         }
@@ -48,7 +49,6 @@ export default function SignUp({ navigation }: any) {
             setwarningEmail('Please enter Email')
             flag++
         } else {
-            
             if (regexEmail.test(email)) {
                 setwarningEmail('')
             } else {
@@ -142,11 +142,20 @@ export default function SignUp({ navigation }: any) {
             setwarningAnswer('')
         }
         if (flag === 0) {
-            handleSignUp(email,user,password,name,sex,Date,question,answer)
+            handleSignUp(
+                email,
+                user,
+                password,
+                name,
+                sex,
+                Date,
+                question,
+                answer
+            )
         }
     }
 
-    const  handleSignUp = async (
+    const handleSignUp = async (
         email: string,
         username: string,
         password: string,
@@ -154,38 +163,39 @@ export default function SignUp({ navigation }: any) {
         sex: string,
         date: string,
         question: string,
-        answer: string) => {
-            try{
-                const response = await fetch(
-                    'https://foodyforapi.herokuapp.com/Account',
-                    {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            email: email,
-                            username: username,
-                            pass: password,
-                            name: name,
-                            sex: sex,
-                            dob: date,
-                            ques: question,
-                            ans: answer
-                        }),
-                    }
-                ) 
-                const data = await response.json()
-                if(data.result === 'fail'){
-                    setSuccess(false)
-                } else {
-                    setSuccess(true)
+        answer: string
+    ) => {
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/Account',
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        username: username,
+                        pass: password,
+                        name: name,
+                        sex: sex,
+                        dob: date,
+                        ques: question,
+                        ans: answer,
+                    }),
                 }
-                setVisible(true)
-            } catch (error) {
-                console.error(error)
+            )
+            const data = await response.json()
+            if (data.result === 'fail') {
+                setSuccess(false)
+            } else {
+                setSuccess(true)
             }
+            setVisible(true)
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     return (
@@ -193,7 +203,11 @@ export default function SignUp({ navigation }: any) {
             <Alert
                 type='change_password'
                 title={success ? 'Success' : 'Fail'}
-                message={success? 'Your account has been created': 'Something wrong has happened'}
+                message={
+                    success
+                        ? 'Your account has been created'
+                        : 'Something wrong has happened'
+                }
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {

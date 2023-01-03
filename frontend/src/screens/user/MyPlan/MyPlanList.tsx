@@ -1,10 +1,10 @@
-import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { ScrollView, View, Text, StyleSheet } from 'react-native'
-import { MyPlanStackParamList } from '../../../util/types'
-import { Food } from '../../../util/interface'
+import React from 'react'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import Card from '../../../components/card/Card'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
+import { Food } from '../../../util/interface'
+import { MyPlanStackParamList } from '../../../util/types'
 
 type Props = NativeStackScreenProps<MyPlanStackParamList>
 

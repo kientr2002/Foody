@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { View, Text, ScrollView, Image } from 'react-native'
+import { Image, ScrollView, Text, View } from 'react-native'
+import Alert from '../../../components/alert/Alert'
+import AlertAdmin from '../../../components/alertAdmin/AlertAdmin'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
-import AlertAdmin from '../../../components/alertAdmin/AlertAdmin'
-import Alert from '../../../components/alert/Alert'
 import TextArea from '../../../components/textarea/TextArea'
 import styles from './styles'
 export default function AddEditDish({ route, navigation }: any) {
@@ -114,7 +114,7 @@ export default function AddEditDish({ route, navigation }: any) {
                 visible={submit}
                 setVisible={setSubmit}
                 handleOk={() => {
-                    !id 
+                    !id
                         ? handleAdd(
                               dishName,
                               Number.parseInt(dishCalo),
@@ -143,18 +143,20 @@ export default function AddEditDish({ route, navigation }: any) {
                 message='Success'
                 visible={success}
                 setVisible={setSuccess}
-                handleOk={() => navigation.navigate('Food list', {
-                    id: id,
-                    name: dishName,
-                    des: description,
-                    image: dishImage,
-                    avgStar: 0,
-                    recipt: dishRecipt,
-                    calo: Number(dishCalo),
-                    protein: Number(dishProtein),
-                    fat: Number(dishFat),
-                    carb: Number(dishCarb)
-                })}
+                handleOk={() =>
+                    navigation.navigate('Food list', {
+                        id: id,
+                        name: dishName,
+                        des: description,
+                        image: dishImage,
+                        avgStar: 0,
+                        recipt: dishRecipt,
+                        calo: Number(dishCalo),
+                        protein: Number(dishProtein),
+                        fat: Number(dishFat),
+                        carb: Number(dishCarb),
+                    })
+                }
             />
             <Alert
                 type='change_password'
@@ -170,26 +172,23 @@ export default function AddEditDish({ route, navigation }: any) {
                 visible={failEdit}
                 setVisible={setFailEdit}
             />
-            
+
             <ScrollView contentContainerStyle={styles.information_container}>
                 <View style={styles.videoContainer}>
-                    <Image source={{ uri: dishImage !== '' ? dishImage : undefined }} style={styles.video} />
+                    <Image
+                        source={{
+                            uri: dishImage !== '' ? dishImage : undefined,
+                        }}
+                        style={styles.video}
+                    />
                 </View>
                 {/* Dish name */}
                 <Text style={styles.text_1}>Dish name</Text>
-                <Input
-                    focus={false}
-                    value={dishName}
-                    setValue={setDishName}
-                />
+                <Input focus={false} value={dishName} setValue={setDishName} />
 
                 {/* Calorioes */}
                 <Text style={styles.text_1}>Calories</Text>
-                <Input
-                    focus={false}
-                    value={dishCalo}
-                    setValue={setDishCalo}
-                />
+                <Input focus={false} value={dishCalo} setValue={setDishCalo} />
 
                 <Text style={styles.text_1}>Recipe video</Text>
                 <Input
@@ -240,10 +239,7 @@ export default function AddEditDish({ route, navigation }: any) {
 
                 {/* Description */}
                 <Text style={styles.text_1}>Description</Text>
-                <TextArea
-                    value={description}
-                    setValue={setDescription}
-                />
+                <TextArea value={description} setValue={setDescription} />
 
                 {/* Button DELETE and EDIT */}
                 <View style={styles.button_container}>

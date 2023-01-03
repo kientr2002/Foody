@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { StyleSheet, ScrollView, View, Text } from 'react-native'
 import AnimatedLottieView from 'lottie-react-native'
-import UserContext, { UserContextInterface } from '../../../context/UserContext'
+import * as React from 'react'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Card from '../../../components/card/Card'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
 import { Food } from '../../../util/interface'
 
 const useCalculateNutrition = (planList: Food[]) => {

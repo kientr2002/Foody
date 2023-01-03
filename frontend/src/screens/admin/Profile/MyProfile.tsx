@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
-import styles from './styles'
 import convertDate from '../../../util/convertDate'
+import styles from './styles'
 export default function Profile({ navigation }: any) {
     const { setLogin, setAdmin, name } =
         React.useContext<UserContextInterface>(UserContext)
@@ -19,6 +19,7 @@ export default function Profile({ navigation }: any) {
         role: number
         username: string
     }>()
+
     const getAdminDetail = async (username: string | null) => {
         try {
             const response = await fetch(

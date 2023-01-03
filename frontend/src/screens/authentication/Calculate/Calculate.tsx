@@ -9,7 +9,7 @@ import styles from './styles'
 
 export default function Calculate({ navigation }: any) {
     const targets = ['Increase Weight', 'Reduce Weight', 'Keep This Weight']
-    const data = [ 
+    const data = [
         'Sedentary',
         'Light exercise (1-2 days/week)',
         'Moderate exercise (3-4 days/week)',
@@ -34,15 +34,19 @@ export default function Calculate({ navigation }: any) {
     const [visible, setVisible] = React.useState<boolean>(false)
     const [notification, setNotification] = useState<string>('')
 
-    
     const handleNavigate = (success: Boolean) => {
         if (success) navigation.goBack()
         else return null
     }
 
-    const verifyInformation = (weight: string, height: string, activity: string, target: string) => {
-        let  flag = 0
-        if(weight === ''){
+    const verifyInformation = (
+        weight: string,
+        height: string,
+        activity: string,
+        target: string
+    ) => {
+        let flag = 0
+        if (weight === '') {
             flag++
             setWarningWeight('Please enter weight')
         } else {
@@ -57,14 +61,14 @@ export default function Calculate({ navigation }: any) {
         if (activity === '') {
             flag++
             setWarningActivity('Please choose activity')
-        }else {
-            if(activity === 'Sedentary'){
+        } else {
+            if (activity === 'Sedentary') {
                 setActivity1('very little')
-            } else if (activity === 'Light exercise (1-2 days/week)'){
+            } else if (activity === 'Light exercise (1-2 days/week)') {
                 setActivity1('little')
-            } else if (activity ===  'Moderate exercise (3-4 days/week)') {
+            } else if (activity === 'Moderate exercise (3-4 days/week)') {
                 setActivity1('normal')
-            } else if (activity === 'Heavy exercise (6-7 days/week)'){
+            } else if (activity === 'Heavy exercise (6-7 days/week)') {
                 setActivity1('heavy')
             } else {
                 setActivity1('very heavy')
@@ -75,16 +79,16 @@ export default function Calculate({ navigation }: any) {
             flag++
             setWarningYourTarget('Please choose target')
         } else {
-            if(target === 'Increase Weight'){
+            if (target === 'Increase Weight') {
                 setObject('increase')
-            } else if(target === 'Reduce Weight'){
-                setObject('stable')               
+            } else if (target === 'Reduce Weight') {
+                setObject('stable')
             } else {
                 setObject('decrease')
             }
             setWarningYourTarget('')
         }
-        if(flag === 0){
+        if (flag === 0) {
             handleChangeTDEE(
                 Number.parseInt(height),
                 Number.parseInt(weight),
@@ -94,41 +98,41 @@ export default function Calculate({ navigation }: any) {
         }
     }
 
-    const handleChangeTDEE = async(
+    const handleChangeTDEE = async (
         outputHeight: number,
         outputWeight: number,
         activity: string,
-        object: string,
+        object: string
     ) => {
-            try{
-                const response = await fetch(
-                    'https://foodyforapi.herokuapp.com/CalcTDEE',
-                    {
-                        method: 'PUT',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            username: name,
-                            height: outputHeight,
-                            weight: outputWeight,
-                            activity: activity,
-                            object: object,
-                        }),
-                    }
-                )
-                const data = await response.json()
-                if(data.result == 'fail'){
-                    setNotification('Caculate has been failed!')
-                } else {
-                    setNotification('TDEE has been update')
-                    setSuccess(true)
+        try {
+            const response = await fetch(
+                'https://foodyforapi.herokuapp.com/CalcTDEE',
+                {
+                    method: 'PUT',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: name,
+                        height: outputHeight,
+                        weight: outputWeight,
+                        activity: activity,
+                        object: object,
+                    }),
                 }
-                setVisible(true)
-            }  catch (error) {
-                console.error(error)
+            )
+            const data = await response.json()
+            if (data.result == 'fail') {
+                setNotification('Caculate has been failed!')
+            } else {
+                setNotification('TDEE has been update')
+                setSuccess(true)
             }
+            setVisible(true)
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     return (
@@ -136,7 +140,7 @@ export default function Calculate({ navigation }: any) {
             <Alert
                 type='create_plan'
                 title={success ? 'Success' : 'Fail'}
-                message= {notification}
+                message={notification}
                 visible={visible}
                 setVisible={setVisible}
                 handleOk={() => {

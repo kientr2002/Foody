@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
+import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
-import Alert from '../../../components/alert/Alert'
-import styles from './styles'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
+import styles from './styles'
 
 export default function ForgotPasswordStep2({ navigation }: any) {
     const { name } = React.useContext<UserContextInterface>(UserContext)
@@ -29,54 +29,52 @@ export default function ForgotPasswordStep2({ navigation }: any) {
             if (answer === '') {
                 setwarningAnswer('Please enter Answer')
             } else {
-                handleForgotPassword(name, question, answer)                                     
+                handleForgotPassword(name, question, answer)
             }
         }
     }
 
-    const handleForgotPassword = (username: string | null, question: string, answer: string) => {
-        fetch(
-            'https://foodyforapi.herokuapp.com/getForgotpass',
-            {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username,
-                    ques: question,
-                    ans: answer
-                }),
-            }
-        )
-            .then(res => res.json())
-            .then(obj => {
+    const handleForgotPassword = (
+        username: string | null,
+        question: string,
+        answer: string
+    ) => {
+        fetch('https://foodyforapi.herokuapp.com/getForgotpass', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                ques: question,
+                ans: answer,
+            }),
+        })
+            .then((res) => res.json())
+            .then((obj) => {
                 if (obj?.result !== 'ok')
                     throw new Error('Secret question or answer is incorrect')
-                return fetch(
-                    'https://foodyforapi.herokuapp.com/getPassword',
-                    {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            username: username
-                        }),
-                    }
-                )
+                return fetch('https://foodyforapi.herokuapp.com/getPassword', {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                    }),
+                })
             })
-            .then(res => res.json())
-            .then(obj => {
+            .then((res) => res.json())
+            .then((obj) => {
                 if (obj?.result === 'ok') {
                     setNotification(obj?.password)
                     setSuccess(true)
                     setVisible(true)
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error)
                 setSuccess(false)
                 setNotification(error.message)

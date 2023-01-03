@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
@@ -13,7 +13,7 @@ export default function ForgotPasswordStep1({ navigation }: any) {
     const [warningUsername, setwarningUsername] = React.useState<string>('')
     const [success, setSuccess] = React.useState<boolean>(false)
     const [visible, setVisible] = React.useState<boolean>(false)
-    
+
     const verifyInformation = (email: string) => {
         if (email === '') {
             setwarningUsername('Please enter Username')
@@ -21,7 +21,6 @@ export default function ForgotPasswordStep1({ navigation }: any) {
             setwarningUsername('')
             handleVerifyUser(username)
         }
-
     }
     const handleVerifyUser = async (username: string) => {
         try {
@@ -34,7 +33,7 @@ export default function ForgotPasswordStep1({ navigation }: any) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        username: username
+                        username: username,
                     }),
                 }
             )
@@ -76,7 +75,9 @@ export default function ForgotPasswordStep1({ navigation }: any) {
                             value={username}
                             setValue={setUsername}
                         />
-                        <Text style={styles.warningText}>{warningUsername}</Text>
+                        <Text style={styles.warningText}>
+                            {warningUsername}
+                        </Text>
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>

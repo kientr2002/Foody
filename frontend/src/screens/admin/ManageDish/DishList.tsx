@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { ActivityIndicator, ScrollView, Text, View } from 'react-native'
 
-import { Food } from '../../../util/interface'
-import Button from '../../../components/button/Button'
 import Alert from '../../../components/alert/Alert'
-import styles from './styles'
+import Button from '../../../components/button/Button'
 import FoodCardAdmin from '../../../components/FoodCardAdmin/FoodCardAdmin'
 import color from '../../../styles/color'
+import { Food } from '../../../util/interface'
+import styles from './styles'
 
 export default function DishList({ route, navigation }: any) {
     const [foods, setFoods] = React.useState<Array<Food>>([])
@@ -18,11 +18,12 @@ export default function DishList({ route, navigation }: any) {
     React.useEffect(() => {
         if (route.params) {
             if (route?.params.id && !route?.params.calo) {
-                let arr = foods.filter((food:Food) => food.id !== route?.params?.id)
+                let arr = foods.filter(
+                    (food: Food) => food.id !== route?.params?.id
+                )
                 setFoods(arr)
-            }
-            else if (route?.params.id && route?.params.calo) {
-                let arr:Food[] = foods.map((food:Food) => {
+            } else if (route?.params.id && route?.params.calo) {
+                let arr: Food[] = foods.map((food: Food) => {
                     if (food.id === route.params.id)
                         return {
                             ...food,
@@ -34,31 +35,30 @@ export default function DishList({ route, navigation }: any) {
                             calo: route.params.calo,
                             protein: route.params.protein,
                             fat: route.params.fat,
-                            carb: route.params.carb
+                            carb: route.params.carb,
                         }
-                    else 
-                        return food
+                    else return food
                 })
                 setFoods(arr)
-            }
-            else if (route?.params.name) {
-                setFoods([...foods, {
-                    id: route.params.id,
-                    name: route.params.name,
-                    des: route.params.des,
-                    image: route.params.image,
-                    avgStar: route.params.avgStar,
-                    recipt: route.params.recipt,
-                    calo: route.params.calo,
-                    protein: route.params.protein,
-                    fat: route.params.fat,
-                    carb: route.params.carb
-                }])
+            } else if (route?.params.name) {
+                setFoods([
+                    ...foods,
+                    {
+                        id: route.params.id,
+                        name: route.params.name,
+                        des: route.params.des,
+                        image: route.params.image,
+                        avgStar: route.params.avgStar,
+                        recipt: route.params.recipt,
+                        calo: route.params.calo,
+                        protein: route.params.protein,
+                        fat: route.params.fat,
+                        carb: route.params.carb,
+                    },
+                ])
             }
         }
-
     }, [route])
-
 
     const getFoods = async () => {
         try {
@@ -110,7 +110,7 @@ export default function DishList({ route, navigation }: any) {
             )
             const data = await response.json()
             if (data.result === 'ok') {
-                let arr = foods.filter((food:Food) => food.id !== id)
+                let arr = foods.filter((food: Food) => food.id !== id)
                 setFoods(arr)
                 setSuccess(true)
             }
@@ -125,7 +125,11 @@ export default function DishList({ route, navigation }: any) {
             <Alert
                 type='change_password'
                 title={success ? 'Success' : 'Fail'}
-                message={success ? 'Food has been deleted' : 'Something wrong were happened'}
+                message={
+                    success
+                        ? 'Food has been deleted'
+                        : 'Something wrong were happened'
+                }
                 visible={visible}
                 setVisible={setVisible}
             />
@@ -162,9 +166,7 @@ export default function DishList({ route, navigation }: any) {
                                 onPressEdit={() =>
                                     handleOnPress('Edit Dish', food)
                                 }
-                                onPressDelete={() =>
-                                    handleDelete(food.id)
-                                }
+                                onPressDelete={() => handleDelete(food.id)}
                             />
                         ))}
                     </ScrollView>

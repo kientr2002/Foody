@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react'
-import { View, Text, Image } from 'react-native'
+import { Image, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
@@ -70,9 +70,7 @@ export default function Login({ navigation }: any) {
                 type='create_plan'
                 title='Login'
                 message={
-                    success
-                        ? 'Log in success'
-                        : 'User or Password is incorrect'
+                    success ? 'Log in success' : 'User or Password is incorrect'
                 }
                 visible={visible}
                 setVisible={setVisible}
@@ -97,7 +95,9 @@ export default function Login({ navigation }: any) {
                             value={username}
                             setValue={setUsername}
                         />
-                        <Text style={styles.warningText}>{warningUsername}</Text>
+                        <Text style={styles.warningText}>
+                            {warningUsername}
+                        </Text>
                     </View>
                     <View style={styles.input}>
                         <Input

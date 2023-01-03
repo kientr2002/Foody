@@ -1,14 +1,14 @@
-import * as React from 'react'
-import * as Progress from 'react-native-progress'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { View, Text, Image, ScrollView, Linking } from 'react-native'
-import { ReviewInput, ReviewCard } from '../../../components/review/Review'
+import * as React from 'react'
+import { Image, Linking, ScrollView, Text, View } from 'react-native'
+import * as Progress from 'react-native-progress'
+import { ReviewCard, ReviewInput } from '../../../components/review/Review'
 import { Comment } from '../../../util/interface'
 
-import styles from './styles'
-import color from '../../../styles/color'
 import Button from '../../../components/button/Button'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
+import color from '../../../styles/color'
+import styles from './styles'
 
 const Tab = createMaterialTopTabNavigator()
 

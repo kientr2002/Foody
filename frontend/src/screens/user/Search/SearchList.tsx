@@ -1,6 +1,6 @@
+import AnimatedLottieView from 'lottie-react-native'
 import * as React from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import AnimatedLottieView from 'lottie-react-native'
 import Card from '../../../components/card/Card'
 import Input from '../../../components/input/Input'
 import { Food } from '../../../util/interface'

@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { View, Text, Image } from 'react-native'
-import Button from '../../../components/button/Button'
+import { Image, Text, View } from 'react-native'
 import Alert from '../../../components/alert/Alert'
+import Button from '../../../components/button/Button'
 import convertDate from '../../../util/convertDate'
-import styles from './styles'
 import { User } from '../../../util/interface'
+import styles from './styles'
 
 export default function AccountDetail({ route, navigation }: any) {
     const { username }: any = route?.params
@@ -104,7 +104,9 @@ export default function AccountDetail({ route, navigation }: any) {
                 visible={confirm}
                 setVisible={setConfirm}
                 handleOk={() => [
-                    user?.status === 1 ? handleBan(username) : handleActive(username),
+                    user?.status === 1
+                        ? handleBan(username)
+                        : handleActive(username),
                 ]}
             />
             <Alert

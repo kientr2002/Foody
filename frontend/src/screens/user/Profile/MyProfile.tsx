@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { ScrollView, StyleSheet, View, Image, Text } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
-import color from '../../../styles/color'
 import UserContext, { UserContextInterface } from '../../../context/UserContext'
+import color from '../../../styles/color'
 import convertDate from '../../../util/convertDate'
 import { User } from '../../../util/interface'
 
@@ -19,21 +19,23 @@ export default function MyProfile({ navigation }: any) {
     const [user, setUser] = React.useState<User>()
     const [logOut, setLogOut] = React.useState<boolean>(false)
 
-    fetch('https://foodyforapi.herokuapp.com/getDetailAcc', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            username: name,
-        }),
-    })
-        .then((res) => res.json())
-        .then((obj) => {
-            if (obj?.result === 'ok') setUser(obj.message[0])
+    React.useEffect(() => {
+        fetch('https://foodyforapi.herokuapp.com/getDetailAcc', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: name,
+            }),
         })
-        .catch((error) => console.log(error))
+            .then((res) => res.json())
+            .then((obj) => {
+                if (obj?.result === 'ok') setUser(obj.message[0])
+            })
+            .catch((error) => console.log(error))
+    }, [name])
 
     return (
         <>

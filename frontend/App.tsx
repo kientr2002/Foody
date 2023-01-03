@@ -1,9 +1,7 @@
-import * as React from 'react'
 import { useFonts } from 'expo-font'
+import * as React from 'react'
 import { UserProvider } from './src/context/UserContext'
-import { AdminProvider } from './src/context/AdminContext'
 import Index from './src/screens/Index'
-import ChangePassword from './src/screens/authentication/ChangePassword/ChangePassword'
 
 export default function App() {
     //load font
@@ -15,19 +13,11 @@ export default function App() {
         'SF-Pro-Rounded_regular': require('./assets/font/SF-Pro-Rounded-Regular.otf'),
     })
 
-    if (!fontLoaded)
-        return null
+    if (!fontLoaded) return null
 
     return (
         <UserProvider>
-            <AdminProvider>
-                <Index />
-            </AdminProvider>
+            <Index />
         </UserProvider>
     )
 }
-
-
-
-
-

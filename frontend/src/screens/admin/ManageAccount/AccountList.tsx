@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { ActivityIndicator, View, ScrollView, Text } from 'react-native'
+import { ActivityIndicator, ScrollView, Text, View } from 'react-native'
 
 import AccountCard from '../../../components/accountcard/AccountCard'
-import styles from './styles'
 import color from '../../../styles/color'
+import styles from './styles'
 
 interface User {
-    id: number,
-    role: number,
-    status: number,
+    id: number
+    role: number
+    status: number
     username: string
 }
 
@@ -18,14 +18,13 @@ export default function AccountList({ route, navigation }: any) {
 
     React.useEffect(() => {
         if (route.params) {
-            let arr:User[] = users.map((user:User) => {
+            let arr: User[] = users.map((user: User) => {
                 if (user.username === route.params.username)
                     return {
                         ...user,
-                        status: route.params.isBanned ? 0 : 1
+                        status: route.params.isBanned ? 0 : 1,
                     }
-                else 
-                    return user
+                else return user
             })
             setUsers(arr)
         }
@@ -51,7 +50,7 @@ export default function AccountList({ route, navigation }: any) {
     }, [])
 
     const handleOnPress = (username: string) => {
-        navigation.navigate('Account detail', {username})
+        navigation.navigate('Account detail', { username })
     }
 
     return (
@@ -73,10 +72,18 @@ export default function AccountList({ route, navigation }: any) {
                                 <View style={styles.card} key={i}>
                                     <AccountCard
                                         username={user.username}
-                                        role={user.role === 1 ? 'User' : 'Admin'}
-                                        status={user.status === 1 ? 'Active' : 'Banned'}
+                                        role={
+                                            user.role === 1 ? 'User' : 'Admin'
+                                        }
+                                        status={
+                                            user.status === 1
+                                                ? 'Active'
+                                                : 'Banned'
+                                        }
                                         imgSrc={`https://api.multiavatar.com/${user.username}.png`}
-                                        onPress={() => handleOnPress(user.username)}
+                                        onPress={() =>
+                                            handleOnPress(user.username)
+                                        }
                                     />
                                 </View>
                             ))}

@@ -1,16 +1,16 @@
-import * as React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import * as React from 'react'
 import {
-    StyleSheet,
-    View,
-    ScrollView,
-    Text,
     ActivityIndicator,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
 } from 'react-native'
-import { HomeStackParamList } from '../../../util/types'
-import { Food } from '../../../util/interface'
 import Card from '../../../components/card/Card'
 import color from '../../../styles/color'
+import { Food } from '../../../util/interface'
+import { HomeStackParamList } from '../../../util/types'
 
 type Props = NativeStackScreenProps<HomeStackParamList>
 

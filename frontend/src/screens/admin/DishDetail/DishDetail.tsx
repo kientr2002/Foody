@@ -1,20 +1,14 @@
-import * as React from 'react'
-import {
-    View,
-    Text,
-    Image,
-    ScrollView,
-    Linking,
-} from 'react-native'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import * as React from 'react'
+import { Image, Linking, ScrollView, Text, View } from 'react-native'
 import * as Progress from 'react-native-progress'
 
-import Button from '../../../components/button/Button'
-import { ReviewInput, ReviewCard } from '../../../components/review/Review'
 import Alert from '../../../components/alert/Alert'
+import Button from '../../../components/button/Button'
+import { ReviewCard, ReviewInput } from '../../../components/review/Review'
+import color from '../../../styles/color'
 import { Comment } from '../../../util/interface'
 import styles from './styles'
-import color from '../../../styles/color'
 
 const Tab = createMaterialTopTabNavigator()
 
@@ -169,7 +163,7 @@ export default function FoodDetail({ route, navigation }: any) {
     const handleOnPress = (obj: any) => {
         navigation.navigate('Edit Food', obj, 'edit')
     }
-    
+
     const handleOnPressDelete = async (id: number) => {
         try {
             const response = await fetch(
@@ -210,7 +204,7 @@ export default function FoodDetail({ route, navigation }: any) {
                 message='Success'
                 visible={success}
                 setVisible={setSuccess}
-                handleOk={() => navigation.navigate('Food list', {id})}
+                handleOk={() => navigation.navigate('Food list', { id })}
             />
             <View style={styles.videoContainer}>
                 <Image source={{ uri: image }} style={styles.video} />

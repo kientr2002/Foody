@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
@@ -8,9 +8,12 @@ import styles from './styles'
 
 export default function ChangePassword({ navigation }: any) {
     const { name } = React.useContext<UserContextInterface>(UserContext)
-    const [warningOldPassword, setWarningOldPassword] = React.useState<string>('')
-    const [warningNewPassword, setWarningNewPassword] = React.useState<string>('')
-    const [warningConfirmNewPassword, setWarningConfirmNewPassword] = React.useState<string>('')
+    const [warningOldPassword, setWarningOldPassword] =
+        React.useState<string>('')
+    const [warningNewPassword, setWarningNewPassword] =
+        React.useState<string>('')
+    const [warningConfirmNewPassword, setWarningConfirmNewPassword] =
+        React.useState<string>('')
     const [oldPassword, setOldPassword] = useState<string>('')
     const [newPassword, setNewPassword] = useState<string>('')
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>('')
@@ -18,11 +21,15 @@ export default function ChangePassword({ navigation }: any) {
     const [visible, setVisible] = React.useState<boolean>(false)
     const [success, setSuccess] = React.useState<boolean>(false)
 
-    const verifyInformation = (oldPassword: string, newPassword: string, confirmNewPassword: string) => {
+    const verifyInformation = (
+        oldPassword: string,
+        newPassword: string,
+        confirmNewPassword: string
+    ) => {
         let flag = 0
         let regexPassword = new RegExp(/.{8,32}/)
 
-        if(oldPassword === ''){
+        if (oldPassword === '') {
             flag++
             setWarningOldPassword('Please enter Password')
         } else {
@@ -64,7 +71,7 @@ export default function ChangePassword({ navigation }: any) {
                 setWarningConfirmNewPassword('Confirm Password does not match')
             }
         }
-        if(flag === 0){
+        if (flag === 0) {
             handleChangePassword(oldPassword, newPassword)
         }
     }
@@ -75,47 +82,40 @@ export default function ChangePassword({ navigation }: any) {
     }
 
     const handleChangePassword = (oldPassword: string, newPassword: string) => {
-        fetch(
-            'https://foodyforapi.herokuapp.com/getPassword',
-            {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: name,
-                }),
-            }
-        )
-            .then(res => res.json())
-            .then(obj => {
+        fetch('https://foodyforapi.herokuapp.com/getPassword', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: name,
+            }),
+        })
+            .then((res) => res.json())
+            .then((obj) => {
                 if (obj?.result === 'ok' && obj?.password !== oldPassword)
                     throw new Error('Old password is incorrect')
 
-                return fetch(
-                    'https://foodyforapi.herokuapp.com/password',
-                    {
-                        method: 'PUT',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            username: name,
-                            newPass: newPassword
-                        }),
-                    }
-                ) 
+                return fetch('https://foodyforapi.herokuapp.com/password', {
+                    method: 'PUT',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: name,
+                        newPass: newPassword,
+                    }),
+                })
             })
-            .then(res => res.json())
-            .then(obj => {
-                if (obj?.result === 'ok')
-                    setSuccess(true)
-                    setNotification('Password has been changed')
-                    setVisible(true)
+            .then((res) => res.json())
+            .then((obj) => {
+                if (obj?.result === 'ok') setSuccess(true)
+                setNotification('Password has been changed')
+                setVisible(true)
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error)
                 setSuccess(false)
                 setNotification(error.message)
