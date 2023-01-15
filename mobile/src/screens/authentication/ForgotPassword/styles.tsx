@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import color from '../../../styles/basic'
+import { color } from '../../../styles/basic'
 
 const styles = StyleSheet.create({
     container: {
@@ -8,18 +8,13 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     title: {
-        fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 30,
-        color: color.text,
-        marginBottom: 4,
+        marginBottom: -5,
         marginLeft: 20,
     },
-    textBackground: {
-        fontFamily: 'SF-Pro-Rounded_bold',
-        fontSize: 13,
-        color: color.textBackground,
+    step: {
         marginLeft: 20,
-        marginBottom: 15,
+        marginBottom: 5,
     },
     inputContainer: {
         display: 'flex',
@@ -29,6 +24,7 @@ const styles = StyleSheet.create({
     },
     input: {
         alignItems: 'center',
+        marginBottom: 15,
     },
     buttonContainer: {
         alignItems: 'flex-end',
@@ -42,6 +38,16 @@ const styles = StyleSheet.create({
 
         marginTop: 5,
         marginBottom: 5,
+    },
+
+    sendAgain: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 20,
+    },
+    sendAgainText: {
+        marginLeft: 5,
+        color: color.second,
     },
 })
 

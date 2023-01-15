@@ -6,7 +6,7 @@ import { ProfileStackParamList, UserTabParamList } from '../../../util/types'
 import HeaderButton from '../../../components/headerButton/HeaderButton'
 import color from '../../../styles/basic'
 import Calculate from '../../authentication/Calculate/Calculate'
-import ChangePassword from '../../authentication/ChangePassword/changePassword'
+import ChangePassword from '../../authentication/ChangePassword/ChangePassword'
 import MyProfile from './MyProfile'
 
 const Stack = createNativeStackNavigator<ProfileStackParamList>()

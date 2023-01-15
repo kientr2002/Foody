@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import color from '../../../styles/basic'
+import { color } from '../../../styles/basic'
 
 const styles = StyleSheet.create({
     container: {
@@ -8,10 +8,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     title: {
-        fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 30,
-        color: color.text,
-        marginBottom: 10,
+        marginBottom: 20,
         marginLeft: 20,
     },
     inputContainer: {
@@ -22,12 +20,12 @@ const styles = StyleSheet.create({
     },
     input: {
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: 15,
     },
     buttonContainer: {
         alignItems: 'flex-end',
         marginRight: 20,
-        marginTop: 10,
+        marginTop: 20,
     },
     warningText: {
         color: 'tomato',

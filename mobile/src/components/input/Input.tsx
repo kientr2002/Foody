@@ -33,10 +33,6 @@ const useInputType = (
 
     React.useEffect(() => {
         switch (type) {
-            case 'user':
-                setName('USER')
-                setIcon('user')
-                break
             case 'email':
                 setName('EMAIL')
                 setIcon('envelope')

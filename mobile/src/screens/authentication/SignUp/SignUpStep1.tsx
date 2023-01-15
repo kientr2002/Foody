@@ -1,31 +1,33 @@
 import React from 'react'
-import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import Button from '../../../components/button/Button'
 import Input from '../../../components/input/Input'
-import { color, text } from '../../../styles/basic'
+import { text } from '../../../styles/basic'
 import styles from './styles'
 
-const Login = ({ navigation }: any): JSX.Element => {
+const SignUpStep1 = ({ navigation }: any): JSX.Element => {
     const [email, setEmail] = React.useState<string>('')
     const [password, setPassword] = React.useState<string>('')
-
-    const handleLogin = async (username: string, password: string) => {
-        // TODO handle login
-    }
+    const [confirmPassword, setConfirmPassword] = React.useState<string>('')
 
     return (
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <>
             <View style={styles.container}>
-                <View style={styles.logoContainer}>
-                    <Image
-                        style={styles.logo}
-                        source={require('../../../../assets/logo.png')}
-                    />
+                <View>
+                    <Text style={[styles.title, text.bold, text.color_black]}>
+                        Sign up
+                    </Text>
+                    <Text
+                        style={[
+                            styles.quote,
+                            text.regular,
+                            text.size_small,
+                            text.color_gray,
+                        ]}
+                    >
+                        Start your new journey with Foody
+                    </Text>
                 </View>
-
-                <Text style={[styles.title, text.bold, text.color_black]}>
-                    Login
-                </Text>
 
                 <View style={styles.inputContainer}>
                     <View style={styles.input}>
@@ -43,34 +45,26 @@ const Login = ({ navigation }: any): JSX.Element => {
                             setValue={setPassword}
                         />
                     </View>
-                </View>
-
-                <View style={styles.focusPassContainer}>
-                    <Text
-                        onPress={() =>
-                            navigation.navigate('Forgot password step 1')
-                        }
-                        style={[
-                            styles.highlightText,
-                            text.heavy,
-                            text.size_extraSmall,
-                        ]}
-                    >
-                        Forgot password?
-                    </Text>
+                    <View style={styles.input}>
+                        <Input
+                            type='confirm_password'
+                            value={confirmPassword}
+                            setValue={setConfirmPassword}
+                        />
+                    </View>
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <ActivityIndicator
-                        size='large'
-                        color={color.primary}
-                        style={styles.loading}
+                    <Button
+                        content='NEXT'
+                        type='confirm'
+                        arrow
+                        onPress={() => navigation.navigate('Sign Up step 2')}
                     />
-                    <Button content='LOGIN' type='confirm' arrow />
                 </View>
             </View>
 
-            <View style={styles.signUpContainer}>
+            <View style={styles.logInContainer}>
                 <View
                     style={{
                         flexDirection: 'row',
@@ -78,10 +72,10 @@ const Login = ({ navigation }: any): JSX.Element => {
                         alignItems: 'center',
                     }}
                 >
-                    <Text>Don't have any account?</Text>
+                    <Text>Already have account?</Text>
                     <Text
                         accessibilityRole='button'
-                        onPress={() => navigation.navigate('Sign Up step 1')}
+                        onPress={() => navigation.navigate('Login')}
                         style={[
                             styles.highlightText,
                             text.heavy,
@@ -89,12 +83,12 @@ const Login = ({ navigation }: any): JSX.Element => {
                             { marginLeft: 5 },
                         ]}
                     >
-                        Sign up
+                        Log In
                     </Text>
                 </View>
             </View>
-        </ScrollView>
+        </>
     )
 }
 
-export default Login
+export default SignUpStep1

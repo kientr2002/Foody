@@ -3,7 +3,7 @@ import { color } from '../../styles/basic'
 const styles = StyleSheet.create({
     button: {
         width: '90%',
-        height: 50,
+        height: 60,
         paddingTop: 5,
         paddingBottom: 5,
         paddingLeft: 10,
@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
 
         borderRadius: 20,
         backgroundColor: color.white,
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.1,
         shadowRadius: 2,
-        elevation: 2,
+        elevation: 1,
     },
     buttonText: {
         flex: 1,

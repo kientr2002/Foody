@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         marginLeft: '6.5%',
+        marginBottom: -5,
+    },
+    quote: {
+        marginLeft: '6.5%',
         marginBottom: 20,
     },
 
@@ -31,6 +35,9 @@ const styles = StyleSheet.create({
         marginRight: 20,
         marginTop: 10,
         marginBottom: 10,
+    },
+    loading: {
+        marginRight: 5,
     },
 
     focusPassContainer: {

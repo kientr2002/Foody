@@ -3,7 +3,7 @@ import { color } from '../../styles/basic'
 
 const styles = StyleSheet.create({
     container: {
-        width: '90%',
+        width: '87%',
         paddingTop: 5,
         paddingBottom: 5,
         paddingLeft: 10,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 1, height: 1 },
         shadowOpacity: 0.1,
         shadowRadius: 2,
-        elevation: 1.5,
+        elevation: 1,
     },
     icon: {
         width: '15%',

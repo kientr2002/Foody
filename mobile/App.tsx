@@ -1,8 +1,6 @@
 import { useFonts } from 'expo-font'
 import * as React from 'react'
-import { Text, View } from 'react-native'
-import Button from './src/components/button/Button'
-import Favorite from './src/components/favorite/Favorite'
+import AuthenticationView from './src/screens/authentication/AuthenticationView'
 
 export default function App() {
     const [visible, setVisible] = React.useState(true)
@@ -19,21 +17,5 @@ export default function App() {
         return null
     }
 
-    return (
-        <View
-            style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
-            <Button
-                type='confirm'
-                content='Open'
-                onPress={() => setVisible(true)}
-            />
-            {/* <Favorite.FavoriteHolder type='favorite' name='Favorite' /> */}
-            <Favorite.Submenu visible={visible} setVisible={setVisible} />
-        </View>
-    )
+    return <AuthenticationView />
 }

@@ -1,7 +1,12 @@
 import { StyleSheet } from 'react-native'
-import color from '../../../styles/basic'
+import { color } from '../../../styles/basic'
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        marginTop: 20,
+    },
     logoContainer: {
         width: '100%',
         flexDirection: 'row',
@@ -12,16 +17,10 @@ const styles = StyleSheet.create({
         width: 180,
         height: 155,
     },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        marginTop: 20,
-    },
     title: {
-        fontFamily: 'SF-Pro-Rounded_bold',
         fontSize: 30,
-        color: color.text,
-        marginLeft: 20,
+        marginLeft: '6.5%',
+        marginBottom: 10,
     },
     inputContainer: {
         display: 'flex',
@@ -31,14 +30,18 @@ const styles = StyleSheet.create({
     },
     input: {
         alignItems: 'center',
-        marginBottom: 5,
+        marginBottom: 15,
     },
 
     buttonContainer: {
-        alignItems: 'flex-end',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
         marginRight: 20,
         marginTop: 10,
         marginBottom: 10,
+    },
+    loading: {
+        marginRight: 5,
     },
 
     focusPassContainer: {
@@ -47,19 +50,12 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     highlightText: {
-        fontFamily: 'SF-Pro-Rounded_heavy',
-        fontSize: 15,
         color: color.primary,
-    },
-    marginTop_10: {
-        marginTop: 10,
-    },
-    marginLeft_10: {
-        marginLeft: 5,
     },
 
     signUpContainer: {
         alignSelf: 'center',
+        justifyContent: 'flex-end',
         marginBottom: 10,
         marginLeft: 20,
     },

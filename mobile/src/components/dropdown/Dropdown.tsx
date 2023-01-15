@@ -79,7 +79,12 @@ const Dropdown = ({
             >
                 {selected || label}
             </Text>
-            <FontAwesome name='caret-down' size={22} color='black' />
+            <FontAwesome
+                name='caret-down'
+                size={22}
+                color='black'
+                style={{ marginRight: 10 }}
+            />
         </TouchableOpacity>
     )
 }

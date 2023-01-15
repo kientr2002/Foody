@@ -3,32 +3,12 @@ import { Food } from './interface'
 
 type AuthenticationStackParamList = {
     Login: undefined
-    'Sign Up': undefined
+    'Sign Up step 1': undefined
+    'Sign Up step 2': undefined
+    'Update status': undefined
     'Forgot password step 1': undefined
     'Forgot password step 2': undefined
-    'Change password': undefined
-}
-
-type AdminTabParamList = {
-    'Manage Dish': NavigatorScreenParams<ManageDishStackParamList>
-    'Manage Account': NavigatorScreenParams<ManageAccountStackParamList>
-    'Profile page': NavigatorScreenParams<AdminProfileStackParamList>
-}
-
-type ManageDishStackParamList = {
-    'Food list': { id: any } | Food | undefined
-    'Food detail': Food
-    'Edit Food': Food
-    'Add Food': undefined
-}
-
-type ManageAccountStackParamList = {
-    'Account list': { username: string; isBanned: boolean } | undefined
-    'Account detail': { username: string } | undefined
-}
-
-type AdminProfileStackParamList = {
-    'My profile': undefined
+    'Forgot password step 3': undefined
     'Change password': undefined
 }
 
@@ -78,8 +58,4 @@ export {
     FavoriteStackParamList,
     SearchStackParamList,
     ProfileStackParamList,
-    AdminTabParamList,
-    ManageAccountStackParamList,
-    ManageDishStackParamList,
-    AdminProfileStackParamList,
 }

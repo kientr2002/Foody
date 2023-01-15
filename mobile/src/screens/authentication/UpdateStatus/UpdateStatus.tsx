@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import { Pressable, Text, TouchableOpacity, View } from 'react-native'
 import Button from '../../../components/button/Button'
 import Dropdown from '../../../components/dropdown/Dropdown'
 import Input from '../../../components/input/Input'
 import { text } from '../../../styles/basic'
 import styles from './styles'
 
-const Calculate = ({ navigation }: any): JSX.Element => {
+const UpdateStatus = ({ navigation }: any): JSX.Element => {
     const targets = ['Increase Weight', 'Reduce Weight', 'Keep This Weight']
     const activities = [
         'Sedentary',
@@ -15,18 +15,42 @@ const Calculate = ({ navigation }: any): JSX.Element => {
         'Heavy exercise (6-7 days/week)',
         'Athlete exercise (2x per day)',
     ]
+    const [name, setName] = React.useState<string>('')
+    const [birthday, setBirthday] = React.useState<string>('')
     const [weight, setWeight] = React.useState<string>('')
     const [height, setHeight] = React.useState<string>('')
+    const [target, setTarget] = React.useState<string>('')
     const [selectedActivity, setSelectedActivity] = React.useState<string>('')
-    const [target, setTarget] = useState<string>('')
 
     return (
         <View style={styles.container}>
-            <Text style={[styles.title, text.bold, text.color_black]}>
-                Update your status
-            </Text>
+            <View>
+                <Text style={[styles.title, text.bold, text.color_black]}>
+                    Almost done
+                </Text>
+                <Text
+                    style={[
+                        styles.quote,
+                        text.regular,
+                        text.size_small,
+                        text.color_gray,
+                    ]}
+                >
+                    Let us know your basic information
+                </Text>
+            </View>
 
             <View style={styles.inputContainer}>
+                <View style={styles.input}>
+                    <Input type='name' value={name} setValue={setName} />
+                </View>
+                <View style={styles.input}>
+                    <Input
+                        type='calendar'
+                        value={birthday}
+                        setValue={setBirthday}
+                    />
+                </View>
                 <View style={styles.input}>
                     <Input type='weight' value={weight} setValue={setWeight} />
                 </View>
@@ -63,10 +87,26 @@ const Calculate = ({ navigation }: any): JSX.Element => {
             </View>
 
             <View style={styles.buttonContainer}>
-                <Button content='SUBMIT' type='confirm' />
+                <Pressable onPress={() => navigation.navigate('Login')}>
+                    <Text
+                        style={[
+                            text.semiBold,
+                            text.size_small,
+                            text.color_gray,
+                            { marginRight: 15 },
+                        ]}
+                    >
+                        Skip
+                    </Text>
+                </Pressable>
+                <Button
+                    content='SUBMIT'
+                    type='confirm'
+                    onPress={() => navigation.navigate('Login')}
+                />
             </View>
         </View>
     )
 }
 
-export default Calculate
+export default UpdateStatus
