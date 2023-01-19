@@ -1,45 +1,13 @@
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import * as React from 'react'
-import HeaderButton from '../../../components/headerButton/HeaderButton'
-import color from '../../../styles/basic'
-import { MyPlanStackParamList, UserTabParamList } from '../../../util/types'
-import CreatePlan from '../CreatePlan/CreatePlan'
-import FoodDetail from '../FoodDetail/FoodDetail'
-import MyPlanList from './MyPlanList'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import React from 'react'
+import { ScrollView, Text, View } from 'react-native'
+import { MyPlanStackParamList } from '../../../util/navigator'
+import styles from './styles'
 
-const Stack = createNativeStackNavigator<MyPlanStackParamList>()
-type Props = BottomTabScreenProps<UserTabParamList, 'MyPlan page'>
+type Props = NativeStackScreenProps<MyPlanStackParamList>
 
-export default function MyPlan({ navigation }: Props) {
-    return (
-        <Stack.Navigator
-            screenOptions={{
-                headerTintColor: color.primary,
-                headerTitleStyle: {
-                    fontFamily: 'SF-Pro-Rounded_bold',
-                    fontSize: 23,
-                },
-            }}
-        >
-            <Stack.Screen
-                name='MyPlan List'
-                component={MyPlanList}
-                options={{
-                    title: 'My Plan',
-                    headerRight: () => (
-                        <HeaderButton type={1} navigation={navigation} />
-                    ),
-                }}
-            />
-            <Stack.Screen
-                name='Food Detail'
-                component={FoodDetail}
-                options={({ route }) => ({
-                    title: route.params.name,
-                })}
-            />
-            <Stack.Screen name='Create Plan' component={CreatePlan} />
-        </Stack.Navigator>
-    )
+const MyPlan = ({ route, navigation }: Props): JSX.Element => {
+    return <ScrollView contentContainerStyle={styles.container}></ScrollView>
 }
+
+export default MyPlan

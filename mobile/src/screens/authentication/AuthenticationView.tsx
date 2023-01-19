@@ -1,8 +1,9 @@
-import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import * as React from 'react'
-import { color } from '../../styles/basic'
-import { AuthenticationStackParamList } from '../../util/types'
+import { FoodyLightTheme } from '../../styles/themes'
+import { AuthenticationStackParamList } from '../../util/navigator'
+
 import ChangePassword from './ChangePassword/ChangePassword'
 import ForgotPasswordStep1 from './ForgotPassword/ForgotPasswordStep1'
 import ForgotPasswordStep2 from './ForgotPassword/ForgotPasswordStep2'
@@ -13,17 +14,10 @@ import SignUpStep2 from './SignUp/SignUpStep2'
 import UpdateStatus from './UpdateStatus/UpdateStatus'
 
 const Stack = createStackNavigator<AuthenticationStackParamList>()
-const MyTheme = {
-    ...DefaultTheme,
-    colors: {
-        ...DefaultTheme.colors,
-        background: color.white,
-    },
-}
 
 export default function AuthenticationView() {
     return (
-        <NavigationContainer theme={MyTheme}>
+        <NavigationContainer theme={FoodyLightTheme}>
             <Stack.Navigator
                 screenOptions={{
                     headerShown: false,

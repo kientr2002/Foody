@@ -1,49 +1,41 @@
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import AnimatedLottieView from 'lottie-react-native'
 import * as React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { SearchStackParamList, UserTabParamList } from '../../../util/types'
+import { ScrollView, StyleSheet, View } from 'react-native'
+import searchAnimated from '../../../../assets/animation/search.json'
+import { SearchStackParamList } from '../../../util/navigator'
+import styles from './styles'
 
-import HeaderButton from '../../../components/headerButton/HeaderButton'
-import CreatePlan from '../CreatePlan/CreatePlan'
-import FoodDetail from '../FoodDetail/FoodDetail'
-import SearchList from './SearchList'
+import Input from '../../../components/input/Input'
 
-import color from '../../../styles/basic'
+type Props = NativeStackScreenProps<SearchStackParamList>
 
-const Stack = createNativeStackNavigator<SearchStackParamList>()
-type Props = BottomTabScreenProps<UserTabParamList, 'Search page'>
-
-export default function Search({ navigation }: Props) {
+const Search = ({ navigation }: Props): JSX.Element => {
     return (
-        <Stack.Navigator
-            screenOptions={{
-                headerTintColor: color.primary,
-                headerTitleStyle: {
-                    fontFamily: 'SF-Pro-Rounded_bold',
-                    fontSize: 23,
-                },
-            }}
-        >
-            <Stack.Screen
-                name='Search List'
-                component={SearchList}
-                options={{
-                    title: 'Search',
-                    headerRight: () => (
-                        <HeaderButton type={1} navigation={navigation} />
-                    ),
-                }}
-            />
-            <Stack.Screen
-                name='Food Detail'
-                component={FoodDetail}
-                options={({ route }) => ({
-                    title: route.params.name,
-                    headerRight: () => <HeaderButton type={2} route={route} />,
-                })}
-            />
-            <Stack.Screen name='Create Plan' component={CreatePlan} />
-        </Stack.Navigator>
+        <View>
+            <View style={styles.searchInput}>
+                <Input
+                    type='search'
+                    focus
+                    value={'searchKeyWord'}
+                    setValue={undefined}
+                />
+            </View>
+
+            {false ? (
+                <ScrollView
+                    contentContainerStyle={styles.resultList}
+                ></ScrollView>
+            ) : (
+                <AnimatedLottieView
+                    style={styles.notFound}
+                    source={searchAnimated}
+                    autoPlay
+                    loop
+                />
+            )}
+        </View>
     )
 }
+
+export default Search

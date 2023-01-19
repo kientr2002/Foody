@@ -24,7 +24,7 @@ const ForgotPasswordStep3 = ({ navigation }: any): JSX.Element => {
                 We has seen password to your email
             </Text>
             <View style={styles.buttonContainer}>
-                <Button content='LOGIN' type='confirm' arrow />
+                <Button content='LOGIN NOW' type='confirm' arrow />
             </View>
             <View style={styles.sendAgain}>
                 <Text

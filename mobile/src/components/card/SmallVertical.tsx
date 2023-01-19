@@ -5,9 +5,16 @@ import { text } from '../../styles/basic'
 import Stars from '../stars/Stars'
 import styles from './styles'
 
-const SmallVertical = (): JSX.Element => {
+export type SmallVerticalAttribute = {
+    onPress: () => void
+}
+
+const SmallVertical = ({ onPress }: SmallVerticalAttribute): JSX.Element => {
     return (
-        <Pressable style={[styles.background, styles.backgroundSmallVertical]}>
+        <Pressable
+            style={[styles.background, styles.backgroundSmallVertical]}
+            onPress={onPress}
+        >
             <Image
                 style={styles.imgSmallVertical}
                 source={{

@@ -1,6 +1,7 @@
 import { useFonts } from 'expo-font'
 import * as React from 'react'
-import AuthenticationView from './src/screens/authentication/AuthenticationView'
+import { UserProvider } from './src/context/UserContext'
+import UserView from './src/screens/user/UserView'
 
 export default function App() {
     const [visible, setVisible] = React.useState(true)
@@ -17,5 +18,9 @@ export default function App() {
         return null
     }
 
-    return <AuthenticationView />
+    return (
+        <UserProvider>
+            <UserView />
+        </UserProvider>
+    )
 }

@@ -1,46 +1,25 @@
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import * as React from 'react'
-import HeaderButton from '../../../components/headerButton/HeaderButton'
-import color from '../../../styles/basic'
-import { FavoriteStackParamList, UserTabParamList } from '../../../util/types'
-import CreatePlan from '../CreatePlan/CreatePlan'
-import FoodDetail from '../FoodDetail/FoodDetail'
-import FavoriteList from './FavoriteList'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import React from 'react'
+import { ScrollView } from 'react-native'
+import FavoriteCard from '../../../components/favorite/Favorite'
+import { FavoriteStackParamList } from '../../../util/navigator'
+import styles from './styles'
 
-const Stack = createNativeStackNavigator<FavoriteStackParamList>()
-type Props = BottomTabScreenProps<UserTabParamList, 'Favorite page'>
+type Props = NativeStackScreenProps<FavoriteStackParamList>
 
-export default function Favorite({ navigation }: Props) {
+const Favorite = ({ route, navigation }: Props): JSX.Element => {
     return (
-        <Stack.Navigator
-            screenOptions={{
-                headerTintColor: color.primary,
-                headerTitleStyle: {
-                    fontFamily: 'SF-Pro-Rounded_bold',
-                    fontSize: 23,
-                },
-            }}
-        >
-            <Stack.Screen
-                name='Favorite List'
-                component={FavoriteList}
-                options={{
-                    title: 'Favorite',
-                    headerRight: () => (
-                        <HeaderButton type={1} navigation={navigation} />
-                    ),
-                }}
+        <ScrollView contentContainerStyle={styles.container}>
+            <FavoriteCard.FavoriteHolder
+                type='favorite'
+                name='Favorite'
+                onPress={() => navigation.navigate('Favorite List')}
             />
-            <Stack.Screen
-                name='Food Detail'
-                component={FoodDetail}
-                options={({ route }) => ({
-                    title: route.params.name,
-                    headerRight: () => <HeaderButton type={4} route={route} />,
-                })}
-            />
-            <Stack.Screen name='Create Plan' component={CreatePlan} />
-        </Stack.Navigator>
+            <FavoriteCard.FavoriteHolder type='your list' name='Your list #1' />
+            <FavoriteCard.FavoriteHolder type='your list' name='Your list #2' />
+            <FavoriteCard.FavoriteHolder type='add' name='Create new list' />
+        </ScrollView>
     )
 }
+
+export default Favorite

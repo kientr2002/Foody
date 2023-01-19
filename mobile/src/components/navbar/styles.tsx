@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import color from '../../styles/basic'
+import { color } from '../../styles/basic'
 
 const styles = StyleSheet.create({
     background: {
@@ -9,11 +9,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
 
-        // position: 'absolute',
-        // bottom: 0,
-        // zIndex: 10,
-
-        backgroundColor: color.background,
+        backgroundColor: color.white,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 6 },
         shadowOpacity: 0.2,
@@ -27,7 +23,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     icon: {
-        color: color.textBackground,
+        color: color.gray,
     },
     iconActive: {
         color: color.second,

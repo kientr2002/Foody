@@ -14,26 +14,29 @@ type AuthenticationStackParamList = {
 
 type UserTabParamList = {
     'Home page': NavigatorScreenParams<HomeStackParamList>
-    'MyPlan page': undefined
+    'MyPlan page': NavigatorScreenParams<MyPlanStackParamList>
     'Search page': NavigatorScreenParams<SearchStackParamList>
     'Favorite page': NavigatorScreenParams<FavoriteStackParamList>
-    'Profile page': undefined
+    'Profile page': NavigatorScreenParams<ProfileStackParamList>
 }
 
 type HomeStackParamList = {
     'Food List': undefined
     'Food Detail': Food
     'Create Plan': undefined
+    'More Food': undefined
 }
 
 type MyPlanStackParamList = {
-    'MyPlan List': undefined
+    'My Plan': undefined
     'Food Detail': Food
     'Create Plan': undefined
 }
 
 type FavoriteStackParamList = {
+    Favorite: undefined
     'Favorite List': undefined
+    'Find food': undefined
     'Food Detail': Food
     'Create Plan': undefined
 }

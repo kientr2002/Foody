@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     holderContainer: {
         width: '90%',
         height: 100,
+        marginVertical: 10,
 
         display: 'flex',
         flexDirection: 'row',

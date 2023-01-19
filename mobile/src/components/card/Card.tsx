@@ -3,10 +3,10 @@ import FavoriteCard, { FavoriteCardAttribute } from './FavoriteCard'
 import Horizontal from './Horizontal'
 import LargeVertical from './LargeVertical'
 import Nutrition from './Nutrition'
-import SmallVertical from './SmallVertical'
+import SmallVertical, { SmallVerticalAttribute } from './SmallVertical'
 
 type CardCmp = React.FunctionComponent & {
-    SmallVertical: React.FunctionComponent
+    SmallVertical: React.FunctionComponent<SmallVerticalAttribute>
     LargeVertical: React.FunctionComponent
     Horizontal: React.FunctionComponent
     Nutrition: React.FunctionComponent

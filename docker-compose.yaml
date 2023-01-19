@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+    database:
+        image: mariadb
+        ports:
+            - 3306:3306
+        environment:
+            - MARIADB_USER=thoaile
+            - MARIADB_PASSWORD=1234
+            - MARIADB_ROOT_PASSWORD=root
+
+    backend:
+        build: ./backend
+        container_name: backend_c
+        ports:
+            - 3000:3000
+        volumes:
+            - F:\PROJECT\Foody\backend:/server

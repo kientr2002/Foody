@@ -1,37 +1,11 @@
 import AnimatedLottieView from 'lottie-react-native'
 import * as React from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
+import UserContext, { UserContextInterface } from '../../../context/UserContext'
+import styles from './styles'
+
 import Alert from '../../../components/alert/Alert'
 import Button from '../../../components/button/Button'
-import Card from '../../../components/card/Card'
-import UserContext, { UserContextInterface } from '../../../context/UserContext'
-import { Food } from '../../../util/interface'
-
-const useCalculateNutrition = (planList: Food[]) => {
-    const [totalCalories, setTotalCalories] = React.useState<number>(0)
-    const [totalProtein, setTotalProtein] = React.useState<number>(0)
-    const [totalFat, setTotalFat] = React.useState<number>(0)
-    const [totalCarb, setTotalCarb] = React.useState<number>(0)
-
-    React.useEffect(() => {
-        let c = 0,
-            p = 0,
-            f = 0,
-            cb = 0
-        planList.forEach((food: Food) => {
-            c += food.calo ? food.calo : 0
-            p += food.protein ? food.protein : 0
-            f += food.fat ? food.fat : 0
-            cb += food.carb ? food.carb : 0
-        })
-        setTotalCalories(c)
-        setTotalProtein(p)
-        setTotalFat(f)
-        setTotalCarb(cb)
-    }, [planList])
-
-    return { totalCalories, totalCarb, totalProtein, totalFat }
-}
 
 export default function CreatePlan({ navigation }: any) {
     const { name, createPlanList, setCreatePlanList, setMyPlan } =
@@ -39,39 +13,6 @@ export default function CreatePlan({ navigation }: any) {
     const [visible, setVisible] = React.useState<boolean>(false)
     const [success, setSuccess] = React.useState<boolean>(false)
     const [alertMessage, setAlertMessage] = React.useState<string>('')
-    const { totalCalories, totalCarb, totalProtein, totalFat } =
-        useCalculateNutrition(createPlanList)
-
-    const handleCreatePlan = async () => {
-        try {
-            const response = await fetch(
-                'https://foodyforapi.herokuapp.com/plan',
-                {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: name,
-                        breakfast: createPlanList[0].id,
-                        lunch: createPlanList[1].id,
-                        dinner: createPlanList[2].id,
-                    }),
-                }
-            )
-            const data = await response.json()
-            if (data?.result === 'ok') {
-                setSuccess(true)
-                setCreatePlanList([])
-                setMyPlan(createPlanList)
-            } else setSuccess(false)
-            setAlertMessage(data?.message)
-            setVisible(true)
-        } catch (error) {
-            console.error(error)
-        }
-    }
 
     return (
         <>
@@ -84,23 +25,7 @@ export default function CreatePlan({ navigation }: any) {
             />
             {createPlanList.length !== 0 ? (
                 <ScrollView>
-                    <View style={styles.foodContainer}>
-                        {createPlanList.map((food: Food, i: number) => (
-                            <Card
-                                key={i}
-                                cardStyle={4}
-                                name={food.name}
-                                des={food.des}
-                                image={food.image}
-                                rate={food.avgStar}
-                                recipt={food.recipt}
-                                calo={food.calo}
-                                protein={food.protein}
-                                fat={food.fat}
-                                carb={food.carb}
-                            />
-                        ))}
-                    </View>
+                    <View style={styles.foodContainer}></View>
                     <View style={styles.summary}>
                         <View style={styles.textContainer}>
                             <Text
@@ -123,7 +48,7 @@ export default function CreatePlan({ navigation }: any) {
                             <Text
                                 style={[styles.text_regular, styles.textSize]}
                             >
-                                {totalCalories}
+                                totalCalories
                             </Text>
                         </View>
                         <View style={styles.textContainer}>
@@ -135,7 +60,7 @@ export default function CreatePlan({ navigation }: any) {
                             <Text
                                 style={[styles.text_regular, styles.textSize]}
                             >
-                                {totalProtein}
+                                totalProtein
                             </Text>
                         </View>
                         <View style={styles.textContainer}>
@@ -147,7 +72,7 @@ export default function CreatePlan({ navigation }: any) {
                             <Text
                                 style={[styles.text_regular, styles.textSize]}
                             >
-                                {totalCarb}
+                                totalCarb
                             </Text>
                         </View>
                         <View style={styles.textContainer}>
@@ -159,7 +84,7 @@ export default function CreatePlan({ navigation }: any) {
                             <Text
                                 style={[styles.text_regular, styles.textSize]}
                             >
-                                {totalFat}
+                                totalFat
                             </Text>
                         </View>
                     </View>
@@ -183,11 +108,7 @@ export default function CreatePlan({ navigation }: any) {
                                         : 'none',
                             }}
                         >
-                            <Button
-                                content='CREATE'
-                                type='confirm'
-                                onPress={handleCreatePlan}
-                            />
+                            <Button content='CREATE' type='confirm' />
                         </View>
                     </View>
                 </ScrollView>
@@ -202,42 +123,3 @@ export default function CreatePlan({ navigation }: any) {
         </>
     )
 }
-
-const styles = StyleSheet.create({
-    foodContainer: {
-        marginTop: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    summary: {
-        paddingHorizontal: 20,
-        marginVertical: 10,
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-    },
-    textContainer: {
-        flexDirection: 'row',
-    },
-    text_semibold: {
-        fontFamily: 'SF-Pro-Rounded_semibold',
-    },
-    text_regular: {
-        marginLeft: 10,
-        fontFamily: 'SF-Pro-Rounded_regular',
-    },
-    textSize: {
-        fontSize: 18,
-    },
-    buttonContainer: {
-        marginVertical: 10,
-        paddingRight: 20,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-    },
-
-    empty: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-})

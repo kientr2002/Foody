@@ -85,10 +85,6 @@ const useInputType = (
                 setName('SEARCH')
                 setIcon('search')
                 break
-            case 'sex':
-                setName('SEX')
-                setIcon('venus-mars')
-                break
 
             default:
                 setName('')

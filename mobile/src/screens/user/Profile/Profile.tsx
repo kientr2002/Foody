@@ -1,52 +1,151 @@
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
-import { ProfileStackParamList, UserTabParamList } from '../../../util/types'
+import { Image, ScrollView, Text, View } from 'react-native'
+import Button from '../../../components/button/Button'
+import { ProfileStackParamList } from '../../../util/navigator'
+import styles from './styles'
 
-import HeaderButton from '../../../components/headerButton/HeaderButton'
-import color from '../../../styles/basic'
-import Calculate from '../../authentication/Calculate/Calculate'
-import ChangePassword from '../../authentication/ChangePassword/ChangePassword'
-import MyProfile from './MyProfile'
+type Props = NativeStackScreenProps<ProfileStackParamList>
 
-const Stack = createNativeStackNavigator<ProfileStackParamList>()
-type Props = BottomTabScreenProps<UserTabParamList, 'Profile page'>
-
-export default function Profile({ navigation }: Props) {
+const Profile = ({ navigation }: Props): JSX.Element => {
     return (
-        <Stack.Navigator
-            screenOptions={{
-                headerTintColor: color.primary,
-                headerTitleStyle: {
-                    fontFamily: 'SF-Pro-Rounded_bold',
-                    fontSize: 23,
-                },
-            }}
-        >
-            <Stack.Screen
-                name='My profile'
-                component={MyProfile}
-                options={{
-                    title: 'Profile',
-                    headerRight: () => (
-                        <HeaderButton type={1} navigation={navigation} />
-                    ),
-                }}
-            />
-            <Stack.Screen
-                name='Update status'
-                component={Calculate}
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen
-                name='Change password'
-                component={ChangePassword}
-                options={{
-                    headerShown: false,
-                }}
-            />
-        </Stack.Navigator>
+        <ScrollView>
+            <View style={styles.headerContainer}>
+                <Image
+                    source={{
+                        uri: ``,
+                    }}
+                    style={styles.avatar}
+                />
+                <View>
+                    <Text style={[styles.text_bold, styles.textSize_23]}>
+                        username
+                    </Text>
+                    <Text
+                        style={[
+                            styles.text_regular,
+                            styles.textSize_18,
+                            styles.color_1,
+                            styles.marginBottom,
+                        ]}
+                    >
+                        email
+                    </Text>
+                    <Button
+                        type='warning'
+                        content='UPDATE TDEE'
+                        onPress={() => {
+                            navigation.navigate('Update status')
+                        }}
+                    />
+                </View>
+            </View>
+
+            <View style={styles.infoContainer}>
+                <View style={styles.textContainer}>
+                    <Text style={[styles.text_bold, styles.textSize_18]}>
+                        Name:
+                    </Text>
+                    <Text
+                        style={[
+                            styles.text_regular,
+                            styles.textSize_18,
+                            styles.color_1,
+                        ]}
+                    >
+                        name
+                    </Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={[styles.text_bold, styles.textSize_18]}>
+                        Day of Birth:
+                    </Text>
+                    <Text
+                        style={[
+                            styles.text_regular,
+                            styles.textSize_18,
+                            styles.color_1,
+                        ]}
+                    ></Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={[styles.text_bold, styles.textSize_18]}>
+                        Weight:
+                    </Text>
+                    <Text
+                        style={[
+                            styles.text_regular,
+                            styles.textSize_18,
+                            styles.color_1,
+                        ]}
+                    >
+                        weight kg
+                    </Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={[styles.text_bold, styles.textSize_18]}>
+                        Height:
+                    </Text>
+                    <Text
+                        style={[
+                            styles.text_regular,
+                            styles.textSize_18,
+                            styles.color_1,
+                        ]}
+                    >
+                        height m
+                    </Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={[styles.text_bold, styles.textSize_18]}>
+                        Current TDEE:
+                    </Text>
+                    <Text
+                        style={[
+                            styles.text_regular,
+                            styles.textSize_18,
+                            styles.color_1,
+                        ]}
+                    >
+                        TDEE
+                    </Text>
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={[styles.text_bold, styles.textSize_18]}>
+                        Current target:
+                    </Text>
+                    <Text
+                        style={[
+                            styles.text_regular,
+                            styles.textSize_18,
+                            styles.color_1,
+                        ]}
+                    >
+                        object
+                    </Text>
+                </View>
+            </View>
+
+            <View style={styles.buttonContainer}>
+                <View
+                    style={{
+                        marginRight: 10,
+                    }}
+                >
+                    <Button
+                        type='confirm'
+                        content='CHANGE PASSWORD'
+                        onPress={() => {
+                            navigation.navigate('Change password')
+                        }}
+                    />
+                </View>
+                <View>
+                    <Button type='error' content='LOG OUT' />
+                </View>
+            </View>
+        </ScrollView>
     )
 }
+
+export default Profile

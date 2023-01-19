@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     },
     backgroundSmallVertical: {
         width: 250,
-        height: 410,
+        height: 390,
         marginRight: 20,
     },
     backgroundLargeVertical: {

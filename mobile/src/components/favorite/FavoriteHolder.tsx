@@ -7,20 +7,22 @@ import styles from './styles'
 export type FavoriteHolderAttribute = {
     type: string
     name: string
+    onPress?: () => void
 }
 
 const FavoriteHolder = ({
     type,
     name,
+    onPress,
 }: FavoriteHolderAttribute): JSX.Element => {
     return (
-        <Pressable style={styles.holderContainer}>
+        <Pressable style={styles.holderContainer} onPress={onPress}>
             <View
                 style={[
                     styles.icon,
                     type === 'favorite'
                         ? styles.iconFavorite
-                        : type === ' your list'
+                        : type === 'your list'
                         ? styles.iconMyList
                         : styles.iconAdd,
                 ]}

@@ -1,47 +1,72 @@
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import * as React from 'react'
-import { HomeStackParamList, UserTabParamList } from '../../../util/types'
+import {
+    ActivityIndicator,
+    Pressable,
+    ScrollView,
+    Text,
+    View,
+} from 'react-native'
+import Card from '../../../components/card/Card'
+import { color, text } from '../../../styles/basic'
+import { HomeStackParamList } from '../../../util/navigator'
+import styles from './styles'
 
-import HeaderButton from '../../../components/headerButton/HeaderButton'
-import color from '../../../styles/basic'
-import CreatePlan from '../CreatePlan/CreatePlan'
-import FoodDetail from '../FoodDetail/FoodDetail'
-import FoodList from './FoodList'
+type Props = NativeStackScreenProps<HomeStackParamList>
 
-const Stack = createNativeStackNavigator<HomeStackParamList>()
-type Props = BottomTabScreenProps<UserTabParamList, 'Home page'>
-
-export default function Home({ navigation }: Props) {
+const HorizontalWrapper = ({ navigation }: any): JSX.Element => {
     return (
-        <Stack.Navigator
-            screenOptions={{
-                headerTintColor: color.primary,
-                headerTitleStyle: {
-                    fontFamily: 'SF-Pro-Rounded_bold',
-                    fontSize: 23,
-                },
-            }}
-        >
-            <Stack.Screen
-                name='Food List'
-                component={FoodList}
-                options={{
-                    title: 'Home',
-                    headerRight: () => (
-                        <HeaderButton type={1} navigation={navigation} />
-                    ),
-                }}
-            />
-            <Stack.Screen
-                name='Food Detail'
-                component={FoodDetail}
-                options={({ route }) => ({
-                    title: route.params.name,
-                    headerRight: () => <HeaderButton type={2} route={route} />,
-                })}
-            />
-            <Stack.Screen name='Create Plan' component={CreatePlan} />
-        </Stack.Navigator>
+        <View>
+            <View style={styles.title}>
+                <Text
+                    style={[text.semiBold, text.color_black, { fontSize: 22 }]}
+                >
+                    Breakfast
+                </Text>
+                <Pressable onPress={() => navigation.navigate('More Food')}>
+                    <Text
+                        style={[
+                            text.medium,
+                            text.color_gray,
+                            text.size_extraSmall,
+                        ]}
+                    >
+                        More
+                    </Text>
+                </Pressable>
+            </View>
+            <ScrollView
+                contentContainerStyle={styles.mealContainer}
+                showsHorizontalScrollIndicator={false}
+                horizontal={true}
+            >
+                <Card.SmallVertical
+                    onPress={() => navigation.navigate('Food Detail')}
+                />
+                <Card.SmallVertical
+                    onPress={() => navigation.navigate('Food Detail')}
+                />
+            </ScrollView>
+        </View>
     )
 }
+
+const Home = ({ route, navigation }: Props): JSX.Element => {
+    return (
+        <>
+            {false ? (
+                <View style={styles.loadingScreen}>
+                    <ActivityIndicator size='large' color={color.primary} />
+                </View>
+            ) : (
+                <ScrollView style={styles.container}>
+                    <HorizontalWrapper navigation={navigation} />
+                    <HorizontalWrapper navigation={navigation} />
+                    <HorizontalWrapper navigation={navigation} />
+                </ScrollView>
+            )}
+        </>
+    )
+}
+
+export default Home
